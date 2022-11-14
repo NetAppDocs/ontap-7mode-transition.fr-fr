@@ -1,0 +1,49 @@
+---
+permalink: san-host/task_preparing_for_cutover_when_transitioning_hp_ux_host_data_luns_with_file_systems.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, cutover, phase, hp, ux, host, data, lun, file, system 
+summary: 'Si vous effectuez la transition d"un LUN hôte HP avec un système de fichiers de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez effectuer certaines étapes avant de passer à la phase de mise en service.' 
+---
+= Préparation de la phase de mise en service lors du transfert des LUN de données hôte HP-UX avec des systèmes de fichiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous effectuez la transition d'un LUN hôte HP avec un système de fichiers de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez effectuer certaines étapes avant de passer à la phase de mise en service.
+
+Si vous utilisez une configuration FC, vous devez établir la connectivité et la segmentation sur les nœuds clustered Data ONTAP.
+
+Si vous utilisez une configuration iSCSI, vous devez découvrir et connecter les sessions iSCSI aux nœuds clustered Data ONTAP.
+
+Pour les transitions basées sur les copies, effectuez ces étapes après la mise en service du stockage dans l'outil 7-mode transition Tool (7MTT). Les transitions sans copie ne sont pas prises en charge pour les hôtes HP-UX.
+
+.Étapes
+. Arrêtez les E/S sur tous les points de montage.
+. Arrêtez chaque application qui accède aux LUN conformément aux recommandations du fournisseur de l'application.
+. Démontez tous les points de montage :
++
+`*umount _mount_point_*`
+
+. Exportez votre groupe de volumes et écrivez le VGID et les volumes logiques du groupe de volumes dans un fichier MPfile :
++
+`*vgexport -p -s -m /tmp/mapfile.vg01 vg01*`
+
+. Effectuez une copie de sauvegarde du fichier mopfile.vg01 vers une source externe.
+. Désactiver le groupe de volumes :
++
+`*vgchange -a n _vg_name_*`
+
+. Exporter le groupe de volumes :
++
+`*vgexport _vg_name_*`
+
+. Vérifiez que le groupe de volumes a été exporté :
++
+`*vgdisplay*`
+
++
+Les informations du groupe de volumes exporté ne doivent pas être affichées dans la sortie.
+
+

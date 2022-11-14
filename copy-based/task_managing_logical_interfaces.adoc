@@ -1,0 +1,77 @@
+---
+permalink: copy-based/task_managing_logical_interfaces.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, manage, logical, interfaces 
+summary: 'Vous pouvez ajouter, modifier ou supprimer des adresses IP 7-mode d"un projet.' 
+---
+= Gestion des interfaces logiques
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez ajouter, modifier ou supprimer des adresses IP 7-mode d'un projet.
+
+Les LIFs sont configurées sur le SVM (Storage Virtual machine) en phase de configuration Apply (prétover) :
+
+* Les adresses IP 7-mode existantes sont créées dans l'état administratif "`down`.
+* De nouvelles adresses IP sont créées dans l'état administratif « UP ».
+
+
+
+IMPORTANT: Les LIF FC et iSCSI ne sont pas transférées par l'outil de transition 7-mode.
+
+.Étapes
+. Effectuez l'une des opérations suivantes :
++
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+Modifier une LIF existante
+ a| 
+.. Cliquez sur image:../media/edit_schedule.gif[""] .
+.. Dans la boîte de dialogue Modifier LIF, apportez les modifications requises, puis cliquez sur *Enregistrer*.
+
+
+
+
+ a| 
+Supprimer une LIF existante
+ a| 
+.. Cliquez sur image:../media/delete_schedule.gif[""] dans le tableau.
++
+
+NOTE: Vous ne pouvez supprimer une LIF que lorsque le projet est en cours de préparation, de copie des données de base, de pause, de prétransfert ou de mise à jour. Toutefois, vous ne pouvez pas supprimer une LIF si cette opération est défectueuse.
+
+.. Cliquez sur *Select 7-mode LIF*.
+.. Sélectionnez les adresses IP 7-mode pour la transition.
+.. Entrez les détails du nœud cible et du port cible.
+.. Cliquez sur *Enregistrer*.
+
+
+
+
+ a| 
+Ajoutez une adresse IP 7-mode
+ a| 
+** Cliquez sur *Select 7-mode LIF*.
+** Sélectionnez les adresses IP 7-mode pour la transition.
+** Entrez les détails du nœud cible et du port cible.
+** Cliquez sur *Enregistrer*.
+
+
+
+
+ a| 
+Ajoutez une nouvelle LIF
+ a| 
+.. Cliquez sur *Ajouter une nouvelle LIF* sous le tableau.
+.. Saisissez les valeurs requises.
+.. Cliquez sur *Enregistrer*.
+
+
+|===
+

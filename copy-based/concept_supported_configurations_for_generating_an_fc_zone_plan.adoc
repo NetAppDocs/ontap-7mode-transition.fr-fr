@@ -1,0 +1,24 @@
+---
+permalink: copy-based/concept_supported_configurations_for_generating_an_fc_zone_plan.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, supported, configurations, fc, zone, plan 
+summary: Pour générer le plan de zone FC, vous devez connaître les configurations prises en charge des systèmes 7-mode, des hôtes, des commutateurs FC et du cluster. Vous devez utiliser le plan pour configurer les zones du cluster après la migration. 
+---
+= Configurations prises en charge pour générer un plan de zone FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour générer le plan de zone FC, vous devez connaître les configurations prises en charge des systèmes 7-mode, des hôtes, des commutateurs FC et du cluster. Vous devez utiliser le plan pour configurer les zones du cluster après la migration.
+
+Les systèmes 7-mode (contrôleur unique ou paire haute disponibilité), les hôtes et le cluster peuvent être connectés aux switchs dans le même fabric ou à des structures différentes, selon les exigences du data Center.
+
+La figure suivante illustre une configuration dans laquelle les systèmes 7-mode, les hôtes et le cluster sont connectés aux commutateurs dans la même structure :
+
+image::../media/fc_zone_config1.gif[La figure suivante illustre une configuration dans laquelle se trouvent les systèmes 7-mode,hosts,and cluster are connected to the switches in the same fabric]
+
+La figure ci-dessous illustre une configuration dans laquelle les systèmes 7-mode et le cluster sont connectés aux commutateurs dans différentes structures :
+
+image::../media/fc_zone_config2.gif[La figure suivante illustre une configuration dans laquelle les systèmes 7-mode et le cluster sont connectés aux commutateurs dans une structure différente]

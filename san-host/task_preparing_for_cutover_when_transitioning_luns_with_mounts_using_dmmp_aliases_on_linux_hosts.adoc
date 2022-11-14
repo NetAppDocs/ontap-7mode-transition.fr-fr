@@ -1,0 +1,42 @@
+---
+permalink: san-host/task_preparing_for_cutover_when_transitioning_luns_with_mounts_using_dmmp_aliases_on_linux_hosts.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, cutover, phase, lun, point, dmmp, device, names 
+summary: 'Si vous effectuez la transition d"un LUN avec un point de montage en utilisant un nom d"alias sur un hôte Linux, vous devez effectuer plusieurs étapes avant de passer à la phase de mise en service.' 
+---
+= Préparation de la phase de mise en service lors de la transition de LUN avec des points de montage à l'aide de noms de périphériques DMMP sur des hôtes Linux
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous effectuez la transition d'un LUN avec un point de montage en utilisant un nom d'alias sur un hôte Linux, vous devez effectuer plusieurs étapes avant de passer à la phase de mise en service.
+
+Pour les configurations FC, vous devez disposer d'une connectivité et d'une segmentation de la structure vers les contrôleurs clustered Data ONTAP.
+
+Pour les configurations iSCSI, vos sessions iSCSI doivent être découvertes et connectées à vos contrôleurs clustered Data ONTAP.
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Arrêtez les E/S aux points de montage.
+. Arrêtez les applications qui accèdent aux LUN en fonction des recommandations du fournisseur de l'application.
+. Désactiver les périphériques DMMP :
++
+`*umount _dir_name_*`
+
+. Flush l'ID du périphérique DMMP du LUN 7-mode :
++
+`*multipath -f _device_name_*`
+
++
+Si nécessaire, vous pouvez obtenir le nom de périphérique DDMP à partir de la colonne *ID de périphérique OS* sous l'onglet *LUN hôte SAN* dans le _Manuel d'évaluation d'inventaire_.
+
+
+
+*Informations connexes*
+
+xref:task_gathering_pretransition_information_from_inventory_assessment_workbook.adoc[Collecte des informations de pré-transition à partir du manuel d'évaluation de l'inventaire]

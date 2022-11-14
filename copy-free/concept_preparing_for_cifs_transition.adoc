@@ -1,0 +1,16 @@
+---
+permalink: copy-free/concept_preparing_for_cifs_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, smb, transition 
+summary: 'Si SMB/CIFS est sous licence et que le service SMB/CIFS s"exécute sur les systèmes 7-mode, vous devez effectuer manuellement certaines tâches, comme l"ajout de la licence SMB/CIFS et la création d"un serveur SMB/CIFS, sur le cluster cible et un SVM pour la transition des configurations SMB/CIFS.' 
+---
+= Préparation à la transition SMB/CIFS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si SMB/CIFS est sous licence et que le service SMB/CIFS s'exécute sur les systèmes 7-mode, vous devez effectuer manuellement certaines tâches, comme l'ajout de la licence SMB/CIFS et la création d'un serveur SMB/CIFS, sur le cluster cible et un SVM pour la transition des configurations SMB/CIFS.
+
+Vous devez également connaître les configurations en phase de transition. Certaines configurations SMB/CIFS fonctionnant en 7-mode ne sont pas prises en charge dans ONTAP. Certaines configurations ne sont pas migrées par l'outil 7-mode transition Tool et doivent être appliquées manuellement à la SVM.

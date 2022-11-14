@@ -1,0 +1,24 @@
+---
+permalink: copy-based/task_post_transition_task_for_a_metrocluster_configuration.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, cron, job, schedules, metrocluster, remote, configuration 
+summary: Les planifications de tâches cron créées pendant la transition ne sont pas répliquées vers le site distant, et par conséquent, le basculement négocié échoue après la transition. Vous devez créer manuellement les planifications de tâches cron sur le site distant après la transition. 
+---
+= Configuration des planifications de tâches cron sur le site distant après avoir effectué la transition d'une configuration MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les planifications de tâches cron créées pendant la transition ne sont pas répliquées vers le site distant, et par conséquent, le basculement négocié échoue après la transition. Vous devez créer manuellement les planifications de tâches cron sur le site distant après la transition.
+
+La mise en service du stockage pour le site actif 7-mode doit avoir été réalisée correctement.
+
+.Étapes
+. Enregistrez les messages cron de tâches générés au niveau de la mise en service de stockage afin d'identifier les planifications de tâches qui doivent être répliquées sur le site distant.
++
+image::../media/mcc_cron_jobs.gif[tâches mcc cron]
+
+. Sur l'interface de ligne de commandes du cluster du site distant, exécutez la `job schedule cron create` commandes enregistrées dans ,Étape 1.
+

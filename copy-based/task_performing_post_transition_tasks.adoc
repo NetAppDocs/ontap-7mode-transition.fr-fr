@@ -1,0 +1,40 @@
+---
+permalink: copy-based/task_performing_post_transition_tasks.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, perform, manual, post, tasks 
+summary: 'Une fois la mise en service terminée avec succès et la transition terminée, vous devez effectuer certaines tâches de post-transition pour configurer les fonctionnalités qui ne sont pas migrées, avant d"autoriser l"accès client aux volumes ONTAP.' 
+---
+= Exécution manuelle de tâches post-transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois la mise en service terminée avec succès et la transition terminée, vous devez effectuer certaines tâches de post-transition pour configurer les fonctionnalités qui ne sont pas migrées, avant d'autoriser l'accès client aux volumes ONTAP.
+
+.Étapes
+. Manuel : effectuez les étapes requises pour configurer les fonctions qui n'ont pas été migrées, comme indiqué dans le rapport de vérification préalable.
++
+Par exemple, vous devez configurer manuellement IPv6 et FPolicy après la transition.
+
+. Supprimez ou consolidez les configurations qui sont migrées.
++
+L'outil 7-mode transition Tool crée une nouvelle instance pour toutes les configurations qui sont passées de 7-mode. Il peut donc y avoir plusieurs instances de certaines configurations, telles que les planifications cron, qui peuvent avoir à être consolidées ou supprimées manuellement.
+
+. Transition SAN : reconfigurez manuellement les hôtes.
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-sanspl/home.html["Transition et résolution des problèmes liés aux hôtes SAN"]
+
+. S'assurer que le SVM est prêt à transmettre des données aux clients en vérifiant les éléments suivants :
++
+** Les volumes du SVM sont en ligne et en lecture/écriture.
+** Les adresses IP sur le SVM sont up et accessibles depuis les serveurs de nom.
+
+
+. Redirection de l'accès client vers les volumes ONTAP.
+
+
+*Informations connexes*
+
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]

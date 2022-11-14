@@ -1,0 +1,92 @@
+---
+permalink: san-host/task_preparing_to_transition_solaris_host_data_luns_with_zfs_file_system.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, solaris, host, data, lun, zfs 
+summary: Avant de passer des LUN hôtes Solaris avec des systèmes de fichiers ZFS de Data ONTAP sous 7-mode à clustered Data ONTAP, vous devez rassembler les informations nécessaires pour le processus de transition. 
+---
+= Préparation de la transition des LUN de données hôte Solaris avec le système de fichiers ZFS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de passer des LUN hôtes Solaris avec des systèmes de fichiers ZFS de Data ONTAP sous 7-mode à clustered Data ONTAP, vous devez rassembler les informations nécessaires pour le processus de transition.
+
+Cela s'applique aux transitions basées sur la copie et aux transitions sans copie.
+
+.Étapes
+. Sur le contrôleur 7-mode, identifiez le nom de la LUN à migrer :
++
+`*lun show*`
+
++
+[listing]
+----
+ fas8040-shu01> lun show
+        /vol/ufs/ufs1                  5g (5368709120)    (r/w, online, mapped)
+        /vol/ufs/ufs2                  5g (5368709120)    (r/w, online, mapped)
+        /vol/zfs/zfs1                  6g (6442450944)    (r/w, online, mapped)
+        /vol/zfs/zfs2                  6g (6442450944)    (r/w, online, mapped)
+----
+. Sur l'hôte, recherchez le nom de fichier du périphérique SCSI pour le LUN :
++
+`*sanlun lun show*`
+
++
+Le nom de fichier du périphérique SCSI se trouve dans le `device filename` colonne.
+
++
+[listing]
+----
+# sanlun lun show
+controller(7mode)/                    device                                            host                  lun
+vserver(Cmode)       lun-pathname     filename                                          adapter    protocol   size    mode
+--------------------------------------------------------------------------------------------------------------------------
+fas8040-shu01        /vol/zfs/zfs2    /dev/rdsk/c0t60A98000383035356C2447384D396550d0s2 scsi_vhci0 FCP        6g      7
+fas8040-shu01        /vol/zfs/zfs1    /dev/rdsk/c0t60A98000383035356C2447384D39654Ed0s2 scsi_vhci0 FCP        6g      7
+fas8040-shu01        /vol/ufs/ufs2    /dev/rdsk/c0t60A98000383035356C2447384D39654Ad0s2 scsi_vhci0 FCP        5g      7
+fas8040-shu01        /vol/ufs/ufs1    /dev/rdsk/c0t60A98000383035356C2447384D396548d0s2 scsi_vhci0 FCP        5g      7
+----
+. Répertoriez le zpool :
++
+`*zpool list*`
+
+. Enregistrez le zpool et obtenez les disques associés au zpool :
++
+`*zpool status _pool-name_*`
+
++
+[listing]
+----
+# zpool list
+NAME     SIZE  ALLOC   FREE  CAP  HEALTH  ALTROOT
+n_pool  11.9G  2.67G  9.27G  22%  ONLINE  -
+
+# zpool status
+  pool: n_pool
+ state: ONLINE
+ scan: none requested
+config:
+
+        NAME                                     STATE     READ WRITE CKSUM
+        n_pool                                   ONLINE       0     0     0
+          c0t60A98000383035356C2447384D396550d0  ONLINE       0     0     0
+          c0t60A98000383035356C2447384D39654Ed0  ONLINE       0     0     0
+
+errors: No known data errors
+----
+. Répertorier et enregistrer les jeux de données ZFS dans un pool de stockage ZFS :
++
+`*zfs list*`
+
++
+[listing]
+----
+# zfs list
+NAME           USED  AVAIL  REFER  MOUNTPOINT
+n_pool        2.67G  9.08G   160K  /n_pool
+n_pool/pool1  1.50G  2.50G  1.50G  /n_pool/pool1
+n_pool/pool2  1.16G  2.84G  1.16G  /n_pool/pool2
+----
+

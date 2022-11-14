@@ -1,0 +1,44 @@
+---
+permalink: copy-free/concept_considerations_for_transitioning_dns_and_ldap_configurations.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, dns, nis, ldap, configurations 
+summary: Il est important de savoir comment les configurations DNS, NIS et LDAP de Data ONTAP 7-mode sont migrées et appliquées dans ONTAP. 
+---
+= Considérations relatives à la transition des configurations DNS, NIS et LDAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il est important de savoir comment les configurations DNS, NIS et LDAP de Data ONTAP 7-mode sont migrées et appliquées dans ONTAP.
+
+
+
+== Considérations relatives à la transition DNS
+
+Pour les configurations DNS, un maximum de six noms de domaine et trois serveurs de noms par SVM sont pris en charge dans ONTAP. Si le nombre unique de noms de domaine ou de serveurs de noms au sein des systèmes 7-mode et que le SVM cible dépasse la limite prise en charge, l'outil 7-mode transition Tool signale une erreur de blocage. Pour poursuivre la transition, vous devez ignorer la transition de la configuration DNS à partir de l'outil.
+
+
+NOTE: Si vous ignorez la transition de la configuration DNS, vous devez configurer manuellement le serveur DNS sur la SVM cible.
+
+
+
+== Considérations relatives à la transition NIS
+
+* La longueur du nom de domaine NIS sur le système 7-mode ne doit pas dépasser 64 caractères.
+* Pour la transition vers des versions de cluster cible exécutant ONTAP 9.1 ou version antérieure, le `nis.servers` L'option du système 7-mode doit être configurée uniquement avec des adresses IP et non un nom de domaine complet (FQDN).
++
+Vous devez configurer le `nis.servers` Option disponible sur le système 7-mode avec adresses IP avant la transition si vous effectuez une transition vers un cluster exécutant ONTAP 9.1 ou version antérieure. La transition est prise en charge si vous disposez de `nis.servers` Option sur le système 7-mode configuré avec un FQDN et vous migrerez vers un cluster exécutant n'importe quelle version de ONTAP entre 9.2 et 9.5.
+
+
+
+
+
+== Considérations relatives à la transition LDAP
+
+* Si des valeurs de base et de portée distinctes sont spécifiées pour le mappage utilisateur (`ldap.usermap.base`) et mot de passe utilisateur (`ldap.base.passwd`) Recherches dans le système 7-mode, les valeurs de base et de portée pour seul le mot de passe utilisateur sont transférées.
++
+Les valeurs de base et de portée sont utilisées pour le mappage utilisateur et les recherches par mot de passe utilisateur dans ONTAP, ce qui peut entraîner des problèmes de sécurité. Vous devez ajouter manuellement les valeurs de base et de portée pour le mappage utilisateur à l'option Nom unique utilisateur (DN) dans ONTAP après la transition, si nécessaire.
+
+

@@ -1,0 +1,14 @@
+---
+permalink: copy-free/task_completing_post_transition_tasks_for_a_copy_free_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, complete 
+summary: 'Pour mener à bien la transition, vous devez vérifier manuellement les volumes et les configurations transférés, tester votre charge de travail, démarrer la production, puis valider le projet de transition sans copie. Comme la restauration n"est pas autorisée après l"opération de validation, vous devez vérifier toutes les charges de travail et démarrer la production pendant une courte durée afin d"évaluer si une restauration est nécessaire.' 
+---
+= Fin de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour mener à bien la transition, vous devez vérifier manuellement les volumes et les configurations transférés, tester votre charge de travail, démarrer la production, puis valider le projet de transition sans copie. Comme la restauration n'est pas autorisée après l'opération de validation, vous devez vérifier toutes les charges de travail et démarrer la production pendant une courte durée afin d'évaluer si une restauration est nécessaire.

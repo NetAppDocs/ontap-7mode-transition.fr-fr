@@ -1,0 +1,26 @@
+---
+permalink: snapmirror/concept_considerations_for_space_when_transitioning_san_volumes.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, space, considerations, transition, san, volume 
+summary: 'Vous devez vous assurer qu"un espace suffisant est disponible dans les volumes lors de la transition. Outre l"espace requis pour le stockage des données et des copies Snapshot, le processus de transition nécessite également 1 Mo d"espace par LUN pour la mise à jour de certaines métadonnées de système de fichiers.' 
+---
+= Considérations d'espace lors de la transition de volumes SAN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vous assurer qu'un espace suffisant est disponible dans les volumes lors de la transition. Outre l'espace requis pour le stockage des données et des copies Snapshot, le processus de transition nécessite également 1 Mo d'espace par LUN pour la mise à jour de certaines métadonnées de système de fichiers.
+
+Avant la mise en service, vous pouvez utiliser le `df -h` Commande sur le volume 7-mode pour vérifier si l'espace libre de 1 Mo par LUN est disponible dans le volume. Si l'espace disponible du volume n'est pas suffisant, l'espace requis doit être ajouté au volume 7-mode.
+
+Si la transition des LUN échoue en raison du manque d'espace sur le volume de destination, le message EMS suivant est généré : `LUN.vol.proc.fail.no.space: Processing for LUNs in volume vol1 failed due to lack of space`.
+
+Dans ce cas, vous devez définir le `filesys-size-fixed` Attribuez la valeur FALSE au volume de destination, puis ajoutez 1 Mo par LUN d'espace libre au volume.
+
+Si des volumes contiennent des LUN réservées à l'espace, la croissance du volume de 1 Mo par LUN risque de ne pas fournir l'espace suffisant. Dans ce cas, la quantité d'espace supplémentaire à ajouter correspond à la taille de la réserve Snapshot pour le volume. Une fois l'espace ajouté au volume de destination, vous pouvez utiliser `lun transition start` Commande pour effectuer la transition des LUN.
+
+*Informations connexes*
+
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]

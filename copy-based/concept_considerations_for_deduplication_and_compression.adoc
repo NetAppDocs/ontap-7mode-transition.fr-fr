@@ -1,0 +1,29 @@
+---
+permalink: copy-based/concept_considerations_for_deduplication_and_compression.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, deduplication, compression 
+summary: 'Lors de l"utilisation de la compression, les volumes source et de destination doivent appartenir à un agrégat 64 bits. Toutes les économies réalisées grâce à la compression et à la déduplication sur le volume source sont conservées sur le réseau lors de la transition. Après la transition, le volume de destination hérite de tous les attributs de compression et de déduplication et les économies de stockage du volume source.' 
+---
+= Considérations relatives à la déduplication et à la compression
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de l'utilisation de la compression, les volumes source et de destination doivent appartenir à un agrégat 64 bits. Toutes les économies réalisées grâce à la compression et à la déduplication sur le volume source sont conservées sur le réseau lors de la transition. Après la transition, le volume de destination hérite de tous les attributs de compression et de déduplication et les économies de stockage du volume source.
+
+La transition de données dédupliquées et compressées contribue à réduire la bande passante du réseau lors de la transition pour les raisons suivantes :
+
+* Les blocs partagés ne sont transférés qu'une seule fois.
+* La compression est maintenue tout au long du transfert.
+* Les données compressées et dédupliquées impliquent des transferts plus petits en raison des économies d'espace réalisées grâce à la compression et à la déduplication. Par conséquent, les transferts sont effectués plus rapidement.
+
+
+Vous ne devez pas démarrer la compression ou la déduplication de données existantes sur le volume source pendant la transition. Si la déduplication ou la compression est en cours, vous devez démarrer la transition uniquement après la fin de l'opération de déduplication ou de compression. Par conséquent, les données non dédupliquées ou non compressées ainsi que les fichiers de métadonnées temporaires supplémentaires ne sont pas envoyés sur le réseau au volume de destination.
+
+Pour que la déduplication et la compression prennent effet sur les nouvelles données écrites sur le volume ONTAP, vous devez activer la déduplication et la compression planifiées après la transition.
+
+Depuis Data ONTAP 8.1, la déduplication gère une base de données des empreintes partiellement ordonnée dans le volume et la copie de l'agrégat. Par conséquent, le système de destination peut réaliser des économies d'espace sur le volume source, ainsi qu'une copie de la base de données des empreintes commandée. Après la migration, lorsque l'efficacité du volume est exécutée sur le nouveau volume pour la première fois, la base de données des empreintes de l'agrégat est automatiquement construite à partir de la copie dans le volume de destination. Cela peut entraîner une augmentation ponctuelle du temps nécessaire aux opérations d'efficacité des volumes.
+
+Si votre volume source exécute un Data ONTAP sous 7-mode avant 8.1, vous devez exécuter le `volume efficiency start` commande avec `-scan-old-data option` paramètre pour optimiser les économies d'espace. Une fois la migration terminée, vérifiez si la planification de la déduplication répond à vos besoins sur le cluster et envisagez de passer à une stratégie d'efficacité des volumes.

@@ -1,0 +1,45 @@
+---
+permalink: copy-free/task_selecting_source_7_mode_systems_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, create, project 
+summary: 'La première étape de la planification d"un projet de transition consiste à sélectionner la paire haute disponibilité 7-mode source dans laquelle vous souhaitez effectuer la transition des tiroirs disques, des agrégats, des volumes et des configurations, puis à créer un projet de transition.' 
+---
+= Création d'un projet de transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La première étape de la planification d'un projet de transition consiste à sélectionner la paire haute disponibilité 7-mode source dans laquelle vous souhaitez effectuer la transition des tiroirs disques, des agrégats, des volumes et des configurations, puis à créer un projet de transition.
+
+* Les contrôleurs 7-mode de la paire haute disponibilité doivent exécuter une version ONTAP prise en charge sur une plateforme prise en charge pour une transition sans copie.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+* Les deux contrôleurs de la configuration haute disponibilité doivent être sains.
++
+.. Sélectionnez la méthode de migration *Copy-Free transition* dans la page d'accueil et cliquez sur *Start Planning*.
++
+Si le contrôleur et le cluster requis pour un nouveau projet ne sont pas ajoutés, vous pouvez entrer les détails dans le volet saisir les informations d'identification du périphérique.
+
+.. Sélectionnez la paire haute disponibilité 7-mode source à effectuer la transition.
+.. Cliquez sur *Créer un projet*.
++
+... Dans la fenêtre Détails du projet, indiquez un nom pour le projet.
+... Sélectionnez un groupe de projets auquel le projet doit être ajouté.
++
+Vous pouvez créer un nouveau groupe de projets ou ajouter le projet au groupe par défaut.
+
++
+La création d'un groupe de projets vous permet de regrouper et de surveiller les projets associés.
+
+... Cliquez sur *Enregistrer*.
++
+L'écran Sélectionner le groupe cible s'affiche.
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+---
+permalink: san-host/concept_transition_of_san_boot_luns.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, san, boot, lun 
+summary: 'Vous devez redémarrer les LUN de démarrage SAN avant de passer de Data ONTAP sous 7-mode à clustered Data ONTAP à l"aide de l"outil de transition 7-mode \(7MTT\). Vous devez effectuer des étapes spécifiques pour préparer la phase de mise en service et, après la transition, vous devez découvrir vos LUN.' 
+---
+= Transition des LUN de démarrage SAN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez redémarrer les LUN de démarrage SAN avant de passer de Data ONTAP 7-mode à clustered Data ONTAP à l'aide de l'outil de transition 7-mode (7MTT). Vous devez effectuer des étapes spécifiques pour préparer la phase de mise en service et, après la transition, vous devez découvrir vos LUN.
+
+*Informations connexes*
+
+xref:task_preparing_for_transition_of_fc_or_fcoe_san_boot_luns.adoc[Préparation à la transition des LUN de démarrage SAN FC ou FCoE sur les hôtes RHEL]
+
+xref:task_preparing_for_transition_of_iscsi_san_boot_luns.adoc[Préparation à la transition des LUN de démarrage SAN iSCSI]
+
+xref:task_discovering_san_boot_luns_after_transition.adoc[Détection des LUN de démarrage SAN après la transition]

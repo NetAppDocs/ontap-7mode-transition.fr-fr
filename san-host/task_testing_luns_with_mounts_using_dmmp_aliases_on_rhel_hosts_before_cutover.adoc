@@ -1,0 +1,81 @@
+---
+permalink: san-host/task_testing_luns_with_mounts_using_dmmp_aliases_on_rhel_hosts_before_cutover.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, mount, pints, dmmp, alias, name, rhel 
+summary: 'Si vous utilisez l"outil 7-mode transition Tool \(7MTT\) 2.2 ou une version ultérieure et Data ONTAP 8.3.2 ou une version ultérieure pour effectuer une transition basée sur la copie de votre hôte Red Hat Enterprise Linux \(RHEL\), vous pouvez tester les LUN clustered Data ONTAP migrées avec des points de montage utilisant des noms d"alias avant la phase de mise en service. Pendant le test, l"hôte source peut continuer à exécuter les E/S sur les LUN 7-mode source.' 
+---
+= Tester les LUN avec des points de montage à l'aide de noms d'alias DMMP sur les hôtes RHEL avant la phase de mise en service des transitions basées sur la copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez l'outil 7-mode transition Tool (7MTT) 2.2 ou une version ultérieure et Data ONTAP 8.3.2 ou une version ultérieure pour effectuer une transition basée sur la copie de votre hôte Red Hat Enterprise Linux (RHEL), vous pouvez tester vos LUN clustered Data ONTAP migrées avec des points de montage utilisant des alias avant la phase de mise en service. Pendant le test, l'hôte source peut continuer à exécuter les E/S sur les LUN 7-mode source.
+
+Vos nouvelles LUN clustered Data ONTAP doivent être mappées sur votre hôte de test et vos LUN doivent être prêtes pour la transition.
+
+Vous devez maintenir la parité matérielle entre l'hôte de test et l'hôte source et effectuer les étapes suivantes sur l'hôte de test.
+
+Vos LUN clustered Data ONTAP sont en mode lecture/écriture pendant le test. Ils se convertissent en mode lecture seule une fois le test terminé et que vous préparez la phase de mise en service.
+
+.Étapes
+. Une fois la copie des données de base terminée, sélectionnez *Test mode* dans l'interface utilisateur 7MTT.
+. Dans l'interface utilisateur 7MTT, cliquez sur *Apply Configuration*.
+. Obtenez les nouveaux noms de périphériques SCSI pour les LUN clustered Data ONTAP :
++
+`*sanlun lun show*`
+
++
+Dans l'exemple suivant : `/dev/sdl` Est le nom du périphérique SCSI pour le `lun_dmmp_raw` LUN, et `/dev/sdk` Est le nom du périphérique SCSI pour le
+
++
+`lun_dmmp_raw_alias` LUN :
+
++
+[listing]
+----
+[root@ibmx3550-229-108 /]# sanlun lun show
+controller(7mode/E-Series)/
+vserver (cDOT/FlashRay)     lun-pathname               filename
+-----------------------------------------------------------------
+vs_brb     /vol/dmmp_raw_vol/lun_dmmp_raw              /dev/sdl
+vs_brb     /vol/dmmp_raw_alias_vol/lun_dmmp_raw_alias  /dev/sdk
+----
+. Configurez les périphériques DMMP pour vos LUN clustered Data ONTAP :
++
+`*multipath*`
+
+. Obtenez les ID de descripteur de périphérique pour les LUN clustered Data ONTAP :
++
+`*multipath -ll*`
+
++
+Voici un exemple d'ID de poignée de dispositif : « 3600a09804d532d79565d47617679764d » »
+
+. Vérifiez si un alias est défini dans l' `/etc/multipath.conf` fichier sur l'hôte source.
+. Copiez manuellement la configuration d'alias sur le `/etc/multipath.conf` Fichier sur l'hôte test, mais remplacez l'ID de descripteur de périphérique 7-mode par l'ID de descripteur de périphérique clustered Data ONTAP correspondant.
+. Utilisez le `multipath` Commande permettant de configurer des périphériques DMMP pour vos LUN clustered Data ONTAP.
+. Identifiez le système de fichiers créé sur le dispositif d'alias DMMP :
++
+`*blkid _dmmp_device_name_*`
+
+. Monter le dispositif DMMP :
++
+`*mount*`
+
+. Effectuez les tests selon les besoins.
+. Une fois le test terminé, arrêtez l'hôte de test :
++
+`*shutdown -h -t0 now*`
+
+. Dans l'interface utilisateur 7MTT, cliquez sur *Finish Testing*.
+
+
+Si vos LUN clustered Data ONTAP doivent être remappées sur votre hôte source, vous devez préparer l'hôte source à la phase de mise en service. Si vos LUN clustered Data ONTAP doivent rester mappées sur l'hôte de test, aucune étape supplémentaire n'est requise sur l'hôte de test.
+
+*Informations connexes*
+
+xref:task_gathering_pretransition_information_from_inventory_assessment_workbook.adoc[Collecte des informations de pré-transition à partir du manuel d'évaluation de l'inventaire]
+
+xref:task_preparing_for_cutover_when_transitioning_luns_with_mounts_using_dmmp_aliases_on_linux_hosts.adoc[Préparation de la phase de mise en service lors de la transition de LUN avec des points de montage à l'aide de noms de périphériques DMMP sur des hôtes Linux]

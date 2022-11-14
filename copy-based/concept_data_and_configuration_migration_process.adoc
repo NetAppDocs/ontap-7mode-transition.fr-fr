@@ -1,0 +1,86 @@
+---
+permalink: copy-based/concept_data_and_configuration_migration_process.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, data, configuration, migration, process 
+summary: 'Le processus de migration des données et de la configuration utilisant l"outil 7-mode transition Tool comprend les phases suivantes : préparation, copie des données de base, application de la configuration \(prémise en service\), et mise en service du stockage. Si vous disposez de volumes SnapLock pour la vérification de la chaîne de contrôle, la vérification de la chaîne de contrôle est une étape supplémentaire après la mise en service.' 
+---
+= Processus de migration des données et de la configuration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le processus de migration des données et de la configuration utilisant l'outil 7-mode transition Tool se compose des phases suivantes : préparation, copie des données de base, application de la configuration (mise en service) et mise en service du stockage. Si vous disposez de volumes SnapLock pour la vérification de la chaîne de contrôle, la vérification de la chaîne de contrôle est une étape supplémentaire après la mise en service.
+
+L'image suivante montre les différentes phases du processus de migration :
+
+image::../media/transition_operational_flow.gif[flux opérationnel de transition]
+
+
+
+== Préparation
+
+Au cours de cette phase, des contrôles préalables sont exécutés pour vérifier le fonctionnement des fonctionnalités. Le processus vérifie les systèmes de stockage 7-mode pour vérifier que les volumes et la configuration sont prêts à être migrés vers ONTAP. Il vérifie que le cluster est correctement configuré et peut prendre en charge la transition. Toute erreur doit être résolue avant de poursuivre la transition. Bien que l'outil vous permette de continuer sans résoudre les avertissements, vous devez comprendre l'impact des avertissements avant de procéder à la transition. Vous pouvez exécuter les contrôles préalables plusieurs fois pour vérifier que toutes les erreurs ont été résolues.
+
+Bien que l'étape de contrôle préalable et les étapes d'évaluation effectuées pendant l'évaluation semblent semblables, il y a des différences. L'étape de précontrôle est un test plus détaillé, axé sur les systèmes de stockage spécifiques identifiés comme les systèmes de migration source (7-mode) et de destination (ONTAP). L'étape d'évaluation n'évalue que les systèmes source de migration, en vérifiant les différences de fonctionnalités et de fonctionnalités avec ONTAP.
+
+
+
+== Copie des données de base
+
+Les nouveaux volumes sont créés sur le SVM, une relation SnapMirror est établie entre les volumes ONTAP et 7-mode, et un transfert de base est effectué. Une fois la copie de base terminée, des transferts incrémentiels s'exécutent automatiquement selon un planning de copie des données défini par l'utilisateur. Les clients et les serveurs qui accèdent au système de stockage source restent en ligne pendant que cette étape est terminée.
+
+La copie de données requiert un accès au processeur, à la mémoire et au stockage, ce qui entraîne l'utilisation de ressources supplémentaires sur le système de stockage source. Il est recommandé de programmer l'activité de copie des données pour qu'elle se produise pendant les heures creuses (de préférence, l'utilisation du processeur doit être d'environ 50 %).
+
+
+
+== Appliquer la configuration (mise en service)
+
+Cette phase inclut les transferts incrémentiels SnapMirror ; les informations de configuration sont appliquées au système ONTAP, au SVM et aux volumes. Vous avez également la possibilité de tester les volumes ONTAP qui sont transférés avant la mise en service du stockage.
+
+Bien qu'une grande partie de la configuration soit appliquée, certaines opérations sont reportées sur la mise en service du stockage, par exemple l'application de quotas.
+
+Les adresses IP 7-mode sélectionnées pour la transition sont créées à l'état administratif descendant. Les nouvelles adresses IP sélectionnées pour la transition sont créées à l'état administratif. Ces nouvelles adresses IP peuvent être utilisées pour vérifier l'accès aux données lors des tests de précontrôle.
+
+Il est recommandé d'exécuter la phase d'application de la configuration (mise en service) quelques jours ou semaines avant la fenêtre de mise en service planifiée. Cette activité permet de vérifier que toutes les configurations sont correctement appliquées et si des modifications sont nécessaires.
+
+
+TIP: Bien qu'aucune mise à jour incrémentielle ne soit requise, il est préférable d'effectuer un transfert incrémentiel aussi près que possible de la mise en service du stockage, afin de minimiser le temps de déconnexion des clients.
+
+
+
+== Mise en service du stockage
+
+Lors de la mise en service du stockage, les clients sont déconnectés, un transfert final de données est effectué, la relation SnapMirror est interrompue et les clients sont reconnectés manuellement.
+
+La déconnexion des clients ou des serveurs du volume de stockage source empêche l'exécution des écritures supplémentaires pendant l'exécution de la copie finale. Avant de déconnecter les clients, il est recommandé d'effectuer une mise à jour incrémentielle afin de réduire au minimum les temps d'arrêt.
+
+L'accès au stockage doit être déconnecté uniquement pour les volumes qui sont en cours de migration. L'accès au stockage peut être abandonné du côté du stockage ou du client. La meilleure pratique consiste à interrompre la connectivité côté stockage. Par exemple, si un client CIFS accède à un volume nommé « user01 » sur un système de stockage 7-mode, vous pouvez utiliser le `cifs terminate -v user01` Commande permettant de désactiver l'accès à tous les partages CIFS du volume (arrêt de l'accès client du côté stockage). Les adresses IP, les points de montage ou même les noms de partage peuvent changer suite à la migration. Par conséquent, l'accès client peut également être interrompu du côté client. Tant que les clients ne peuvent pas écrire de nouvelles données dans le conteneur de stockage en cours de migration, vous pouvez utiliser l'une ou l'autre de ces méthodes, ou les deux, pour interrompre l'accès.
+
+Une fois les clients déconnectés, l'outil 7-mode transition Tool exécute une copie finale afin que les jeux de données source et de destination fassent l'objet d'une parité. 7-mode transition Tool configure les LIF de données sur la SVM. Certaines modifications de configuration qui n'ont pas été migrées au préalable, telles que l'application des configurations et quotas SAN, sont également appliquées à la SVM à l'heure actuelle.
+
+Une fois la mise en service du stockage terminée, vous pouvez reconnecter les clients manuellement et valider l'accès aux données. La validation de l'accès aux données implique de vérifier que les clients accèdent correctement au système ONTAP et que toutes les autorisations fonctionnent comme prévu.
+
+
+
+== Vérification de la chaîne de contrôle des volumes SnapLock
+
+Vous pouvez déclencher l'opération de chaîne de garde des volumes SnapLock dans le projet une fois la transition terminée. Cette opération n'est pas obligatoire et n'est nécessaire que si la vérification de la chaîne de garde est essentielle pour la transition des volumes SnapLock. Cette opération peut être effectuée pour tous les volumes SnapLock du projet ou pour un sous-ensemble de volumes SnapLock du projet. La vérification de la chaîne de contrôle est prise en charge pour la conformité et les volumes SnapLock d'entreprise. La vérification de la chaîne de garde est uniquement prise en charge pour les volumes SnapLock en lecture-écriture, et n'est pas prise en charge pour les volumes SnapLock en lecture seule.
+
+
+IMPORTANT: La vérification de la chaîne de garde n'est pas prise en charge pour le volume SnapLock comportant des noms de fichier avec des caractères non ASCII.
+
+Le workflow de vérification est uniquement pris en charge dans l'interface graphique de 7-mode transition Tool et n'est pas pris en charge dans le workflow d'interface de ligne de commande.
+
+L'opération de vérification de la chaîne de garde effectue les opérations suivantes :
+
+* Énumère tous les fichiers WORM des volumes 7-mode
+* Calcule l'empreinte de chaque fichier WORM énuméré précédemment sur les volumes 7-mode et les volumes ONTAP migrés
+* Génère un rapport avec des détails sur le nombre de fichiers avec des empreintes identiques et sans correspondance, ainsi que sur la cause de l'incompatibilité
+
+
+Les données des empreintes de tous les fichiers WORM sont stockées dans un volume ONTAP fourni lors de la phase de planification.
+
+
+NOTE: En fonction du nombre de fichiers sur les volumes 7-mode, le processus de vérification de la chaîne de contrôle peut prendre un temps considérable (en jours ou en semaines).

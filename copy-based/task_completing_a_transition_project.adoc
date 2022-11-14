@@ -1,0 +1,62 @@
+---
+permalink: copy-based/task_completing_a_transition_project.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, complete, project 
+summary: 'À l"issue de la transition, vous pouvez mener à bien chaque projet. Comme cette opération est perturbatrice, vous devez évaluer quand l"exécuter. Lors de la transition de volumes dans une relation SnapMirror, le projet secondaire doit être terminé avant la fin de la transition du projet principal.' 
+---
+= Finalisation d'un projet de transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+À l'issue de la transition, vous pouvez mener à bien chaque projet. Comme cette opération est perturbatrice, vous devez évaluer quand l'exécuter. Lors de la transition de volumes dans une relation SnapMirror, le projet secondaire doit être terminé avant la fin de la transition du projet principal.
+
+La mise en service du stockage s'effectue en quelques minutes. Le délai requis pour le remontage des données varie en fonction du client. La durée de la mise en service ou de la fenêtre de panne du stockage dépend des facteurs suivants :
+
+* Dernière mise à jour
++
+La mise à jour finale des données dépend de la quantité de changement dans les données source depuis la dernière mise à jour. Les transferts incrémentiels réduisent la quantité des données à transférer au cours de la mise en service.
+
+* Reconnexion des clients
++
+Si des mises à jour sont requises pour chaque client afin qu'il puisse se connecter au cluster, le nombre de clients qui doivent être mis à jour détermine le temps de la mise en service.
+
+
+
+Les pannes s'appliquent uniquement aux volumes en cours de migration. Il n'est pas nécessaire d'arrêter l'intégralité du système de stockage 7-mode source. Les volumes du système source qui ne sont pas migrés peuvent rester en ligne et accessibles.
+
+. Dans le tableau de bord de migration, sélectionnez le projet à mener à bien.
+. Déconnectez l'accès client manuellement.
+. Cliquez sur *terminer la transition*.
++
+.. Pour conserver les volumes source 7-mode en ligne après la transition, décochez la case *mettre les volumes source hors ligne après la transition*.
++
+Par défaut, cette option est sélectionnée et les volumes source sont mis hors ligne.
+
+.. Si vous avez sélectionné des volumes SnapLock pour la vérification de la chaîne de contrôle, cochez la case *je sais que je ne dois pas mettre les volumes SnapLock 7-mode hors ligne pendant la vérification de la chaîne de garde* pour maintenir les volumes SnapLock en ligne après la transition.
+.. Si vous avez sélectionné la transition d'une relation SnapMirror entre des clusters qui exécutent ONTAP 9.3 ou une version ultérieure prise en charge, cochez la case *je comprends que je dois convertir manuellement le type de relation SnapMirror de Data_protection en Extended_Data_protection*.
+.. Cochez la case *Customize le nombre de transferts SnapMirror simultanés et Limit limit for this operation* pour spécifier le nombre d'opérations de copie de données SnapMirror et la limite d'accélération.
+.. Cliquez sur *Continuer*.
+
+
++
+Les résultats de l'opération de mise en service s'affichent.
+
+
+
+Les adresses IP 7-mode sélectionnées pour la transition ne sont pas configurées à partir du système de stockage 7-mode, et les LIF associées créées avant la mise en service sont mises en service à l'état administratif. Les volumes 7-mode sont hors ligne.
+
+Depuis le cluster, lancer la commande vserver check lif-multi run pour vérifier que les serveurs de noms sont accessibles à l'aide des LIFs migrées.
+
+
+NOTE: Si vous avez créé une nouvelle LIF, les utilisateurs et les applications des volumes transférés doivent être remappés sur les disques à l'aide des nouvelles adresses IP et des nouveaux ports une fois tous les projets terminés.
+
+Si vous avez terminé la transition d'une relation SnapMirror entre des clusters qui exécutent des versions ONTAP 9.3 ou ultérieures prises en charge, vous devez convertir la relation SnapMirror de type DP en version XDP.
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-dap/home.html["Protection des données"]
+
+*Informations connexes*
+
+xref:concept_guidelines_for_deciding_when_to_cutover.adoc[Instructions permettant de décider quel est le moment d'effectuer la mise en service]

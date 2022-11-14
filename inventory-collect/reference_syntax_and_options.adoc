@@ -1,0 +1,90 @@
+---
+permalink: inventory-collect/reference_syntax_and_options.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, transition, syntax, option, ict, inventory, collection, tool 
+summary: 'Les commandes de l"outil de collecte d"inventaire \(TIC\) collectent les informations de configuration et d"inventaire à partir des contrôleurs et des hôtes spécifiés soit dans l"interface de ligne de commande \(CLI\), soit dans un fichier texte contenant les détails du système. Vous pouvez utiliser la syntaxe et les options avec les commandes ICT.' 
+---
+= Syntaxe et options
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les commandes de l'outil de collecte d'inventaire (TIC) collectent les informations de configuration et d'inventaire à partir des contrôleurs et des hôtes spécifiés soit dans l'interface de ligne de commande (CLI), soit dans un fichier texte contenant des détails système. Vous pouvez utiliser la syntaxe et les options avec les commandes ICT.
+
+
+
+== Syntaxe
+
+* `*ict --cmd collect [--output <inventory.xml>] <uri> [<uri> ...]*`
+* `*ict --cmd collect [--output <inventory.xml>] --input <credential_file.txt>*`
+* `*ict --cmd generate-fc-zones --source-filers <filer-ip>[,<filer-ip>] --dest-svm <cluster-name:svm-name> --fc-switches <switch-ip>[:<vsan-id>][,<switch-ip>[:<vsan-id>] ... ] <inventory_xml> [<inventory_xml> ...]*`
+* `*ict --cmd generate-fc-zones --source-filers <filer-ip>[<filer-ip>] --dest-svm <cluster-name:svm-name> --fc-switches <switch-ip>[:<vsan-id>][,<switch-ip>[:<vsan-id>] ... ] --fc-switches-target <switch-ip>[:<vsan-id>][,<switch-ip>[:<vsan-id>] ... ] <inventory_xml> [<inventory_xml> ...]*`
+* `*ict --help*`
+* `*ict --version*`
+
+
+
+
+== Options
+
+Le fichier texte doit contenir les détails système de chaque système dans une ligne distincte :
+
+* uri1
+* uri2
+* uri3
+
+
+Si un mot de passe est `*` Ou omis dans l'interface de ligne de commande ou le fichier texte, alors l'utilisateur est invité à saisir un mot de passe dans l'interface de ligne de commande. Les options suivantes sont disponibles pour exécuter les TIC :
+
+* `--help`
++
+Affiche le message d'aide et quitte.
+
+* `--version`
++
+Imprime la version de l'outil et quitte.
+
+* `--cmd [collect|generate-fc-zones]`
++
+Collecte : collecte des informations de configuration et d'inventaire à partir des contrôleurs et des hôtes.
+
++
+Générer-fc-zones : génère un document de planification de zone FC sur un inventaire donné.
+
+* `--output <filename[.xml[.gz]]>`
++
+Spécifie l'emplacement où les fichiers sont générés. Si le nom de fichier est suffixé de "`.gz`" , le fichier est compressé. Cette option génère deux fichiers (rapports) : Rapport d'inventaire et Manuel de rapport d'inventaire.
+
+* `--input <credentials_file.txt>`
++
+Spécifie l'emplacement où le fichier avec les informations d'identification système est enregistré. Cette option n'est pas utilisée dans `--cmd generate-fc-` zones.
+
++
+
+NOTE: Seul le fichier texte ASCII encodé est pris en charge.
+
+* format uri(`ontap|windows|vmware|linux|cisco|brocade)://[(<user>|<domain_user>)[:(<password>|*)]@](<hostname>|<ip>`)
++
+Spécifie le type de système, l'adresse IP et les informations d'identification du contrôleur ou de l'hôte. Si le mot de passe fourni est `*`, ou si aucun mot de passe n'est fourni, l'utilisateur est invité à entrer un mot de passe dans la ligne de commande.
+
+* `--source-filers`
++
+Spécifie l'adresse IP séparée par des virgules des contrôleurs source à utiliser pour générer le plan de zone FC.
+
+* `--dest-svm`
++
+Spécifie le SVM destination clustered Data ONTAP formaté en tant que `_cluster-name:svm-name_` À utiliser pour générer le plan de zone FC.
+
+* `--fc-switches`
++
+Le répertorie les commutateurs FC pour lesquels le plan de zone FC doit être généré. Il s'agit d'une liste d'identifiants de commutateur séparés par des virgules. Pour Cisco, les commutateurs FC doivent être formatés en `_switch-ip:vsan-id_` Et pour Brocade, les commutateurs FC doivent être formatés en `_switch-ip_`. Par exemple, 10.61.187.6:200,10.61.187.7:200 (Cisco) ou 10.61.187.4,10.61.187.5 (Brocade)
+
+* `--fc-switches-target`
++
+Spécifie la liste des commutateurs FC (connectés au cluster) pour lesquels le plan de zone FC doit être généré. Il s'agit d'une liste des identifiants des commutateurs cibles séparés par des virgules qui sont répertoriés dans la même séquence que les commutateurs FC d'origine (--fc-commutations). Le script de zoning FC est généré pour chaque commutateur d'origine ajouté à la liste des paramètres des commutateurs fc. Ce paramètre est facultatif.
+
+
+
+Pour FC zone Planner, les XML d'inventaire d'entrée sont donnés comme arguments sans nom.

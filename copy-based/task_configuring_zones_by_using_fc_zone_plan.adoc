@@ -1,0 +1,52 @@
+---
+permalink: copy-based/task_configuring_zones_by_using_fc_zone_plan.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, configure, zone, fc, zone, plan 
+summary: 'Avant de passer à un environnement SAN FC, vous devez configurer les zones à l"aide du planificateur de zones FC pour regrouper les hôtes et les cibles initiateurs.' 
+---
+= Configuration des zones à l'aide du plan de zone FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de passer à un environnement SAN FC, vous devez configurer les zones à l'aide du planificateur de zones FC pour regrouper les hôtes et les cibles initiateurs.
+
+* Le cluster et les hôtes initiateurs doivent être connectés au commutateur.
+* Le fichier script de zone FC doit être accessible.
+
+
+.Étapes
+. En cas de modification des configurations d'un groupe initiateur sur les systèmes 7-mode, modifiez et régénérez le plan de zone FC.
++
+xref:task_generating_an_assessment_report_by_adding_systems_to_7mtt.adoc[Génération d'un rapport d'évaluation en ajoutant des systèmes à l'outil de transition 7-mode]
+
+. Connectez-vous à l'interface de ligne de commande du commutateur.
+. Copiez et exécutez les commandes de zone requises une par une.
++
+L'exemple suivant exécute les commandes de zone sur le commutateur :
+
++
+[listing]
+----
+switch1:admin>config terminal
+# Enable NPIV feature
+feature npiv
+zone name auto_transition_igroup_d31_194bf3 vsan 10
+member pwwn 21:00:00:c0:dd:19:4b:f3
+member pwwn 20:07:00:a0:98:32:99:07
+member pwwn 20:09:00:a0:98:32:99:07
+.......
+.......
+.......
+copy running-config startup-config
+----
+. Vérifiez l'accès aux données depuis le cluster à l'aide des hôtes test.
+. Une fois la vérification terminée, effectuez les opérations suivantes :
++
+.. Déconnectez les hôtes initiateurs à tester.
+.. Supprimer la configuration de zone.
+
+
+

@@ -1,0 +1,57 @@
+---
+permalink: san-host/task_rolling_back_clustered_ontap_luns_back_to_7_mode_on_rhel_hosts.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, lun, rhel, roll, back 
+summary: 'Si vos LUN ONTAP ne fonctionnent pas comme vous le souhaitez après une transition depuis Data ONTAP en 7-mode, vous pouvez restaurer des LUN ONTAP vers 7-mode sur un hôte Red Hat Enterprise Linux \(RHEL\) 5 ou RHEL 6.' 
+---
+= Retour des LUN ONTAP vers des LUN 7-mode sur des hôtes RHEL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vos LUN ONTAP ne fonctionnent pas comme vous le souhaitez après une transition depuis Data ONTAP fonctionnant en 7-mode, vous pouvez restaurer des LUN ONTAP vers des LUN 7-mode sur un hôte Red Hat Enterprise Linux (RHEL) 5 ou RHEL 6.
+
+Vos LUN 7-mode doivent être remappées sur votre hôte RHEL 5 ou RHEL 6.
+
+.Étapes
+. Découvrez les LUN 7-mode :
++
+`*rescan-scsi-bus.sh*`
+
+. Configurez vos périphériques DMMP pour les LUN 7-mode :
++
+`*multipath*`
+
+. Vérifiez vos LUN 7-mode :
++
+`*sanlun lun show*`
+
+. Déterminez l'ID du descripteur de périphérique 7-mode :
++
+`*multipath -ll _device_handle_name_*`
+
+. Si l'hôte a été configuré avec Logical Volume Manager (LVM), procédez comme suit :
++
+.. Importez le groupe de volumes : +
+`*vgimport _vg_name_*`
+.. Vérifiez l'état du groupe de volumes : +
+`*vgdisplay*`
+.. Activez les volumes logiques : +
+`*vgchange -ay _vg_name_*`
+.. Vérifiez l'état du volume logique : +
+`*lvdisplay*`
++
+L'état du VG doit être affiché comme disponible.
+
+.. Montez les volumes logiques du LUN ONTAP sur le répertoire de point de montage respectif : +
+`*mount _lv_name mount_point_*`
++
+Si les points de montage sont définis dans le `etc/fstab` fichier, vous pouvez également utiliser `mount -a` commande de montage des volumes logiques.
+
+.. Vérifiez les points de montage : +
+`*mount*`
+
+
+

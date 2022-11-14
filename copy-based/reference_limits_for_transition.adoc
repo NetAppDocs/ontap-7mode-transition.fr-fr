@@ -1,0 +1,80 @@
+---
+permalink: copy-based/reference_limits_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, limits 
+summary: 'Lorsque vous effectuez la transition de volumes à l"aide de 7-mode transition Tool, vous devez prendre en compte certaines limites pour l"évaluation, telles que le nombre de contrôleurs et d"hôtes pouvant être évalués simultanément. Pour la migration, il est recommandé de vérifier le nombre de volumes d"un projet et le nombre de projets qui peuvent être exécutés simultanément.' 
+---
+= Limites pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous effectuez la transition de volumes à l'aide de 7-mode transition Tool, vous devez prendre en compte certaines limites pour l'évaluation, telles que le nombre de contrôleurs et d'hôtes pouvant être évalués simultanément. Pour la migration, il est recommandé de vérifier le nombre de volumes d'un projet et le nombre de projets qui peuvent être exécutés simultanément.
+
+Le tableau suivant répertorie le nombre de contrôleurs et d'hôtes pouvant être évalués simultanément :
+
+|===
+| Paramètre | Limite maximale 
+
+
+ a| 
+Nombre de contrôleurs
+ a| 
+50
+
+
+
+ a| 
+Nombre d'hôtes
+ a| 
+20
+
+
+
+ a| 
+Nombre d'hôtes ESXi
+ a| 
+10
+
+|===
+
+NOTE: Le nombre maximal de contrôleurs 7-mode dans une évaluation unique dépend du nombre d'objets, tels que le nombre de volumes, de qtrees, de quotas et d'exportations.
+
+Le tableau suivant répertorie le nombre de volumes dans un projet, ainsi que le nombre de projets qui peuvent être exécutés simultanément pendant la migration :
+
+|===
+| Paramètre | Limite maximale 
+
+
+ a| 
+Nombre de volumes dans un projet
+ a| 
+160
+
+
+
+ a| 
+Limite recommandée pour le nombre total de volumes pour tous les projets actifs dans l'interface Web à tout moment
+ a| 
+240
+
+
+
+ a| 
+Nombre maximal de projets actifs à un moment donné
+ a| 
+50
+
+
+NOTE: Si vous avez 50 projets actifs, vous pouvez répliquer les données à partir de systèmes de stockage 50 7-mode et de leurs destinations SnapMirror associées.
+
+
+
+ a| 
+Nombre de planifications de copies de données par projet
+ a| 
+7
+
+|===

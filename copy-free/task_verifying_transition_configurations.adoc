@@ -1,0 +1,19 @@
+---
+permalink: copy-free/task_verifying_transition_configurations.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, verify, configurations 
+summary: 'Une fois les volumes et les configurations 7-mode correctement importés, vous devez vérifier manuellement les agrégats, volumes, LUN et configurations ayant fait l"objet de la transition.' 
+---
+= Vérification des configurations migrées
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois les volumes et les configurations 7-mode correctement importés, vous devez vérifier manuellement les agrégats, volumes, LUN et configurations ayant fait l'objet de la transition.
+
+.Étapes
+. Vérification de la transition des agrégats, volumes et LUN 7-mode, ainsi que des partages CIFS, des exportations NFS et des mappages de LUN.
+. Vérifier que toutes les configurations 7-mode sont conservées.
+

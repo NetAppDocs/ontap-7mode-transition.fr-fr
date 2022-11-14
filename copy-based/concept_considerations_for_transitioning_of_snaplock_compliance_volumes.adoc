@@ -1,0 +1,26 @@
+---
+permalink: copy-based/concept_considerations_for_transitioning_of_snaplock_compliance_volumes.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, snaplock, compliance, volumes 
+summary: '7-mode transition Tool prend en charge la transition de volumes SnapLock Compliance autonomes et de volumes SnapLock Compliance faisant partie d"une relation SnapMirror.' 
+---
+= Considérations relatives à la transition de volumes SnapLock Compliance
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+7-mode transition Tool prend en charge la transition de volumes SnapLock Compliance autonomes et de volumes SnapLock Compliance faisant partie d'une relation SnapMirror.
+
+Le workflow de transition de volumes SnapLock Compliance autonomes est le même que pour la transition de volumes FlexVol.
+
+La transition des relations SnapMirror pour les volumes de conformité SnapLock n'est pas automatisée par l'outil de transition 7-mode. Vous devez effectuer la transition des volumes de conformité SnapLock primaire et secondaire en tant que volumes autonomes, puis resynchroniser manuellement les relations.
+
+Vous pouvez inclure les volumes de conformité SnapLock (autonomes et les volumes des relations SnapMirror) en tant que volume autonome dans les projets primaires et secondaires autonomes.
+
+Le mode de lecture/écriture de pré-commande n'est pas pris en charge pour les projets avec des volumes SnapLock Compliance. Il est recommandé de créer des projets distincts pour les volumes SnapLock Compliance et les volumes non SnapLock Compliance, car le mode de lecture/écriture de pré-mise en service n'est pas pris en charge si des volumes SnapLock Compliance sont inclus dans le projet.
+
+Pendant la mise en service, si le volume sélectionné est un volume SnapLock Compliance et qu'il représente la destination d'une relation SnapMirror, la relation SnapMirror entre le volume 7-mode et le volume ONTAP est supprimée sans interruption de SnapMirror. Cette action permet aux volumes ONTAP SnapLock Compliance secondaires de rester en mode lecture seule. Les volumes de conformité ONTAP SnapLock secondaires doivent être en mode lecture seule pour que l'opération de resynchronisation puisse réussir entre les volumes de conformité SnapLock primaire et secondaire.
+
+Voir https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_transition_the_7-Mode_SnapLock_Compliance_volumes_with_SnapMirror_relationship_to_clustered_Data_ONTAP["Comment effectuer la transition des volumes de conformité SnapLock 7-mode avec la relation SnapMirror vers clustered Data ONTAP"]

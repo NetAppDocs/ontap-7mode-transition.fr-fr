@@ -1,0 +1,54 @@
+---
+permalink: san-host/task_reattaching_rdm_to_vms_using_vsphere_client.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, rdm, vm, vshpere, client 
+summary: 'Après la transition d"un hôte ESXi à l"aide de l"outil 7-mode transition Tool \(7MTT\), vous devez rattacher vos RDM aux machines virtuelles \(VM\).' 
+---
+= Rattachement de RDM à des VM à l'aide de vSphere client
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition d'un hôte ESXi à l'aide de l'outil 7-mode transition Tool (7MTT), vous devez rattacher vos RDM aux machines virtuelles.
+
+Les mappages de périphériques Raw Device (RDM) obsolètes doivent avoir été supprimés.
+
+.Étapes
+. Ouvrez l'hôte ESXi ou le serveur vCenter gérant l'hôte ESXi.
+. Cliquez avec le bouton droit de la souris sur la VM, puis sélectionnez *Modifier les paramètres*.
++
+La fenêtre VM Properties s'ouvre.
+
+. Cliquez sur *Ajouter*.
++
+La fenêtre Ajouter du matériel s'ouvre.
+
+. Cliquez sur *disque dur*.
+. Cliquez sur *Suivant* pour sélectionner le disque.
+. Sélectionnez *mappages de périphériques Raw Device*.
+. Cliquez sur *Suivant* pour sélectionner la LUN cible.
+. Sélectionnez le LUN avec le nouvel ID NAA clustered Data ONTAP que vous avez noté dans le fichier de mappage 7MTT.
+. Cliquez sur *Suivant*.
+. Choisissez *sélectionnez datastore*.
+. Sélectionnez le datastore qui correspond au chemin de disque que vous avez indiqué dans le fichier de mappage 7MTT.
+. Cliquez sur *Suivant*.
+. Choisissez *physique* ou *virtuel* pour le *mode de compatibilité*.
++
+Choisissez le mode de compatibilité indiqué lorsque votre RDM obsolète a été supprimé.
+
+. Cliquez sur *Suivant*.
+. Choisissez *Options avancées*.
+. Sélectionnez *Virtual Device Node*.
++
+Sélectionnez le mode de périphérique virtuel que vous avez noté lorsque vous avez supprimé le RDM obsolète.
+
+. Cliquez sur *Suivant*.
+. Cliquez sur *Terminer* pour soumettre vos modifications.
+. Répétez les étapes pour tous les ordinateurs virtuels avec RDM attaché.
+
+
+*Informations connexes*
+
+xref:task_removing_stale_rdm_using_vsphere_client.adoc[Suppression de RDM obsolètes à l'aide du client vSphere]

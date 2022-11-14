@@ -1,0 +1,33 @@
+---
+permalink: copy-free/task_transitioning_to_clustered_ontap_8_3_from_a_7_mode_version_with_32_bit_data.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, prepare, 32, aggregates 
+summary: Les agrégats, volumes et copies Snapshot 32 bits ne sont pas pris en charge par ONTAP 8.3 et les versions ultérieures. Vous devez donc développer les agrégats 32 bits sur 64 bits, puis rechercher et supprimer tous les volumes 32 bits et toutes les copies Snapshot du système 7-mode avant la transition. 
+---
+= Préparation à la transition des systèmes 7-mode avec des agrégats 32 bits
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les agrégats, volumes et copies Snapshot 32 bits ne sont pas pris en charge par ONTAP 8.3 et les versions ultérieures. Vous devez donc développer les agrégats 32 bits sur 64 bits, puis rechercher et supprimer tous les volumes 32 bits et toutes les copies Snapshot du système 7-mode avant la transition.
+
+* *agrégats 32 bits*
++
+.. xref:task_expanding_an_aggregate_to_64_bit_format_without_adding_storage.adoc[Extension d'un agrégat au format 64 bits]
+.. xref:task_finding_and_removing_32_bit_data_from_source_volumes_and_snapshot_copies.adoc[Recherche et suppression de volumes 32 bits et de copies Snapshot]
+
+
+* *Volumes 32 bits ou copies Snapshot*
++
+Même si vous ne disposez que d'agrégats et de volumes 64 bits, il peut conserver certains volumes FlexVol ou Snapshot 32 bits ou à format mixte. Vous devez supprimer ces volumes et ces copies Snapshot avant la transition.
+
++
+xref:task_finding_and_removing_32_bit_data_from_source_volumes_and_snapshot_copies.adoc[Recherche et suppression de volumes 32 bits et de copies Snapshot]
+
+
+
+*Informations connexes*
+
+http://www.netapp.com/us/media/tr-3978.pdf["Rapport technique NetApp 3978 : mise à niveau d'agrégats 32 bits en agrégats 64 bits sans déplacement des données : présentation et meilleures pratiques"]

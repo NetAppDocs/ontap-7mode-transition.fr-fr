@@ -1,0 +1,126 @@
+---
+permalink: copy-based/task_applying_7_mode_configurations.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, apply, 7, mode, configuration 
+summary: 'Une fois la copie de données de base terminée, vous pouvez copier et appliquer toutes les configurations du système 7-mode \ (y compris la configuration des protocoles et des services\) aux volumes ONTAP. Si le cluster cible exécute une version quelconque de ONTAP 8.3.2 et versions ultérieures prises en charge, la configuration SAN est transition lors de cette phase.' 
+---
+= Application des configurations 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois la copie de base terminée, vous pouvez copier et appliquer toutes les configurations du système 7-mode (y compris la configuration des protocoles et des services) aux volumes ONTAP. Si le cluster cible exécute une version quelconque de ONTAP 8.3.2 et versions ultérieures prises en charge, la configuration SAN est transition lors de cette phase.
+
+Si vous migrez des volumes SAN, vous devez avoir créé au moins une LIF de données du protocole approprié (iSCSI ou FC) pour chaque nœud du cluster.
+
+* Les configurations sont appliquées dans la phase de configuration Apply (prétover), qui a deux modes : le mode de lecture seule prétover et le mode de lecture/écriture prétover.
+
+
+Le mode de lecture/écriture prétover n'est pas pris en charge lorsque le projet contient :
+
+* LES volumes SAN et le cluster cible exécutent Data ONTAP 8.3.1 ou une version antérieure. Dans ce cas, les configurations suivantes ne sont pas appliquées lors de la phase de mise en service :
++
+** Configurations SAN
+** Configurations de planification des copies Snapshot
+
+
+* Volumes SnapLock Compliance.
++
+Si le projet contient des volumes SnapLock Compliance, les configurations de planification Snapshot ne sont pas appliquées lors de la phase de mise en service. Ces configurations sont alors appliquées lors de la phase de mise en service.
+
++
+Voir xref:concept_considerations_for_transitioning_of_snaplock_compliance_volumes.adoc[Considérations relatives à la transition de volumes SnapLock Compliance].
+
+
+
+.Étapes
+. Dans le Tableau de bord, sélectionnez le projet.
+. Appliquer les configurations :
++
+|===
+| Si vous voulez appliquer toutes les configurations dans... | Alors... 
+
+
+ a| 
+Mode lecture seule
+ a| 
+Cliquez sur *appliquer la configuration*.
+
+
+
+ a| 
+Mode lecture/écriture
+ a| 
+.. Cochez la case *mode test*.
+.. Cliquez sur *appliquer la configuration*.
++
+Les volumes ONTAP sont en lecture/écriture et vous pouvez tester les configurations et les opérations d'accès aux données.
+
+.. Sélectionnez *appliquer la configuration en mode test* dans la boîte de dialogue appliquer la configuration (précontrôle).
+
+
+|===
+. Cocher la case *Customize le nombre de transferts SnapMirror simultanés et accélérateur limit pour cette opération* afin de spécifier le nombre d'opérations de copie de données SnapMirror et la limite de papillon :
++
+.. Indiquez le nombre maximal de transferts SnapMirror simultanés à exécuter pendant la transition.
+.. Entrez le pourcentage de flux disponibles pouvant être utilisés pour les transferts SnapMirror.
++
+Par défaut, l'outil utilise 50 % des transferts SnapMirror volume disponibles.
+
+.. Saisissez une limite d'accélération ou sélectionnez *maximum* pour utiliser la bande passante maximale.
++
+Par défaut, l'outil utilise la régulation maximale pour la transition de configuration.
+
+
+
+. Cochez la case *Configuration Kerberos de transition* pour fournir des détails de configuration de serveur Kerberos sous UNIX ou Microsoft AD pour la transition.
++
+
+NOTE: Cette option n'est activée que lorsque Kerberos est configuré sur le système de stockage 7-mode source.
+
++
+.. Entrez les détails du serveur Kerberos, par exemple le nom d'hôte, l'adresse IP, le nom d'utilisateur et le mot de passe.
++
+
+NOTE: Pour effectuer la transition de la configuration Kerberos, au moins une LIF doit être transférée dans le cadre du projet et la LIF doit être résolue avec un nom d'hôte.
+
+
+
+. Cliquez sur *Continuer*.
++
+La boîte de dialogue progression de l'opération s'affiche et l'opération de copie de configuration démarre.
+
+. Si la transition de configuration est effectuée en mode lecture/écriture, cliquez sur *Terminer le test* une fois le test et la vérification des configurations terminés.
++
+Ce mode ne doit être utilisé qu'à des fins de test. Toutes les données écrites sur le cluster sur les volumes migrés en mode test sont perdues.
+
++
+L'outil reétablit la relation SnapMirror et resynchronise (sur la base de la planification active pour ce projet à ce moment) les volumes ONTAP. Toutes les données écrites sur 7-mode sont synchronisées une nouvelle fois avec les volumes ONTAP.
+
++
+
+NOTE: Pour que la resynchronisation soit réussie, une copie Snapshot commune doit exister entre les volumes Data ONTAP 7-mode et clustered. Vous ne devez pas supprimer manuellement la copie Snapshot commune. Dans le cas contraire, la resynchronisation échoue.
+
+
+
+Les adresses IP 7-mode restent opérationnelles. Les LIFs sont configurées sur le SVM (Storage Virtual machine) de plusieurs manières :
+
+* Les adresses IP 7-mode existantes sont créées à l'état administratif inactif.
++
+Lors de la mise en service du stockage, ces adresses IP sont supprimées du système 7-mode et les LIF de SVM correspondantes sont mises en état d'administration. Si vous sélectionnez le mode de lecture/écriture pré-défini, vous devez utiliser une autre LIF pour accéder aux volumes en cours de migration vers le cluster.
+
+* Les nouvelles adresses IP sont créées à l'état de configuration administrative.
++
+Si vous sélectionnez le mode de lecture/écriture pré-défini, ces LIF peuvent être utilisées pour tester l'accès aux volumes migrés au sein du cluster.
+
+
+
+*Informations connexes*
+
+xref:task_managing_logical_interfaces.adoc[Gestion des interfaces logiques]
+
+xref:concept_considerations_for_quotas.adoc[Considérations relatives aux quotas]
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/7MTT_v2.0%2F%2FTransitioned_Data_ONTAP_features["Fonctionnalités 7MTT v2.0/Data ONTAP migrées"]

@@ -1,0 +1,18 @@
+---
+permalink: copy-free/concept_storage_and_host_version_requirements.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, storage, host, fc, switches, version, requirements, assessment 
+summary: 'Vous devez connaître les versions de Data ONTAP 7-mode, des hôtes et des commutateurs FC pris en charge pour l"évaluation de la transition.' 
+---
+= Exigences de version des commutateurs FC, d'hôte et de stockage pour l'évaluation de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les versions de Data ONTAP 7-mode, des hôtes et des commutateurs FC pris en charge pour l'évaluation de la transition.
+
+Pour obtenir la liste des versions 7-mode, des hôtes et des commutateurs FC pris en charge pour l'évaluation par l'outil de transition 7-mode, consultez la matrice d'interopérabilité NetApp.
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

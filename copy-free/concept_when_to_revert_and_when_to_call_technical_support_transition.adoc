@@ -1,0 +1,33 @@
+---
+permalink: copy-free/concept_when_to_revert_and_when_to_call_technical_support_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, roll, back, transition, technical, support 
+summary: 'Vous pouvez revenir en arrière sans assistance lors de la restauration d"un cluster de test ou de laboratoire. Cependant, vous devez contacter le support technique en cas de problème pendant ou après la transition, ou pour annuler une transition effectuée sur un cluster de production.' 
+---
+= Quand annuler une transition et quand contacter le support technique
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez revenir en arrière sans assistance lors de la restauration d'un cluster de test ou de laboratoire. Cependant, vous devez contacter le support technique en cas de problème pendant ou après la transition, ou pour annuler une transition effectuée sur un cluster de production.
+
+
+IMPORTANT: Vous ne devez pas tenter de restaurer une transition vers un environnement de production sans l'aide du support technique.
+
+Si vous rencontrez l'une des situations suivantes, contactez immédiatement le support technique :
+
+* Le processus de transition échoue et ne peut pas se terminer, et vous n'êtes pas certain de la suite à suivre.
+* Le processus de transition est terminé, mais le cluster est inutilisable dans un environnement de production.
+* Le processus de transition se termine et le cluster passe en production, mais vous n'êtes pas satisfait de son comportement.
+* Le processus de transition se termine pour une partie des données et de la configuration, et vous décidez de restaurer la transition.
+* Vous avez un problème avec le processus de transition et ne pouvez pas résoudre le problème lié aux messages de réponse d'erreur de l'outil 7-mode transition Tool, dans les messages d'événement EMS Data ONTAP et dans la base de connaissances NetApp.
++
+https://kb.netapp.com/["Base de connaissances NetApp"]
+
+
+
+*Informations connexes*
+
+xref:task_collecting_tool_logs.adoc[Téléchargement des fichiers journaux de transition]

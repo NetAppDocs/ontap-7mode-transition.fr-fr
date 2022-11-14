@@ -1,0 +1,15 @@
+---
+permalink: san-host/reference_trademark.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, trademark 
+summary: Informations sur les marques commerciales du Guide de transition et de correction des hôtes SAN. 
+---
+= Marques commerciales
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+NetApp, le logo NETAPP et les marques mentionnées sur la page des marques commerciales NetApp sont des marques commerciales de NetApp, Inc. Les autres noms de sociétés et de produits peuvent être des marques commerciales de leurs propriétaires respectifs.
+
+http://www.netapp.com/us/legal/netapptmlist.aspx[]

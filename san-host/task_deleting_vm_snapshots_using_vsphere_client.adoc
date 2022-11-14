@@ -1,0 +1,25 @@
+---
+permalink: san-host/task_deleting_vm_snapshots_using_vsphere_client.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, delete, vm, snapshots, copy, vsphere, client 
+summary: 'Si vous ne connaissez pas la CLI ESXi ou si elle est plus pratique pour votre environnement, vous pouvez supprimer les snapshots de machine virtuelle \(VM\) à l"aide du client vSphere.' 
+---
+= Suppression de copies Snapshot de machine virtuelle à l'aide de vSphere client
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous ne connaissez pas la CLI ESXi ou si elle est plus pratique pour votre environnement, vous pouvez supprimer les snapshots de machine virtuelle (VM) à l'aide du client vSphere.
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Ouvrez l'hôte ESXi ou le serveur vCenter gérant l'hôte ESXi.
+. Cliquez avec le bouton droit de la souris sur la machine virtuelle à partir de laquelle vous devez supprimer des snapshots.
+. Ouvrez la fenêtre *Snapshot* > *Snapshot Manager* snapshots.
+. Cliquez sur *Supprimer tout*.
+

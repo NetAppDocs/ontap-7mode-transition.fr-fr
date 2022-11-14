@@ -1,0 +1,79 @@
+---
+permalink: san-host/task_bringing_windows_hosts_online_after_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, windows, host, online 
+summary: 'Après la transition de vos LUN à l"aide de l"outil 7-mode transition Tool \(7MTT\) pour les hôtes Windows, vous devez effectuer plusieurs étapes pour mettre en ligne votre hôte et recommencer la maintenance des données.' 
+---
+= Mise en ligne des hôtes Windows après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition de vos LUN à l'aide de l'outil 7-mode transition Tool (7MTT) pour les hôtes Windows, vous devez effectuer plusieurs étapes pour mettre en ligne l'hôte et recommencer la maintenance des données.
+
+Pour une transition sans copie, vous devez suivre les procédures ci-dessous `vol rehost` doit être terminé. Voir la link:https://docs.netapp.com/us-en/ontap-7mode-transition/copy-free/index.html["Guide de transition sans copie de l'outil 7-mode"] pour plus d'informations.
+
+* Pour les transitions basées sur la copie, effectuez ces étapes après la mise en service du stockage dans l'outil 7-mode transition Tool (7MTT).
+* Pour les CFT, effectuer ces étapes après avoir terminé l'opération Import & Data Configuration dans l'outil 7MTT.
++
+.. Générer le fichier de mappage de LUN 7-mode vers ONTAP :
++
+*** Pour les transitions basées sur la copie, exécutez la commande suivante depuis l'hôte sur lequel l'outil 7MTT est installé : +
+`*transition cbt export lunmap -p _project-name_ -o _file_path_*`
++
+Par exemple :
+
++
+`*transition cbt export lunmap -p SanWorkLoad -o c:/Libraires/Documents/7-to-C-LUN-MAPPING.csv*`
+
+*** Pour les transitions sans copie, exécutez la commande suivante depuis le système sur lequel l'outil 7MTT est installé : +
+`*transition cft export lunmap -p _project-name_ -s _svm-name_ -o _output-file_*`
++
+
+NOTE: Vous devez exécuter cette commande pour chaque SVM.
+
++
+Par exemple :
+
++
+`*transition cft export lunmap -p SANWorkLoad -s svml -o c:/Libraries/Documents/7-to-C-LUN-MAPPING-svml.csv*`
+
+
+
+.. Si l'hôte Windows est démarré par SAN et que le LUN de démarrage a été transféré, mettez-le sous tension sur l'hôte.
+.. Mettez à jour le BIOS FC afin que le système démarre à partir du LUN sur le contrôleur clustered Data ONTAP.
++
+Pour plus d'informations, reportez-vous à la documentation relative au HBA.
+
+.. Sur l'hôte Windows, relancez l'analyse des disques à partir du Gestionnaire de disques.
+.. Obtenez les numéros de série de LUN, les ID de LUN et les numéros de disque physique Windows correspondants des LUN mappées à l'hôte.
++
+*** Pour les systèmes exécutant Data ONTAP ONTAP DSM : utilisez le snap-in Data ONTAP Management extension ou l'applet de commande Get-sandisk Windows PowerShell.
+*** Pour les systèmes exécutant MSDSM : utilisez l'outil Inventory Collect Tool (ICT).
++
+L'ID de LUN, le numéro de série de LUN et le numéro de série correspondant sont saisis sous l'onglet SAN Host LUN.
+
+
+
+.. Utilisez les numéros de série de la LUN, les ID de LUN, les numéros de disque physique Windows correspondants des LUN, ainsi que la sortie du mappage de LUN et les données collectées à l'état de prétransition pour déterminer si les LUN ont été migrées avec succès.
+.. Notez que les numéros de disque physique des LUN migrées ont changé.
+.. Mettre vos disques en ligne.
++
+*** Utilisez le Gestionnaire de disques Windows pour mettre en ligne des disques qui ne font pas partie du basculement de cluster.
+*** Utilisez Failover Cluster Manager pour mettre les disques en ligne faisant partie du basculement de cluster.
+
+
+.. Si l'hôte en cours de transition exécute Windows Server 2003 et que vous avez migré le périphérique quorum, démarrez les services de cluster sur tous les nœuds du cluster.
+.. Si Hyper-V est activé sur l'hôte et que les périphériques d'intercommunication sont configurés sur les machines virtuelles, modifiez les paramètres de Hyper-V Manager.
++
+Le numéro de disque physique de la LUN correspondant au périphérique d'intercommunication peut avoir changé suite à la transition.
+
+
+
+
+
+*Informations connexes*
+
+xref:concept_what_the_inventory_collect_tool_is.adoc[Qu'est-ce que l'outil de collecte d'inventaire]

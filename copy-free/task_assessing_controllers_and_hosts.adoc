@@ -1,0 +1,26 @@
+---
+permalink: copy-free/task_assessing_controllers_and_hosts.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, assess, controllers, hosts 
+summary: 'Vous pouvez collecter et évaluer les informations sur les contrôleurs et les hôtes à l"aide de l"outil de transition 7-mode ou de l"outil de collecte d"inventaire, en fonction des réglementations de sécurité qui régissent votre environnement.' 
+---
+= Évaluation des contrôleurs et des hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez collecter et évaluer les informations sur les contrôleurs et les hôtes à l'aide de l'outil de transition 7-mode ou de l'outil de collecte d'inventaire, en fonction des réglementations de sécurité qui régissent votre environnement.
+
+* 7-mode transition Tool collecte des informations d'inventaire sur le contrôleur et les hôtes en ajoutant les systèmes ou en utilisant le rapport d'inventaire généré par l'outil de collecte d'inventaire.
++
+L'outil 7-mode transition Tool évalue ensuite les informations d'inventaire et crée le rapport d'évaluation de la transition.
+
+* Lors de l'évaluation de la transition, vous devez prendre en compte les éléments suivants :
++
+** Vous ne devez pas effectuer à la fois des opérations d'évaluation et de migration simultanément sur un contrôleur.
+** Vous devez éviter d'effectuer des opérations d'évaluation sur des contrôleurs de stockage actifs pendant les heures de pointe.
+
+
+

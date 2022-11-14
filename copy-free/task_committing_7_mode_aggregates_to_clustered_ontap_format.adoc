@@ -1,0 +1,25 @@
+---
+permalink: copy-free/task_committing_7_mode_aggregates_to_clustered_ontap_format.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, commit, project 
+summary: La dernière étape de la transition consiste à engager le projet de transition sans copie. Une fois les agrégats validés, vous ne pouvez pas restaurer le système 7-mode. 
+---
+= Validation du projet de transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La dernière étape de la transition consiste à engager le projet de transition sans copie. Une fois les agrégats validés, vous ne pouvez pas restaurer le système 7-mode.
+
+Vous devez avoir vérifié manuellement les données et les configurations migrées, ainsi que les charges de travail et applications testées.
+
+Toutes les copies Snapshot de niveau agrégat créées lors de la phase d'exportation sont supprimées.
+
+.Étapes
+. Cliquez sur *commit*.
+. Dans le message d'avertissement qui s'affiche, cliquez sur *Oui*.
+
+
+Toutes les restrictions liées aux phases de test de préproduction sont supprimées, et les volumes transférés peuvent gérer les données de production, si ce n'est pas le cas lors de la phase de test de préproduction.

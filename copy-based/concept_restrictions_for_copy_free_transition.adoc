@@ -1,0 +1,61 @@
+---
+permalink: copy-based/concept_restrictions_for_copy_free_transition.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, restrictions, 7, mode, volumes 
+summary: Vous devez tenir compte de certaines restrictions relatives à la transition des volumes 7-mode. Certaines restrictions sont dues à des fonctions qui ne sont pas prises en charge dans ONTAP. Pour certaines restrictions, vous pouvez effectuer une action corrective qui vous permet de poursuivre la transition. 
+---
+= Restrictions liées à la transition de volumes 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez tenir compte de certaines restrictions relatives à la transition des volumes 7-mode. Certaines restrictions sont dues à des fonctions qui ne sont pas prises en charge dans ONTAP. Pour certaines restrictions, vous pouvez effectuer une action corrective qui vous permet de poursuivre la transition.
+
+
+
+== Types de volume
+
+Les types de volumes suivants ne sont pas pris en charge pour la transition :
+
+* Volumes traditionnels
++
+Vous pouvez utiliser des méthodes de transition basées sur hôte pour effectuer la transition de volumes traditionnels.
+
++
+http://www.netapp.com/us/media/tr-4052.pdf["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"]
+
+* Volumes FlexCache
+
+
+
+
+== États du volume
+
+La transition est bloquée si l'un des volumes 7-mode sélectionnés pour la transition est à l'un des États suivants :
+
+* Hors ligne
+* Limitée
+* Incohérent (`wafl inconsistent`)
+
+
+
+
+== Volume avec qtrees appartenant à une autre unité vFiler
+
+Vous ne pouvez pas effectuer la transition de volumes avec des qtrees dont les qtrees sont la propriété d'une unité vFiler différente de celle du volume. Avant la transition, vous devez vous assurer que chaque volume et tous ses qtrees appartiennent à la même unité vFiler en effectuant l'une des actions suivantes :
+
+* Déplacez les qtrees vers l'unité vFiler propriétaire du volume.
+* Supprimez les qtrees.
+
+
+
+
+== Paramètre de conversion du nom d'inode vers le nom parent
+
+Les traductions du nom d'inode vers le nom parent doivent être activées sur chaque volume. Vous pouvez activer le parent pour le chemin des traductions en désactivant le `no_i2p` option :
+
+`*vol options _vol_name_ no_i2p off*`
+
+Il n'est pas nécessaire d'attendre la fin de l'acquisition i2p, et vous pouvez poursuivre la préparation de la transition.

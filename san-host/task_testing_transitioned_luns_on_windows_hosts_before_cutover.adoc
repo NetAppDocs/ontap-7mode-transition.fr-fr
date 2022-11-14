@@ -1,0 +1,64 @@
+---
+permalink: san-host/task_testing_transitioned_luns_on_windows_hosts_before_cutover.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, test, lun, windows, cutover, phase 
+summary: 'Si vous utilisez 7-mode transition Tool \(7MTT\) 2.2 ou une version ultérieure et Data ONTAP 8.3.2 ou une version ultérieure pour effectuer la transition de vos LUN hôtes Windows, Vous pouvez tester vos LUN clustered Data ONTAP migrées pour vérifier que vous pouvez mettre en ligne votre disque et que les opérations de vos applications fonctionnent comme prévu avant la phase de mise en service. Pendant le test, l"hôte source peut continuer à exécuter les E/S sur les LUN 7-mode source.' 
+---
+= Le test des LUN a été effectué sur des hôtes Windows avant la phase de mise en service
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez 7-mode transition Tool (7MTT) 2.2 ou une version ultérieure et Data ONTAP 8.3.2 ou une version ultérieure pour effectuer la transition de vos LUN hôtes Windows, Vous pouvez tester vos LUN clustered Data ONTAP migrées pour vérifier que vous pouvez mettre en ligne votre disque et que les opérations de vos applications fonctionnent comme prévu avant la phase de mise en service. Pendant le test, l'hôte source peut continuer à exécuter les E/S sur les LUN 7-mode source.
+
+Vos LUN 7-mode doivent être prêts pour la transition.
+
+Vous devez maintenir la parité matérielle entre l'hôte de test et l'hôte source, et vous devez effectuer les étapes suivantes sur l'hôte de test.
+
+Vos LUN clustered Data ONTAP sont en mode lecture/écriture pendant le test. Ils se convertissent en mode lecture seule une fois le test terminé et que vous préparez la phase de mise en service.
+
+.Étapes
+. Une fois la copie des données de base terminée, sélectionnez *Test mode* dans l'interface utilisateur 7MTT.
+. Dans l'interface utilisateur 7MTT, cliquez sur *Apply configuration*.
+. Générer le fichier de mappage de LUN 7-mode vers clustered Data ONTAP :
++
+** Pour les transitions basées sur la copie, exécutez la commande suivante depuis l'hôte sur lequel l'outil 7MTT est installé : +
+`*transition cbt export lunmap -p _project-name_ -o _file_path_*`
++
+Par exemple :
+
++
+`*transition cbt export lunmap -p SanWorkLoad -o c:/Libraires/Documents/7-to-C-LUN-MAPPING.csv*`
+
+** Pour les transitions sans copie, exécutez la commande suivante depuis le système sur lequel l'outil 7MTT est installé : +
+`*transition cft export lunmap -p _project-name_ -s _svm-name_ -o _output-file_`
++
+
+NOTE: Vous devez exécuter cette commande pour chaque SVM.
+
++
+Par exemple :
+
++
+`*transition cft export lunmap -p SANWorkLoad -s svml -o c:/Libraries/Documents/7-to-C-LUN-MAPPING-svml.csv*`
+
+
+
+. Mettre en ligne les disques et applications transférés :
++
+** Si les disques transférés ne font pas partie du basculement de cluster, utilisez le Gestionnaire de disque Windows pour mettre les disques en ligne.
+** Si les disques transférés font partie du basculement de cluster, utilisez Cluster Failover Manager pour mettre les disques en ligne.
+
+
+. Effectuez les tests selon les besoins.
+. Une fois les tests terminés, mettez vos applications et vos disques hors ligne :
++
+** Si les disques transférés ne font pas partie du basculement de cluster, utilisez le Gestionnaire de disque Windows pour mettre les disques hors ligne.
+** Si les disques transférés font partie de Cluster Failover Manager, mettez les disques hors ligne à l'aide de Cluster Failover Manager.
+
+
+
+
+Si vos LUN clustered Data ONTAP doivent être remappées sur votre hôte source, vous devez préparer l'hôte source à la phase de mise en service. Si vos LUN clustered Data ONTAP doivent rester mappées sur l'hôte de test, aucune étape supplémentaire n'est requise sur l'hôte de test.

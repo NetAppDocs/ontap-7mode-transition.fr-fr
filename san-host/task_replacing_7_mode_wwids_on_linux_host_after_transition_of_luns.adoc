@@ -1,0 +1,101 @@
+---
+permalink: san-host/task_replacing_7_mode_wwids_on_linux_host_after_transition_of_luns.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, 7, mode, wwids, linux, lun 
+summary: 'Après la transition LUN, l"ID de site Web 7-mode LUN a été modifié. Vous devez le remplacer par le WWID de LUN ONTAP correspondant avant de pouvoir commencer le service des données.' 
+---
+= Remplacement des WWID LUN 7-mode sur les hôtes Linux après la transition des LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition LUN, l'ID de site Web 7-mode LUN a été modifié. Vous devez le remplacer par le WWID de LUN ONTAP correspondant avant de pouvoir commencer le service des données.
+
+Pour une transition sans copie, les procédures de réhébergement de volumes doivent être complètes.
+
+Voir la link:https://docs.netapp.com/us-en/ontap-7mode-transition/copy-free/index.html["Guide de transition sans copie de l'outil 7-mode"]pour plus d'informations.
+
+* Pour les transitions basées sur les copies (CBT), effectuez ces étapes après la mise en service du stockage dans 7MTT.
+* Pour les CFT, effectuez ces étapes une fois l'opération Import Data & Configuration terminée dans l'outil 7MTT.
+
+
+.Étapes
+. Générer le fichier de mappage de LUN 7-mode vers ONTAP :
++
+** Pour les CBT, exécutez la commande suivante depuis l'hôte Linux sur lequel l'outil 7MTT est installé : +
+`*transition cbt export lunmap -p project-name -o _file_path_*`
++
+Par exemple :
+
++
+`*transition cbt export lunmap -p SanWorkLoad -o c:/Libraires/Documents/7-to-C-LUN-MAPPING.csv*`
+
+** Pour les CFT, exécutez la commande suivante à partir du système sur lequel l'outil 7MTT est installé : +
+`*transition cft export lunmap -p _project-name_ -s _svm-name_ -o _output-file_*`
++
+Par exemple :
+
++
+`*transition cft export lunmap -p SanWorkLoad -s svml -0 c:/Libraries/Documents/7-to-C-LUN-MAPPING-svml.csv*`
+
++
+
+NOTE: Vous devez exécuter cette commande pour chaque SVM.
+
+
+
+. Notez le nouvel ID du descripteur de périphérique ONTAP à partir du fichier de mappage de LUN.
+. Supprimez les périphériques SCSI créés pour les LUN 7-mode :
++
+** Pour supprimer tous les périphériques SCSI : +
+`*rescan-scsi-bus.sh -r*`
+** Pour retirer chaque périphérique SCSI individuellement : +
+`*echo 1> /sys/block/__SCSI_ID__/delete*`
++
+Cette commande doit être exécutée sur tous les périphériques SCSI LUN 7-mode. Consultez la colonne ID de périphérique SCSI de l'onglet LUN hôte SAN du Manuel d'évaluation d'inventaire_ pour identifier les ID de périphérique SCSI des LUN.
+
+
+
+. Découvrir les nouveaux LUN ONTAP :
++
+`*rescan-scsi-bus.sh*`
+
+. Identifiez les périphériques SCSI des nouveaux LUN ONTAP :
++
+`*sanlun lun show*`
+
+. Obtenez les WWID des nouveaux LUN ONTAP :
++
+`*/lib/udev/scsi_id -g -u -d /dev _SCSI_dev_*`
+
+. Si un alias DMMP est défini, mettez à jour le fichier /etc/multipath.conf afin de remplacer le WWID 7-mode par son identifiant de LUN ONTAP correspondant, de sorte que l'alias DMMP pointe vers le LUN clustered Data ONTAP :
++
+`*cat /etc/multipath.conf*`
+
+. Configurer les périphériques DMMP :
++
+`*multipath*`
+
+. Vérifiez que l'alias DMMP fait référence correctement à l'ID WWID de LUN ONTAP :
++
+`*multipath -11*`
+
++
+Dans l'exemple de sortie suivant, l'alias DMMP `dmmp_raw_lun` fait référence `3600a098051764b2d4f3f453135452d31` Comme WWID ONTAP :
+
++
+[listing]
+----
+root@IBMx3550M3-229-169 ~]# multipath -ll dmmp_raw_lun
+dmmp_raw_lun (3600a098051764b2d4f3f453135452d31) dm-8 NETAPP, LUN C-Mode
+[size=1.0G] [features=3 queue_if_no_path pg_init_retries 50] [hwhandler=1 alua] [rw]
+\_round-robin 0 [prio=50][enabled]
+ \_5:0:0:6 sdx 	65:112 [active][ready]
+	\_8:0:0:6 sdab 65:176 [active][ready]
+\_round-robin 0 [prio=10][enabled]
+ \_6:0:0:6 sdy 	65:128 [active][ready]
+	\_7:0:0:6 sdaa 65:160 [active][ready]
+----
+

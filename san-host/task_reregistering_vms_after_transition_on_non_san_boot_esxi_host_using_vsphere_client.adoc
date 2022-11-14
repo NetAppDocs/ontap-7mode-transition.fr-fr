@@ -1,0 +1,36 @@
+---
+permalink: san-host/task_reregistering_vms_after_transition_on_non_san_boot_esxi_host_using_vsphere_client.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, vm, esxi, vsphere, client 
+summary: 'Après la transition d"un hôte non démarré par SAN, vous devez réenregistrer vos ordinateurs virtuels \(VM\).' 
+---
+= Redirection de machines virtuelles après la transition sur des hôtes VMware ESXi de démarrage non SAN à l'aide du client vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition d'un hôte non démarré par SAN, vous devez ré-enregistrer vos ordinateurs virtuels (VM).
+
+L'hôte doit être en ligne et les LUN doivent être découvertes.
+
+* Pour les transitions basées sur la copie, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode.
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Ouvrez le classeur _Inventory Assessment Workbook_ généré par l'outil Inventory Collect Tool (ICT).
+. Accédez à l'onglet VM hôte, puis enregistrez le chemin *VM Config File* et *Location/datastore Name* de la machine virtuelle.
+. Utilisez vSphere client pour vous connecter à l'hôte ESXi ou au serveur vCenter gérant l'hôte ESXi.
+. Sous *hôte et clusters*, sélectionnez l'hôte ESXi.
+. Accédez à *Configuration* > *matériel* > *stockage*.
+. Sélectionnez le datastore avec le nom que vous avez indiqué précédemment.
+. Cliquez avec le bouton droit de la souris et sélectionnez *Browse datastore*.
++
+La fenêtre datastore Browser s'ouvre.
+
+. Accédez au chemin *VM Config File* que vous avez noté précédemment.
+. Cliquez avec le bouton droit de la souris sur le fichier `.vmx `, puis sélectionnez *Ajouter à l'inventaire*.
+. Répétez ces étapes pour chaque machine virtuelle répertoriée dans l'onglet *VM hôte* du _Workbook d'évaluation d'inventaire_ généré par les TIC.
+

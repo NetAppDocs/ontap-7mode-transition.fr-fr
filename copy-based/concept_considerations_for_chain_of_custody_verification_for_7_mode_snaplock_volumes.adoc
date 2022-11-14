@@ -1,0 +1,26 @@
+---
+permalink: copy-based/concept_considerations_for_chain_of_custody_verification_for_7_mode_snaplock_volumes.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, chain, custody, verification, snaplock, volumes, considerations 
+summary: Notez les éléments à prendre en compte pour la vérification de la chaîne de garde des volumes SnapLock 7-mode. 
+---
+= Considérations relatives à l'utilisation de la vérification de la chaîne de garde pour les volumes SnapLock 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Notez les éléments à prendre en compte pour la vérification de la chaîne de garde des volumes SnapLock 7-mode.
+
+* La vérification de la chaîne de garde SnapLock ne doit être effectuée que si la transition des volumes SnapLock est indispensable.
++
+Vous pouvez effectuer la vérification de la chaîne de contrôle pour l'ensemble ou un sous-ensemble des volumes SnapLock du projet.
+
+* La vérification de la chaîne de contrôle SnapLock peut prendre un temps considérable selon le nombre de fichiers sur les volumes SnapLock 7-mode.
+* La vérification de la chaîne de garde est prise en charge uniquement pour les volumes SnapLock 7-mode en lecture/écriture
++
+La vérification de la chaîne de garde n'est pas prise en charge pour les volumes en lecture seule.
+
+* La vérification de la chaîne de garde n'est pas prise en charge pour les volumes SnapLock contenant des fichiers portant des noms de caractères non ASCII.
+

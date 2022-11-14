@@ -1,0 +1,18 @@
+---
+permalink: install-admin/concept_transition_to_clustered_ontap_using_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, install, transition, tool, clustered 
+summary: 'L"outil de transition 7-mode vous permet de collecter l"inventaire des contrôleurs 7-mode, des hôtes, des commutateurs et des applications, et d"évaluer leur niveau de préparation à la transition vers clustered ONTAP. Après l"évaluation, vous pouvez migrer vos données et configurations de 7-mode vers clustered ONTAP, soit à l"aide de la méthode de transition basée sur la copie, soit sans copie. L"outil de transition 7-mode peut être téléchargé depuis le site du support NetApp et installé sur un système Linux ou Windows.' 
+---
+= Transition vers clustered ONTAP à l'aide de l'outil 7-mode transition Tool
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'outil de transition 7-mode vous permet de collecter l'inventaire des contrôleurs 7-mode, des hôtes, des commutateurs et des applications, et d'évaluer leur niveau de préparation à la transition vers clustered ONTAP. Après l'évaluation, vous pouvez migrer vos données et configurations de 7-mode vers clustered ONTAP, soit à l'aide de la méthode de transition basée sur la copie, soit sans copie. L'outil de transition 7-mode peut être téléchargé depuis le site du support NetApp et installé sur un système Linux ou Windows.
+
+N'oubliez pas de consulter la version actuelle de 7-mode transition Tool _Release Notes_ pour obtenir les dernières informations sur les versions cibles prises en charge et les problèmes connus.
+
+http://docs.netapp.com/us-en/ontap-7mode-transition/releasenotes.html["Notes de version de l'outil 7-mode transition Tool"]

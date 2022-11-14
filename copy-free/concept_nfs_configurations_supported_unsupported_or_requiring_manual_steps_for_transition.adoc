@@ -1,0 +1,111 @@
+---
+permalink: copy-free/concept_nfs_configurations_supported_unsupported_or_requiring_manual_steps_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, nfs, transition, supported, unsupported, required, manual, steps 
+summary: 'Certaines configurations NFS ne sont pas migrées vers ONTAP car elles ne sont pas prises en charge par ONTAP, les fonctionnalités diffèrent de 7-mode ou doivent être migrées manuellement. Vous devez vérifier toutes les erreurs de contrôle préalable et tous les messages d"avertissement pour évaluer l"impact de ces configurations sur la transition.' 
+---
+= Transition NFS : configurations prises en charge et non prises en charge, et étapes manuelles nécessaires
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certaines configurations NFS ne sont pas migrées vers ONTAP car elles ne sont pas prises en charge par ONTAP, les fonctionnalités diffèrent de 7-mode ou doivent être migrées manuellement. Vous devez vérifier toutes les erreurs de contrôle préalable et tous les messages d'avertissement pour évaluer l'impact de ces configurations sur la transition.
+
+
+
+== Configurations prises en charge pour la transition
+
+À un niveau élevé, les configurations NFS suivantes sont migrées par l'outil 7-mode transition Tool :
+
+* Options NFS :
++
+** `nfs.udp.xfersize`
+** `nfs.v4.id.domain`
+** `nfs.v4.acl.max.aces`
+** `nfs.tcp.xfersize`
+** `nfs.rpcsec.ctx.high`
+** `nfs.rpcsec.ctx.idle`
+** `nfs.response.trigger`
+** `wafl.default_nt_user`
+** `nfs.mount_rootonly`
+** `nfs.tcp.enable`
+** `nfs.udp.enable`
+** `nfs.response.trace`
+** `nfs.v4.read_delegation`
+** `nfs.v4.write_delegation`
+** `nfs.v4.acl.enable`
+** `nfs.vstorage.enable`
+** `nfs.v3.enable`
+** `nfs.v4.enable`
+
+
+* Règle d'exportation NFS :
++
+Si la règle d'exportation est configurée avec l'option -réelle, le chemin exporté (chemin d'alias) est ignoré et la règle d'exportation est configurée avec le chemin réel.
+
+* Règles d'exportation avec la sécurité Kerberos krb5p
+
+
+Pour plus d'informations sur ces configurations NFS, reportez-vous aux résultats de précontrôle.
+
+
+
+== Configurations non prises en charge dans ONTAP
+
+Les configurations NFS suivantes ne sont pas prises en charge dans ONTAP :
+
+* Les exports NFS de sous-volume autres que les exports NFS de niveau qtree
+* NFS Web
+* PC-NFS
+* NFSv2
+* Escrime de clients NFS à partir d'un ou plusieurs chemins de système de fichiers
+* Certaines options NFS
++
+Reportez-vous aux messages d'avertissement de vérification préalable pour obtenir une liste complète des options non prises en charge.
+
+
+
+
+
+== Configurations qui doivent être migrées manuellement
+
+Certaines configurations NFS sont prises en charge dans ONTAP, mais ne sont pas transmises par l'outil 7-mode transition Tool.
+
+Les configurations NFS suivantes génèrent un message d'avertissement lors de l'opération de précontrôle et vous devez appliquer manuellement les configurations sur la SVM :
+
+* Configuration de l'audit NFS
+* Options NFS :
++
+** `rpc.nsm.tcp.port`
+** `rpc.nsm.udp.port`
+** `rpc.mountd.tcp.port`
+** `rpc.mountd.udp.port`
+** `nfs.export.neg.timeout`
+** `nfs.export.pos.timeout`
+** `nfs.export.harvest.timeout`Utilisez le `vserver nfs modify` Commande permettant de modifier la configuration d'un SVM (Storage Virtual machine) compatible NFS.
+
+
+* Configuration Kerberos
+
+
+
+
+== Les configurations fonctionnellement différentes dans ONTAP
+
+Les configurations NFS suivantes sont fonctionnelles différentes dans ONTAP :
+
+* Règles d'exportation NFS
+* Cache d'accès d'exportation NFS
+* Commandes de diagnostic NFS
+* Prise en charge du `showmount` commande
+* Chiffrement NFS Kerberos
+* Prise en charge de la version NLM
+
+
+*Informations connexes*
+
+xref:task_customizing_configurations_for_transition.adoc[Personnalisation de la transition des configurations 7-mode]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]

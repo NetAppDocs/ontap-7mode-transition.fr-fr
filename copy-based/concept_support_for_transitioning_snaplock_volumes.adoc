@@ -1,0 +1,16 @@
+---
+permalink: copy-based/concept_support_for_transitioning_snaplock_volumes.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, support, snaplock, volumes 
+summary: 'L"outil 7-mode transition Tool prend en charge la transition des volumes SnapLock vers des clusters cible exécutant n"importe quelle version d"ONTAP 9.0, sauf la version 9.6.' 
+---
+= Prise en charge de la transition de volumes SnapLock
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'outil 7-mode transition Tool prend en charge la transition des volumes SnapLock vers des clusters cible exécutant n'importe quelle version d'ONTAP 9.0, sauf la version 9.6.
+
+Les volumes SnapLock Enterprise et SnapLock Compliance sont pris en charge pour la transition vers les clusters cibles qui exécutent n'importe quelle version d'ONTAP, à l'exception de la version 9.6. Cependant, la transition de volume SnapLock Compliance n'est pas prise en charge par les clusters cibles dans les configurations MetroCluster.

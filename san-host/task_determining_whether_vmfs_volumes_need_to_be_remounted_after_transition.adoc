@@ -1,0 +1,40 @@
+---
+permalink: san-host/task_determining_whether_vmfs_volumes_need_to_be_remounted_after_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, vmfs, volumes, remounted 
+summary: Après la transition de Data ONTAP fonctionnant en 7-mode vers clustered Data ONTAP, vous pouvez avoir des volumes VMFS à remonter pour placer les datastores VMFS et les machines virtuelles à leur état de prétransition. 
+---
+= Vous devez déterminer si les volumes VMFS doivent être remontés après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition de Data ONTAP fonctionnant en 7-mode vers clustered Data ONTAP, vous pouvez avoir des volumes VMFS à remonter pour placer les datastores VMFS et les machines virtuelles à leur état de prétransition.
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Ouvrez le classeur _Inventory Assessment Workbook_ généré par l'outil Inventory Collect Tool (ICT).
+. Cliquez sur l'onglet *SAN Host Filesystems*.
+. Vérifiez la colonne *lecteur / montage / nom de datastore* pour les systèmes de fichiers et les datastores montés sur l'hôte avant la transition.
+. Notez les ID naa de LUN correspondants dans la colonne *ID de périphérique SCSI/Nom de périphérique* pour le datastore.
+. Vérifier si les ID naa mentionnés pour le datastore sont répertoriés dans le fichier de mappage 7MTT généré après la transition.
++
+** Si aucun ID naa n'est présent dans le fichier de mappage 7MTT, le datastore et les LUN sous-jacentes n'étaient pas inclus dans la transition 7MTT et aucune correction n'est nécessaire.
+** Si seule une partie des identifiants naa est présente dans le fichier de mappage 7MTT, votre transition est incomplète et vous ne pouvez pas continuer.
+** Si tous les ID naa sont présents, vous devez remonter vos volumes VMFS.
+
+
+
+
+*Informations connexes*
+
+xref:task_remounting_vmfs_volumes_after_transition_using_vsphere_client.adoc[Le remontage des volumes VMFS après la transition à l'aide du client vSphere]
+
+xref:task_remounting_vmfs_volumes_after_transition_using_esxi_cli_console.adoc[Remontage des volumes VMFS après la transition à l'aide de la CLI ESXi]
+
+xref:concept_what_the_inventory_collect_tool_is.adoc[Qu'est-ce que l'outil de collecte d'inventaire]

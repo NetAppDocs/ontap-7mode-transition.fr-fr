@@ -1,0 +1,18 @@
+---
+permalink: snapmirror/task_recovering_from_a_disaster_at_7_mode_site_during_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, transition, snapmirror, recover, disaster, site 
+summary: 'Si vous avez établi une relation SnapMirror de reprise sur incident \(DR\) entre le volume primaire 7-mode et le volume secondaire clustered Data ONTAP et si un incident se produit sur le site primaire 7-mode, vous pouvez directement accéder au volume secondaire clustered Data ONTAP. Une fois le volume primaire 7-mode remis en ligne, vous devez effectuer des étapes supplémentaires pour rediriger les clients vers le volume primaire clustered Data ONTAP.' 
+---
+= La récupération après un incident sur le site 7-mode lors de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous avez établi une relation de reprise après incident SnapMirror entre le volume primaire 7-mode et le volume secondaire clustered Data ONTAP et si un incident se produit sur le site primaire 7-mode, vous pouvez directement accéder au volume secondaire clustered Data ONTAP. Une fois le volume primaire 7-mode remis en ligne, vous devez effectuer des étapes supplémentaires pour rediriger les clients vers le volume primaire clustered Data ONTAP.
+
+Pour conserver toutes les données écrites sur le volume secondaire clustered Data ONTAP après l'incident, vous devez transférer le volume primaire 7-mode après la remise en ligne du volume primaire 7-mode et établir une relation SnapMirror entre les volumes primaires et secondaires clustered Data ONTAP. Vous pouvez ensuite rediriger les clients vers les volumes primaires clustered Data ONTAP.
+
+La resynchronisation SnapMirror des volumes clustered Data ONTAP vers les volumes 7-mode n'est pas prise en charge. Par conséquent, si vous rétablissez la relation de reprise sur incident entre le volume principal 7-mode et le volume secondaire clustered Data ONTAP après l'incident, toutes les données écrites sur le système clustered Data ONTAP secondaire seront perdues.

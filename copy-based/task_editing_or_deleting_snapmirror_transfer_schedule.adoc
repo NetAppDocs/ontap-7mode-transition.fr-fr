@@ -1,0 +1,111 @@
+---
+permalink: copy-based/task_editing_or_deleting_snapmirror_transfer_schedule.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, edit, delete, data, copy, snapmirror, transfer 
+summary: 'Si d"autres planifications de reprise après incident sont configurées ou modifiées et nécessitent la modification de la planification de copie des données de transition, vous pouvez modifier ou supprimer des planifications de copie des données utilisées pour les opérations de base SnapMirror, de mise à jour et de resynchronisation.' 
+---
+= Modification ou suppression d'une planification de copies de données pour les transferts SnapMirror
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si d'autres planifications de reprise après incident sont configurées ou modifiées et nécessitent la modification de la planification de copie des données de transition, vous pouvez modifier ou supprimer des planifications de copie des données utilisées pour les opérations de base SnapMirror, de mise à jour et de resynchronisation.
+
+Le projet doit être en phase de préparation, de copie des données ou d'application de la configuration (prétransfert).
+
+* Après la modification d'un horaire, il faut jusqu'à 5 minutes pour qu'il devienne efficace.
+* Si la limite des gaz est modifiée dans la planification en cas de transferts actifs, la nouvelle limite des gaz n'est pas applicable pour les transferts SnapMirror en cours d'exécution.
++
+Une fois le transfert actuel terminé pour une relation SnapMirror spécifique, une nouvelle limite de papillon est prise en compte pour les opérations suivantes pour cette relation SnapMirror.
+
+* Si vous souhaitez que la limite du papillon soit effective immédiatement pour les transferts SnapMirror en cours, vous devez mettre en pause et reprendre le projet.
+
+
+.Étapes
+. Dans le tableau de bord, sélectionnez un projet, puis cliquez sur configurer le planning.
++
+Tous les calendriers existants pour le projet sont affichés.
+
++
+Vous pouvez également modifier ou supprimer des planifications à partir de l'option configurer un planning.
+
+. Modifier ou supprimer une planification :
++
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+Modifier une planification existante
+ a| 
+.. Cliquez sur image:../media/edit_schedule.gif[""].
++
+La boîte de dialogue Modifier le programme s'affiche.
+
++
+
+NOTE: Vous pouvez modifier le planning et les paramètres SnapMirror pour les opérations de copie des données.
+
+.. Apportez les modifications requises, puis cliquez sur *Enregistrer*.
+
+
+
+
+ a| 
+Supprimer un planning
+ a| 
+.. Cliquez sur image:../media/delete_schedule.gif[""].
++
+Le planning est supprimé du volet.
+
++
+
+NOTE: Les transferts de données nécessitent au moins une planification. Par conséquent, vous ne devez pas supprimer toutes les planifications.
+
+
+
+|===
+
+
+
+
+== Exemple
+
+L'exemple suivant illustre l'application de la limite d'accélération lorsqu'un transfert SnapMirror actif est présent dans le projet.
+
+|===
+| Planification | Le nombre de volumes et l'état de copie des données | Nombre maximal de transferts SnapMirror simultanés | Limite d'accélération | Accélérateur utilisé par chaque transfert 
+
+
+ a| 
+Avant modification
+ a| 
+Cinq volumes en attente d'une configuration de base
+ a| 
+Cinq
+ a| 
+500 Mbit/s.
+ a| 
+100 Mbit/s.
+
+
+
+ a| 
+Après modification
+ a| 
+* Pour deux volumes, la ligne de base est en cours en utilisant un accélérateur de 100 Mbit/s.
+* Pour trois volumes, le système de base est terminé et attend les mises à jour
+
+ a| 
+Cinq
+ a| 
+250 Mbit/s.
+ a| 
+* Deux volumes qui sont en phase de base continuent d'utiliser l'accélérateur de 100 Mbit/s.
+* Trois volumes pour lesquels la ligne de base est terminée utilisent le papillon modifié de 50 Mbit/s pour les mises à jour
+
+
+|===
+Une fois la copie de base des deux volumes terminée, la nouvelle limite de vitesse de 50 Mbit/s est utilisée pour ces relations SnapMirror volume lors de la planification des prochaines opérations de copie des données.

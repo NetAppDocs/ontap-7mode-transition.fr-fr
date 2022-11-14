@@ -1,0 +1,74 @@
+---
+permalink: san-host/task_making_a_san_boot_lun_primary_for_hp_ux_emulex_hbas_after_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, san, boot, lun, primary, hp, ux, emulex, hba 
+summary: Si le SAN de votre système Data ONTAP fonctionnant sous 7-mode HP-UX a démarré, vous devez faire du LUN de démarrage SAN le LUN de démarrage principal après la transition vers clustered Data ONTAP. 
+---
+= Création d'une LUN de démarrage SAN la LUN de démarrage principale pour les HBA Emulex HP-UX après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si le SAN de votre système Data ONTAP fonctionnant sous 7-mode HP-UX a démarré, vous devez faire du LUN de démarrage SAN le LUN de démarrage principal après la transition vers clustered Data ONTAP.
+
+La migration des données doit être terminée et votre LUN de démarrage doit être mappée sur votre hôte depuis votre nœud clustered Data ONTAP.
+
+Pour les transitions basées sur les copies, effectuez ces étapes après la mise en service du stockage dans l'outil de transition 7-mode. Les transitions sans copie ne sont pas prises en charge sur les hôtes HP-UX.
+
+.Étapes
+. À partir de l'invite du shell, lister les HBA Emulex :
++
+`*drivers*`
+
+. Sélectionnez le HBA Emulex, puis appuyez sur entrée.
+. Sélectionnez *Utilitaire de configuration*.
+. Sélectionnez *configurer les paramètres de démarrage*.
+. Sélectionnez *configurer les périphériques de démarrage*.
+. Sélectionnez un périphérique dans la liste, puis appuyez sur entrée.
+. Sélectionnez *cibles d'acquisition*.
+. Sélectionnez le LUN avec le chemin de démarrage souhaité, puis appuyez sur entrée.
+. Sélectionnez *Peripheral dev* comme mode, puis appuyez sur entrée.
+. Sélectionnez *Boot ce périphérique via WWN*, puis appuyez sur entrée.
++
+La LUN de démarrage s'affiche.
+
+. Appuyez sur *Echap* jusqu'à ce que vous revienne à l'invite du shell.
+. Affichez votre LUN pour obtenir le chemin d'accès à la LUN à partir duquel vous souhaitez démarrer :
++
+`*map -r*`
+
++
+Les chemins de LUN sont répertoriés dans la colonne périphérique. Le disque SAN amorçable est affiché sous la colonne table de mappage et a « WWN » et « partie 1 » dans la chaîne de sortie.
+
+. Indiquez le chemin d'accès LUN de votre LUN de démarrage SAN.
++
+Un exemple de chemin de LUN est fs0.
+
+. Quittez le shell EFI :
++
+`*cd efi*`
+
+. Entrez le répertoire HPUX :
++
+`*cd hpux*`
+
+. Faites du nouveau LUN de démarrage SAN clustered Data ONTAP le LUN de démarrage principal :
++
+`*bcfg boot add 1 hpux.efi "HP-UX-Primary Boot"*`
+
+. Mettez manuellement à jour le BIOS du HBA en créant une entrée dans EFI pour le LUN de démarrage du SAN.
+. Créez un chemin de démarrage alternatif :
++
+`*bcfg boot add 2 hpux.efi “HPUX alternate boot”*`
+
+. Créer un troisième chemin de démarrage :
++
+`*bcfg boot add 2 hpux.efi “HPUX third boot”*`
+
+. Créez un quatrième chemin d'amorçage :
++
+`*bcfg boot add 2 hpux.efi “HPUX fourth boot”*`
+
+

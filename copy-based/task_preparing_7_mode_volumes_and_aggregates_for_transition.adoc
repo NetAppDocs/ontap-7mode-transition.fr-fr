@@ -1,0 +1,14 @@
+---
+permalink: copy-based/task_preparing_7_mode_volumes_and_aggregates_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, prepare, aggrates, volumes 
+summary: Avant la transition, vous devez vous assurer que les agrégats et les volumes 7-mode peuvent bénéficier de la transition et effectuer quelques étapes manuelles avant la transition. Par exemple, certains types de volumes ne peuvent pas être transférés et des données 32 bits doivent être supprimées des systèmes 7-mode avant la transition. 
+---
+= Préparation aux agrégats et volumes 7-mode pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant la transition, vous devez vous assurer que les agrégats et les volumes 7-mode peuvent bénéficier de la transition et effectuer quelques étapes manuelles avant la transition. Par exemple, certains types de volumes ne peuvent pas être transférés et des données 32 bits doivent être supprimées des systèmes 7-mode avant la transition.

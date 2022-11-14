@@ -1,0 +1,22 @@
+---
+permalink: copy-free/task_performing_copy_free_transition_of_7_mode_aggregates.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, aggregates, transition 
+summary: 'Le workflow de transition sans copie implique de planifier un projet, d"appliquer des configurations 7-mode aux SVM, d"exporter les informations du système 7-mode et d"arrêter le système 7-mode, de câbler manuellement les tiroirs disques aux nœuds de cluster et d"importer les données et les configurations 7-mode.' 
+---
+= Transition d'agrégats 7-mode sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le workflow de transition sans copie implique de planifier un projet, d'appliquer des configurations 7-mode aux SVM, d'exporter les informations du système 7-mode et d'arrêter le système 7-mode, de câbler manuellement les tiroirs disques aux nœuds de cluster et d'importer les données et les configurations 7-mode.
+
+image::../media/perform_cft_phases_workflow.gif[réaliser des flux de travail de phases de transition sans copie]
+
+Vous devez avoir préparé le système 7-mode et le cluster pour une transition sans copie.
+
+Le délai de mise en service du stockage peut être inférieur ou égal à 4-8 heures. Le temps de mise en service comprend le temps nécessaire à l'outil pour effectuer deux opérations automatisées, à savoir les opérations d'exportation, d'arrêt et d'importation, ainsi que le temps nécessaire pour câbler manuellement les tiroirs disques aux nouveaux contrôleurs.
+
+Les opérations d'exportation et d'importation prennent environ 2 heures ou moins. Le câblage peut prendre moins de 2-6 heures.

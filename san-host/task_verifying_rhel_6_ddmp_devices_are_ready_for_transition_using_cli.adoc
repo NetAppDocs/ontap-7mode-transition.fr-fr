@@ -1,0 +1,32 @@
+---
+permalink: san-host/task_verifying_rhel_6_ddmp_devices_are_ready_for_transition_using_cli.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, rhel, ddmp, devices, cli 
+summary: 'Avant de transférer votre périphérique DMMP Red Hat Enterprise Linux \(RHEL\) 6, vous devez vérifier qu"il ne fait pas partie d"un gestionnaire de volumes logiques \(LVM\) et qu"il ne dispose pas d"un système de fichiers.' 
+---
+= Vérification que les périphériques DDMP RHEL 6 sont prêts pour la transition à l'aide de CLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de procéder à la transition de votre périphérique DMMP Red Hat Enterprise Linux (RHEL) 6, vous devez vérifier qu'il ne fait pas partie d'un gestionnaire de volumes logiques (LVM) et qu'il ne dispose pas d'un système de fichiers.
+
+.Étapes
+. Recueillir les informations de pré-transition à partir du _Cahier d'évaluation des stocks_.
+. Vérifiez que le périphérique DMMP existe dans le `/dev/mapper` répertoire :
++
+`*ls /dev/mapper/ _DMMP_device_name_*`
+
++
+Si le périphérique DMMP n'est pas affiché, il est possible que le périphérique utilise un alias ou un nom convivial.
+
+. Déterminez si le périphérique DMMP fait partie d'un LVM et si le périphérique DMMP dispose d'un système de fichiers :
++
+`*blkid*`
+
++
+Si le périphérique DMMP ne fait pas partie d'un LVM et n'a pas de système de fichiers, l'entrée du périphérique ne doit pas être affichée dans blkidoutput.
+
+

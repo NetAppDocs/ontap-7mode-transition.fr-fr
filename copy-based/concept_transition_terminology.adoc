@@ -1,0 +1,61 @@
+---
+permalink: copy-based/concept_transition_terminology.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, terminology 
+summary: 'La terminologie de transition associée à l"outil 7-mode transition Tool vous aide à comprendre le processus de transition.' 
+---
+= Terminologie de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La terminologie de transition associée à l'outil 7-mode transition Tool vous aide à comprendre le processus de transition.
+
+* * Recueillir et évaluer*
++
+Avant de transférer les données et les configurations vers ONTAP, vous devez collecter des informations sur l'environnement de stockage qui inclut les systèmes de stockage, les hôtes et les applications. Vous devez ensuite évaluer les fonctions et fonctionnalités de ces systèmes et identifier le fonctionnement de ces fonctions et fonctionnalités dans la version ONTAP sélectionnée pour la transition.
+
+* *Migrer*
++
+Consiste à effectuer la transition des données et des configurations des volumes 7-mode vers ONTAP. La migration doit être effectuée après l'évaluation des contrôleurs 7-mode.
+
+* *Projet*
++
+Dans 7-mode transition Tool, le projet vous permet de configurer et de gérer la transition d'un groupe de volumes.
+
++
+Les projets de transition sont de trois types : autonome, primaire et secondaire.
+
++
+** *Projet autonome*
++
+Les volumes de ce projet ne se trouvent ni dans une relation SnapMirror avec des volumes d'autres systèmes de stockage, ni dans un autre système de transition de ces volumes sans conserver leurs relations SnapMirror.
+
+** *Projet primaire*
++
+Les volumes de ce projet sont les volumes source d'une relation SnapMirror.
+
+** *Projet secondaire*
++
+Les volumes de ce projet sont les volumes de destination d'une relation SnapMirror.
+
+
+
+* *Groupe de projets*
++
+Dans l'outil 7-mode transition Tool, un groupe de projets est un conteneur logique que vous pouvez utiliser pour conserver les projets de migration associés. Il existe toujours un groupe par défaut avec le nom Default_Group qui existe dans le système.
+
+* * Relation de transition avec les pairs*
++
+La relation entre pairs de transition est un mécanisme d'autorisation qui permet à SnapMirror d'établir des relations entre un système de stockage 7-mode et un SVM du cluster afin de copier les données des volumes 7-mode vers les volumes ONTAP à des fins de transition. Une relation de pairs de transition ne peut être créée que par un administrateur de cluster et initiée depuis le cluster.
+
+* *Relation de protection des données de transition*
++
+Les relations de protection des données de transition sont des relations SnapMirror volume qui sont établies entre un système 7-mode et un système ONTAP.
+
++
+La protection des données de transition est uniquement prise en charge pour la transition. Vous ne devez pas conserver cette relation pendant de longues périodes, car il n'est pas possible de resynchroniser les données d'un volume ONTAP vers un volume 7-mode.
+
+

@@ -1,0 +1,14 @@
+---
+permalink: copy-free/task_preparing_for_san_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, san, prepare 
+summary: Avant de passer à un environnement SAN, vous devez savoir quelles configurations sont prises en charge pour la transition SAN, créer des LIF SAN sur le SVM et préparer les hôtes SAN pour la transition. 
+---
+= Préparation à la transition SAN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de passer à un environnement SAN, vous devez savoir quelles configurations sont prises en charge pour la transition SAN, créer des LIF SAN sur le SVM et préparer les hôtes SAN pour la transition.

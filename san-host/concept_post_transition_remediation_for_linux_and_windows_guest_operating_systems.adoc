@@ -1,0 +1,26 @@
+---
+permalink: san-host/concept_post_transition_remediation_for_linux_and_windows_guest_operating_systems.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, remediation, linux, windows, guest, operating, systems 
+summary: 'Après la transition des LUN de Data ONTAP en 7-mode vers clustered Data ONTAP, les systèmes d"exploitation invités Linux et Windows peuvent nécessiter des mesures supplémentaires.' 
+---
+= Correction post-transition pour les systèmes d'exploitation invités Linux et Windows
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition des LUN de Data ONTAP en 7-mode vers clustered Data ONTAP, les systèmes d'exploitation invités Linux et Windows peuvent nécessiter des mesures supplémentaires.
+
+Pour les transitions basées sur la copie, procédez comme suit après la mise en service du stockage dans 7MTT. Pour les transitions sans copie, effectuez les opérations suivantes une fois l'opération Import Data & Configuration terminée dans 7MTT.
+
+* Linux
++
+Si les points de montage sont définis dans le `/etc/fstab `file, you must mount the LUN (`mount --a`).
+
+* Répertoires de base
++
+Si Failover Cluster est configuré sur la machine virtuelle, vous devez mettre les disques en ligne à partir de Failover Cluster Manager.
+
+

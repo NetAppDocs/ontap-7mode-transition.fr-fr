@@ -1,0 +1,38 @@
+---
+permalink: copy-based/task_transitioning_volumes_using_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, migrate, data, configuration, volumes 
+summary: 'Pour migrer des volumes ou une relation SnapMirror volume à l"aide de l"outil 7-mode transition Tool, vous devez d"abord configurer des projets, lancer une copie de base et mener à bien leurs projets.' 
+---
+= Migration des données et de la configuration depuis des volumes 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour migrer des volumes ou une relation SnapMirror volume à l'aide de l'outil 7-mode transition Tool, vous devez d'abord configurer des projets, lancer une copie de base et mener à bien leurs projets.
+
+* Les contrôleurs et les clusters 7-mode que vous souhaitez inclure dans la transition doivent être accessibles depuis l'hôte Windows où l'outil est installé.
+* Vous devez disposer de tous les privilèges de niveau administrateur pour les contrôleurs et les clusters que vous souhaitez inclure dans le projet de transition.
+* Le service outil de transition 7-mode doit être exécuté sur la machine sur laquelle il est installé.
++
+Le service est défini sur automatique par défaut et doit démarrer au redémarrage de l'ordinateur.
+
+* Vous ne devez pas effectuer simultanément d'évaluation et de migration sur un contrôleur.
+* Vous ne devez pas modifier les objets (volumes, adresses IP, informations système, etc.) des contrôleurs et clusters 7-mode après avoir corrigé les erreurs et les avertissements signalés par le précontrôle.
+* Il est recommandé d'éviter d'utiliser plusieurs sessions d'interface web écrites simultanément sur le même SVM afin d'éviter les résultats indésirables.
+* Vous devez éviter de modifier les mots de passe du contrôleur et du cluster pendant le processus de transition.
+* Vous devriez éviter d'utiliser les boutons du navigateur **Retour** et *Suivant*, car l'outil ne prend pas en charge la navigation dans le navigateur Web et peut causer des résultats indésirables.
+* Il est conseillé d'éviter l'actualisation du navigateur pendant la transition, car cela pourrait provoquer des résultats indésirables.
+
+
+L'image suivante illustre le processus de migration :
+
+image::../media/transition_gui_flow.gif[flux de l'interface graphique de transition]
+
+*Informations connexes*
+
+xref:concept_how_you_transition_a_stand_alone_volume.adoc[Comment effectuer la transition d'un volume autonome]
+
+xref:concept_how_you_transition_volumes_in_a_snapmirror_relationship.adoc[Méthode de transition des volumes dans une relation SnapMirror]

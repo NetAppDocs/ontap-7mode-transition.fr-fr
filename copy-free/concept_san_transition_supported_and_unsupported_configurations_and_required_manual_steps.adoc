@@ -1,0 +1,92 @@
+---
+permalink: copy-free/concept_san_transition_supported_and_unsupported_configurations_and_required_manual_steps.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, san, transition, supported, unsupported, required, manual, steps 
+summary: 'Vous devez connaître les configurations SAN migrées par l"outil 7-mode transition Tool. Notez également les fonctionnalités SAN de 7-mode qui ne sont pas prises en charge dans ONTAP, afin de pouvoir effectuer les actions nécessaires avant la transition.' 
+---
+= Transition SAN : configurations prises en charge et non prises en charge, et étapes manuelles nécessaires
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les configurations SAN migrées par l'outil 7-mode transition Tool. Notez également les fonctionnalités SAN de 7-mode qui ne sont pas prises en charge dans ONTAP, afin de pouvoir effectuer les actions nécessaires avant la transition.
+
+Vous devez vérifier tous les messages d'erreur et d'avertissement de pré-contrôle pour évaluer l'impact de ces configurations sur la transition.
+
+
+
+== Configurations qui sont migrées
+
+Les configurations SAN suivantes sont migrées par l'outil 7-mode transition Tool :
+
+* Services FC et iSCSI
+* igroups et mappages de LUN
++
+[NOTE]
+====
+** Les groupes initiateurs 7-mode qui ne sont mappés sur aucun LUN ne sont pas mis à niveau vers les SVM cibles.
+** Pour les versions clustered Data ONTAP 8.3.0 et 8.3.1, la transition des groupes initiateurs et des configurations de mappage des LUN n'est pas prise en charge au cours de l'opération de mise en service.
++
+Les groupes initiateurs requis sont au contraire créés lors de l'opération de mise en service. Pour les volumes primaires et autonomes, les LUN sont mappées aux groupes initiateurs au cours de la mise en service. Toutefois, pour les volumes secondaires, le mappage de LUN sur des igroups n'est pas pris en charge lors de l'opération de mise en service. Vous devez mapper manuellement les LUN secondaires après avoir terminé la transition de volumes primaires.
+
+** Pour les versions ONTAP 8.3.2 et ultérieures prises en charge, les configurations igroups et de mappage des LUN sont appliquées lors de l'opération de mise en service.
+
+
+====
+
+
+
+
+== Configurations non prises en charge dans ONTAP
+
+Les configurations non prises en charge dans ONTAP sont les suivantes :
+
+* Clones LUN 7-mode avec copies Snapshot
++
+Les clones de LUN avec copie Snapshot présents dans les copies Snapshot ne sont pas pris en charge pour les opérations de restauration. Ces LUN ne sont pas accessibles dans ONTAP. Vous devez séparer ou supprimer les clones LUN de copie Snapshot 7-mode avant la transition.
+
+* LUN avec une valeur de paramètre ostype de vld, image ou n'importe quelle chaîne définie par l'utilisateur
++
+Vous devez modifier la valeur du paramètre ostype pour ces LUN ou supprimer les LUN avant la transition.
+
+* Répartition du clone de LUN
++
+Vous devez patienter le temps que les opérations de séparation des clones de LUN actifs terminent ou abandonner le fractionnement des clones de LUN, puis supprimer la LUN avant la transition.
+
+
+
+Les fonctionnalités 7-mode suivantes vous permettent de continuer le processus de transition, mais elles ne sont pas prises en charge dans ONTAP :
+
+* Le `lun share` commande
++
+Partage d'une LUN sur les protocoles NAS
+
+* SnapValidator
+
+
+
+
+== Configurations qui doivent être migrées manuellement
+
+Les configurations suivantes doivent être migrées manuellement :
+
+* LIF SAN
++
+Vous devez créer manuellement les LIF avant la transition.
+
+* Ensembles de ports
++
+Vous devez configurer manuellement les groupes initiateurs liés à un ensemble de ports après la transition.
+
+* Informations sur la liste d'accès iSCSI
+* Configuration iSNS
+* Configurations CHAP iSCSI et RADIUS
+
+
+*Informations connexes*
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+
+https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion du réseau et des LIF"]

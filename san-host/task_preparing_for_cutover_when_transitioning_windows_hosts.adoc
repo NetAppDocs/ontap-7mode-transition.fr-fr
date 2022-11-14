@@ -1,0 +1,36 @@
+---
+permalink: san-host/task_preparing_for_cutover_when_transitioning_windows_hosts.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, cutover, phase, windows, hosts 
+summary: Si vous migrez un hôte Windows de Data ONTAP sous 7-mode vers clustered Data ONTAP, vous devez effectuer les étapes suivantes après le début de la transition, mais avant le début de la mise en service. 
+---
+= Préparation de la phase de mise en service lors de la transition des hôtes Windows
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous migrez un hôte Windows de Data ONTAP sous 7-mode vers clustered Data ONTAP, vous devez effectuer les étapes suivantes après le début de la transition, mais avant le début de la mise en service.
+
+Si vous exécutez Data ONTAP DSM, la version de Data ONTAP DSM installée sur le serveur doit être prise en charge pour la version de Data ONTAP exécutée sur le nœud clustered Data ONTAP cible.
+
+Si vous exécutez MSDSM, la version de Windows Host Utilities installée sur le serveur doit être prise en charge pour la version de Data ONTAP exécutée sur le noeud Data ONTAP cible en cluster.
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Export & halt 7-mode dans l'outil 7MTT.
+
+
+.Étapes
+. Utilisez Disk Manager pour mettre hors ligne les disques à migrer.
+. Si l'hôte est démarré à partir du réseau SAN et que le LUN de démarrage est en transition, arrêtez l'hôte de démarrage.
+. Si l'hôte est mis en cluster, utilisez Failover Cluster Manager pour mettre hors ligne les disques en cluster, y compris le disque quorum.
+. Si l'hôte exécute Windows Server 2003 et que vous devez migrer le périphérique quorum, arrêtez les services de cluster sur tous les nœuds du cluster.
+. Si vous migrez des LUN sur un serveur sur lequel Hyper-V est activé, effectuez les étapes de transition côté hôte appropriées pour votre système d'exploitation invité.
+. Si vous migrez des LUN sur un serveur sur lequel Hyper-V est activé et que le périphérique de démarrage du système d'exploitation invité est situé sur un LUN Data ONTAP en cours de transition, procédez comme suit :
++
+.. Arrêtez l'OS invité.
+.. Mettez hors ligne le disque correspondant sur le système parent.
+
+
+

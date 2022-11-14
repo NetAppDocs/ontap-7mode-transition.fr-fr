@@ -1,0 +1,92 @@
+---
+permalink: copy-based/concept_log_files_for_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, log, files, tool 
+summary: 7-mode transition Tool crée des fichiers journaux qui fournissent les détails de traitement des opérations de transition qui ont eu lieu sur votre système. Les fichiers journaux se trouvent dans le répertoire logs du chemin où 7-mode transition Tool est installé. 
+---
+= Fichiers journaux de 7-mode transition Tool
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+7-mode transition Tool crée des fichiers journaux qui fournissent les détails de traitement des opérations de transition qui ont eu lieu sur votre système. Les fichiers journaux se trouvent dans le répertoire logs du chemin où 7-mode transition Tool est installé.
+
+Pour résoudre les problèmes, vous pouvez également utiliser les messages EMS relatifs aux journaux SnapMirror du système 7-mode et du cluster.
+
+Le tableau suivant répertorie les fichiers journaux associés à un projet de transition particulier :
+
+|===
+| Chemin du fichier journal | Contient des informations sur... 
+
+
+ a| 
+`_project_name_/transition.log`
+ a| 
+Messages de débogage spécifiques à un projet
+
+
+
+ a| 
+`_project_name_/zapi-outbound.log`
+ a| 
+Résultat de toutes les API Data ONTAP exécutées par l'outil 7-mode transition Tool pour un projet particulier
+
+|===
+Le tableau suivant répertorie les fichiers journaux qui ne sont liés à aucun projet particulier :
+
+|===
+| Chemin du fichier journal | Contient des informations sur... 
+
+
+ a| 
+`transition-gui.log`
+ a| 
+Entrées de toutes les actions effectuées à l'aide de l'interface Web
+
+
+
+ a| 
+`default/audit.log`
+ a| 
+* Tous les paramètres, tels que le port HTTP ou HTTPS et le chemin du répertoire du journal, utilisés par l'outil à chaque exécution de l'outil 7-mode transition Tool
+* Toutes les commandes de transition exécutées avec les sorties
+
+
+
+
+ a| 
+`default/default/transition.log`
+ a| 
+Messages de débogage qui ne sont spécifiques à aucun projet
+
+
+
+ a| 
+`default/STREAM_MANAGEMENT/stream_management.log`
+ a| 
+Déboguer les messages qui sont consignés par le planificateur lors de la gestion des planifications et qui n'appartiennent à aucun projet
+
+
+
+ a| 
+`default/default/zapi-outbound.log`
+ a| 
+Résultat de toutes les API Data ONTAP exécutées par 7-mode transition Tool et qui n'appartiennent à aucun projet
+
+
+
+ a| 
+`default/STREAM_MANAGEMENT/zapi-outbound.log`
+ a| 
+Résultat de toutes les API Data ONTAP exécutées par le planificateur 7-mode transition Tool en gérant les planifications et celles qui n'appartiennent à aucun projet
+
+
+
+ a| 
+`server-console.log`
+ a| 
+Entrées de journal de tous les échanges de paquets effectués avec le serveur 7-mode transition Tool. Ce fichier aide à résoudre les problèmes liés à une panne de serveur.
+
+|===

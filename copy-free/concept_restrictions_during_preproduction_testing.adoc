@@ -1,0 +1,151 @@
+---
+permalink: copy-free/concept_restrictions_during_preproduction_testing.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, preproduction, testing, restrictions 
+summary: Certaines opérations sont bloquées et certaines opérations ne sont pas recommandées lors des tests de préproduction. Ces restrictions sont imposées pour permettre la restauration vers 7-mode si vous ne souhaitez pas effectuer la transition. 
+---
+= Restrictions lors des tests de préproduction
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certaines opérations sont bloquées et certaines opérations ne sont pas recommandées lors des tests de préproduction. Ces restrictions sont imposées pour permettre la restauration vers 7-mode si vous ne souhaitez pas effectuer la transition.
+
+
+
+== Opérations bloquées
+
+|===
+| Fonctionnement | Description 
+
+
+ a| 
+Suppression automatique des copies Snapshot de l'agrégat (suppression automatique
+ a| 
+Étant donné que les copies Snapshot au niveau de l'agrégat 7-mode créées lors de l'opération d'exportation sont requises en cas de restauration, ces copies ne sont pas supprimées automatiquement lorsque l'espace utilisé de l'agrégat augmente.
+
+
+IMPORTANT: Vous devez surveiller l'espace physique disponible dans l'agrégat et vérifier que les agrégats ne manquent pas d'espace lors du test.
+
+
+
+ a| 
+Déplacement des volumes vers un autre agrégat
+ a| 
+* Vous ne pouvez pas déplacer des volumes vers les agrégats transférés.
+* Vous pouvez déplacer des volumes entre les agrégats transférés et les agrégats du cluster.
+
+
+
+
+ a| 
+Copie ou déplacement des LUN entre les volumes
+ a| 
+* Vous ne pouvez ni copier ni déplacer des LUN vers les volumes transférés.
+* Vous pouvez copier ou déplacer des LUN des volumes transférés vers d'autres volumes du cluster.
+
+
+
+
+ a| 
+Création d'un agrégat
+ a| 
+Cette opération est limitée sur la paire haute disponibilité du cluster cible. Vous pouvez créer des agrégats sur d'autres nœuds du cluster.
+
+
+
+ a| 
+Destruction d'un agrégat
+ a| 
+Les copies Snapshot 7-mode au niveau de l'agrégat créées lors de l'opération d'exportation sont requises en cas de restauration, les agrégats transférés ne peuvent pas être détruits.
+
+
+
+ a| 
+La configuration d'un agrégat transféré en tant qu'agrégat racine
+ a| 
+Les agrégats transférés ne peuvent pas être sélectionnés en tant qu'agrégats racine. De plus, vous ne pouvez pas modifier la politique de haute disponibilité des agrégats transférés vers le CFO.
+
+
+
+ a| 
+Exécution d'opérations de copie de fichier
+ a| 
+* Vous ne pouvez ni déplacer ni copier des fichiers (copie à la demande d'un fichier unique) vers les volumes transférés.
+* Vous pouvez déplacer ou copier des fichiers des volumes transférés vers d'autres volumes du cluster.
+
+
+
+
+ a| 
+Mise en miroir d'un agrégat existant
+ a| 
+L'opération est bloquée sur tous les agrégats du cluster.
+
+
+
+ a| 
+Mise à niveau ou rétablissement de la version Data ONTAP sur les nœuds de cluster cibles
+ a| 
+Vous devez valider le projet avant de mettre à niveau ou de restaurer les nœuds de cluster cibles.
+
+
+
+ a| 
+Ajout de disques
+ a| 
+Vous ne pouvez pas exécuter le `storage aggregate add-disks` commande au niveau de privilège admin. Cependant, vous pouvez exécuter cette commande au niveau de privilège avancé.
+
+
+IMPORTANT: Vous devez vous assurer que seuls les disques de spare des tiroirs disques 7-mode sont ajoutés pour augmenter l'espace au sein des agrégats en transition. Vous devez ajouter des disques de spare à l'aide de l' `-disklist` paramètre (le `-diskcount` le paramètre ne doit pas être utilisé).
+
+
+
+ a| 
+Désignation d'un volume transféré en tant que volume racine du SVM
+ a| 
+Vous ne pouvez pas exécuter le `volume make-vsroot` commande sur les volumes transférés.
+
+|===
+
+
+== Opérations non recommandées
+
+|===
+| Fonctionnement | Action corrective avant la restauration 
+
+
+ a| 
+Déplacement d'agrégats
+
+La propriété de l'agrégat transféré est changée en son partenaire de haute disponibilité.
+ a| 
+Remplacez la propriété de l'agrégat avant la restauration, car l'outil 7-mode transition Tool mappe les agrégats sur les contrôleurs 7-mode en fonction des informations de mappage de nœud cible enregistrées dans le projet.
+
+
+
+ a| 
+Création de volumes sur les agrégats transférés
+ a| 
+Vous devez supprimer ces volumes ou les déplacer vers des agrégats différents.
+
+
+
+ a| 
+Renommer les agrégats ou les volumes
+ a| 
+Renommez les agrégats ou volumes d'origine.
+
+
+
+ a| 
+Modification du type de RAID
+ a| 
+Si vous décidez de restaurer votre système vers 7-mode, le type RAID doit correspondre au type RAID 7-mode.
+
+|===
+*Informations connexes*
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr/GUID-5CB10C70-AC11-41C0-8C16-B4D0DF916E9B.html["Commandes ONTAP 9"]

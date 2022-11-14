@@ -1,0 +1,52 @@
+---
+permalink: copy-free/task_preparing_7_mode_system_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, prepare, ha, pair 
+summary: Avant de démarrer une transition, vous devez effectuer certaines tâches sur le système 7-mode, par exemple activer le système 7-mode pour communiquer avec le cluster cible et activer les protocoles HTTPS et TLS. 
+---
+= Préparation de la paire 7-mode HA à une transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de démarrer une transition, vous devez effectuer certaines tâches sur le système 7-mode, par exemple activer le système 7-mode pour communiquer avec le cluster cible et activer les protocoles HTTPS et TLS.
+
+La paire HA doit être saine et aucun des nœuds ne doit être en mode basculement, qui peut être vérifié à l'aide de la commande cf status. Vous pouvez également utiliser l'outil NetApp AutoSupport pour détecter les erreurs et les conditions de risque.
+
+. Si HTTPS n'est pas activé sur le système de stockage, activez l'option HTTPS :
++
+`*options httpd.admin.ssl.enable on*`
+
++
+HTTPS est activé par défaut.
+
+. Activez TLS sur les systèmes de stockage 7-mode pour permettre à l'outil 7-mode transition Tool de communiquer avec les systèmes 7-mode :
++
+.. Si SSL n'est pas déjà activé sur le système de stockage, configurez et démarrez SSL : +
+`*secureadmin setup ssl*`
++
+SSL est configuré par défaut pour les systèmes de stockage. Si le protocole SSL a déjà été configuré pour le système de stockage, vous êtes invité à indiquer si vous souhaitez continuer. Vous pouvez quitter la configuration SSL si vous ne souhaitez pas apporter de modifications.
+
+.. Activer SSL : +
+`*options ssl.enable on*`
++
+Cette option doit être activée pour permettre la communication via TLS.
+
+.. Activer TLS: +
+`*options tls.enable on*`
+.. Désactivez SSLv2 et SSLv3 sur le système 7-mode : +
+`*options ssl.v2.enable off*`
++
+`*options ssl.v3.enable off*`
+
+
+
++
+7-mode transition Tool utilise les protocoles TLS ou SSL pour communiquer avec les systèmes de stockage 7-mode. L'outil communique avec le système de stockage via le protocole TLS si TLS est activé sur le système de stockage. Si TLS est désactivé et que SSLv3 est activé sur un système de stockage, l'outil utilise SSLv3 pour communiquer avec le système de stockage.
+
++
++ IMPORTANT : la meilleure pratique est d'activer TLS et de désactiver SSLv2 et SSLv3 afin d'éviter les vulnérabilités de sécurité.
+
+

@@ -1,0 +1,68 @@
+---
+permalink: copy-free/concept_copy_free_transition_using_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, 7, mode, tool 
+summary: 'L"outil de transition 7-mode vous permet de collecter l"inventaire et d"évaluer les contrôleurs 7-mode, les hôtes, les commutateurs et les applications à mettre en œuvre pour la transition. Après l"évaluation, vous pouvez effectuer la transition sans copie pour migrer vos données et vos configurations vers ONTAP. Pour effectuer la transition sans copie, vous devez déconnecter tous les tiroirs disques d"une paire haute disponibilité 7-mode et les connecter à une paire haute disponibilité dans le cluster cible.' 
+---
+= Transition sans copie grâce à 7-mode transition Tool
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'outil de transition 7-mode vous permet de collecter l'inventaire et d'évaluer les contrôleurs 7-mode, les hôtes, les commutateurs et les applications à mettre en œuvre pour la transition. Après l'évaluation, vous pouvez effectuer la transition sans copie pour migrer vos données et vos configurations vers ONTAP. Pour effectuer la transition sans copie, vous devez déconnecter tous les tiroirs disques d'une paire haute disponibilité 7-mode et les connecter à une paire haute disponibilité dans le cluster cible.
+
+La transition sans copie réduit considérablement le coût de migration grâce à la réutilisation des tiroirs disques 7-mode. La durée totale de la transition est plus rapide car la copie des données n'est pas requise.
+
+Unité de transition sans copie : paire haute disponibilité. Vous devez déplacer tous les tiroirs disques de la paire 7-mode HA vers les nœuds de cluster cible.
+
+Les métadonnées des agrégats et des volumes 7-mode sont converties au format ONTAP par l'outil de transition 7-mode. Le temps nécessaire à cette conversion ne dépend pas de la taille des agrégats et des volumes. Par exemple, le temps nécessaire pour convertir un agrégat de 10 Go au format ONTAP est identique à celui requis pour convertir un agrégat de 100 To.
+
+La transition sans copie implique une interruption de l'accès aux données. Toutefois, le temps total nécessaire pour effectuer la migration des données est plus rapide, car aucune copie des données n'est requise.
+
+L'illustration ci-dessous présente les scénarios avant et après pour une transition sans copie d'une paire haute disponibilité 7-mode vers un cluster à deux nœuds :
+
+image::../media/cft_overview.gif[présentation de la transition sans copie]
+
+7-mode transition Tool s'exécute sur un système Windows et fournit une interface Web pour la gestion des opérations de transition.
+
+
+
+== Collecte et évaluation des systèmes, des hôtes, des commutateurs et des applications ONTAP
+
+Vous pouvez effectuer les tâches suivantes de collecte et d'évaluation à l'aide de l'outil de transition 7-mode :
+
+* Collecte des informations d'inventaire à partir des systèmes ONTAP (contrôleurs 7-mode et nœuds du cluster), des hôtes, des commutateurs et des applications hôtes.
+* Génération du plan de zone FC pour configurer les zones pour une transition SAN FC.
+* Évaluez les fonctions et les fonctionnalités des systèmes 7-mode et identifiez leur fonctionnement dans la version ONTAP sélectionnée pour la transition.
+
+
+
+
+== Déplacement des données et des configurations de 7-mode vers ONTAP
+
+La transition sans copie utilise les tiroirs disques 7-mode pour copier les données 7-mode de 7-mode vers ONTAP. Vous pouvez effectuer les tâches suivantes à l'aide de l'outil 7-mode transition Tool pour la migration sans copie :
+
+* Planification de la transition afin de mapper les contrôleurs 7-mode ou les unités vFiler aux SVM cibles, et de concevoir l'espace de noms.
+* Exécution de contrôles préalables pour vérifier la compatibilité des systèmes 7-mode et des nœuds de cluster cibles pour la transition.
+* Importation des tiroirs disques 7-mode de l'une des manières suivantes :
++
+** Il s'agit d'une paire haute disponibilité 7-mode vers une nouvelle paire haute disponibilité dans un nouveau cluster
+** D'une paire haute disponibilité 7-mode à une nouvelle paire haute disponibilité dans un cluster existant avec des nœuds supplémentaires diffusant les données
+** Depuis une paire haute disponibilité 7-mode vers une paire haute disponibilité avec des agrégats de données dans un cluster existant qui transmet des données
+** D'une paire haute disponibilité contenant des volumes d'une relation SnapMirror volume à une paire haute disponibilité dans un cluster nouveau ou existant
++
+Vous devez créer manuellement une relation de type cluster après la transition. Toutefois, un transfert de nouvelle base n'est pas nécessaire, et vous pouvez conserver la relation SnapMirror après la transition.
+
+
+
+* Transition des configurations 7-mode vers les SVM.
++
+La transition sans copie prend en charge la transition des configurations NAS et SAN.
+
+* Reprise du stockage et des configurations sur 7-mode en cas de défaillance d'un système ONTAP.
++
+L'outil génère la liste des étapes nécessaires pour revenir à 7-mode. Vous devez effectuer manuellement ces étapes de restauration sur les systèmes 7-mode et le cluster.
+
+

@@ -1,0 +1,38 @@
+---
+permalink: copy-based/task_pausing_and_resuming_a_subproject.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, pause, resume, project 
+summary: Vous pouvez interrompre et reprendre un projet pour lequel la copie des données a démarré. 
+---
+= Interruption et reprise d'un projet
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez interrompre et reprendre un projet pour lequel la copie des données a démarré.
+
+Lorsque vous mettez en pause un projet principal, seule l'opération de copie du volume primaire 7-mode vers le volume primaire clustered Data ONTAP correspondant est interrompue. La copie des données du volume primaire 7-mode vers le volume secondaire ONTAP continue d'être exécutée conformément au planning. Cela permet de garantir la protection continue des données pour les volumes primaires.
+
+. Dans le tableau de bord, sélectionnez le projet que vous souhaitez mettre en pause.
+. Cliquez sur *Pause*.
++
+L'opération de copie de données pour tous les volumes du projet est arrêtée.
+
++
+Si le transfert de base d'un volume est en cours et qu'aucun point de contrôle de copie Snapshot n'est créé pour les relations SnapMirror, l'opération de pause est ignorée pour le volume. Attendez la création du point de contrôle de la copie Snapshot et exécutez de nouveau l'opération de pause.
+
+. Cliquez sur *reprendre*.
++
+L'opération de copie reprend à partir du point où elle a été interrompue.
+
++
+
+NOTE: L'opération de copie des données reprend en fonction de la planification active disponible à ce moment-là.
+
+
+
+*Informations connexes*
+
+xref:task_starting_baseline_data_copy.adoc[Début de la copie des données de base]

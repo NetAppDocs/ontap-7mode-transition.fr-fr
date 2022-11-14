@@ -1,0 +1,45 @@
+---
+permalink: copy-based/task_performing_on_demand_snapmirror_update_operation.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, perform, demand, snapmirror, updates 
+summary: Vous pouvez effectuer les mises à jour incrémentielles de SnapMirror sur tous les volumes avant la mise en service, afin de réduire le délai de mise en service. 
+---
+= Effectuer des mises à jour SnapMirror à la demande
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer les mises à jour incrémentielles de SnapMirror sur tous les volumes avant la mise en service, afin de réduire le délai de mise en service.
+
+* Vous ne pouvez pas effectuer de mises à jour SnapMirror à la demande lorsque des transferts de données incrémentiels sont programmés après la copie des données de base et après le mise en service.
+* Cette tâche est facultative.
++
+.. Cliquez sur *mettre à jour maintenant* pour effectuer une mise à jour SnapMirror manuelle.
++
+La boîte de dialogue mise à jour de transition s'affiche. Vous pouvez choisir de personnaliser le nombre de transferts SnapMirror et la limite de papillon pour cette opération.
+
+.. Cocher la case *Customize le nombre de transferts SnapMirror simultanés et Limit limit for this opération* afin de spécifier le nombre d'opérations de copie de données SnapMirror et la limite du papillon.
++
+... Indiquez le nombre maximal de transferts SnapMirror simultanés à exécuter pendant la transition.
+... Entrez le pourcentage de flux disponibles que l'outil peut utiliser pour les transferts SnapMirror.
++
+Par défaut, l'outil utilise 50 % des transferts SnapMirror volume disponibles.
+
+... Saisissez la limite d'accélération pour utiliser la bande passante maximale.
++
+Par défaut, l'outil utilise la régulation maximale pour la transition de configuration.
+
+
+
+.. Cliquez sur *Continuer*.
+
+
+
+
+*Informations connexes*
+
+xref:task_starting_baseline_data_copy.adoc[Début de la copie des données de base]
+
+xref:task_creating_schedule_for_snapmirror_transfers.adoc[Création d'un planning de copies pour les transferts SnapMirror]

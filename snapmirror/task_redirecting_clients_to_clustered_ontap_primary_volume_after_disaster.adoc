@@ -1,0 +1,91 @@
+---
+permalink: snapmirror/task_redirecting_clients_to_clustered_ontap_primary_volume_after_disaster.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, redirect, clients, clustered, data, primary, volume, snapmirror 
+summary: 'Une fois le volume primaire 7-mode de nouveau en ligne, vous pouvez effectuer la transition vers le volume primaire 7-mode, établir une relation SnapMirror avec le volume secondaire clustered Data ONTAP, et rediriger l"accès client vers le volume primaire clustered Data ONTAP.' 
+---
+= Redirection des clients vers le volume primaire clustered Data ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois le volume primaire 7-mode de nouveau en ligne, vous pouvez effectuer la transition vers le volume primaire 7-mode, établir une relation SnapMirror avec le volume secondaire clustered Data ONTAP, et rediriger l'accès client vers le volume primaire clustered Data ONTAP.
+
+.Étapes
+. Créer la relation entre SVM peer-to-peer entre les SVM principal et secondaire
++
+.. Utilisez le `cluster peer create` commande pour créer la relation entre clusters.
++
+[listing]
+----
+pri_cluster::> cluster peer create -peer-addrs cluster2-d2, 10.98.234.246 -timeout 60
+
+Notice: Choose a passphrase of 8 or more characters. To ensure the authenticity of the peering relationship, use a phrase or sequence of characters that would be hard to guess.
+
+Enter the passphrase: ********
+Confirm the passphrase: ********
+----
+.. Depuis le cluster source, utilisez la `vserver peer create` Commande permettant de créer une relation de pairs entre le volume primaire clustered Data ONTAP et le volume secondaire clustered Data ONTAP
++
+[listing]
+----
+pri_cluster::> vserver peer create -vserver src_vserver -peervserver src_c_vserver -applications snapmirror -peer-cluster sec_cluster
+----
+.. Dans le cluster destination, utiliser le `vserver peer accept` Commande permettant d'accepter la demande du SVM peer et d'établir la relation SVM peer.
++
+[listing]
+----
+sec_cluster::> vserver peer accept -vserver dst_vserver -peervserver src_vserver
+----
+
+
+. Utilisez le `snapmirror create` Commande permettant de créer une relation SnapMirror avec le volume secondaire clustered Data ONTAP en tant que source et le volume primaire clustered Data ONTAP en tant que destination.
++
+[listing]
+----
+pri_cluster::> snapmirror create -source-path dst_vserver:dst_c_vol -destination-path src_vserver:src_c_vol
+----
+. Dans le cluster principal, utilisez le `snapmirror resync` Commande permettant de resynchroniser le volume secondaire clustered Data ONTAP.
++
+[listing]
+----
+pri_cluster::> snapmirror resync -source-path dst_vserver:dst_c_vol -destination-path src_vserver:src_c_vol
+----
++
+Vous devez attendre la fin de la resynchronisation. L'état SnapMirror est modifié en `SnapMirrored` lorsque la resynchronisation est terminée.
+
+. Lorsque vous êtes prêt à basculer vers le volume primaire clustered Data ONTAP, déconnectez l'accès des clients du volume secondaire clustered Data ONTAP.
+. Dans le cluster principal, utilisez le `snapmirror update` commande pour mettre à jour le volume principal.
++
+[listing]
+----
+pri_cluster::> snapmirror update -destination-path src_vserver:src_c_vol
+----
+. Dans le cluster principal, utilisez le `snapmirror break`` Commande permettant d'interrompre la relation SnapMirror entre les volumes primaires et secondaires clustered Data ONTAP.
++
+[listing]
+----
+pri_cluster::> snapmirror break -destination-path src_vserver:src_c_vol
+----
+. Activez l'accès client au volume primaire clustered Data ONTAP.
+. Dans le cluster principal, utilisez le `snapmirror delete` Commande de suppression de la relation SnapMirror entre les volumes primaires et secondaires clustered Data ONTAP
++
+[listing]
+----
+pri_cluster::> snapmirror delete -destination-path src_vserver:src_c_vol
+----
+. Dans le cluster secondaire, utilisez le `snapmirror create` Commande de création d'une relation SnapMirror avec le volume primaire clustered Data ONTAP en tant que source et le volume secondaire clustered Data ONTAP en tant que destination, avec une planification similaire à la planification précédente entre le volume primaire 7-mode et le volume secondaire clustered Data ONTAP.
++
+[listing]
+----
+sec_cluster::> snapmirror create -source-path src_vserver:src_c_vol -destination-path dst_vserver:dst_c_vol -schedule 15_minute_sched
+----
+. Dans le cluster secondaire, utilisez le `snapmirror resync` Commande permettant de resynchroniser le volume principal clustered Data ONTAP.
++
+[listing]
+----
+sec_cluster::> snapmirror resync -source-path src_vserver:src_c_vol -destination-path dst_vserver:dst_c_vol
+----
+

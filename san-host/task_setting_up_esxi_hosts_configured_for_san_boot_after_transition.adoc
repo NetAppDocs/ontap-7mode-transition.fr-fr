@@ -1,0 +1,37 @@
+---
+permalink: san-host/task_setting_up_esxi_hosts_configured_for_san_boot_after_transition.html 
+sidebar: sidebar 
+keywords: esxi, configured, boot, ontap, san, host, transition 
+summary: 'Si votre hôte ESXi a été configuré pour le démarrage SAN avant toute transition depuis Data ONTAP fonctionnant en 7-mode, vous devez effectuer plusieurs étapes avant d"utiliser l"hôte après la transition.' 
+---
+= Configuration des hôtes ESXi configurés pour le démarrage SAN après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si votre hôte ESXi a été configuré pour le démarrage SAN avant toute transition depuis Data ONTAP fonctionnant en 7-mode, vous devez effectuer plusieurs étapes avant d'utiliser l'hôte après la transition.
+
+* Pour les transitions basées sur la copie, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans 7MTT.
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Reconfigurez votre BIOS HBA FC et FCoE pour démarrer à partir du LUN de démarrage SAN du système clustered Data ONTAP.
+. Démarrez l'hôte ESXi.
+. Réinitialisez les configurations hôte sur les paramètres de pré-transition.
+. Pour les hôtes iSCSI, reportez-vous à la section comment reconfigurer votre initiateur iSCSI VMware.
++
+xref:concept_reconfiguration_of_vmware_software_iscsi_initiator.adoc[Reconfigurez votre initiateur iSCSI VMware]
+
+. Remontez les datastores VMFS créés à partir de la LUN de démarrage dans l'installation par défaut.
+
+
+*Informations connexes*
+
+xref:task_remounting_vmfs_volumes_after_transition_using_vsphere_client.adoc[Le remontage des volumes VMFS après la transition à l'aide du client vSphere]
+
+xref:task_remounting_vmfs_volumes_after_transition_using_esxi_cli_console.adoc[Remontage des volumes VMFS après la transition à l'aide de la CLI ESXi]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["Administration SAN"]

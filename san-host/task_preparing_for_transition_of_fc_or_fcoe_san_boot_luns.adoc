@@ -1,0 +1,95 @@
+---
+permalink: san-host/task_preparing_for_transition_of_fc_or_fcoe_san_boot_luns.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, transition, fc, fcoe, san, boot, lun, rhel 
+summary: 'Avant de procéder à la transition d"une LUN de démarrage SAN FC ou FCoE, vous devez effectuer des étapes spécifiques sur votre hôte Red Hat Enterprise Linux \(RHEL\).' 
+---
+= Préparation à la transition des LUN de démarrage SAN FC ou FCoE sur les hôtes RHEL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de procéder à la transition d'une LUN de démarrage SAN FC ou FCoE, vous devez effectuer des étapes spécifiques sur votre hôte Red Hat Enterprise Linux (RHEL).
+
+Vous devez disposer des informations suivantes du manuel _Inventory Assessment Workbook_ :
+
+* Nom de LUN 7-mode sur lequel RHEL 5 ou RHEL 6 est installé
+* Nom du périphérique SCSI pour la LUN de transition
+* Nom du périphérique DMMP pour la LUN de transition
+* Répertoire de montage
+* Système de fichiers configuré sur le périphérique DMMP
+* Numéro UUID de la partition /boot
+* Nom du `initrid` image
+
+
+Cette procédure s'applique aux transitions basées sur la copie et aux transitions sans copie.
+
+. Vérifiez que le périphérique DMMP existe dans le répertoire /dev/mapper :
++
+`*ls /dev/mapper/ _DMMP_device_name_*`
+
++
+Si vous ne parvenez pas à localiser le périphérique DMMP, il se peut qu'il utilise un alias ou un nom convivial.
+
+. Identifiez les noms des périphériques DMMP et du gestionnaire de volume logique (LVM) sur lesquels les répertoires du système d'exploitation RHEL 5 ou RHEL 6 /boot et root (/) sont installés :
++
+`*df - h*`
+
++
+Par défaut, RHEL 5 et RHEL 6 sont installés sur la partition racine (/) du volume logique. Si la partition racine est installée sur le volume logique, aucune modification de pré-transition n'est nécessaire.
+
+. Si la partition /boot est installée sur le périphérique DMMP, confirmez la manière dont la partition /boot est référencée pour monter dans `/etc/fstab` au démarrage.
+. Si la partition /boot est référencée dans `/etc/fstab` Par son nom de périphérique DMMP, remplacez le nom du périphérique DMMP par le nom UUID du système de fichiers.
+. Faire une sauvegarde du `/etc/fstab` fichier :
++
+`*cp /etc/fstab /etc/__fstab_pre_transition_file_name__*`
+
+. Modifiez le `/etc/fstab` Fichier pour remplacer le nom du périphérique DMMP par son numéro d'UUID de système de fichiers respectif.
+. Faire une sauvegarde du `initrd` fichier image :
++
+`*cp /boot/__initrd_image_file_nameinitrd_image_file_name__.bak*`
+
+. Pour RHEL 5 uniquement :
++
+.. Dans le `/etc/mutipath.conf` Fichier, identifiez le périphérique de partition SWAP.
++
+Dans l'exemple suivant : `/dev/VolGroup00/LogVol01` Le périphérique de partition SWAP est-il :
+
++
+`/dev/VolGroup00/LogVol01 swap swap defaults 0 0`
+
+.. Créer une étiquette pour le montage de la partition swap : +
+`*swapoff _swap-partition_device_*`
++
+`*mkswap -L _label-for-swapswap-partition-device_*`
+
++
+`*swapon _swap-partition_device_*`
+
+.. Remplacez le nom du périphérique de partition SWAP dans l' `/etc/fstab` File avec l'étiquette D'ÉCHANGE.
++
+La ligne mise à jour dans `/etc/fstab` le fichier doit être le suivant :
+
++
+[listing]
+----
+LABEL=SwapPartition  swap  swap   defaults    0 0
+----
+
+
+. Recréez l'image initrd.
++
+** Pour RHEL5 : +
+`*mkinitrd -f/boot/ initrd-"'uname-r'".img 'uname-r' --with multipath*`
+** Pour RHEL 6 : +
+`*dracut --force --add multipath --verbose*`
+
+
+. Redémarrez l'hôte pour démarrer à partir du nouveau `initrd` image.
+
+
+*Informations connexes*
+
+xref:task_gathering_pretransition_information_from_inventory_assessment_workbook.adoc[Collecte des informations de pré-transition à partir du manuel d'évaluation de l'inventaire]

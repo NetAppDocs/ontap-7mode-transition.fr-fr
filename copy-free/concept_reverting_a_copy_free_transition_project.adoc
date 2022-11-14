@@ -1,0 +1,18 @@
+---
+permalink: copy-free/concept_reverting_a_copy_free_transition_project.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, performing, rollback, 7, mode 
+summary: 'La restauration fait référence à l"arrêt de la transition vers le système ONTAP et au rétablissement du système 7-mode. La restauration de la transition est manuelle. Cependant, l"outil 7-mode transition Tool fournit la liste des tâches manuelles que vous devez effectuer pour une restauration.' 
+---
+= Effectuer une restauration de la transition vers 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La restauration fait référence à l'arrêt de la transition vers le système ONTAP et au rétablissement du système 7-mode. La restauration de la transition est manuelle. Cependant, l'outil 7-mode transition Tool fournit la liste des tâches manuelles que vous devez effectuer pour une restauration.
+
+Vous pouvez restaurer un projet de transition en phase de test du SVM de provisionnement, d'exportation, de câblage, d'importation ou de préproduction. Vous ne pouvez pas revenir en arrière une fois le projet de transition terminé.
+
+Toutes les nouvelles données écrites ou modifiées, telles que les LUN ou les clones LUN, dans les volumes transférés seront perdues après un retour arrière. Les volumes seront restaurés à leur état de 7-mode d'origine.

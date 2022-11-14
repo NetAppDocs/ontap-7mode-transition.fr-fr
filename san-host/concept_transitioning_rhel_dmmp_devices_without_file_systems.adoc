@@ -1,0 +1,26 @@
+---
+permalink: san-host/concept_transitioning_rhel_dmmp_devices_without_file_systems.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, rhel, dmmp, device, file, system 
+summary: 'Avant de passer à un périphérique DMMP Red Hat Enterprise Linux \(RHEL\) sans système de fichiers, vous devez vérifier que le périphérique DMMP ne dispose pas d"un système de fichiers. Vous devez également effectuer des étapes spécifiques pour préparer la phase de mise en service et, après la transition, vous devez remplacer le WWID.' 
+---
+= Transfert de périphériques DMMP RHEL sans système de fichiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de passer à un périphérique DMMP Red Hat Enterprise Linux (RHEL) sans système de fichiers, vous devez vérifier que le périphérique DMMP ne dispose pas d'un système de fichiers. Vous devez également effectuer des étapes spécifiques pour préparer la phase de mise en service et, après la transition, vous devez remplacer le WWID.
+
+*Informations connexes*
+
+xref:task_verifying_that_rhel_luns_are_ready_for_transition_using_inventory_assessment_workbook.adoc[Vérifier que les LUN RHEL sont prêtes à la transition à l'aide du manuel d'évaluation d'inventaire]
+
+xref:task_verifying_rhel_5_luns_are_ready_for_transition_using_cli.adoc[Vérification que les LUN RHEL 5 sont prêtes à la transition à l'aide de l'interface de ligne de commande]
+
+xref:task_verifying_rhel_6_ddmp_devices_are_ready_for_transition_using_cli.adoc[Vérification que les périphériques DDMP RHEL 6 sont prêts pour la transition à l'aide de CLI]
+
+xref:task_preparing_for_cutover_when_transitioning_linux_host_dmmp_device_without_file_system.adoc[Préparation de la mise en service lors de la transition d'un périphérique DMMP hôte Linux sans système de fichiers]
+
+xref:task_replacing_7_mode_wwids_on_linux_host_after_transition_of_luns.adoc[Remplacement des WWID LUN 7-mode sur les hôtes Linux après la transition des LUN]

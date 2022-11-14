@@ -1,0 +1,54 @@
+---
+permalink: copy-based/concept_considerations_for_local_users_and_groups_transition.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, cifs, local, users, groups 
+summary: 'Vous devez connaître les éléments à prendre en compte pour exécuter les opérations de transition lors de la migration d"utilisateurs et de groupes CIFS locaux.' 
+---
+= Considérations relatives à la transition des utilisateurs et groupes locaux CIFS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les éléments à prendre en compte pour exécuter les opérations de transition lors de la migration d'utilisateurs et de groupes CIFS locaux.
+
+* Si le cluster de destination exécute clustered Data ONTAP 8.2, ne tentez pas de passer à un volume 7-mode qui transmet des données CIFS et est accessible par des utilisateurs et des groupes locaux.
++
+L'outil 7-mode transition Tool ne prend pas en charge la transition d'utilisateurs et de groupes locaux vers clustered Data ONTAP 8.2.
+
+* La transition de volumes servant les données CIFS depuis un contrôleur 7-mode ou une unité vFiler possédant des utilisateurs et groupes locaux et ayant un SVM non-BUILTIN CIFS local utilisateurs et groupes n'est pas prise en charge.
++
+La SVM doit avoir uniquement des utilisateurs et groupes locaux BUILTIN CIFS pour la transition.
+
++
+Lors de la transition d'utilisateurs et de groupes locaux d'un contrôleur 7-mode ou d'une unité vFiler vers un SVM spécifique, les utilisateurs et groupes locaux du premier projet de transition sont transférés. Dans la transition subséquente de projets à l'aide d'un même contrôleur 7-mode ou d'une même unité vFiler vers un même SVM, la transition d'utilisateurs et de groupes locaux est ignorée, bien que la transition réussie. Le nom de l'utilisateur local sur le système 7-mode ne doit pas être identique au nom du serveur CIFS sur le SVM.
+
+* Vous devez connaître le nombre maximal d'utilisateurs et de groupes locaux pris en charge par clustered Data ONTAP 8.2.1 et versions ultérieures.
+* Un compte utilisateur local avec un mot de passe vide ou des comptes utilisateur locaux avec un mot de passe de plus de 14 caractères sur le système 7-mode est transféré vers le logiciel ONTAP avec le mot de passe `*cifsUser@1*`.
++
+Une fois la transition terminée, vous pouvez accéder à ces utilisateurs à partir du système Windows en utilisant le mot de passe `*cifsUser@1*`. On doit ensuite modifier manuellement le mot de passe de tels utilisateurs locaux CIFS sur le SVM via la commande suivante :
+
++
+`*cifs users-and-groups local-user set-password -vserver _svm_name_ -user-name _user_name_*`.
+
+* Si l'adresse IP de l'outil de transition 7-mode n'est pas accessible depuis le logiciel ONTAP cible, l'outil de transition 7-mode bloque la transition des utilisateurs et groupes locaux CIFS vers le logiciel ONTAP lors de la phase de contrôle préalable. Si cette erreur s'affiche pendant la phase de contrôle préalable, utilisez le
++
+`*network ping -node local -destination _ip_address_*`
+
++
+Commande pour s'assurer que l'adresse IP de l'outil 7-mode transition Tool est accessible depuis le logiciel ONTAP cible. Vous pouvez modifier le `\etc\conf\transition-tool.conf` Fichier installé avec 7-mode transition Tool pour modifier toute option de configuration utilisée par l'outil, telle que l'adresse IP 7-mode transition Tool.
+
+* La SVM vers laquelle les utilisateurs et groupes locaux sont passés doit avoir une LIF de données.
+* Si un groupe local possède plusieurs identifiants de système membres (SID) mappés sur un utilisateur ou un groupe de domaine unique sur le système 7-mode, l'outil de transition 7-mode bloque la transition des utilisateurs et groupes locaux vers ONTAP lors de la phase de vérification préalable.
++
+Si cette erreur s'affiche pendant la phase de contrôle préalable, vous devez supprimer manuellement les SID supplémentaires qui sont mappés à un seul utilisateur ou groupe de domaine sur le système 7-mode. Vous devez ensuite relancer l'opération de vérification préalable avec un seul SID mappé à l'utilisateur ou au groupe du domaine.
+
++
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/Troubleshooting_Workflow%3A_CIFS%3A_Device_attached_to_the_system_is_not_functioning["Workflow de dépannage : CIFS : le périphérique connecté au système ne fonctionne pas"]
+
+
+
+*Informations connexes*
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-cifs/home.html["Gestion SMB/CIFS"]

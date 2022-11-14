@@ -1,0 +1,103 @@
+---
+permalink: copy-free/task_gathering_cabling_information_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, gather, cabling, information 
+summary: Avant de démarrer la transition sans copie, vous devez collecter des informations sur les adaptateurs, les ports, les tiroirs disques et la connectivité de stockage de vos contrôleurs 7-mode, puis planifier la connexion des tiroirs disques 7-mode aux nœuds de cluster cibles. 
+---
+= Collecte des informations de câblage pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de démarrer la transition sans copie, vous devez collecter des informations sur les adaptateurs, les ports, les tiroirs disques et la connectivité de stockage de vos contrôleurs 7-mode, puis planifier la connexion des tiroirs disques 7-mode aux nœuds de cluster cibles.
+
+Vous devez avoir imprimé la fiche technique de câblage de transition sans copie.
+
+xref:reference_copy_free_transition_cabling_worksheet.adoc[Fiche technique de câblage de transition sans copie]
+
+. Utilisez Config Advisor pour vérifier l'état du stockage 7-mode et le câblage, et collecter les données de câblage.
++
+Vous devez utiliser le `7-Mode Install Checks` Option du profil d'exécution « Data ONTAP 7 et 8 (7-mode) ».
+
+. Collectez les informations requises pour chaque contrôleur 7-mode à l'aide de la commande suivante :
++
+`*sysconfig _slot_number_*`
+
++
+Vous pouvez utiliser le résultat de cette commande pour identifier les ports utilisés pour la connectivité du tiroir disque.
+
++
+[listing]
+----
+host1> sysconfig 3
+        slot 3: SAS Host Adapter 3a
+                24 Disks:            13440.0GB
+                1 shelf with IOM3
+        slot 3: SAS Host Adapter 3b
+                24 Disks:            13440.0GB
+                1 shelf with IOM3
+        slot 3: SAS Host Adapter 3c
+                24 Disks:            13440.0GB
+                1 shelf with IOM3
+        slot 3: SAS Host Adapter 3d
+                24 Disks:            13440.0GB
+                1 shelf with IOM3
+----
+. À partir du cluster, exécutez la commande nodeshell suivante sur chaque nœud :
++
+`*system node run -node _node_name_ -command sysconfig -a*`
+
++
+Vous pouvez utiliser la sortie de cette commande pour obtenir des informations sur les ports disponibles et les logements de carte d'extension.
+
+. Sur les nœuds de cluster cibles, planifiez les ports à utiliser pour la connexion des tiroirs disques 7-mode :
++
+.. Examinez les ports disponibles (ouverts).
+.. Examinez les logements de carte d'extension.
+.. Planifiez la configuration de la carte d'extension.
++
+Vous pouvez prévoir de transférer les cartes d'extension des systèmes 7-mode si elles sont également prises en charge sur la plateforme de destination et sur la version ONTAP. Vous pouvez également prévoir des cartes PAM, le cas échéant.
+
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+.. Planifiez les ports de destination à utiliser pour le câblage du tiroir disque.
++
+La sélection des ports de destination dépend de certains des facteurs suivants :
+
++
+*** Pile de tiroirs disques séparée ou existante
+*** Disponibilité du port
+*** Connexions SAS ou FC
+*** Disponibilité de ports intégrés ou de cartes d'extension
+
+
+
+
+. Accédez au data Center pour enregistrer physiquement les connexions de ports sur les contrôleurs 7-mode et les nœuds de cluster cibles dans la fiche de câblage :
++
+.. Enregistrez les ports utilisés sur les contrôleurs 7-mode dans la fiche de câblage.
+.. Enregistrez les ports utilisés sur les nœuds de cluster cible dans la fiche de câblage.
+.. Enregistrez les ports de destination à utiliser pour la connexion des tiroirs disques 7-mode, comme prévu à l'étape ,#STEP_D0CFE719A0384F7FA5D9E73C8EA6C2E7.
+.. Vérifiez que vous disposez des câbles appropriés pour connecter les tiroirs disques.
++
+Vous devez identifier les éventuels problèmes de câblage en fonction du nouvel emplacement de la pile de tiroirs disques.
+
+.. Planifiez les longueurs de câble plus longues en raison des exigences de mise en rack des échelles ou des centres de données.
+.. Etiqueter chaque pile de tiroirs disques et les câbles sur les contrôleurs 7-mode.
++
+Il est recommandé d'étiqueter les piles de tiroirs disques 7-mode si vous souhaitez restaurer la transition et de reconnecter les tiroirs disques aux contrôleurs 7-mode.
+
+
+
+
+
+*Informations connexes*
+
+https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guide d'installation et de maintenance des tiroirs disques SAS pour DS4243, DS2246, DS4486 et DS4246"]
+
+https://library.netapp.com/ecm/ecm_download_file/ECMM1280273["DiskShelf14mk2 DANS le Guide de maintenance du matériel"]
+
+https://library.netapp.com/ecm/ecm_download_file/ECMP1112854["DS14mk2 FC et DS14mk4 FC Hardware Service Guide"]

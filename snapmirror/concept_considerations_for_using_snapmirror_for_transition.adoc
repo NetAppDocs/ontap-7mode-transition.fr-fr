@@ -1,0 +1,34 @@
+---
+permalink: snapmirror/concept_considerations_for_using_snapmirror_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, transition, mode, snapmirror, operations, snapvault, considerations 
+summary: 'Vous devez tenir compte de certains facteurs lorsque vous exécutez simultanément les opérations de transition avec SnapMirror ou SnapVault pendant les opérations effectuées sur le système 7-mode, comme le nombre maximal de transferts SnapMirror simultanés, la planification de copie des données et l"utilisation de plusieurs chemins pour la transition.' 
+---
+= Considérations relatives à l'utilisation de SnapMirror pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez tenir compte de certains facteurs lorsque vous exécutez simultanément les opérations de transition avec SnapMirror ou SnapVault pendant les opérations effectuées sur le système 7-mode, comme le nombre maximal de transferts SnapMirror simultanés, la planification de copie des données et l'utilisation de plusieurs chemins pour la transition.
+
+
+
+== Nombre maximal de transferts SnapMirror simultanés
+
+Au cours de la transition, le nombre maximum de transferts SnapMirror simultanés pris en charge sur les systèmes 7-mode et ONTAP dépend du nombre d'opérations de réplication SnapMirror volume autorisées pour un modèle de système de stockage spécifique.
+
+Pour plus d'informations sur le nombre maximal de transferts SnapMirror de volumes simultanés pour votre modèle de système, consultez le link:https://library.netapp.com/ecm/ecm_get_file/ECMP1635994["Guide Data ONTAP de protection, de sauvegarde en ligne et de restauration pour la version 7-mode"].
+
+
+
+== Planifications de copies de données
+
+Les planifications de copies de données pour les opérations de transition ne doivent pas chevaucher les planifications existantes pour les opérations SnapMirror ou SnapVault exécutées sur le système 7-mode.
+
+
+
+== Utilisation de plusieurs chemins pour la transition
+
+Vous pouvez spécifier deux chemins de transition à l'aide d'une adresse IP de copie de données et d'une adresse IP multivoie. Cependant, les deux chemins ne peuvent être utilisés que pour l'équilibrage de charge, et non pour le basculement.

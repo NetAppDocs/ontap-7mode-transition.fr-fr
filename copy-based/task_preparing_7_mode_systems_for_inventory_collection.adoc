@@ -1,0 +1,103 @@
+---
+permalink: copy-based/task_preparing_7_mode_systems_for_inventory_collection.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, prepare, host, assessment 
+summary: 'Vous devez vous assurer que les systèmes et hôtes 7-mode répondent à certaines exigences en matière de réseau et de protocoles pour correctement générer un rapport d"évaluation.' 
+---
+= Préparation des systèmes et des hôtes 7-mode pour l'évaluation de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vous assurer que les systèmes et hôtes 7-mode répondent à certaines exigences en matière de réseau et de protocoles pour correctement générer un rapport d'évaluation.
+
+.Étapes
+. Activez HTTPS sur le système 7-mode :
++
+`*options httpd.admin.ssl.enable on*`
+
+. Activez TLS sur le système 7-mode :
++
+`*options tls.enable on*`
+
++
+
+IMPORTANT: La meilleure pratique consiste à activer TLS en raison des vulnérabilités de sécurité dans SSLv3.
+
+. Activez SSL et désactivez SSLv2 et SSLv3 sur le système 7-mode :
++
+.. Configurer et démarrer SSL :
++
+`*secureadmin setup ssl*`
+
+.. Activer SSL :
++
+`*options ssl.enable on*`
+
+.. Désactiver SSLv2 et SSLv3 :
++
+`*options ssl.v2.enable off*`
+
++
+`*options ssl.v3.enable off*`
+
++
+
+IMPORTANT: Il est recommandé de désactiver SSLv2 et SSLv3 pour éviter les vulnérabilités de sécurité.
+
+
+
+. Activer SSH sur le système 7-mode :
++
+.. Configuration de SSH sur le système 7-mode :
++
+`*secureadmin setup -f ssh*`
+
++
+Le `-f` L'option oblige l'installation à s'exécuter même si le serveur SSH est déjà configuré.
+
+.. Activer SSH :
++
+`*secureadmin enable ssh2*`
+
+.. Activez l'authentification par mot de passe sur le serveur SSH :
++
+`*options ssh.passwd_auth.enable*`
+
+.. Activer l'accès SSH à l'hôte : +
+`*options ssh.access*`
+
+
+. Préparez vos systèmes hôtes Windows :
++
+** Activez l'accès WMI.
++
+Pour plus d'informations sur l'activation de l'accès WMI, consultez la documentation hôte.
+
+** Si vous disposez de Windows Server 2003, vérifiez que vous avez installé le package Microsoft Fibre Channel information Tool (fcinfo) et exécutez l'outil une fois sur votre système hôte Windows.
++
+Cet outil vous permet de collecter les informations de configuration HBA de l'hôte.
+
+** Si le système sur lequel l'outil de transition 7-mode est exécuté n'appartient pas à un domaine, vérifiez les points suivants :
++
+*** Le système hôte appartient à un domaine.
+*** Si l'hôte possède un utilisateur local et que le nom d'utilisateur de cet utilisateur est au format suivant :
++
+`SystemName\Username`
+
+
+
+
+
+. Activez SSH sur l'hôte Linux ou ESXi.
++
+Pour plus d'informations sur l'activation de SSH, reportez-vous à la documentation de l'hôte.
+
+. Vérifiez que vous avez installé la dernière version du logiciel NetApp Host Utilities pour chaque hôte.
++
+Pour plus d'informations sur le téléchargement et l'installation du logiciel NetApp Host Utilities, consultez le site de support NetApp.
+
+. Vérification que tous les hôtes et les systèmes de stockage peuvent être atteints par le système Windows à partir duquel l'outil 7-mode transition Tool est exécuté.
+

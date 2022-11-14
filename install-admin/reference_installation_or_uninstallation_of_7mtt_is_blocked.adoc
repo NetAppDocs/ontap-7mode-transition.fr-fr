@@ -1,0 +1,32 @@
+---
+permalink: install-admin/reference_installation_or_uninstallation_of_7mtt_is_blocked.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, install, uninstall, transition, tool, blocked 
+summary: 'Lorsque vous utilisez le programme d"installation de 7-mode transition Tool ou le programme de désinstallation pour effectuer toute opération \ (installation, réparation, réinstallation, mise à niveau, désinstallation\), Le message d"erreur suivant s"affiche : une autre instance de NetApp 7-mode transition Tool Setup ou de Uninstall est en cours d"exécution. Une seule instance peut être exécutée à la fois.' 
+---
+= L'installation ou la désinstallation de 7-mode transition Tool est bloquée
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous utilisez le programme d'installation de 7-mode transition Tool ou le programme de désinstallation pour effectuer toute opération (installation, réparation, réinstallation, mise à niveau, désinstallation, etc.), le message d'erreur suivant s'affiche : `Another instance of NetApp 7-Mode Transition Tool Setup or Uninstall is running. Only one instance can run at a time`.
+
+
+
+== Solution de contournement
+
+Avant de commencer, assurez-vous qu'il n'y a pas d'instances ou de boîtes de dialogue ouvertes de l'outil de transition 7-mode. Sinon, vous devrez peut-être recommencer les étapes.
+
+. Ouvrez *Registre* en cliquant sur *Démarrer*.
+. Dans *Rechercher programmes et fichiers*, entrez `*RegEdit*`.
+. Lorsque l'Editeur du Registre est ouvert, localisez le répertoire de Registre HKEY_LOCAL_MACHINE.
+. Développez la ruche HKEY_LOCAL_MACHINE en cliquant sur l'icône développer à gauche de l'icône de dossier.
+. Continuez à développer les clés de registre et les sous-clés jusqu'à ce que vous localisiez `HKEY_LOCAL_MACHINE\ SOFTWARE \NetApp \7-Mode Transition Tool`.
+. Cliquez sur *7-mode transition Tool*.
+. Cliquez avec le bouton droit de la souris SUR INSTALLATION_STATUS et sélectionnez *Modify*.
+. Modifiez la valeur de INSTALLER_RUNNING sur INSTALLÉ, puis cliquez sur *OK*.
+
+
+Vous devriez maintenant pouvoir effectuer toute opération à l'aide du programme d'installation de 7-mode transition Tool ou du programme de désinstallation.

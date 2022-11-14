@@ -1,0 +1,43 @@
+---
+permalink: copy-free/task_customizing_configurations_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, customize, 7, mode 
+summary: 'Lorsque vous planifiez la transition de configurations de 7-mode vers ONTAP, vous pouvez personnaliser la transition de configuration de deux manières. Vous pouvez ignorer ou ignorer la transition d"une ou plusieurs configurations. Vous pouvez consolider les règles d"exportation NFS 7-mode, puis réutiliser une export policy NFS existante et une policy Snapshot sur le SVM cible.' 
+---
+= Personnalisation de la transition des configurations 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous planifiez la transition de configurations de 7-mode vers ONTAP, vous pouvez personnaliser la transition de configuration de deux manières. Vous pouvez ignorer ou ignorer la transition d'une ou plusieurs configurations. Vous pouvez consolider les règles d'exportation NFS 7-mode, puis réutiliser une export policy NFS existante et une policy Snapshot sur le SVM cible.
+
+7-mode transition Tool n'effectue pas de contrôles préalables pour la configuration exclue.
+
+Par défaut, toutes les configurations 7-mode sont sélectionnées pour la transition.
+
+Il est préférable d'exécuter les contrôles préalables avec toutes les configurations, puis d'exclure une ou plusieurs configurations lors de l'exécution ultérieure des contrôles préalables. Cela vous aide à comprendre quelles configurations sont exclues de la transition et quels contrôles préalables sont ignorés par la suite.
+
+.Étapes
+. Dans la page Configuration du plan, sélectionnez les options suivantes dans le volet *Configuration du SVM* :
++
+** Pour l'exclusion de la transition de configurations, décochez la case de ces configurations.
+** Pour consolider des règles d'exportation NFS 7-mode similaires en une export policy unique dans ONTAP, qui peut ensuite être appliquée au volume transféré ou au qtree, cochez la case *consolider les règles d'exportation NFS sur 7-mode*.
+** Pour réutiliser une export policy NFS existante sur le SVM qui correspond à la export policy qui sera créée par l'outil, qui peut ensuite être appliquée aux volumes transférés ou aux qtrees, cochez la case *réutiliser les export Policies de SVM*.
+** Pour consolider des planifications Snapshot 7-mode similaires sur une seule règle Snapshot dans ONTAP, qui peut ensuite être appliquée au volume transféré, cochez la case *consolider les règles Snapshot 7-mode*.
+** Pour réutiliser une politique Snapshot existante sur le SVM qui correspond à la politique Snapshot qui sera créée par l'outil, qui peut ensuite être appliquée aux volumes transférés, cochez la case *réutiliser les règles Snapshot de SVM*.
+
+
+. Cliquez sur *Enregistrer et accédez à Tableau de bord*.
+
+
+*Informations connexes*
+
+xref:concept_nfs_configurations_supported_unsupported_or_requiring_manual_steps_for_transition.adoc[Transition NFS : configurations prises en charge et non prises en charge, et étapes manuelles nécessaires]
+
+xref:concept_cifs_configurations_supported_unsupported_or_requiring_manual_steps_for_transition.adoc[Configurations CIFS prises en charge et non prises en charge pour la transition vers ONTAP]
+
+xref:concept_supported_and_unsupported_data_protection_relationships.adoc[Transition de la protection des données : configurations prises en charge et non prises en charge]
+
+xref:concept_supported_and_unsupported_name_services_configurations.adoc[Transition des services de noms : configurations prises en charge et non prises en charge et étapes manuelles requises]

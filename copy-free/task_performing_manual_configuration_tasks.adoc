@@ -1,0 +1,33 @@
+---
+permalink: copy-free/task_performing_manual_configuration_tasks.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, performing, manual, configuration 
+summary: Vous devez effectuer manuellement certaines tâches de configuration requises pour les charges de travail et les applications qui accèdent aux volumes transférés. Vous pouvez obtenir la liste des tâches manuelles à partir des résultats de vérification préalable. 
+---
+= Effectuer des tâches de configuration manuelles après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez effectuer manuellement certaines tâches de configuration requises pour les charges de travail et les applications qui accèdent aux volumes transférés. Vous pouvez obtenir la liste des tâches manuelles à partir des résultats de vérification préalable.
+
+.Étapes
+. Effectuez les tâches répertoriées dans les résultats du contrôle préalable pour configurer des fonctionnalités qui n'ont pas été migrées par l'outil ou qui nécessitent une personnalisation pour votre environnement.
++
+xref:concept_supported_and_unsupported_name_services_configurations.adoc[Transition des services de noms : configurations prises en charge et non prises en charge et étapes manuelles requises]
+
++
+xref:concept_nfs_configurations_supported_unsupported_or_requiring_manual_steps_for_transition.adoc[Transition NFS : configurations prises en charge et non prises en charge, et étapes manuelles nécessaires]
+
++
+xref:concept_cifs_configurations_supported_unsupported_or_requiring_manual_steps_for_transition.adoc[Configurations CIFS prises en charge et non prises en charge pour la transition vers ONTAP]
+
++
+xref:concept_san_transition_supported_and_unsupported_configurations_and_required_manual_steps.adoc[Transition SAN : configurations prises en charge et non prises en charge, et étapes manuelles nécessaires]
+
++
+xref:task_transitioning_a_snapmirror_relationship.adoc[Transition d'une relation SnapMirror]
+
+

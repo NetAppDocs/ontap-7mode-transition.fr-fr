@@ -1,0 +1,16 @@
+---
+permalink: copy-based/concept_copy_based_transition_workflow.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, workflow 
+summary: Le flux de production de transition basée sur la copie implique de préparer la migration, de migrer les données et les configurations, et de réaliser des configurations post-transition. 
+---
+= Transition basée sur la copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le flux de production de transition basée sur la copie implique de préparer la migration, de migrer les données et les configurations, et de réaliser des configurations post-transition.
+
+image::../media/cbt_workflow.gif[workflow cbt]

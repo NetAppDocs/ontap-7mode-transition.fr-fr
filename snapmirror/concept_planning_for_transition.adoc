@@ -1,0 +1,38 @@
+---
+permalink: snapmirror/concept_planning_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, transition, plan, clustered, volumes, snapmirror 
+summary: Avant de copier des données de volumes 7-mode vers des volumes clustered ONTAP, vous devez savoir quand utiliser SnapMirror pour effectuer la transition et vérifier les informations concernant les versions 7-mode et les volumes pris en charge pour la transition. Vous devez également connaître certaines considérations relatives à la transition. 
+---
+= Planification de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de copier des données de volumes 7-mode vers des volumes clustered ONTAP, vous devez savoir quand utiliser SnapMirror pour effectuer la transition et vérifier les informations concernant les versions 7-mode et les volumes pris en charge pour la transition. Vous devez également connaître certaines considérations relatives à la transition.
+
+Vous devez consulter les _Notes de mise à jour_ pour la version cible de transition en cas de problème de transition.
+
+https://library.netapp.com/ecmdocs/ECMLP2492508/html/frameset.html["Notes de version de ONTAP 9"]
+
+Les relations SnapMirror entre des volumes 7-mode et clustered ONTAP sont prises en charge dans les versions suivantes :
+
+* ONTAP 9.8 et versions ultérieures
+* ONTAP 9.7P2 et versions ultérieures 9.7
+* ONTAP 9.6P7 et versions ultérieures 9.6
+* ONTAP 9.0 à ONTAP 9.5
+
+
+Vous pouvez utiliser SnapMirror pour effectuer la transition des données dans les scénarios suivants :
+
+* L'outil 7-mode transition Tool ne prend pas en charge vos exigences de transition. Par exemple, l'outil 7-mode transition Tool requiert un hôte Windows ou Linux qui risque d'être indisponible dans votre environnement.
++
+*Recommandation :* vous devez utiliser l'outil de transition 7-mode pour effectuer la transition des volumes 7-mode, car l'outil fournit des contrôles préalables pour vérifier la faisabilité de la transition et effectuer la migration de toutes les configurations de protocoles, de réseau et de services avec les données.
+
++
+Vous pouvez installer et utiliser l'outil 7-mode transition Tool pour effectuer les précontrôles pour la transition, puis utiliser les commandes SnapMirror pour effectuer la migration des données depuis le volume 7-mode vers le volume clustered ONTAP.
+
+* La machine virtuelle de stockage et de cluster sont déjà configurées et seules les données doivent être transférées des volumes 7-mode vers les volumes clustered ONTAP.
+

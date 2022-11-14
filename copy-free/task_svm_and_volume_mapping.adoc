@@ -1,0 +1,78 @@
+---
+permalink: copy-free/task_svm_and_volume_mapping.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, map, svm, volumes 
+summary: 'Vous devez mapper chaque contrôleur 7-mode de la paire HA sur un SVM cible. Si vous avez des unités vFiler, il est conseillé de sélectionner un SVM cible pour chaque unité vFiler. Les volumes du contrôleur 7-mode ou de l"unité vFiler sont transférés vers la SVM mappée.' 
+---
+= Mappage des SVM et des volumes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez mapper chaque contrôleur 7-mode de la paire HA sur un SVM cible. Si vous avez des unités vFiler, il est conseillé de sélectionner un SVM cible pour chaque unité vFiler. Les volumes du contrôleur 7-mode ou de l'unité vFiler sont transférés vers la SVM mappée.
+
+On doit avoir créé les SVM sur le cluster cible.
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.onc-sm-help/GUID-DF04A607-30B0-4B98-99C8-CB065C64E670.html["Gestion du cluster via System Manager"]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
+
+Une unité vFiler peut être mappée uniquement à une seule SVM. Les volumes des autres contrôleurs 7-mode ou unités vFiler ne peuvent pas être transférés vers une SVM mappée.
+
+.Étapes
+. Dans l'onglet SVM et Volume Mapping, sélectionnez le SVM cible vers lequel vous souhaitez transférer les volumes de chaque contrôleur 7-mode ou unité vFiler.
++
+Le SVM cible peut se trouver dans l'IPspace par défaut ou non par défaut.
+
+. Selon que vous souhaitiez appliquer la même Junction path aux volumes du SVM ou une différente Junction path pour les volumes de chaque SVM, choisir l'une des actions suivantes :
++
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+Appliquer la même Junction path policy à tous les SVM
+ a| 
+.. Cliquez sur *appliquer*.
+.. Sélectionnez une option pour la stratégie de chemin de jonction.
+.. Cliquez sur *OK*.
+
+
+
+
+ a| 
+Spécifier la politique de Junction path pour chaque SVM
+ a| 
+Sélectionner la Junction path policy dans la liste déroulante pour chaque SVM cible.
+
+|===
++
+La politique de Junction path spécifie le chemin sur lequel les volumes clustered Data ONTAP cibles doivent être montés pour accéder aux clients. Vous pouvez ajouter l'une des valeurs suivantes pour la règle de chemin de jonction :
+
++
+** *Conserver les chemins de montage 7-mode*
++
+Conserve les mêmes chemins de jonction que ceux utilisés sur les volumes 7-mode source et les volumes sont montés avec des chemins de jonction au format `/vol/__source_volume_name__` après la transition.
+
+** *Utilisez le nom de volume clustered Data ONTAP*
++
+Tous les volumes clustered Data ONTAP cibles sont montés avec des chemins de jonction avec le nom du volume clustered Data ONTAP au format `_/target_volume_name_` après la transition.
+
+** *Utilisez le nom du volume 7-mode*
++
+Tous les volumes clustered Data ONTAP cibles sont montés avec des chemins de jonction avec le nom du volume 7-mode au format `_/source_volume_name_` après la transition.
+
+
+
+. Cliquez sur image:../media/delete_me_edit_schedule.gif["Icône Modifier"] Pour modifier le nom du volume clustered Data ONTAP cible.
++
+Par défaut, le volume cible clustered Data ONTAP porte le même nom que le volume 7-mode. Si un volume du même nom que le volume 7-mode existe déjà sur le SVM, celui-ci se voit attribuer automatiquement un nouveau nom.
+
+. Cliquez sur *Save Mapping* pour chaque SVM mappé.
+. Cliquez sur *Suivant*.
++
+L'écran réseau s'affiche.
+
+

@@ -1,0 +1,68 @@
+---
+permalink: install-admin/concept_comparison_of_copy_free_transition_and_copy_based_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, install, copy, free, transition, based 
+summary: 7-mode transition Tool vous permet de migrer vos données et vos configurations de 7-mode vers ONTAP en utilisant la transition basée sur la copie ou sans copie. Il est important de bien comprendre les différences entre les deux méthodes avant la transition. 
+---
+= Comparaison de la transition sans copie et de la transition basée sur les copies
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+7-mode transition Tool vous permet de migrer vos données et vos configurations de 7-mode vers ONTAP en utilisant la transition basée sur la copie ou sans copie. Il est important de bien comprendre les différences entre les deux méthodes avant la transition.
+
+|===
+| Paramètre | La transition sans copie | Transition basée sur la copie 
+
+
+ a| 
+Unité de transition
+ a| 
+Paire HA
+ a| 
+Groupe de volumes
+
+
+
+ a| 
+Configuration matérielle requise
+ a| 
+Les tiroirs disques sont réutilisés
+ a| 
+Nouveaux tiroirs disques et nouveaux disques pour héberger les volumes transférés
+
+
+
+ a| 
+Besoins de la plateforme
+ a| 
+Pris en charge uniquement sur les plateformes de milieu et de haut niveau https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+ a| 
+Prise en charge sur toutes les plateformes
+
+
+
+ a| 
+Durée de transition
+ a| 
+Durée de transition globale plus courte (aucune copie de données requise)
+ a| 
+Durée plus longue (la durée initiale de base et le temps de transfert de mise à jour varient en fonction de la charge de travail, de la bande passante du réseau et de la capacité de données migrée)
+
+
+
+ a| 
+Interruption de l'accès aux données
+ a| 
+Dans la plage d'heures
+
+
+IMPORTANT: Dans la plupart des cas, le délai de mise en service du stockage peut être de 3 à 8 heures. Le temps de mise en service comprend le temps nécessaire à l'outil pour effectuer deux opérations automatisées : l'opération d'exportation et d'arrêt, l'importation, ainsi que le délai de câblage manuel des tiroirs disques aux nouveaux contrôleurs. L'opération d'exportation et d'arrêt et l'opération d'importation peuvent prendre jusqu'à 2 heures. Le câblage des tiroirs disques peut prendre de 1 heure à 6 heures.
+
+Ces conseils en matière de délai de mise en service n'incluent pas le temps nécessaire aux tests préproduction requis, et une transition sans erreur, sans défaillance imprévue telle qu'une panne de disque.
+ a| 
+Dans l'intervalle de minutes
+
+|===

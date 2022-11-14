@@ -1,0 +1,14 @@
+---
+permalink: inventory-collect/index.html 
+sidebar: sidebar 
+keywords: 7, mode, ontap, host, storage, information, collection, transition, assessment 
+summary: 'Décrit comment collecter des informations sur les systèmes ONTAP et 7-mode, les commutateurs, les hôtes et les applications hôtes, et générer un rapport d"inventaire que vous pouvez utiliser avec l"outil de transition 7-mode pour évaluer si les systèmes sont prêts pour la transition.' 
+---
+= Guide de collecte des informations sur les hôtes et le stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ce guide décrit la collecte d'informations sur les systèmes ONTAP et 7-mode, les commutateurs, les hôtes et les applications hôtes, et génère un rapport d'inventaire que vous pouvez utiliser avec l'outil de transition 7-mode pour évaluer si les systèmes sont prêts pour la transition.

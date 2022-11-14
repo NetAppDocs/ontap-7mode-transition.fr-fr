@@ -1,0 +1,21 @@
+---
+permalink: copy-based/task_deleting_a_project.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, delete, project 
+summary: 'Si vous ne souhaitez pas qu"un projet soit supprimé, vous pouvez le supprimer du Tableau de bord.' 
+---
+= Suppression d'un projet
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous ne souhaitez pas qu'un projet soit supprimé, vous pouvez le supprimer du Tableau de bord.
+
+. Dans le volet groupes DashboardProjects, cliquez sur le groupe de projets auquel appartient le projet.
+. Dans le volet Résumé du groupe, cliquez sur *Modifier*, puis sur *Supprimer*.
++
+Vous ne pouvez pas supprimer un projet si celui-ci a échoué au cours de la phase de mise en service.
+
+

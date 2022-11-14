@@ -1,0 +1,26 @@
+---
+permalink: copy-free/concept_collecting_and_assessing_inventory_information.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, collecting, assessing, inventory, information 
+summary: 'Vous pouvez collecter les informations d"inventaire à partir des contrôleurs, des hôtes et des commutateurs FC. Vous pouvez ensuite évaluer les fonctions et fonctionnalités de ces systèmes et identifier le fonctionnement de ces fonctionnalités dans la version ONTAP sélectionnée pour la transition.' 
+---
+= Collecte et évaluation des informations d'inventaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez collecter les informations d'inventaire à partir des contrôleurs, des hôtes et des commutateurs FC. Vous pouvez ensuite évaluer les fonctions et fonctionnalités de ces systèmes et identifier le fonctionnement de ces fonctionnalités dans la version ONTAP sélectionnée pour la transition.
+
+Vous pouvez recueillir les informations d'inventaire de deux façons :
+
+* Si la sécurité de votre environnement le permet, vous pouvez installer 7-mode transition Tool, puis l'utiliser pour collecter les informations d'inventaire.
+* Vous pouvez importer le rapport XML d'inventaire généré par l'outil de collecte d'inventaire, puis effectuer l'évaluation.
+
+
+Dans les deux cas, vous devez utiliser la dernière version de l'outil de collecte d'inventaire pour recueillir l'inventaire.
+
+Pour évaluer les informations d'inventaire à des fins de transition sans copie, vous devez sélectionner les deux nœuds de la paire 7-mode HA source. Bien que l'évaluation soit effectuée par nœud, si un nœud n'est pas qualifié pour la transition, l'intégralité de la paire haute disponibilité ne peut pas être transition.
+
+image::../media/delete_me_cbt_assessment_workflow.gif[supprimer le workflow d'évaluation cbt]

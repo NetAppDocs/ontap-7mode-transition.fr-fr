@@ -1,0 +1,91 @@
+---
+permalink: san-host/task_preparing_rhel_luns_for_transition_using_the_cli.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, phel, lun, mount, points, dmmp, alias, names, cli 
+summary: 'Avant la transition d"un point de montage à l"aide d"un nom de périphérique DMMP, vous devez remplacer le nom de périphérique DMMP par son numéro d"UUID de système de fichiers respectif.' 
+---
+= Préparation des LUN RHEL avec des points de montage à l'aide de noms d'alias DMMP pour la transition à l'aide de l'interface de ligne de commande
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant la transition d'un point de montage à l'aide d'un nom de périphérique DMMP, vous devez remplacer le nom de périphérique DMMP par son numéro d'UUID de système de fichiers respectif.
+
+Cette procédure s'applique aux transitions basées sur la copie et aux transitions sans copie.
+
+.Étapes
+. Identifiez et enregistrez l'ID de périphérique SCSI pour la LUN à migrer :
++
+`*sanlun lun show*`
+
++
+L'ID de périphérique SCSI est répertorié sous la colonne nom de fichier dans la sortie.
+
+. Identifiez et enregistrez le nom du périphérique DMMP pour la LUN à migrer :
++
+`*multipath -ll _SCSI_device_ID_*`
+
++
+Dans l'exemple suivant : `360a9800037534562572b453855496b41` Est le nom du périphérique DMMP :
+
++
+[listing]
+----
+[root@IBMx3550M3-229-169 ~]# multipath -ll /dev/sdc
+dmmp_fs_lun (360a9800037534562572b453855496b41) dm-3 NETAPP, LUN
+[size=1.0G] [features=3 queue_if_no_path pg_init_retries 50] [hwhandler=0][rw]
+\_ round-robin 0 [prio=2][active]
+	\_ 9:0:0:1 sdc 8:32  [active][ready]
+	\_ 9:0:0:1 sdg 8:96  [active][ready]
+----
+. Identifiez le système de fichiers configuré sur le périphérique DMMP :
++
+`*blkid | grep -i _DMMP_device_name_*`
+
++
+La valeur DE TYPE dans la sortie identifie le système de fichiers.
+
++
+Dans l'exemple suivant, le système de fichiers est `ext3`.
+
++
+[listing]
+----
+[root@ibmx3550-229-108 ~]#blkid | grep -i 3600a09804d532d79565d47617679658
+/dev/mapper/3600a09804d532d79565d47617679658:
+UUID="450b999a-4f51-4828-8139-29b20d2f8708" TYPE="ext3" SEC_TYPE="ext2"
+----
+. Identifiez le numéro UUID de la LUN :
++
+`*dumpe2fs _device_path_name_ | grep UUID*`
+
+. Identifiez le répertoire sur lequel le périphérique DMMP est monté :
++
+`*df -h*`
+
++
+Dans l'exemple suivant : `/mnt/dmmp_ext3` Représente le répertoire sur lequel le périphérique DMMP est monté :
+
++
+[listing]
+----
+[root@IBMx3550M3-229-169 ~]# df -h
+Filesystem Size Used Avail Use% Mounted on
+/dev/mapper/dmmp_fs_lun
+1008M 34M 924M 4% /mnt/dmnp_ext3
+----
+. Vérifier dans le `/etc/fstab` Fichier que les points de montage du périphérique DMMP sont définis :
++
+`*cat /etc/fstab*`
+
++
+Le nom du périphérique DMMP et le répertoire de montage doivent s'afficher dans la sortie.
+
+. Créer une sauvegarde du `/etc/fstab` fichier :
++
+`*cp /etc/fstab /etc/_fstab_pre_transition_bkup_*`
+
+. Modifiez le `/etc/fstab` Fichier pour remplacer le nom du périphérique DMMP par son numéro d'UUID de système de fichiers respectif.
+

@@ -1,0 +1,14 @@
+---
+permalink: copy-free/index.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, index 
+summary: 'Décrit la transition d"une paire haute disponibilité 7-mode vers un cluster ONTAP à l"aide de l"outil 7-mode transition Tool sans copier les données depuis les disques ; les tiroirs disques existants sont connectés au nouveau cluster.' 
+---
+= Guide de transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ce guide explique comment passer d'une paire haute disponibilité 7-mode à un cluster ONTAP à l'aide de l'outil 7-mode transition Tool sans avoir à copier les données depuis des disques ; les tiroirs disques existants sont connectés au nouveau cluster.

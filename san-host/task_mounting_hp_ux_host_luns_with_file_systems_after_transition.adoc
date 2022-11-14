@@ -1,0 +1,65 @@
+---
+permalink: san-host/task_mounting_hp_ux_host_luns_with_file_systems_after_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, mount, hp, ux, host, lun, file, system 
+summary: Après la transition de LUN hôte HP-UX avec des systèmes de fichiers de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez monter les LUN. 
+---
+= Montage des LUN hôtes HP-UX avec des systèmes de fichiers après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition de LUN hôte HP-UX avec des systèmes de fichiers de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez monter les LUN.
+
+Pour les transitions basées sur les copies, effectuez ces étapes après la mise en service du stockage dans l'outil 7-mode transition Tool (7MTT). Les transitions sans copie ne sont pas prises en charge pour les hôtes HP-UX.
+
+.Étapes
+. Découvrez les nouvelles LUN clustered Data ONTAP :
++
+`*ioscan -fnC disk*`
+
+. Vérifiez que les LUN clustered Data ONTAP ont été découvertes :
++
+`*sanlun lun show*`
+
+. Vérifiez que le `lun-pathname` Pour les LUN clustered Data ONTAP est le même que pour `lun-pathname` Pour les LUN 7-mode avant la transition.
+. Vérifiez que la sortie de la colonne mode est passée de `7` à `C`.
+. Utilisez le `mapfile` fichier pour importer le groupe de volumes :
++
+`*vgimport -s -v -m /tmp/mapfile.vg01 /dev/vg01"*`
+
+. Activer les volumes logiques :
++
+`*vgchange -a y _vg_name_*`
+
+. Convertir le nom de fichier spécial du périphérique existant (DSF) en DSF permanent :
++
+`*vgdsf -c /dev/vg01*`
+
+. Vérifiez que l'état VG est affiché comme disponible :
++
+`*vgdisplay*`
+
+. Monter manuellement chacun des périphériques :
++
+`*mount -F vxfs -o largefiles _device_name mount_point_*`
+
+. Exécutez la commande fsck si vous y êtes invité.
+. Vérifiez les points de montage :
++
+`*bdf*`
+
++
+L'exemple suivant montre comment les points de montage doivent s'afficher :
+
++
+[listing]
+----
+bash-2.05# bdf
+Filesystem          kbytes     used     avail     used   Mounted on
+/dev/vg01/lvol1   23592960   1050952   22189796    5%   /mnt/qa/vg01
+/dev/vg01/lvol2   23592960    588480   22645044    3%   /mnt/qa/vg02
+----
+

@@ -1,0 +1,24 @@
+---
+permalink: copy-based/concept_guidelines_for_deciding_when_to_cutover.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, decide, perform, cutover 
+summary: 'La mise en service de la transition entraînant des perturbations pour les clients, vous devez planifier l"activité afin de réduire au maximum les temps d"arrêt. Vous devez planifier la mise en service dans une fenêtre à faible activité. Il est conseillé de mettre à jour les volumes ONTAP, puis d"attendre l"arrêt complet des transferts avant de déconnecter les clients et de lancer la mise en service du stockage pour réduire le temps d"arrêt.' 
+---
+= Instructions permettant de décider quel est le moment d'effectuer la mise en service
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La mise en service de la transition entraînant des perturbations pour les clients, vous devez planifier l'activité afin de réduire au maximum les temps d'arrêt. Vous devez planifier la mise en service dans une fenêtre à faible activité. Il est conseillé de mettre à jour les volumes ONTAP, puis d'attendre l'arrêt complet des transferts avant de déconnecter les clients et de lancer la mise en service du stockage pour réduire le temps d'arrêt.
+
+Vous devez continuer à surveiller l'état de SnapMirror pour chaque volume. Si la durée du dernier transfert des précédentes mises à jour du volume se trouve dans une limite acceptable, la plupart des modifications de données du volume doivent avoir été copiées et la durée de la mise à jour des données finale lors de la mise en service doit être comprise dans la limite acceptable.
+
+Il est ainsi possible de calculer le temps d'indisponibilité approximatif lorsque vous estimez le nombre de volumes transférés.
+
+Pour réduire le délai de mise en service, la latence réseau entre 7-mode transition Tool et les systèmes de stockage doit être au minimum. Pour l'adoption d'une relation SnapMirror volume, la latence réseau entre l'outil et les systèmes primaires doit être minimale.
+
+*Informations connexes*
+
+xref:task_performing_on_demand_snapmirror_update_operation.adoc[Effectuer des mises à jour SnapMirror à la demande]

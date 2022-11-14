@@ -1,0 +1,20 @@
+---
+permalink: copy-based/concept_impact_of_takeover_and_giveback_on_transition.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, impact, takeover, giveback 
+summary: 'Les opérations de transition, comme la préparation, le démarrage, la pause, la reprise ou l"exécution de la transition, échec lors d"un basculement ou d"un retour de contrôleur.' 
+---
+= Impact du basculement et du retour sur la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les opérations de transition, comme la préparation, le démarrage, la pause, la reprise ou l'exécution de la transition, échec lors d'un basculement ou d'un retour de contrôleur.
+
+Si une opération de transition a échoué à cause d'un basculement, vous devez attendre la fin du retour, puis exécuter à nouveau l'opération de transition.
+
+En cas de basculement d'un contrôleur lors d'un transfert de base, le transfert échoue. Pour reprendre le transfert de base à partir du point où il a été abandonné, vous devez attendre que le retour se termine.
+
+La copie des données reprend en fonction du calendrier configuré.

@@ -1,0 +1,15 @@
+---
+section: command-map
+title: Mappage de commandes pour les administrateurs 7-mode
+url: "/command-map/index.html"
+entries:
+- title: Comment les commandes 7-mode s'associent aux commandes ONTAP
+  url: "/command-map/reference_how_7_mode_commands_map_to_clustered_ontap_commands.html"
+- title: Comment les options 7-mode s'associent aux commandes ONTAP
+  url: "/command-map/reference_how_7_mode_options_map_to_clustered_ontap_commands.html"
+- title: Comment les fichiers de configuration 7-mode sont associés aux commandes
+    clustered Data ONTAP
+  url: "/command-map/reference_how_7_mode_configuration_files_map_to_clustered_ontap_commands.html"
+- title: Interprétation des commandes, des options et des mappages de fichiers de
+    configuration clustered Data ONTAP pour les administrateurs 7-mode
+  url: "/command-map/concept_how_to_interpret_clustered_ontap_command_maps_for_7_mode_administrators.html"

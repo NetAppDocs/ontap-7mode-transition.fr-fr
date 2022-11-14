@@ -1,0 +1,79 @@
+---
+permalink: san-host/task_testing_dmmp_devices_on_rhel_before_cutover.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, dmmp, file, systems, rhel, cutover, copy, based 
+summary: 'Si vous utilisez l"outil 7-mode transition Tool \(7MTT\) 2.2 ou une version ultérieure et Data ONTAP 8.3.2 ou une version ultérieure pour effectuer la transition de votre hôte Red Hat Enterprise Linux \(RHEL\) 5, Vous pouvez tester vos LUN clustered Data ONTAP migrées pour vérifier que vous pouvez mettre en ligne votre hôte et vos applications avant la phase de mise en service. Pendant le test, l"hôte source peut continuer à exécuter les E/S sur les LUN 7-mode source.' 
+---
+= Test des périphériques DMMP sans système de fichiers sur les hôtes RHEL avant la phase de mise en service des transitions basées sur la copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez l'outil 7-mode transition Tool (7MTT) 2.2 ou une version ultérieure et Data ONTAP 8.3.2 ou une version ultérieure pour migrer votre hôte Red Hat Enterprise Linux (RHEL) 5, Vous pouvez tester vos LUN clustered Data ONTAP migrées pour vérifier que vous pouvez mettre en ligne votre hôte et vos applications avant la phase de mise en service. Pendant le test, l'hôte source peut continuer à exécuter les E/S sur les LUN 7-mode source.
+
+Vos nouvelles LUN clustered Data ONTAP doivent être mappées sur votre hôte de test et vos LUN doivent être prêtes pour la transition.
+
+Vous devez maintenir la parité matérielle entre l'hôte de test et l'hôte source et effectuer les étapes suivantes sur l'hôte de test.
+
+Vos LUN clustered Data ONTAP sont en mode lecture/écriture pendant le test. Ils se convertissent en mode lecture seule une fois le test terminé et que vous préparez la phase de mise en service.
+
+.Étapes
+. Une fois la copie des données de base terminée, sélectionnez *Test mode* dans l'interface utilisateur 7MTT.
+. Dans l'interface utilisateur 7MTT, cliquez sur *Apply Configuration*.
+. Relancez l'analyse de vos nouvelles LUN clustered Data ONTAP sur l'hôte de test :
++
+`*rescan-scsi-bus.sh*`
+
+. Obtenez les nouveaux noms de périphériques SCSI pour les LUN clustered Data ONTAP :
++
+`*sanlun lun show*`
+
++
+Dans l'exemple suivant : `/dev/sdl` Est le nom du périphérique SCSI pour le `lun_dmmp_raw` LUN, et `/dev/sdk` Est le nom du périphérique SCSI pour le `lun_dmmp_raw_alias` LUN :
+
++
+[listing]
+----
+[root@ibmx3550-229-108 /]# sanlun lun show
+controller(7mode/E-Series)/
+vserver (cDOT/FlashRay lun-pathname   filename
+------------------------------------------------------------------------
+vs_brb   /vol/dmmp_raw_vol/lun_dmmp_raw             /dev/sdl
+vs_brb   /vol/dmmp_raw_alias_vol/lun_dmmp_raw_alias	/dev/sdk
+----
+. Obtenez les ID de descripteur de périphérique (WWID) pour les LUN clustered Data ONTAP :
++
+`*/sbin/scsi_id -g-u-s /block/__SCSI_device_name__*`
+
++
+Voici un exemple de WWID : « 3600a09804d532d79565d47617679764d » »
+
+. Vérifiez si un alias est défini dans l' `/etc/multipath.conf` fichier sur l'hôte source.
+. Si un alias est défini sur l'hôte source, ajoutez-le à la `/etc/multipath.conf` Fichier sur l'hôte test, mais remplacez l'ID de descripteur de périphérique 7-mode par l'ID de LUN clustered Data ONTAP.
+. Mettez à jour les paramètres d'alias DMMP :
++
+`*multipath*`
+
+. Vérifiez que le nom d'alias DMMP référence correctement le LUN clustered Data ONTAP :
++
+`*multipath -ll*`
+
+. Effectuez les tests selon les besoins.
+. Une fois le test terminé, arrêtez l'hôte de test :
++
+`*shutdown -h -t0 now*`
+
+. Dans l'interface utilisateur 7MTT, cliquez sur *Finish Testing*.
+
+
+Si vos LUN clustered Data ONTAP doivent être remappées sur votre hôte source, vous devez préparer l'hôte source à la phase de mise en service. Si vos LUN clustered Data ONTAP doivent rester mappées sur l'hôte de test, aucune étape supplémentaire n'est requise sur l'hôte de test.
+
+*Informations connexes*
+
+xref:task_gathering_pretransition_information_from_inventory_assessment_workbook.adoc[Collecte des informations de pré-transition à partir du manuel d'évaluation de l'inventaire]
+
+xref:task_verifying_that_rhel_luns_are_ready_for_transition_using_inventory_assessment_workbook.adoc[Vérifier que les LUN RHEL sont prêtes à la transition à l'aide du manuel d'évaluation d'inventaire]
+
+xref:task_preparing_for_cutover_when_transitioning_linux_host_dmmp_device_without_file_system.adoc[Préparation de la mise en service lors de la transition d'un périphérique DMMP hôte Linux sans système de fichiers]

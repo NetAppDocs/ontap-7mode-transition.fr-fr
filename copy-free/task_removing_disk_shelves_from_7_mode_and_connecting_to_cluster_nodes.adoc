@@ -1,0 +1,123 @@
+---
+permalink: copy-free/task_removing_disk_shelves_from_7_mode_and_connecting_to_cluster_nodes.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, disconnect, disk, shelves, connect, cluster, node 
+summary: 'Le câblage des tiroirs disques 7-mode vers les nœuds de cluster cibles est un processus manuel. Après le câblage des tiroirs disques, il est recommandé de vérifier le câblage à l"aide de Config Advisor. Vous pouvez ensuite vérifier le câblage à l"aide de l"outil de transition 7-mode. L"outil n"exécute qu"un sous-ensemble des vérifications effectuées par Config Advisor.' 
+---
+= Déconnexion des tiroirs disques du système 7-mode et connexion aux nœuds du cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le câblage des tiroirs disques 7-mode vers les nœuds de cluster cibles est un processus manuel. Après le câblage des tiroirs disques, il est recommandé de vérifier le câblage à l'aide de Config Advisor. Vous pouvez ensuite vérifier le câblage à l'aide de l'outil de transition 7-mode. L'outil n'exécute qu'un sous-ensemble des vérifications effectuées par Config Advisor.
+
+Vous devez avoir enregistré les informations relatives à la connectivité du tiroir disque aux ports du contrôleur 7-mode.
+
+Vous devez tenir compte de certains facteurs à prendre en compte lors de la connexion des tiroirs disques SAS :
+
+* Vous devez respecter les règles relatives au câblage des ports SAS carrés et Circle.
+* Il est possible de combiner des tiroirs IOM6 et IOM3 dans la même pile, mais il ne doit pas dépasser une transition unique entre tiroirs qui utilisent différents types d'E/S.
++
+Ainsi, IOM6e (contrôleur)--IOM6 (tiroir)--IOM3 (tiroir)--IOM3 (tiroir) est une configuration prise en charge. Mais les solutions IOM6e (contrôleur)--IOM3 (tiroir)--IOM6 (tiroir)--IOM3 (tiroir) ne constituent pas une configuration prise en charge.
+
+
+
+.Étapes
+. Vérifiez les ID du tiroir disque dans la paire 7-mode HA et les nœuds de cluster cible :
++
+.. Si des ID de tiroir sont dupliqués (si les ID de tiroir disque 7-mode sont utilisés pour les tiroirs disques des nœuds de cluster cibles), modifiez les ID des tiroirs disques.
++
+*** Pour les tiroirs disques SAS, un ID de tiroir valide est compris entre 00 et 99.
+*** Ils doivent être uniques dans la paire HA.https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guide d'installation et de maintenance des tiroirs disques SAS pour DS4243, DS2246, DS4486 et DS4246"]
+*** Pour les tiroirs disques FC, un ID de tiroir valide est compris entre 1 et 7.
+*** Les identifiants de tiroirs FC doivent être uniques dans chaque boucle FC.https://library.netapp.com/ecm/ecm_download_file/ECMP1112854["DS14mk2 FC et DS14mk4 FC Hardware Service Guide"]
+
+
+.. Mettez les tiroirs disques sous tension afin que les nouveaux ID soient appliqués.
+
+
+. Mettre les tiroirs disques 7-mode hors tension.
+. Selon que des ports supplémentaires sont disponibles sur les nœuds du cluster cible, choisissez l'une des options suivantes :
++
+|===
+| Si... | Alors... 
+
+
+ a| 
+D'autres ports sont disponibles pour connecter les tiroirs disques
+ a| 
+Connectez les tiroirs disques d'une nouvelle pile aux nœuds de cluster cibles dans une configuration à chemins d'accès multiples.
+
+
+NOTE: Il est recommandé de connecter les tiroirs disques à une pile distincte. L'outil 7-mode transition Tool détecte la disponibilité du nombre de ports requis sur les nœuds de cluster cible lors de l'exécution de contrôles préalables.
+
+
+
+ a| 
+Les ports ne sont pas disponibles pour connecter les tiroirs disques
+ a| 
+Effectuez l'une des opérations suivantes :
+
+** Ajoutez une nouvelle carte d'extension et connectez les tiroirs disques d'une nouvelle pile aux nœuds du cluster cible dans une configuration multivoie.
++
+Vous devez avoir vérifié que la carte d'extension est prise en charge sur la plate-forme de destination.
+
+** Connectez les tiroirs disques à une pile existante dans une configuration multivoie.
+
+
+|===
++
+https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guide d'installation et de maintenance des tiroirs disques SAS pour DS4243, DS2246, DS4486 et DS4246"]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMM1280273["DiskShelf14mk2 DANS le Guide de maintenance du matériel"]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMP1112854["DS14mk2 FC et DS14mk4 FC Hardware Service Guide"]
+
+. Mettez les tiroirs disques sous tension.
++
+
+IMPORTANT: Vous devez attendre au moins 70 secondes avant de continuer.
+
+. Utilisez Config Advisor pour vérifier les connexions.
++
+Vous devez résoudre tous les problèmes de câblage identifiés par Config Advisor.
+
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
+
+. Dans 7-mode transition Tool, cliquez sur *Verify Cabling* (vérifier le câblage).
++
+Un message répertoriant les considérations importantes pour cette opération s'affiche.
+
++
+*Dépannage:* si un agrégat contient des disques manquants, l'agrégat devient dégradé et la vérification du câblage échoue. Si le nombre de disques manquants se situe dans une limite autorisée, vous pouvez poursuivre la transition avec les agrégats dégradés en exécutant la commande suivante à partir de l'interface de ligne de commandes de l'outil 7-mode transition :
+
++
+`*transition cft aggregate degraded-transition -p _project_name_ -n 7-__mode_host_name__ -a _7-mode_aggregate_name_ -i acknowledge*`
+
++
+Vous pouvez ensuite réexécuter l'opération de vérification du câblage et poursuivre la transition. Vous devez vous assurer que le nœud de cluster cible dispose de suffisamment de disques de spare pour reconstruire ces groupes RAID après la transition des agrégats.
+
+. Cliquez sur *Oui* pour continuer.
+. Attendre la fin de l'opération et effectuer les étapes suivantes pour enregistrer les résultats de l'opération et recueillir les journaux d'outils :
++
+.. Cliquez sur *Enregistrer au format CSV* pour enregistrer les résultats de l'opération dans un fichier.
+.. Cliquez sur *Collect Tool Logs* pour créer une sauvegarde de tous les fichiers journaux de transition.
++
+Il est recommandé d'enregistrer les fichiers journaux après chaque opération de transition.
+
+.. Cliquez sur *Fermer*.
+
+
++
+Si l'opération prend beaucoup de temps, vous pouvez cliquer sur *Exécuter en arrière-plan* pour quitter la fenêtre des résultats de l'opération. Vous ne devez pas modifier le projet ni effectuer d'autres tâches lorsque l'opération est en cours d'exécution en arrière-plan. Vous pouvez ensuite afficher les résultats des opérations à partir de l'onglet Historique des opérations.
+
+
+
+*Informations connexes*
+
+xref:task_gathering_cabling_information_for_transition.adoc[Collecte des informations de câblage pour la transition]

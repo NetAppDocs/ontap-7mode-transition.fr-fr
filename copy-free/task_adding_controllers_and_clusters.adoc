@@ -1,0 +1,39 @@
+---
+permalink: copy-free/task_adding_controllers_and_clusters.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, add, controllers, clusters 
+summary: 'Avant de démarrer la transition, vous devez ajouter les contrôleurs 7-mode, y compris les deux nœuds d"une paire haute disponibilité 7-mode et les clusters nécessaires à la transition. Vous devez ajouter les clusters à l"aide de l"interface de gestion du cluster.' 
+---
+= Ajout de contrôleurs et de clusters
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de démarrer la transition, vous devez ajouter les contrôleurs 7-mode, y compris les deux nœuds d'une paire haute disponibilité 7-mode et les clusters nécessaires à la transition. Vous devez ajouter les clusters à l'aide de l'interface de gestion du cluster.
+
+* Pour une transition sans copie, vous devez ajouter le cluster, et non les nœuds de cluster cibles de transition.
+* Les informations fournies par les contrôleurs 7-mode et les clusters ne sont pas persistantes.
++
+Si le service 7-mode transition Tool est redémarré, l'outil vous invite dans le tableau de bord de projet à obtenir des informations sur les contrôleurs et le cluster faisant partie de projets actifs.
+
+
+
+.Étapes
+. Dans le volet supérieur, cliquez sur *Storage Systems*.
+. Dans le champ *Hostname*, entrez le nom de domaine complet ou l'adresse IP du contrôleur 7-mode ou du système ONTAP.
++
+Pour un cluster, vous pouvez spécifier l'adresse IP ou le FQDN de l'interface de gestion du cluster. Pour un contrôleur 7-mode, vous devez spécifier l'adresse IP de l'unité vFiler par défaut, car les adresses IP des unités vFiler individuelles ne sont pas acceptées.
+
+. Entrez les informations d'identification de l'administrateur pour l'hôte spécifié, puis cliquez sur *Ajouter*.
++
+Les contrôleurs 7-mode sont ajoutés au tableau « contrôleurs 7-mode » et les clusters sont ajoutés au tableau « systèmes Data ONTAP en cluster ».
+
+. Répétez les étapes 2 et 3 pour ajouter tous les contrôleurs et clusters nécessaires à la transition.
+. Si la colonne État indique que les informations d'identification du système sont manquantes ou que les informations d'identification ont été modifiées par rapport à ce qui a été entré initialement dans l'outil, cliquez sur le bouton image:../media/delete_me_edit_schedule.gif[""] puis saisissez à nouveau les informations d'identification.
+. Cliquez sur *Suivant*.
++
+L'écran Sélectionner les systèmes source s'affiche.
+
+

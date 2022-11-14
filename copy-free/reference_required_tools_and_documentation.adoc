@@ -1,0 +1,30 @@
+---
+permalink: copy-free/reference_required_tools_and_documentation.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, tools, documentation, required 
+summary: 'Config Advisor est l"outil requis pour la transition sans copie. Vous devez utiliser Config Advisor pour vérifier le câblage des tiroirs disques. Une documentation supplémentaire est également disponible pour la résolution des problèmes liés à l"hôte SAN.' 
+---
+= Outils et documentation nécessaires pour la transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Config Advisor est l'outil requis pour la transition sans copie. Vous devez utiliser Config Advisor pour vérifier le câblage des tiroirs disques. Une documentation supplémentaire est également disponible pour la résolution des problèmes liés à l'hôte SAN.
+
+
+
+== Config Advisor
+
+Vous devez utiliser le profil d'exécution « transition » dans Config Advisor pour vérifier le câblage après la connexion des tiroirs disques 7-mode aux nœuds de cluster cibles.
+
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
+
+
+
+== Documentation
+
+Décrit les étapes de pré-transition et post-transition qui doivent être effectuées sur les hôtes SAN lors de la transition à l'aide d'une transition sans copie.
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-sanspl/home.html["Transition et résolution des problèmes liés aux hôtes SAN"]

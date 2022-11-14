@@ -1,0 +1,51 @@
+---
+permalink: san-host/task_remounting_vmfs_volumes_after_transition_using_esxi_cli_console.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, esxi, cli, vmfs, volumes 
+summary: 'Une fois la transition terminée, vous pouvez utiliser l"interface de ligne de commande ESXi pour remonter vos volumes et ramener vos datastores et vos machines virtuelles à leur état de prétransition.' 
+---
+= Remontage des volumes VMFS après la transition à l'aide de la CLI ESXi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois la transition terminée, vous pouvez utiliser l'interface de ligne de commande ESXi pour remonter vos volumes et ramener vos datastores et vos machines virtuelles à leur état de prétransition.
+
+La LUN 7-mode d'origine doit être hors ligne ou mappée.
+
+Ces étapes s'appliquent aux volumes et aux volumes fractionnés.
+
+.Étapes
+. Connectez-vous à la console ESXi à l'aide de SSH.
+. Répertoriez les LUN récemment ajoutées avec des signatures VMFS et des étiquettes VMFS existants :
++
+`*# esxcfg-volume -l*`
+
++
+Voici un exemple de LUN répertoriées avec des signatures VMFS et des étiquettes VMFS.
+
++
+[listing]
+----
+# esxcfg-volume -l
+VMFS UUID/label: 53578567-5b5c363e-21bb-001ec9d631cb/datastore1
+Can mount: Yes
+Can resignature: Yes
+Extent name: naa.600a098054314c6c445d446f79716475:1 range: 0 - 409599
+(MB)
+----
+. Remontez les volumes VMFS de manière persistante avec la même signature :
++
+** Pour les volumes normaux: +
+`*esxcfg-volume -M|--persistent-mount _VMFS UUID|label_*`
+** Pour les volumes fractionnés : +
+`*# esxcfg-volume -M vmfs-span-ds*`
+
+
+
+
+*Informations connexes*
+
+http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1011387["VMware KB : traitement vSphere des LUN détectées comme LUN de snapshot"]

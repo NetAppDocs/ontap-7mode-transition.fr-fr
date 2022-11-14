@@ -1,0 +1,27 @@
+---
+permalink: copy-free/task_collecting_tool_logs.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, download, log, files 
+summary: '7-mode transition Tool crée des fichiers journaux qui fournissent les informations de traitement des opérations d"évaluation de la transition et de migration exécutées sur votre système.' 
+---
+= Téléchargement des fichiers journaux de transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+7-mode transition Tool crée des fichiers journaux qui fournissent les informations de traitement des opérations d'évaluation de la transition et de migration exécutées sur votre système.
+
+.Étapes
+. Cliquez sur *Logs* dans le menu supérieur.
+. Cliquez sur *rassembler les journaux de projet* pour collecter les journaux associés à tous les projets.
+. Pour collecter les journaux d'un projet donné, localisez-les dans la liste des projets, puis cliquez sur *Télécharger*.
++
+Les journaux sont téléchargés en tant que `.zip` fichier, et le nom du dossier est l'horodatage.
+
+
+
+*Informations connexes*
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp["Télécharger un fichier vers NetApp"]

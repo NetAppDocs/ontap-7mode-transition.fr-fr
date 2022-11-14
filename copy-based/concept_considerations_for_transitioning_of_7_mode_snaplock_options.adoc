@@ -1,0 +1,30 @@
+---
+permalink: copy-based/concept_considerations_for_transitioning_of_7_mode_snaplock_options.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, snaplock, options, 7, mode 
+summary: 'L"outil de transition 7-mode prend en charge la transition de quelques options 7-mode associées aux volumes SnapLock.' 
+---
+= Considérations relatives à la transition des options SnapLock 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'outil de transition 7-mode prend en charge la transition de quelques options 7-mode associées aux volumes SnapLock.
+
+Data ONTAP 7-mode propose les options suivantes en relation avec les volumes SnapLock :
+
+* `snaplock.autocommit_period`
++
+Cette option est au niveau du volume dans ONTAP et est transférée vers ONTAP lors de la transition.
+
+* `snaplock.compliance.write_verify`
++
+Cette option n'est pas applicable dans ONTAP.
+
+* `snaplock.log.default_retention`
+* `snaplock.log.maximum_size`
+
+
+Bien que le `snaplock.log.default_retention` et `snaplock.log.maximum_size` Les options sont prises en charge par ONTAP, les paramètres configurés dans ces options ne sont pas transférés par l'outil 7-mode transition Tool. Une fois la transition terminée, vous devez définir manuellement ces options pour les volumes d'audit.

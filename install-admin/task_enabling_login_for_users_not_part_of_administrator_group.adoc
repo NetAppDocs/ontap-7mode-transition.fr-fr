@@ -1,0 +1,36 @@
+---
+permalink: install-admin/task_enabling_login_for_users_not_part_of_administrator_group.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, install, enable, login, user, administrator, group 
+summary: 'Par défaut, les utilisateurs doivent être membres du groupe Administrateur sur le système Windows sur lequel l"outil de transition 7-mode est installé. Vous pouvez à tout moment activer la connexion pour les utilisateurs qui ne sont pas membres du groupe administrateurs et qui ne peuvent pas installer l"outil mais qui sont authentifiés pour utiliser le système Windows sur lequel l"outil est installé.' 
+---
+= Activation de la connexion pour les utilisateurs ne faisant pas partie du groupe Administrateur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Par défaut, les utilisateurs doivent être membres du groupe Administrateur sur le système Windows sur lequel l'outil de transition 7-mode est installé. Vous pouvez à tout moment activer la connexion pour les utilisateurs qui ne sont pas membres du groupe administrateurs et qui ne peuvent pas installer l'outil mais qui sont authentifiés pour utiliser le système Windows sur lequel l'outil est installé.
+
+.Étapes
+. Connectez-vous à l'hôte Windows à l'aide des privilèges d'administrateur.
+. Modifiez le fichier de configuration de l'outil pour permettre aux utilisateurs qui ne font pas partie du groupe Administrateur de se connecter à l'outil :
++
+.. Ouvrez le `\etc\conf\transition-tool.conf` fichier du répertoire d'installation.
+.. Définissez la valeur du `tool.login.non.admin.enabled` paramètre dans le `transition-tool.conf` fichier à vrai.
+.. Enregistrez le fichier.
+
+
+. Redémarrez le service de transition.
++
+.. Cliquez sur *Démarrer* > *panneau de configuration* > *système et services* > *Outils d'administration* > *Services*.
+.. Cliquez avec le bouton droit de la souris sur le service *NetApp 7-mode transition Tool* et cliquez sur *Stop*.
+.. Cliquez à nouveau avec le bouton droit de la souris sur le service *NetApp 7-mode transition Tool* et cliquez sur *Start*.
+
+
+
+
+*Informations connexes*
+
+xref:task_modifying_default_configuration_settings_of_7mtt.adoc[Modification des options de configuration de 7-mode transition Tool]

@@ -1,0 +1,106 @@
+---
+permalink: copy-free/task_generating_an_assessment_report_by_adding_systems_to_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, assessment, report, add, transition, tool 
+summary: 'Vous pouvez collecter les informations d"inventaire des contrôleurs, des hôtes et des commutateurs FC en ajoutant les systèmes à l"outil de transition 7-mode. Vous pouvez ensuite créer un rapport d"évaluation afin d"évaluer les fonctionnalités de ces systèmes et d"identifier leur fonctionnement dans la version ONTAP sélectionnée pour la transition.' 
+---
+= Génération d'un rapport d'évaluation en ajoutant des systèmes à l'outil de transition 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez collecter les informations d'inventaire des contrôleurs, des hôtes et des commutateurs FC en ajoutant les systèmes à l'outil de transition 7-mode. Vous pouvez ensuite créer un rapport d'évaluation afin d'évaluer les fonctionnalités de ces systèmes et d'identifier leur fonctionnement dans la version ONTAP sélectionnée pour la transition.
+
+* Le nom d'utilisateur du système de stockage et des hôtes doit disposer de privilèges suffisants pour exécuter les commandes répertoriées dans le fichier Lisez-moi.
++
+Le fichier Lisez-moi se trouve à l'adresse `_7-Mode_Transition_Tool_installed_location\bin\ict`.
+
+* Vous devez avoir préparé les systèmes 7-mode, les hôtes et les commutateurs FC pour l'évaluation de la transition.
+* Pour évaluer les systèmes Windows, vous devez disposer d'un compte d'utilisateur de domaine.
+* Si vous ajoutez plusieurs systèmes pour l'évaluation, vous devez créer un fichier texte encodé au format ASCII ou UTF-8 et contenir les détails du système sous la forme d'un système par ligne.
++
+Les détails de chaque système doivent être au format suivant :
+
++
+`(ontap|windows|vmware|linux|cisco|brocade)://[(_user|domain_user_)[_:password_]@](_host_name|ip_)`
+
+* Le contrôleur ou l'hôte doit être accessible par le système sur lequel l'outil 7-mode transition Tool est installé et exécuté.
+* Toutes les fonctionnalités doivent être configurées ou leur licence activée pour que le classeur puisse contenir des informations d'inventaire sur ces fonctionnalités.
+* Le nom d'utilisateur du système de stockage doit disposer de privilèges d'administration suffisants pour collecter les informations d'inventaire.
+* Tous les noms d'hôte et les configurations du système de stockage, tels que les noms de partage CIFS, les noms d'utilisateur et les noms de groupe, doivent être au format UTF-8.
+
+
+Si le service 7-mode transition Tool ou le système sur lequel cet outil est installé est redémarré, les détails système ajoutés à l'outil sont perdus et le système doit être ajouté à nouveau à l'outil.
+
+.Étapes
+. Pour utiliser les dernières données de la matrice d'interopérabilité (IMT) pour une évaluation de transition :
++
+.. Téléchargez les données IMT depuis la matrice d'interopérabilité, puis enregistrez-les :
++
+... Dans le menu Rapports, cliquez sur *compléter les exportations quotidiennes*.
+... Dans la boîte de dialogue Exports quotidiens complets, entrez FAS dans le champ de recherche.
+... Téléchargez le fichier Excel de l'hôte SAN ONTAP, puis enregistrez-le.https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+
+.. Depuis l'interface de ligne de commandes, importez les données IMT à l'aide de `transition imt import` commande.
+.. Vérifiez que l'importation a réussi à l'aide de l' `transition imt show` commande.
++
+*Dépannage:* si l'opération d'importation des données IMT échoue, vous pouvez revenir aux données précédentes à l'aide de l' `transition imt restore` commande.
+
+
+
+. Connectez-vous à 7-mode transition Tool, puis cliquez sur *Collect & Assess* dans la page d'accueil.
+. Cliquez sur *Ajouter des systèmes*.
+. Dans la fenêtre Ajouter un système, effectuez l'une des opérations suivantes :
++
+** Ajouter un système unique :
++
+... Saisissez le nom de domaine complet (FQDN) ou l'adresse IP du système.
+... Saisissez le nom d'utilisateur et le mot de passe du système spécifié.
+... Sélectionnez le type de système :
++
+**** Systèmes de stockage Data ONTAP
+**** Hôtes : Microsoft Windows, Red Hat Linux Enterprise et VMware ESXi
+**** Commutateurs FC : Cisco et Brocade
+
+
+
+
+** Ajoutez plusieurs systèmes en cliquant sur *Parcourir*, puis en sélectionnant le fichier texte qui contient les informations d'identification pour plusieurs systèmes.
+
+
+. Cliquez sur *Ajouter*.
++
+Si l'état d'évaluation d'un système est prêt, vous pouvez effectuer une évaluation de la transition pour ce système.
+
+. Générer le rapport d'évaluation de la transition :
++
+.. Sélectionnez les systèmes pour l'évaluation de la transition.
+.. Cliquez sur *Créer un rapport d'évaluation de transition*.
+.. Dans la boîte de dialogue Créer un rapport d'évaluation de transition, sélectionnez la version Data ONTAP du cluster cible.
+.. Spécifiez un préfixe pour le nom de fichier des rapports.
+.. Cliquez sur *générer rapport*.
+
+
++
+Les rapports du cahier d'évaluation (nom du rapport joint au « Manuel d'évaluation ») et du résumé de l'évaluation (nom du rapport joint au « Résumé de l'évaluation ») sont générés en format XML.
+
++
++ vous pouvez accéder au classeur d'évaluation, au résumé d'évaluation et aux fichiers XML d'inventaire qui sont utilisés pour générer le rapport d'évaluation à partir du `...etc/webapp/transition-gui/tmc` dossier.
+
+. Consultez le classeur d'évaluation dans Microsoft Excel et le résumé de l'évaluation dans Microsoft Word avec Microsoft Office 2007 ou une version ultérieure.
++
+Dans le manuel d'évaluation, pour plus d'informations sur l'évaluation de faisabilité de la transition (CFT), le résumé de la prévérification configuration, les détails de la prévérification de la configuration et le récapitulatif de la transition sans copie.
+
++
+Dans le résumé de l'évaluation, consultez la section faisabilité de la transition sans copie pour en savoir plus sur l'évaluation au niveau du contrôleur.
+
++
+Vous devrez peut-être activer les macros dans Excel pour afficher le classeur d'évaluation.
+
++
+Dans le résumé de la collecte de données du manuel d'évaluation, si l'état d'accès d'un système est `FAILED`, les informations d'inventaire pour ce système sont incorrectes. Dans le résumé de l'évaluation, la valeur de certains champs de ce système s'affiche sous la forme `Not Assessed`.
+
+

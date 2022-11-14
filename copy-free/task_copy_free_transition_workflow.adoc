@@ -1,0 +1,16 @@
+---
+permalink: copy-free/task_copy_free_transition_workflow.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, workflow 
+summary: Le workflow de transition sans copie comprend la préparation à la transition, la transition et la fin de la transition. Certaines de ces tâches doivent être effectuées manuellement sur les systèmes 7-mode et le cluster. 
+---
+= Transition sans copie au flux de travail
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le workflow de transition sans copie comprend la préparation à la transition, la transition et la fin de la transition. Certaines de ces tâches doivent être effectuées manuellement sur les systèmes 7-mode et le cluster.
+
+image::../media/cft_highlevel_workflow.gif[flux de travail général de la transition sans copie]

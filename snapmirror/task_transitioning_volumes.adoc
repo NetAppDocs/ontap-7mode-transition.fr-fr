@@ -1,0 +1,24 @@
+---
+permalink: snapmirror/task_transitioning_volumes.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, snapmirror, transition, volume, data, protection, relationship, stand, alone 
+summary: 'Vous pouvez passer un ou plusieurs volumes autonomes qui sont dans des relations de protection de données \(dans les relations SnapMirror volume\) à l"aide de la technologie SnapMirror.' 
+---
+= Transfert de volumes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez passer un ou plusieurs volumes autonomes résidant dans des relations de protection des données (dans les relations SnapMirror volume) à l'aide de la technologie SnapMirror.
+
+Si une mise à jour planifiée est abandonnée en raison d'une opération DE CONTINUITÉ D'ACTIVITÉ (basculement ou transfert d'agrégats), la mise à jour reprend automatiquement une fois l'opération DE CONTINUITÉ D'ACTIVITÉ terminée.
+
+Si vous effectuez la transition d'un volume autonome ou d'une relation SnapMirror volume avec des LUN, vous devez créer des igroups et mapper des LUN. Vous devez ensuite effectuer les tâches de post-transition requises sur les hôtes avant de configurer l'accès aux volumes clustered Data ONTAP transférés.
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-sanspl/home.html["Transition et résolution des problèmes liés aux hôtes SAN"]
+
+*Informations connexes*
+
+xref:task_transitioning_7_mode_volumes_using_snapmirror.adoc[La transition de volumes 7-mode à l'aide de SnapMirror]

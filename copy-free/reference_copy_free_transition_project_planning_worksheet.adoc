@@ -1,0 +1,598 @@
+---
+permalink: copy-free/reference_copy_free_transition_project_planning_worksheet.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, project, planning, worksheet 
+summary: 'Vous pouvez utiliser les feuilles de calcul de planification de la transition sans copie pour enregistrer des informations sur le mappage de nœuds, le mappage de SVM, le mappage de volumes et les LIF à migrer. Ces feuilles de calcul sont utiles pour la création d"un projet de transition à l"aide de l"outil 7-mode transition Tool. Vous devez connaître les directives pour remplir les feuilles de travail.' 
+---
+= Feuilles de calcul de planification du projet de transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser les feuilles de calcul de planification de la transition sans copie pour enregistrer des informations sur le mappage de nœuds, le mappage de SVM, le mappage de volumes et les LIF à migrer. Ces feuilles de calcul sont utiles pour la création d'un projet de transition à l'aide de l'outil 7-mode transition Tool. Vous devez connaître les directives pour remplir les feuilles de travail.
+
+Vous pouvez suivre les directives suivantes pour remplir les feuilles de travail :
+
+* Mappage de chaque unité vFiler à un SVM
++
+Si aucune unité vFiler n'est disponible dans le contrôleur 7-mode, mappez le contrôleur sur un seul SVM.
+
+* Enregistrez le nom du volume 7-mode et le nom du volume Data ONTAP correspondant.
++
+Le nom du volume ONTAP peut être différent du nom du volume 7-mode.
+
+* Identifier les LIFs à configurer sur chaque SVM.
++
+Les adresses IP des LIFs peuvent être existantes sur le système 7-mode ou de nouvelles LIF.
+
+
+
+
+
+== Mappage de nœuds
+
+|===
+| Contrôleur 7-mode | Nœud de cluster mappé 
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+|===
+
+
+== SVM et mappage de volumes
+
+|===
+| Contrôleur 7-mode | Unité vFiler ou contrôleur | SVM mappée | Volume 7-mode | Volume du SVM 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+
+|===
+
+
+== Mappage de LIF (adresses IP 7-mode)
+
+|===
+| Contrôleur 7-mode | Unité vFiler ou contrôleur | SVM mappée | Adresse IP 7-mode | Masque de réseau | Passerelle par défaut | Nœud de départ | Port de départ 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+
+
+== Mapping LIF (nouvelles LIF)
+
+|===
+| SVM | Nouvelle adresse IP | Masque de réseau | Passerelle par défaut | Nœud de départ | Port de départ 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+
+
+== Exemple
+
+Le tableau suivant présente un exemple de feuilles de calcul complétées pour une paire HA 7-mode avec les contrôleurs hostA_7mode et hostB_7mode.
+
+*Mappage de nœud*
+
+|===
+| Contrôleur 7-mode | Nœud de cluster mappé 
+
+
+ a| 
+HostA_7mode
+ a| 
+cluster 1_01
+
+
+
+ a| 
+HostB_7mode
+ a| 
+cluster 1_02
+
+|===
+*SVM et mappage de volume*
+
+|===
+| Contrôleur 7-mode | Nœud de cluster mappé | Unité vFiler ou contrôleur | SVM mappée | Volume 7-mode | Volume du SVM 
+
+
+ a| 
+HostA_7mode
+ a| 
+cluster 1_01
+ a| 
+VfilerA
+ a| 
+svm1
+ a| 
+Vola
+ a| 
+Vola
+
+
+
+ a| 
+VolB
+ a| 
+VolB
+
+
+
+ a| 
+VfilerB
+ a| 
+svm2
+ a| 
+vol1
+ a| 
+vol_nfs
+
+
+
+ a| 
+vol2
+ a| 
+cifs_vol
+
+
+
+ a| 
+HostB_7mode
+ a| 
+cluster 1_02
+ a| 
+Sans objet
+ a| 
+svm3
+ a| 
+vol3
+ a| 
+vol3
+
+
+
+ a| 
+vol4
+ a| 
+vol4
+
+
+
+ a| 
+vol5
+ a| 
+vol5
+
+
+
+ a| 
+vol6
+ a| 
+vol6
+
+|===
+*Mappage de LIF (adresses IP 7-mode)*
+
+|===
+| Contrôleur 7-mode | Unité vFiler ou contrôleur | SVM mappée | IP 7-mode existant | Masque de réseau | Passerelle par défaut | Nœud de départ | Port de départ 
+
+
+ a| 
+HostA_7mode
+ a| 
+VfilerA
+ a| 
+svm1
+ a| 
+192.0.2.129
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_01
+ a| 
+e0a
+
+
+
+ a| 
+192.0.2.135
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_02
+ a| 
+e0b
+
+
+
+ a| 
+VfilerB
+ a| 
+svm2
+ a| 
+-
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+-
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+HostB_7mode
+ a| 
+Sans objet
+ a| 
+svm3
+ a| 
+192.0.2.110
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_01
+ a| 
+e0c
+
+
+
+ a| 
+192.0.2.111
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_02
+ a| 
+e0d
+
+|===
+*Mappage LIF (nouvelles LIF)*
+
+|===
+| SVM | Nouvelle adresse IP | Masque de réseau | Passerelle par défaut | Nœud de départ | Port de départ 
+
+
+ a| 
+svm1
+ a| 
+-
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+-
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+svm2
+ a| 
+192.0.2.130
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_01
+ a| 
+e1c
+
+
+
+ a| 
+192.0.2.131
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_02
+ a| 
+e1d
+
+
+
+ a| 
+svm3
+ a| 
+192.0.2.136
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_01
+ a| 
+e0c
+
+
+
+ a| 
+192.0.2.137
+ a| 
+255.255.255.128
+ a| 
+192.40.0.1
+ a| 
+cluster 1_02
+ a| 
+e0d
+
+|===

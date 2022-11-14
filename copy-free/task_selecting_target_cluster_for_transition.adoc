@@ -1,0 +1,36 @@
+---
+permalink: copy-free/task_selecting_target_cluster_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, select, target, cluster, nodes 
+summary: Vous pouvez sélectionner la paire HA du cluster cible et mapper chaque contrôleur 7-mode de la paire HA sur un nœud de cluster cible correspondant. Le nœud mappé spécifie le nœud de cluster sur lequel les tiroirs disques du contrôleur 7-mode correspondant doivent être connectés. 
+---
+= Sélection des nœuds de cluster cibles pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez sélectionner la paire HA du cluster cible et mapper chaque contrôleur 7-mode de la paire HA sur un nœud de cluster cible correspondant. Le nœud mappé spécifie le nœud de cluster sur lequel les tiroirs disques du contrôleur 7-mode correspondant doivent être connectés.
+
+Le cluster cible doit exécuter Data ONTAP 8.3.2 ou version ultérieure.
+
+Vous pouvez passer des tiroirs disques 7-mode à une paire haute disponibilité cible contenant des agrégats et des volumes de données préexistants.
+
+Pour un cluster à deux nœuds, un agrégat de données doit héberger les volumes root des SVM cibles. Pour un cluster de quatre nœuds ou plus, les volumes root des SVM peuvent être hébergés sur les nœuds cibles de la transition ou sur d'autres nœuds du cluster.
+
+.Étapes
+. Sélectionnez la paire HA cible vers laquelle les tiroirs disques 7-mode doivent être connectés.
++
+L'outil mappe automatiquement chaque système de stockage 7-mode sur un nœud de cluster cible.
+
++
+
+NOTE: Le disque et l'agrégat de propriété de chaque contrôleur 7-mode sont transférés vers le nœud de cluster cible mappé correspondant lors de la phase d'importation.
+
+. Cliquez sur *Permuter le mappage de nœud* pour modifier l'affectation automatique du mappage de nœud source-cible.
+. Cliquez sur *Enregistrer et continuer*.
++
+L'écran SVM et Volume Mapping s'affiche.
+
+

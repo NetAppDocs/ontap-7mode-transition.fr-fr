@@ -1,0 +1,26 @@
+---
+permalink: copy-based/concept_considerations_for_quotas.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, quotas 
+summary: 'Vous devez savoir comment les quotas sont transférés lorsque « Apply configuration » \(precutover\) est exécuté en mode lecture seule et en lecture-écriture.' 
+---
+= Considérations relatives aux quotas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez savoir comment les quotas sont transférés lorsque « Apply configuration » (prétover) est exécuté en lecture seule et en lecture-écriture.
+
+Des quotas sont appliqués de la manière suivante lors de la phase de pré-contrôle :
+
+* Mode lecture seule
++
+Les quotas ne sont pas appliqués en mode lecture seule pré-défini sur le système ONTAP ; ils sont appliqués uniquement pendant la phase de mise en service du stockage.
+
+* Mode lecture-écriture
++
+Des quotas sont appliqués en mode de lecture-écriture pré-over sur le système ONTAP, afin de pouvoir les tester en ONTAP. Toutefois, les quotas sont supprimés pendant la resynchronisation (après la fin du test) des volumes ONTAP. Les quotas sont à nouveau appliqués lors de la phase de mise en service du stockage.
+
+

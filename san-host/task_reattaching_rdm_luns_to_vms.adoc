@@ -1,0 +1,38 @@
+---
+permalink: san-host/task_reattaching_rdm_luns_to_vms.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, rdm, lun, vm 
+summary: 'Pour que les machines virtuelles reliées à des LUN \(RDM\) RDM (Raw Device Mapping) puissent fonctionner après la transition, vous devez supprimer les disques RDM hébergeant la LUN de la machine virtuelle. Vous devez ensuite rattacher les disques RDM à la machine virtuelle en fonction du numéro de série de LUN fourni par l"outil de transition 7-mode \(7MTT\).' 
+---
+= Rattachement de LUN RDM à des VM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour que les machines virtuelles connectées à des LUN RDM (Raw Device Mapping) fonctionnent après la transition, vous devez supprimer les disques RDM hébergeant la LUN de la machine virtuelle. Vous devez ensuite rattacher les disques RDM à la machine virtuelle d'après le numéro de série de LUN fourni par l'outil 7-mode transition Tool (7MTT).
+
+* Pour les transitions basées sur la copie, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans 7MTT.
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Dans _Inventory Assessment Workbook_, accédez à l'onglet *Host VM Disk Details*.
+. Identifiez la machine virtuelle hôte ESXi avec PTRDM ou NPTRDM dans la colonne *Type*.
+. Notez le nom de la machine virtuelle, le chemin du disque dans la colonne *Disk* et l'ID naa dans la colonne *Device Mapping*.
+. Vérifiez que l'ID naa est répertorié dans le fichier de mappage 7MTT généré après la transition.
+. Vérifiez que l'ID naa possède un nouvel ID naa correspondant dans la colonne *LUN WWID* du fichier de mappage.
++
+Il s'agit du nouvel ID naa de LUN clustered Data ONTAP.
+
+. Utilisez l'ID naa de LUN clustered Data ONTAP dans la colonne *WWID* de LUN et les détails du chemin de disque pour rattacher le LUN clustered Data ONTAP à la machine virtuelle.
+
+
+*Informations connexes*
+
+xref:task_removing_stale_rdm_using_vsphere_client.adoc[Suppression de RDM obsolètes à l'aide du client vSphere]
+
+xref:task_reattaching_rdm_to_vms_using_vsphere_client.adoc[Rattachement de RDM à des VM à l'aide de vSphere client]
+
+xref:task_reattaching_rdm_using_esxi_cli_console.adoc[Rattachement de RDM à l'aide de VMware ESXi de la CLI/console]

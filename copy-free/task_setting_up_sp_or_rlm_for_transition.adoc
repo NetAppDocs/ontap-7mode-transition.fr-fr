@@ -1,0 +1,151 @@
+---
+permalink: copy-free/task_setting_up_sp_or_rlm_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, sp, rlm, system, set, up 
+summary: 'Si le processeur de service \(SP\) ou le module LAN distant \(RLM\) n"est pas déjà configuré sur les systèmes de stockage 7-mode ou si vous avez configuré le SP ou la RLM avec une adresse IPv6, vous devez configurer le SP ou la RLM avec une adresse IPv4.' 
+---
+= Configuration du processeur de service ou de la carte RLM sur les systèmes 7-mode pour la transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si le processeur de service ou le module RLM (Remote LAN module) n'est pas déjà configuré sur les systèmes de stockage 7-mode ou si vous avez configuré le SP ou la RLM avec une adresse IPv6, vous devez configurer le SP ou la RLM avec une adresse IPv4.
+
+* SSHv2 doit être pris en charge sur l'hôte sur lequel l'outil 7-mode transition Tool est installé.
+* Vous devez avoir accès au compte « naroot » du SP ou de la RLM, ou à un compte utilisateur Data ONTAP disposant des identifiants du rôle « admin » ou bien d'un rôle doté de la fonctionnalité « login-sp ».
+
+
+L'outil de transition 7-mode accède aux systèmes 7-mode lorsque les systèmes sont interrompus pendant la transition à l'aide d'un dispositif de gestion à distance qui peut être le SP ou la RLM, selon le modèle de plateforme disponible sur votre système. Vous devez configurer le processeur de service ou la RLM avec une adresse IPv4. La configuration IPv6 n'est pas prise en charge pour la transition.
+
+.Étapes
+* Configurez le processeur de service et fournissez un accès au processeur de service à l'hôte sur lequel l'outil de transition 7-mode est installé.
++
+.. Configurer et activer le réseau du processeur de service avec une adresse IPv4 : +
+`*sp setup*`
++
+[listing]
+----
+system1> sp setup
+   The Service Processor (SP) provides remote management capabilities
+   including console redirection, logging and power control.
+   It also extends autosupport by sending
+   additional system event alerts. Your autosupport settings are use
+   for sending these alerts via email over the SP LAN interface.
+Would you like to configure the SP? y
+Would you like to enable DHCP on the SP LAN interface? n
+Please enter the IP address of the SP []: 192.168.123.98
+Please enter the netmask of the SP []: 255.255.255.0
+Please enter the IP address for the SP gateway []: 192.168.123.1
+Do you want to enable IPv6 on the SP ? n
+Verifying mailhost settings for SP use...
+----
+.. Vérifiez les paramètres de configuration réseau du processeur de service :
++
+`*sp status*`
+
++
+[listing]
+----
+system1> sp status
+        Service Processor      Status: Online
+             Firmware Version:   1.2
+             Mgmt MAC Address:   00:A0:98:01:7D:5B
+             Ethernet Link:      up
+             Using DHCP:         no
+    IPv4 configuration:
+             IP Address:         192.168.123.98
+             Netmask:            255.255.255.0
+             Gateway:            192.168.123.1
+----
+.. Fournir un accès SP à l'hôte sur lequel l'outil de transition 7-mode est installé :
++
+`*options sp.ssh.access host=__7mtt_host__*`
+
++
+`_7mtt_host_` Est le nom d'hôte ou l'adresse IP de l'hôte sur lequel l'outil de transition 7-mode est installé.
+
++
+
+NOTE: Lorsque vous configurez le processeur de service, l'accès de tous les hôtes est accordé par défaut. Vous devez effectuer cette étape si vous souhaitez restreindre l'accès à des hôtes spécifiques.
+
+.. Depuis l'hôte sur lequel 7-mode transition Tool est installé, connectez-vous au SP : +
+`*ssh _username@SP_IP_address_*`
++
+Lorsque vous y êtes invité, entrez le mot de passe du nom d'utilisateur.
+
++
+L'invite du processeur de service est affichée, indiquant que vous avez accès à l'interface de ligne de commandes du processeur de service.
+
+
+
+* Configurez la RLM et fournissez un accès RLM à l'hôte sur lequel l'outil de transition 7-mode est installé.
++
+.. Configurer le réseau RLM avec une adresse IPv4 : +
+`*rlm setup*`
++
+Dans l'assistant de l'interface de ligne de commande RLM, vous devez entrer l'adresse IP, le masque de réseau et la passerelle du module RLM.
+
++
+[listing]
+----
+system> rlm setup
+	  The Remote LAN Module (RLM) provides remote management capabilities
+ 	 including console redirection, logging and power control.
+ 	 It also extends autosupport by sending
+ 	 additional system event alerts. Your autosupport settings are used
+ 	 for sending these alerts via email over the RLM LAN interface.
+Would you like to configure the RLM? y
+Would you like to enable DHCP on the RLM LAN interface? n
+Please enter the IP address for the RLM []:192.168.123.98
+Please enter the netmask for the RLM []:255.255.255.0
+Please enter the IP address for the RLM gateway []:192.168.123.1
+Do you want to enable IPv6 on the RLM ? n
+Verifying mailhost settings for RLM use...
+----
+.. Vérifiez que la configuration réseau RLM est correcte :
++
+`*rlm status*`
+
++
+[listing]
+----
+system> rlm status
+	Remote LAN Module    Status: Online
+		Part Number:        110-00030
+		Revision:           A0
+		Serial Number:      123456
+		Firmware Version:   4.0
+		Mgmt MAC Address:   00:A0:98:01:7D:5B
+		Ethernet Link:      up, 100Mb, full duplex, auto-neg complete
+		Using DHCP:         no
+	IPv4 configuration:
+		IP Address:         192.168.123.98
+		Netmask:            255.255.255.0
+		Gateway:            192.168.123.1
+----
+.. Fournir un accès RLM à l'hôte sur lequel l'outil de transition 7-mode est installé :
++
+`+options rlm.ssh.access host=__7mtt_host__*`
+
++
+7mtt_host est le nom d'hôte ou l'adresse IP de l'hôte sur lequel l'outil de transition 7-mode est installé.
+
++
+
+NOTE: Lorsque vous configurez la RLM, l'accès est accordé par défaut à tous les hôtes. Vous devez effectuer cette étape si vous souhaitez restreindre l'accès à des hôtes spécifiques.
+
+.. Depuis l'hôte sur lequel 7-mode transition Tool est installé, connectez-vous à la RLM :
++
+`*ssh _username@RLM_IP_address_*`
+
++
+Lorsque vous y êtes invité, vous devez saisir le mot de passe correspondant au nom d'utilisateur.
+
++
+L'invite RLM s'affiche, indiquant que vous avez accès à l'interface de ligne de commande RLM.
+
+
+
+

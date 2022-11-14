@@ -1,0 +1,78 @@
+---
+permalink: snapmirror/task_preparing_cluster_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, prepare, transition, cluster, requirements 
+summary: Vous devez configurer le cluster avant de transférer un système 7-mode et vérifier que le cluster répond aux exigences telles que la configuration de LIF et la vérification de la connectivité réseau pour la transition. 
+---
+= Préparation du cluster pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer le cluster avant de transférer un système 7-mode et vérifier que le cluster répond aux exigences telles que la configuration de LIF et la vérification de la connectivité réseau pour la transition.
+
+* Le cluster et le SVM doivent déjà être configurés.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Configuration logicielle"]
+
++
+Le SVM cible ne doit pas se trouver dans une relation de reprise d'activité de SVM.
+
+* Le cluster doit être accessible via le LIF de gestion du cluster.
+* Le cluster doit être sain et aucun des nœuds ne doit être en mode basculement.
+* Les agrégats cibles qui contiennent les volumes transférés doivent disposer d'une règle SFO.
+* Les agrégats doivent se trouver sur des nœuds qui n'ont pas atteint la limite maximale du volume.
+* Pour établir une relation de SVM peer lors de la transition d'une relation SnapMirror volume, les conditions suivantes doivent être remplies :
++
+** Le cluster secondaire ne doit pas disposer d'un SVM portant le même nom que celui du SVM principal.
+** Le cluster principal ne doit pas disposer d'un SVM portant le même nom que celui du SVM secondaire.
+** Le nom du système 7-mode source ne doit pas entrer en conflit avec les SVM ou SVM locaux qui sont déjà associés.
+
+
+
+
+Vous pouvez configurer des LIF locales qui se trouvent dans l'IPspace par défaut ou les LIF intercluster sur chaque nœud du cluster pour communiquer entre le cluster et les systèmes 7-mode. Si vous avez configuré des LIF locales, il n'est pas nécessaire de configurer les LIF intercluster. Si vous avez configuré à la fois les LIFs intercluster et locales, alors les LIFs locales sont préférables.
+
+. Créer un LIF intercluster sur chaque node du cluster pour assurer la communication entre le cluster et le système 7-mode :
++
+.. Créer un LIF intercluster :
++
+`*network interface create -vserver _svm_name_ -lif _intercluster_lif_ -role intercluster -home-node _home_node_ -home-port _home_port_ -address _ip_address_ -netmask _netmask_*`
+
++
+[listing]
+----
+cluster1::> network interface create -vserver cluster1 -lif intercluster_lif -role intercluster -home-node cluster1-01 -home-port e0c -address 192.0.2.130 -netmask 255.255.255.0
+----
+.. Créer une route statique pour le LIF intercluster :
++
+`*network route create -vserver _svm_name_ -destination _IP_address/mask_ -gateway _ip_address_*`
+
++
+[listing]
+----
+cluster1::> network route create -vserver vs0 -destination 0.0.0.0/0 -gateway 10.61.208.1
+----
+.. Vérifier que vous pouvez utiliser le LIF intercluster pour envoyer un ping au système 7-mode :
++
+`*network ping -lif _intercluster_lif_ -vserver _svm_name_ -destination _remote_inetaddress_*`
+
++
+[listing]
+----
+cluster1::> network ping -lif intercluster_lif -vserver cluster1 -destination system7mode
+system7mode is alive
+----
+
+
+
+
+Pour les chemins d'accès multiples, vous devez avoir deux LIF intercluster sur chaque nœud.
+
+https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion du réseau et des LIF"]
+
+xref:task_creating_a_transition_peering_relationship.adoc[Création d'une relation de transition peer-to-peer]
+
+https://mysupport.netapp.com/site/docs-and-kb["Documentation NetApp : bibliothèque de produits De A à Z"]

@@ -1,0 +1,48 @@
+---
+permalink: inventory-collect/task_generating_fc_zone_plan.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, generate, fc, zone, plan, transition 
+summary: Après la collecte des informations sur les systèmes Data ONTAP, les hôtes et les commutateurs FC, vous pouvez générer le plan de zone FC, qui est utilisé pour configurer les commutateurs dans le cluster après la migration. 
+---
+= Génération du plan de zone FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la collecte des informations sur les systèmes Data ONTAP, les hôtes et les commutateurs FC, vous pouvez générer le plan de zone FC, qui est utilisé pour configurer les commutateurs dans le cluster après la migration.
+
+* Les systèmes 7-mode, les hôtes et le cluster doivent être connectés au commutateur.
+* Les informations relatives au cluster, aux SVM, aux LIF FCP et aux commutateurs doivent être collectées.
++
+Le cluster peut être connecté au même commutateur que le système 7-mode ou à un nouveau commutateur dans la même structure.
+
++
+xref:concept_supported_configurations_for_generating_an_fc_zone_plan.adoc[Configurations prises en charge pour générer un plan de zone FC]
+
+
+
+.Étapes
+. Dans l'interface de ligne de commande, accédez au répertoire ICT.
+. Depuis l'interface de ligne de commande, génération du plan de zone FC :
++
+`*ict --cmd generate-fc-zones --source-filers _7-mode-ip1,7mode-ip2_ --dest-svm _cluster-name:vserver-name_ --fc-switches _switch-name:vsan-id1,vsan-id2_ 7mode_cdot_switch_inventory.xml*`
+
++
+Vous devez saisir l'ID VSAN pour les commutateurs Cisco.
+
++
+[listing]
+----
+...bin\ict>ict --cmd generate-fc-zones --source-filers system1,system2 --dest-svm vs1:fc_zone1
+ --fc-switches brocade-1,brocade-2 7mode_cdot_switch_inventory.xml
+----
++
+Le plan de zone FC contient les zones créées par les configurations d'un groupe initiateur sur les systèmes 7-mode. Chaque zone contient un WWPN initiateur unique et plusieurs WWPN cibles SVM.
+
+
+
+Dans une transition basée sur la copie, vous pouvez utiliser le plan de zone FC pour configurer les zones en mode de lecture/écriture de pré-mise en service afin de vérifier la configuration du cluster à l'aide des hôtes de test, ou après la mise en service, pour fournir un accès aux données aux hôtes initiateurs du cluster.
+
+Dans une transition sans copie, vous devez utiliser le plan de zone FC pour configurer les zones afin de regrouper les hôtes initiateurs et les cibles pour fournir un accès aux données à partir du cluster lors de la phase de configuration appliquer.

@@ -1,0 +1,24 @@
+---
+permalink: copy-free/task_transitioning_a_snapmirror_relationship.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, snapmirror, relationship 
+summary: 'Il est possible de passer d"abord une paire haute disponibilité secondaire, de configurer une relation SnapMirror échelonnée entre les volumes primaires 7-mode et les volumes secondaires clustered Data ONTAP, puis de faire évoluer la paire haute disponibilité principale plus tard. Dans certains cas, vous devez effectuer une transition en parallèle des paires haute disponibilité secondaires et primaires d"une relation SnapMirror 7-mode.' 
+---
+= Transition d'une relation SnapMirror
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il est possible de passer d'abord une paire haute disponibilité secondaire, de configurer une relation SnapMirror échelonnée entre les volumes primaires 7-mode et les volumes secondaires clustered Data ONTAP, puis de faire évoluer la paire haute disponibilité principale plus tard. Dans certains cas, vous devez effectuer une transition en parallèle des paires haute disponibilité secondaires et primaires d'une relation SnapMirror 7-mode.
+
+Si tous les volumes primaires appartiennent à une paire HA et que tous les volumes secondaires appartiennent à l'autre paire HA, vous pouvez effectuer une transition à l'aide de la méthode échelonnée.
+
+Si l'une des paires HA a une combinaison de volumes primaires et secondaires, vous devez effectuer une transition à l'aide de la méthode parallèle.
+
+Après avoir effectué la transition des paires haute disponibilité primaires et secondaires, vous devez configurer manuellement la relation de volume SnapMirror dans clustered Data ONTAP après la transition. Pour une resynchronisation réussie, au moins une copie Snapshot commune, créée dans la Data ONTAP 8.1 ou version ultérieure, doit exister entre les volumes primaire et secondaire de la relation SnapMirror.
+
+*Informations connexes*
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.onc-sm-help/GUID-DF04A607-30B0-4B98-99C8-CB065C64E670.html["Gestion du cluster via System Manager"]

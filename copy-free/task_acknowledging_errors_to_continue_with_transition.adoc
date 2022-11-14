@@ -1,0 +1,35 @@
+---
+permalink: copy-free/task_acknowledging_errors_to_continue_with_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, ignorable, errors 
+summary: 'Lors de la transition, vous pouvez constater des erreurs qui bloquent la transition. Vous pouvez ignorer certaines de ces erreurs en accusant de réception des problèmes à l"aide de l"interface de ligne de commandes de l"outil de transition 7-mode. Vous devez relancer l"opération ayant échoué après avoir ignoré l"erreur pour poursuivre la transition.' 
+---
+= Poursuivre la transition si des erreurs ignorables se produisent
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la transition, vous pouvez constater des erreurs qui bloquent la transition. Vous pouvez ignorer certaines de ces erreurs en accusant de réception des problèmes à l'aide de l'interface de ligne de commandes de l'outil de transition 7-mode. Vous devez relancer l'opération ayant échoué après avoir ignoré l'erreur pour poursuivre la transition.
+
+Lorsque vous reconnaissez une erreur, cela signifie que vous avez compris l'impact de ces erreurs et les avez acquittées.
+
+Vous devez relancer l'opération de transition après avoir ignoré l'erreur. Dans certains cas, une fois que vous avez reconnu le problème, Data ONTAP effectue des actions correctives sur les agrégats et volumes concernés lorsque l'opération sera exécutée la prochaine fois.
+
+.Étapes
+. Si l'opération de transition génère des erreurs ignorables, exécutez la commande suivante à partir de l'interface de ligne de commande 7-mode transition Tool :
++
+`*transition cft ignorableerrors add -p _project_name_ -c _ignorable_errorcategory_*`
+
++
+`_ignorable_errorcategory_` est le type d'erreur que vous pouvez ignorer.
+
++
+xref:reference_ignorable_errors_during_transition.adoc[Erreurs Ignorables pendant la transition]
+
+. Exécutez à nouveau l'opération de transition.
++
+L'erreur de blocage se transforme en avertissement et l'erreur s'affiche comme `acknowledged`. Vous pouvez poursuivre la transition avec l'avertissement.
+
+

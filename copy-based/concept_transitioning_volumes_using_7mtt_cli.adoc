@@ -1,0 +1,16 @@
+---
+permalink: copy-based/concept_transitioning_volumes_using_7mtt_cli.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, cli, tool, columes 
+summary: '7-mode transition Tool fournit des commandes qui vous permettent de passer des volumes 7-mode. Si 7-mode transition Tool est installé sur un système Linux, vous devez utiliser l"interface de ligne de commande pour effectuer la transition.' 
+---
+= Transition des volumes à l'aide de l'interface de ligne de commande 7-mode transition Tool
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+7-mode transition Tool fournit des commandes qui vous permettent de passer des volumes 7-mode. Si 7-mode transition Tool est installé sur un système Linux, vous devez utiliser l'interface de ligne de commande pour effectuer la transition.
+
+L'outil collecte les informations relatives au volume et à l'adresse IP du système de stockage 7-mode. Il vérifie la configuration 7-mode et interagit avec le cluster pour appliquer la configuration sur la SVM.

@@ -1,0 +1,37 @@
+---
+permalink: san-host/task_remounting_vmfs_volumes_after_transition_using_vsphere_client.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, remount, vmfs, volumes, vshpere, client 
+summary: 'Après la transition, vous devez reconfigurer les volumes VMFS pour placer vos datastores et vos machines virtuelles \(VM\) à leur état de prétransition. Si vous ne connaissez pas l"interface de ligne de commande ESXi ou si elle est plus pratique dans votre environnement, vous pouvez utiliser vSphere client pour remonter vos volumes.' 
+---
+= Le remontage des volumes VMFS après la transition à l'aide du client vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition, vous devez remonter vos volumes VMFS pour ramener vos datastores et vos machines virtuelles à leur état de prétransition. Si vous ne connaissez pas l'interface de ligne de commande ESXi ou si elle est plus pratique dans votre environnement, vous pouvez utiliser vSphere client pour remonter vos volumes.
+
+Ces étapes s'appliquent aux volumes et aux volumes fractionnés.
+
+.Étapes
+. Connectez-vous à l'hôte ESXi ou au serveur vCenter gérant l'hôte ESXi.
+. Sous *hôtes et clusters*, sélectionnez l'hôte ESXi.
+. Accédez à *Configuration* > *matériel* > *stockage*.
+. Dans le coin supérieur droit, cliquez sur *Ajouter un stockage*.
+. Sélectionnez *disque/LUN*.
+. Cliquez sur *Suivant*.
+. Dans la liste des LUN, recherchez la colonne *VMFS_label* qui affiche le nom du datastore.
+. Sélectionnez la LUN pour terminer l'opération de remontage.
++
+Si vous montez à nouveau un volume VMFS fractionné, la première LUN de la plage est marquée « tête ». Vous devez sélectionner la LUN « tête » pour terminer l'opération de remontage.
+
+. Cliquez sur *Suivant*.
+. Dans la fenêtre Select VMFS Mount Options (Sélectionner les options de montage VMFS), sélectionnez *conserver la signature existante*.
+. Suivez l'assistant.
+. Répétez cette procédure pour toutes les LUN affichant le nom du datastore dans la colonne VMFS_label.
++
+Les datastores sont remontés et les machines virtuelles sont actives.
+
+

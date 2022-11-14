@@ -1,0 +1,63 @@
+---
+permalink: copy-free/task_testing_workloads_and_applications.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, test, workload, application 
+summary: 'Vous devez tester manuellement toutes les charges de travail et applications dans l"environnement de préproduction. Vous pouvez ensuite démarrer la production pendant une courte durée pour évaluer si un retour arrière est nécessaire avant de valider le projet.' 
+---
+= Testez les charges de travail et les applications
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez tester manuellement toutes les charges de travail et applications dans l'environnement de préproduction. Vous pouvez ensuite démarrer la production pendant une courte durée pour évaluer si un retour arrière est nécessaire avant de valider le projet.
+
+Les agrégats transférés doivent disposer d'au moins 5 % d'espace physique disponible.
+
+
+NOTE: Il est recommandé d'avoir au moins 20 % d'espace libre dans les agrégats transférés.
+
+Certaines opérations sont limitées lors de tests préproduction.
+
+xref:concept_restrictions_during_preproduction_testing.adoc[Restrictions lors des tests de préproduction]
+
+.Étapes
+. Connectez les clients aux volumes transférés.
+. Si vous disposez de charges de travail SAN, exécutez les tâches de correction d'hôte post-transition sur les hôtes SAN.
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-sanspl/home.html["Transition et résolution des problèmes liés aux hôtes SAN"]
+
+. Tester toutes les charges de travail et applications qui utilisent les données et configurations migrées.
+. Vérifiez que l'espace occupé par les agrégats transférés n'est pas insuffisant en surveillant l'espace physique disponible dans les agrégats transférés depuis l'onglet agrégats du tableau de bord 7-mode transition Tool.
++
+*Dépannage:* si vous avez un espace insuffisant sur les agrégats transférés, vous pouvez ajouter des disques.
+
++
+.. Connectez-vous au niveau de privilège avancé : +
+`*set -privilege advanced*`
+.. Sélectionnez les disques de spare des tiroirs disque 7-mode et ajoutez des disques pour augmenter l'espace dans les agrégats en transition : +
+`*storage aggregate add-disks -aggregate _aggr_name_ -disklist _disk1_*`
++
+Si les disques de spare 7-mode ne sont pas disponibles, vous pouvez utiliser des disques de spare des tiroirs disque des nœuds du cluster ; cependant, cela complique le processus de restauration.
+
+
+
+
+
+Vous pouvez commencer à transférer les données de production.
+
+[IMPORTANT]
+====
+Vous pouvez rapidement transmettre des données dans l'environnement de production afin de vous assurer que les charges de travail fonctionnent correctement dans un environnement de production et qu'une restauration vers 7-mode n'est pas requise. Vous ne devez pas prolonger cette phase et ne devez pas retarder la validation du projet de transition sans copie pour les raisons suivantes :
+
+* La probabilité de manquer d'espace dans les agrégats transférés augmente à mesure que les nouvelles données sont écrites sur les volumes.
+* Les nouvelles données écrites sur les volumes durant cette étape ne seront pas disponibles pendant la restauration.
+
+
+====
+*Informations connexes*
+
+xref:concept_reverting_a_copy_free_transition_project.adoc[Effectuer une restauration de la transition vers 7-mode]
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr/GUID-5CB10C70-AC11-41C0-8C16-B4D0DF916E9B.html["Commandes ONTAP 9"]

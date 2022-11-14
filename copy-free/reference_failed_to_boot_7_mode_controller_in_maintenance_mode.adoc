@@ -1,0 +1,62 @@
+---
+permalink: copy-free/reference_failed_to_boot_7_mode_controller_in_maintenance_mode.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, failed, boot, controller, maintenance, mode 
+summary: 'L"opération d"exportation et d"arrêt échoue et le message d"erreur : échec du démarrage du contrôleur 7-mode en mode de maintenance. Vous devez arrêter et démarrer manuellement le contrôleur en mode de maintenance et réexécuter l"opération.' 
+---
+= Impossible de démarrer le contrôleur 7-mode en mode de maintenance
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'opération d'exportation et d'arrêt échoue avec le message d'erreur : `Failed to boot the 7-Mode controller in maintenance mode`. Vous devez arrêter et démarrer manuellement le contrôleur en mode de maintenance et réexécuter l'opération.
+
+
+
+== Solution de contournement
+
+. Arrêtez le système de stockage 7-mode :
++
+`*halt -f -t 0*`
+
+. À l'invite DU CHARGEUR, enregistrez les valeurs définies pour le `*bootarg.init.console_muted*` et `*bootarg.init.console_level boot*` paramètres de démarrage :
++
+`*printenv bootarg.init.console_muted*`
+
++
+`*printenv bootarg.init.console_level*`
+
+. Pour désactiver les messages de la console, définissez les paramètres de démarrage suivants :
++
+`*setenv bootarg.init.console_muted "true"*`
+
++
+`*setenv bootarg.init.console_level "-1"*`
+
+. À partir de l'outil de transition 7-mode, exécutez à nouveau l'opération d'exportation et d'arrêt.
+. À partir du système de stockage 7-mode, définissez les paramètres de démarrage sur leurs valeurs d'origine, comme indiqué à l'étape 2 :
++
+|===
+| Si les paramètres de démarrage sont... | Entrez les commandes suivantes... 
+
+
+ a| 
+Non défini précédemment avec une valeur (non défini)
+ a| 
+`*unsetenv bootarg.init.console_muted*`
+
+`*unsetenv bootarg.init.console_level*`
+
+
+
+ a| 
+Définir avec une valeur auparavant
+ a| 
+`*unsetenv bootarg.init.console_muted "_original_value_"*`
+
+`*unsetenv bootarg.init.console_level "_original_value_"*`
+
+|===
+

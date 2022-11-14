@@ -1,0 +1,34 @@
+---
+permalink: snapmirror/task_resuming_a_failed_snapmirror_transfer_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, resume, failed, snapmirror, baseline, transfer, transition 
+summary: 'Pendant cette transition, les transferts de base de SnapMirror peuvent échouer en raison d"un certain nombre de raisons, comme la perte de connectivité réseau, le transfert abandonné ou le basculement du contrôleur. Après correction de la cause de défaillance, vous pouvez reprendre les transferts SnapMirror si un point de contrôle de redémarrage est disponible.' 
+---
+= Reprise d'un transfert de base SnapMirror défectueux
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pendant cette transition, les transferts de base de SnapMirror peuvent échouer en raison d'un certain nombre de raisons, comme la perte de connectivité réseau, le transfert abandonné ou le basculement du contrôleur. Après correction de la cause de défaillance, vous pouvez reprendre les transferts SnapMirror si un point de contrôle de redémarrage est disponible.
+
+Si le point de contrôle de redémarrage du transfert de base n'est pas disponible, vous devez supprimer et recréer le volume, restaurer la relation SnapMirror et initier à nouveau la transition.
+
+.Étapes
+. Dans le cluster destination, utiliser le `snapmirror show` commande avec `-snapshot-checkpoint` paramètre permettant d'afficher l'état du transfert de ligne de base et du point de contrôle de redémarrage.
++
+[listing]
+----
+cluster2::> snapmirror show -destination-path dest_vserver:vol3 -fields snapshot-checkpoint
+source-path          destination-path snapshot-checkpoint
+-------------------- ---------------- -------------------
+src_system:vol3    dest_vserver:vol3 50MB
+----
+. Si le point de contrôle SnapMirror existe, utilisez le `snapmirror initialize` pour reprendre le transfert de base.
++
+[listing]
+----
+cluster2::> snapmirror initialize -destination-path dest_vserver:vol3
+----
+

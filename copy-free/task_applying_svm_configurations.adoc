@@ -1,0 +1,93 @@
+---
+permalink: copy-free/task_applying_svm_configurations.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, apply, svm, configurations 
+summary: 'Vous devez appliquer manuellement certaines configurations avant la phase de provisionnement SVM. Vous pouvez ensuite appliquer toutes les configurations définies dans le contrôleur 7-mode \(fichiers dans le répertoire /etc\) ou au niveau de l"unité vFiler aux SVM mappés à l"aide de l"outil.' 
+---
+= Application des configurations de SVM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez appliquer manuellement certaines configurations avant la phase de provisionnement SVM. Vous pouvez ensuite appliquer toutes les configurations définies dans le contrôleur 7-mode (fichiers du `/etc` Directory) ou au niveau de l'unité vFiler aux SVM mappées à l'aide de l'outil.
+
+Si vous ne souhaitez pas transférer toutes les configurations vers les SVM cibles, vous devez avoir défini les propriétés des configurations à exclure sur les SVM.
+
+xref:task_customizing_configurations_for_transition.adoc[Personnalisation de la transition des configurations 7-mode]
+
+* Les configurations telles que les exportations NFS, les partages CIFS et le mappage de LUN ne sont pas appliquées au SVM lors de la phase de provisionnement du SVM.
+* Les configurations suivantes sont appliquées par l'outil sur les SVM lors de la phase de provisionnement des SVM :
++
+** *Services de noms*
++
+*** Configuration DNS
+*** Configuration LDAP
+*** Configuration NIS
+*** Nommer la configuration du commutateur de service
+*** Configuration d'hôtes
+*** Utilisateurs et groupes UNIX
+*** Configuration netGroups
+
+
+** *Réseau*
++
+*** Les adresses IP 7-mode existantes sélectionnées pour la transition sont créées à l'état administratif descendant.
++
+Lors de la phase d'importation, ces adresses IP sont configurées à l'état administratif.
+
+*** Les nouvelles adresses IP sont créées à l'état de configuration administrative.
+
+
+** *NFS*
++
+Options NFS
+
+** *CIFS*
++
+*** Configuration de data Center privilégiée par CIFS
+*** Configuration du mappage utilisateur
+*** Configuration des liaisons larges
+*** Options CIFS
+*** Vérifiez la configuration de l'audit
+
+
+** *SAN*
++
+Services FC et iSCSI
+
++
+[IMPORTANT]
+====
+Vous ne pouvez pas réexécuter cette opération une fois qu'elle a été terminée avec succès.
+
+Par conséquent, si vous apportez des modifications aux configurations au niveau du contrôleur 7-mode après cette opération, vous devez effectuer manuellement la transition des configurations vers les SVM cibles avant la phase d'exportation. Par exemple, si vous ajoutez une nouvelle unité vFiler au contrôleur 7-mode et que vous la mappez à un SVM après cette opération, vous devez transférer manuellement les configurations de cette unité vFiler vers la SVM mappée. C'est un autre exemple que si vous ajoutez des utilisateurs UNIX sur le contrôleur 7-mode après la phase de provisionnement SVM, vous devez créer ces utilisateurs UNIX manuellement sur les SVM mappés.
+
+====
+
+
+
+
+.Étapes
+. Cliquez sur *appliquer SVM Config* pour appliquer les configurations 7-mode aux SVM cibles.
++
+Un message de confirmation qui répertorie les considérations importantes pour cette opération s'affiche.
+
+. Cliquez sur *Oui* pour continuer.
+. Une fois l'opération terminée, effectuez les opérations suivantes :
++
+.. Cliquez sur *Enregistrer au format CSV* pour enregistrer les résultats de l'opération dans un fichier.
+.. Cliquez sur *Collect Project Logs* pour créer une sauvegarde de tous les fichiers journaux de transition.
++
+Il est recommandé d'enregistrer les fichiers journaux après chaque opération de transition.
+
+.. Cliquez sur *Fermer* pour fermer la fenêtre des résultats de l'opération.
+
+
++
+Si l'opération prend beaucoup de temps, vous pouvez cliquer sur *Exécuter en arrière-plan* pour quitter la fenêtre des résultats de l'opération. Vous ne devez pas modifier le projet ni effectuer d'autres tâches lorsque l'opération est en cours d'exécution en arrière-plan. Vous pouvez ensuite afficher les résultats des opérations à partir de l'onglet Historique des opérations.
+
+. Vérifier et tester manuellement les configurations appliquées aux SVM cibles et effectuer les modifications requises.
+. Vérifiez manuellement la connectivité aux serveurs de noms externes.
+

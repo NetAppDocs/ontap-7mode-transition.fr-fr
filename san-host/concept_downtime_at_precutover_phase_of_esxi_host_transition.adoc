@@ -1,0 +1,18 @@
+---
+permalink: san-host/concept_downtime_at_precutover_phase_of_esxi_host_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, downtime, apply, configurations, precutover, phase, esxi, host 
+summary: 'Vous devez prévoir les temps d"arrêt lors de la phase Apply configuration \(precutover\) lors de la transition d"hôtes ESXi.' 
+---
+= Temps d'arrêt lors de la phase de configuration des applications (mise en service) de transition de l'hôte ESXi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez prévoir les temps d'arrêt lors de la phase de configuration Apply (prémise) lors de la transition des hôtes ESXi.
+
+Après avoir défini les conditions préalables pour les transitions d'hôtes ESXi, vous pouvez utiliser l'outil 7-mode transition Tool (7MTT) pour effectuer la transition de vos LUN depuis Data ONTAP sous 7-mode vers ONTAP. Les hôtes ESXi, les machines virtuelles et les applications peuvent être en ligne jusqu'à la phase de configuration Apply (prétover) de l'outil 7MTT. Toutefois, à la phase de configuration des applications (précontrôle), toutes les applications et tous les systèmes d'exploitation invités doivent être mis hors tension. Si les hôtes ESXi sont démarrés par SAN ou si les LUN de démarrage SAN font partie de la transition, les hôtes ESXi doivent également être mis hors tension à la phase de configuration Apply (prétover).
+
+Si l'hôte n'est pas démarré par le SAN et que vous devez continuer à exécuter votre service sur des LUN de type non-transition ou des LUN de baie non créées par NetApp, vous pouvez choisir de ne pas l'arrêter. Toutefois, si vous ne l'arrêtez pas, vous risquez de connaître la condition de tous les chemins d'accès (APD). Pour éviter ce problème, vous pouvez masquer les Data ONTAP sous 7-mode LUN. Voir la link:https://kb.vmware.com/s/article/1009449["ID de la base de connaissances VMware 1009449"] pour en savoir plus.

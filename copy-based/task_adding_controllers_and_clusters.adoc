@@ -1,0 +1,38 @@
+---
+permalink: copy-based/task_adding_controllers_and_clusters.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, add, controller, clusters 
+summary: 'Avant de démarrer la transition, vous devez ajouter les contrôleurs 7-mode et les clusters nécessaires à la transition. Les contrôleurs 7-mode inclus pour l"évaluation sont ajoutés automatiquement à la migration.' 
+---
+= Ajout de contrôleurs et de clusters
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de démarrer la transition, vous devez ajouter les contrôleurs 7-mode et les clusters nécessaires à la transition. Les contrôleurs 7-mode inclus pour l'évaluation sont ajoutés automatiquement à la migration.
+
+* Les informations relatives au contrôleur 7-mode et au cluster fournies ne sont pas persistantes.
++
+Si le service 7-mode transition Tool est redémarré, cet outil vous demande des informations sur les contrôleurs et les clusters qui font partie de projets actifs. Vous devez fournir le même nom d'hôte que celui que vous avez fourni pour votre système lors de la création du projet.
+
+* Si un contrôleur 7-mode fait partie d'une paire haute disponibilité, l'outil ne demande pas d'informations d'identification du partenaire haute disponibilité du contrôleur 7-mode (sauf si le partenaire de haute disponibilité fait partie d'un autre projet actif).
++
+.. Dans le volet supérieur, cliquez sur *Storage Systems*.
+.. Dans le champ *Hostname*, entrez le nom de domaine complet ou l'adresse IP du contrôleur 7-mode ou du système ONTAP.
++
+Pour un cluster, vous pouvez spécifier l'adresse IP ou le FQDN de l'interface de gestion du cluster. Pour un contrôleur 7-mode, vous devez spécifier l'adresse IP de l'unité vFiler par défaut, car les adresses IP des unités vFiler individuelles ne sont pas acceptées.
+
+
+
+
+
+.Étapes
+. Entrez les informations d'identification de l'administrateur pour l'hôte spécifié, puis cliquez sur *Ajouter*.
++
+Les contrôleurs 7-mode sont ajoutés au tableau « contrôleurs 7-mode » et les clusters sont ajoutés au tableau « systèmes Data ONTAP en cluster ».
+
+. Répétez les étapes 2 et 3 pour ajouter tous les contrôleurs et clusters nécessaires à la transition.
+. Si la colonne État indique que les informations d'identification du système sont manquantes ou que les informations d'identification ont été modifiées par rapport à ce qui a été entré initialement dans l'outil, cliquez sur le bouton image:../media/edit_schedule.gif[""] puis saisissez à nouveau les informations d'identification.
+

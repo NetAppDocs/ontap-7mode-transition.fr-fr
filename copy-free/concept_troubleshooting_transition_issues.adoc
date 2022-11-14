@@ -1,0 +1,14 @@
+---
+permalink: copy-free/concept_troubleshooting_transition_issues.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, troubleshooting, issues 
+summary: 'Vous devez savoir comment résoudre les problèmes avec 7-mode transition Tool et où rechercher les fichiers journaux. Lorsque vous utilisez l"outil 7-mode transition Tool, vous verrez peut-être des messages d"erreur qui identifient le problème et fournissent la solution.' 
+---
+= Résolution des problèmes de transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez savoir comment résoudre les problèmes avec 7-mode transition Tool et où rechercher les fichiers journaux. Lorsque vous utilisez l'outil 7-mode transition Tool, vous verrez peut-être des messages d'erreur qui identifient le problème et fournissent la solution.

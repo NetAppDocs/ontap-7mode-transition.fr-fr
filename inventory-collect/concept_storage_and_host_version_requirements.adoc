@@ -1,0 +1,18 @@
+---
+permalink: inventory-collect/concept_storage_and_host_version_requirements.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, transition, storage, host, fc, switches, version, requirements, inventory, collection 
+summary: 'Vous devez connaître les versions de Data ONTAP 7-mode, des hôtes et des commutateurs FC à partir desquels vous pouvez collecter des données d"inventaire.' 
+---
+= Exigences de version des commutateurs FC, d'hôte et de stockage pour la collecte de l'inventaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les versions de Data ONTAP 7-mode, des hôtes et des commutateurs FC à partir desquels vous pouvez collecter des données d'inventaire.
+
+Pour obtenir la liste des versions 7-mode, des hôtes et des commutateurs FC pris en charge pour l'évaluation par l'outil Inventory Collect Tool, consultez la matrice d'interopérabilité.
+
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]

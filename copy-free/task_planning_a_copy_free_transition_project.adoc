@@ -1,0 +1,16 @@
+---
+permalink: copy-free/task_planning_a_copy_free_transition_project.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, plan, project 
+summary: 'La planification d"un projet de transition sans copie implique la sélection des contrôleurs 7-mode source et des nœuds de cluster cibles, le mappage des volumes 7-mode vers une machine virtuelle de stockage \(SVM\), la sélection des LIF à migrer et l"exécution de contrôles préalables.' 
+---
+= Planifiez un projet de transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La planification d'un projet de transition sans copie implique la sélection des contrôleurs 7-mode source et des nœuds de cluster cibles, le mappage des volumes 7-mode à une machine virtuelle de stockage (SVM), la sélection des LIF à migrer et l'exécution de contrôles préalables.
+
+Vous pouvez créer plusieurs projets avec les mêmes nœuds de paire haute disponibilité de cluster cible. Vous pouvez ensuite exécuter des contrôles préalables et appliquer les configurations SVM à tous ces projets. Cependant, un seul projet peut être dans la fenêtre de section critique à un moment donné. Un projet se trouve dans la fenêtre de section critique si le projet se trouve dans l'une des phases de l'exportation à la validation, ou si une opération de restauration a été lancée pour le projet. Vous pouvez continuer l'opération d'exportation et d'arrêt pour un autre projet uniquement après que l'opération de validation ou de restauration du projet soit terminée dans la fenêtre de la section critique.

@@ -1,0 +1,63 @@
+---
+permalink: copy-based/task_generating_fc_zone_plan.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, generate, fc, zone, plan 
+summary: 'Pour les commutateurs FC, vous devez générer un plan de zone FC dans le rapport d"évaluation de transition afin de configurer les zones pour le regroupement des hôtes et des cibles initiateurs après la migration.' 
+---
+= Génération d'un plan de zone FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour les commutateurs FC, vous devez générer un plan de zone FC dans le rapport d'évaluation de transition afin de configurer les zones pour le regroupement des hôtes et des cibles initiateurs après la migration.
+
+* Le système 7-mode, les hôtes et le cluster doivent être connectés au même commutateur.
++
+xref:concept_supported_configurations_for_generating_an_fc_zone_plan.adoc[Configurations prises en charge pour générer un plan de zone FC]
+
+* Vous devez avoir créé les SVM cible et les LIF FC requis sur le cluster.
+* Les LIFs FC créées sur les SVM cibles possèdent un WWPN, qui est différent des WWPN 7-mode. Par conséquent, effectuez une segmentation FC lors de la transition du SAN pour FCP.
+
+
+.Étapes
+. Dans la section collecte et évaluation, cliquez sur *Ajouter des systèmes*.
+. Dans la fenêtre Ajouter un système, effectuez l'une des opérations suivantes :
++
+** Ajouter un système unique :
++
+... Saisissez le nom de domaine complet ou l'adresse IP du système.
+... Saisissez le nom d'utilisateur et le mot de passe du système spécifié.
+... Sélectionnez le type de système :
++
+**** Systèmes de stockage Data ONTAP
+**** Hôtes : Microsoft Windows, Red Hat Linux Enterprise et VMware ESXi
+**** Commutateurs FC : Cisco et Brocade
+
+
+
+
+** Ajoutez plusieurs systèmes en cliquant sur *Parcourir*, puis en sélectionnant le fichier texte qui contient les informations d'identification pour plusieurs systèmes.
+
+
+. Cliquez sur *Ajouter*.
++
+Si l'état d'évaluation d'un système est prêt, vous pouvez effectuer une évaluation de la transition pour ce système.
+
+. Générer le rapport d'évaluation de transition avec le plan de zone FC :
++
+.. Sélectionner les systèmes, y compris les commutateurs FC requis, pour l'évaluation de la transition.
+.. Cliquez sur *Créer un rapport d'évaluation de transition*.
+.. Dans la boîte de dialogue paire Systems and start FC zone Planner, sélectionnez les systèmes 7-mode (contrôleur unique ou paire HA), le commutateur connecté au cluster et un SVM dans le cluster.
+.. Cliquez sur *FC zonage pour les systèmes jumelés*.
+.. Dans la boîte de dialogue Créer un rapport d'évaluation de transition, sélectionnez la version Data ONTAP du cluster cible.
+.. Spécifiez un préfixe pour le nom de fichier des rapports.
+.. Cliquez sur *générer rapport*.
+
+
+
+
+Le plan de zone FC est généré comme A. `.zip` fichier. Le plan contient les zones créées en fonction des configurations d'un groupe initiateur sur les systèmes 7-mode. Chaque zone contient un WWPN initiateur unique et plusieurs WWPN cibles SVM.
+
+Vous devez utiliser le plan de zone FC pour configurer les zones afin de regrouper les hôtes initiateurs et les cibles pour fournir un accès aux données à partir du cluster.

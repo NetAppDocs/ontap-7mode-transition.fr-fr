@@ -1,0 +1,44 @@
+---
+permalink: copy-free/concept_considerations_for_transitioning_unix_users_and_groups.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, netgroups, unix, users, groups 
+summary: 'La configuration netgroup n"est transférée que si la taille du fichier /etc/netgroup 7-mode est inférieure à 5 Mo. Les utilisateurs et groupes UNIX sont transférés uniquement si le nombre total d"utilisateurs et de groupes UNIX sur la SVM ne dépasse pas les limites des utilisateurs et des groupes de ONTAP.' 
+---
+= Considérations relatives à la transition des groupes réseau et des utilisateurs et groupes UNIX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuration netgroup n'est transférée que si le 7-mode `/etc/netgroup` La taille du fichier est inférieure à 5 Mo. Les utilisateurs et groupes UNIX sont transférés uniquement si le nombre total d'utilisateurs et de groupes UNIX sur la SVM ne dépasse pas les limites des utilisateurs et des groupes de ONTAP.
+
+
+
+== Considérations pour les groupes réseau
+
+Si le `/etc/netgroup` Fichier sous 7-mode supérieur à 5 Mo, la configuration de groupe réseau n'est pas transférée. Vous devez effectuer l'une des actions suivantes pour poursuivre la transition :
+
+* Exclure la transition des groupes réseau.
++
+xref:task_customizing_configurations_for_transition.adoc[Personnalisation de la transition des configurations 7-mode]
+
+* Déplacez la configuration de groupe réseau vers des serveurs NIS ou LDAP avant la transition.
+
+
+
+
+== Considérations relatives aux utilisateurs et aux groupes UNIX
+
+Si le nombre total d'utilisateurs et de groupes qui effectuent la transition UNIX dépasse la limite des utilisateurs et groupes UNIX dans ONTAP, l'outil de transition 7-mode bloque la transition. Vous devez effectuer l'une des actions suivantes pour poursuivre la transition :
+
+* Exclure la transition des utilisateurs et groupes UNIX.
++
+xref:task_customizing_configurations_for_transition.adoc[Personnalisation de la transition des configurations 7-mode]
+
+* Déplacez les utilisateurs et les groupes UNIX vers des serveurs NIS ou LDAP avant la transition.
+
+
+*Informations connexes*
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]

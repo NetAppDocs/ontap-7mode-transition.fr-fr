@@ -1,0 +1,43 @@
+---
+permalink: snapmirror/concept_features_and_volumes_not_supported_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, transition, feature, volumes, supported, snapmirror 
+summary: Vous ne pouvez pas effectuer la transition de certains volumes 7-mode, tels que les volumes traditionnels, et de certaines fonctionnalités 7-mode, telles que les relations SnapMirror synchrones, car certaines fonctionnalités pourraient ne pas être disponibles dans clustered Data ONTAP. 
+---
+= Fonctionnalités et volumes non pris en charge pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous ne pouvez pas effectuer la transition de certains volumes 7-mode, tels que les volumes traditionnels, et de certaines fonctionnalités 7-mode, telles que les relations SnapMirror synchrones, car certaines fonctionnalités pourraient ne pas être disponibles dans clustered Data ONTAP.
+
+Vous pouvez passer un volume 7-mode uniquement à un SVM.
+
+Vous ne pouvez pas effectuer la transition des volumes ou configurations 7-mode suivants :
+
+* Volumes restreints ou hors ligne
+* Volumes traditionnels
+* Volumes avec mappage de caractères NFS-to-CIFS (charmap)
+* Volumes avec configurations Storage-Level Access Guard
+* Les volumes contenant des qtrees avec des configurations Storage-Level Access Guard
++
+Si le cluster cible exécute Data ONTAP 8.3.1 ou une version ultérieure, vous pouvez effectuer le transfert des volumes contenant des qtrees avec cette configuration.
+
+* Des volumes avec le `no_i2p` option activée.
+* Volumes FlexCache
+* Volumes 32 bits et volumes 64 bits dotés de copies Snapshot 32 bits si le cluster de destination exécute Data ONTAP 8.3 ou une version ultérieure
+* Volumes FlexClone
++
+Les volumes FlexClone peuvent être transférés sous forme de volumes FlexVol, mais la hiérarchie de clones et l'efficacité du stockage seront perdues.
+
+* Le volume root d'une unité vFiler, où le volume root est basé sur un qtree appartenant à l'unité vFiler par défaut
+* Configuration SnapMirror synchrone
+* Relations SnapMirror qtree
+* Configurations IPv6
+* Relations SnapVault
+* Compression réseau pour SnapMirror
+* Restauration du volume de destination sur une copie Snapshot spécifique (SnapMirror `break -s` commande)
+* Déplacement de volume
+

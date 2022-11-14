@@ -1,0 +1,61 @@
+---
+permalink: copy-free/task_exporting_7_mode_system_and_hardware_information.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, exporte, storage, configurations, halt 
+summary: 'La fenêtre de mise en service de la transition commence depuis la phase d"exportation. Lors de cette phase, l"outil collecte les informations système, les détails des tiroirs disques et les configurations de stockage des systèmes 7-mode, puis réduit de moitié les systèmes de stockage 7-mode.' 
+---
+= Exportation des configurations de stockage et arrêt des systèmes 7-mode
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fenêtre de mise en service de la transition commence depuis la phase d'exportation. Lors de cette phase, l'outil collecte les informations système, les détails des tiroirs disques et les configurations de stockage des systèmes 7-mode, puis réduit de moitié les systèmes de stockage 7-mode.
+
+* Le processeur de service ou la RLM (Remote LAN module) doit être configuré avec une adresse IPv4 sur le système 7-mode.
+* Tous les clients doivent être déconnectés des systèmes 7-mode (en démontant les exportations NFS, en déconnectant les partages CIFS et en arrêtant les hôtes SAN), mais les services NAS et SAN applicables doivent être exécutés sur les systèmes 7-mode.
++
+
+IMPORTANT: Vous ne devez pas arrêter les services de protocole, car ils sont requis pour collecter les configurations de protocoles des systèmes de stockage 7-mode.
+
+* Toutes les données écrites sur les volumes 7-mode lors de cette opération sont perdues.
+* Vous ne devez pas effectuer d'opérations de gestion sur les systèmes 7-mode pendant cette opération.
+* L'outil effectue les opérations suivantes dans la phase d'exportation :
++
+** Collecte toutes les configurations de volume et de stockage
+** Crée une copie Snapshot de chaque agrégat de transition
++
+Si vous décidez de revenir à 7-mode à n'importe quelle étape de la transition, ces copies Snapshot sont utilisées par l'outil pour l'opération de restauration.
+
+** Démarre les contrôleurs 7-mode en mode de maintenance
+** Supprime les propriétaires de disques des contrôleurs 7-mode
+** Désactive l'affectation automatique des disques sur les nœuds du cluster cible
+
+
+
+
+.Étapes
+. Cliquez sur *Exporter et arrêter*.
++
+Un message qui répertorie les considérations importantes pour cette opération s'affiche.
+
+. Cochez la case *confirmer que l'accès client est déconnecté*.
+. Cliquez sur *Oui* pour continuer l'opération d'exportation et d'arrêt.
++
+Les résultats de l'opération s'affichent.
+
+. Attendre la fin de l'opération et effectuer les étapes suivantes pour enregistrer les résultats de l'opération et recueillir les journaux d'outils :
++
+.. Cliquez sur *Enregistrer au format CSV* pour enregistrer les résultats de l'opération dans un fichier.
+.. Cliquez sur *Collect Tool Logs* pour créer une sauvegarde de tous les fichiers journaux de transition.
++
+Il est recommandé d'enregistrer les fichiers journaux après chaque opération de transition.
+
+.. Cliquez sur *Fermer* pour fermer la fenêtre des résultats de l'opération.
+
+
++
+Si l'opération prend beaucoup de temps, vous pouvez cliquer sur *Exécuter en arrière-plan* pour quitter la fenêtre des résultats de l'opération. Vous ne devez pas modifier le projet ni effectuer d'autres tâches lorsque l'opération est en cours d'exécution en arrière-plan. Vous pouvez ensuite afficher les résultats des opérations à partir de l'onglet Historique des opérations.
+
+

@@ -1,0 +1,53 @@
+---
+permalink: san-host/task_preparing_for_cutover_when_transitioning_solaris_host_sun_volume_manager_data_luns.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, cutover, phase, solaris, host, sun, volume, manager 
+summary: 'Si vous effectuez la transition d"une LUN de données hôte Solaris avec Sun Volume Manager de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez effectuer certaines étapes avant d"entrer dans la phase de mise en service.' 
+---
+= Préparation de la phase de mise en service lors de la transition des LUN de données de l'hôte Solaris Sun Volume Manager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous effectuez la transition d'une LUN de données hôte Solaris avec Sun Volume Manager de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez effectuer certaines étapes avant d'entrer dans la phase de mise en service.
+
+Si vous utilisez une configuration FC, vous devez établir la connectivité et la segmentation sur les nœuds clustered Data ONTAP.
+
+Si vous utilisez une configuration iSCSI, vous devez découvrir et connecter les sessions iSCSI aux nœuds clustered Data ONTAP.
+
+Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+
+Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Export & halt 7-mode dans 7MTT.
+
+. Arrêtez les E/S sur tous les points de montage.
+. Arrêtez chaque application qui accède aux LUN conformément aux recommandations du fournisseur de l'application.
+. Démontez tous les points de montage :
++
+`*umount _mount_point_*`
+
++
+[listing]
+----
+#umount /d1
+#umount /d2
+----
+. Effectuer les opérations suivantes sur le métaet :
++
+`*metaset –s _set-name_ –A disable*`
+
++
+`metaset –s _set-name_ –r`
+
++
+`*metaset –s _set-name_ –P*`
+
++
+[listing]
+----
+metaset -s n_vg -A disable
+metaset -s n_vg -r
+metaset -s n_vg -P
+----
+

@@ -1,0 +1,28 @@
+---
+permalink: copy-based/concept_transition_overview.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, overview 
+summary: 'La transition vers clustered ONTAP implique l"identification de votre environnement actuel, la définition de la phase de transition, la conception de la configuration optimale des systèmes de destination, la planification de la migration des données et des configurations, et les mises à jour environnementales nécessaires.' 
+---
+= Présentation de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La transition vers clustered ONTAP implique l'identification de votre environnement actuel, la définition de la phase de transition, la conception de la configuration optimale des systèmes de destination, la planification de la migration des données et des configurations, et les mises à jour environnementales nécessaires.
+
+N'oubliez pas de consulter la version actuelle de 7-mode transition Tool _Release Notes_ pour obtenir les dernières informations sur les versions cibles prises en charge et les problèmes connus.
+
+link:https://docs.netapp.com/us-en/ontap-7mode-transition/releasenotes.html["Notes de version de l'outil 7-mode transition Tool"^]
+
+Vous devez d'abord collecter des informations sur l'environnement actuel, y compris l'environnement de stockage actuel, ainsi que les hôtes et les applications. Après la collecte de l'inventaire du stockage, vous pouvez évaluer les fonctionnalités actuelles utilisées et identifier les différences dans la version ONTAP sélectionnée. Vous pouvez utiliser l'outil 7-mode transition Tool pour effectuer ces tâches.
+
+Vous pouvez alors définir votre projet de migration. Vous devez pour cela identifier les volumes et les charges de travail à migrer ensemble, puis concevoir votre cluster et planifier votre transition. Vous pouvez commencer à planifier votre migration en sélectionnant d'abord la méthode de migration optimale. Lors de la conception d'un cluster, vous pouvez utiliser les informations collectées sur votre environnement de stockage afin de mapper les éléments de configuration existants à leurs éléments équivalents dans ONTAP. Par exemple, un volume 7-mode doit être mappé sur un SVM, un volume dans ONTAP et une adresse IP qui sera transférée vers les LIF. Vous devez également déterminer si des modifications environnementales doivent être effectuées sur le système ONTAP.
+
+L'implémentation inclut le déploiement et la configuration du cluster, la migration des données, l'application des modifications de configuration, la déconnexion des clients et la reconnexion au système ONTAP de destination, la vérification de l'accès, ainsi que la réalisation des modifications environnementales nécessaires.
+
+*Informations connexes*
+
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]

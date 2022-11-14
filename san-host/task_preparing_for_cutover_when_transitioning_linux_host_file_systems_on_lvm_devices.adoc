@@ -1,0 +1,68 @@
+---
+permalink: san-host/task_preparing_for_cutover_when_transitioning_linux_host_file_systems_on_lvm_devices.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, cutover, phase, host, lvm, device 
+summary: 'Si vous effectuez la transition d"un système de fichiers hôte Linux sur un périphérique Logical Volume Manager \(LVM\), vous devez effectuer certaines étapes avant la phase de mise en service.' 
+---
+= Préparation de la phase de mise en service lors de la transition de systèmes de fichiers hôtes Linux sur des périphériques LVM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous effectuez la transition d'un système de fichiers hôte Linux sur un périphérique LVM (Logical Volume Manager), vous devez effectuer certaines étapes avant la phase de mise en service.
+
+* Pour les configurations FC, vous devez disposer d'une connectivité et d'une segmentation de la structure vers les contrôleurs clustered Data ONTAP.
+* Pour les configurations iSCSI, vos sessions iSCSI doivent être découvertes et connectées à vos contrôleurs clustered Data ONTAP.
+* Vous devez disposer des informations suivantes avant la transition à partir du _Cahier d'évaluation des stocks_ :
++
+** Les noms de périphériques DMMP utilisés par le LVM
+** Nom du groupe de volumes
+** Nom du volume logique
+** Système de fichiers configuré sur le périphérique de volume logique
+** Répertoire sur lequel les volumes logiques sont montés
+
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Export & halt 7-mode dans l'outil 7MTT.
+
+
+.Étapes
+. Arrêtez les E/S aux points de montage du VG.
+. Arrêtez les applications qui accèdent aux LUN en fonction des recommandations du fournisseur de l'application.
+. Démonter le point de montage du VG :
++
+`*umount _dir_name_*`
+
+. Désactiver le volume logique :
++
+`*vgchange -an _vg_name_*`
+
+. Vérifiez l'état du volume logique :
++
+`*lvdisplay _dir_name_*`
+
++
+L'état du VG doit afficher « NON disponible ».
+
+. Exporter le groupe de volumes :
++
+`*vgexport _vg_name_*`
+
+. Vérifier l'état VG :
++
+`*vgdisplay _vg_name_*`
+
++
+L'état VG doit afficher « exporté ».
+
+. Rincez les ID de périphérique DDMP 7-mode :
++
+`*multipath -f _device_name_*`
+
+
+
+*Informations connexes*
+
+xref:task_gathering_pretransition_information_from_inventory_assessment_workbook.adoc[Collecte des informations de pré-transition à partir du manuel d'évaluation de l'inventaire]

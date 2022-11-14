@@ -1,0 +1,24 @@
+---
+permalink: copy-based/concept_collecting_and_assessing_inventory_information.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, collect, assess, inventory, information 
+summary: 'Vous pouvez collecter les informations d"inventaire à partir des contrôleurs, des hôtes et des commutateurs FC. Vous pouvez ensuite évaluer les fonctions et fonctionnalités de ces systèmes et identifier le fonctionnement de ces fonctionnalités dans la version ONTAP sélectionnée pour la transition.' 
+---
+= Collecte et évaluation des informations d'inventaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez collecter les informations d'inventaire à partir des contrôleurs, des hôtes et des commutateurs FC. Vous pouvez ensuite évaluer les fonctions et fonctionnalités de ces systèmes et identifier le fonctionnement de ces fonctionnalités dans la version ONTAP sélectionnée pour la transition.
+
+Vous pouvez recueillir les informations d'inventaire de deux façons :
+
+* Si la sécurité de votre environnement le permet, vous pouvez installer 7-mode transition Tool, puis l'utiliser pour collecter les informations d'inventaire.
+* Vous pouvez importer le rapport XML d'inventaire généré par l'outil de collecte d'inventaire, puis effectuer l'évaluation.
+
+
+Dans les deux cas, vous devez utiliser l'outil de collecte d'inventaire 3.3 pour recueillir l'inventaire.
+
+image::../media/cbt_assessment_workflow.gif[workflow d'évaluation cbt]

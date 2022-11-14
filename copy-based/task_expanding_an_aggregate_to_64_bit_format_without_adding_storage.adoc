@@ -1,0 +1,73 @@
+---
+permalink: copy-based/task_expanding_an_aggregate_to_64_bit_format_without_adding_storage.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, expand, aggregate, 64, bit, format 
+summary: Si votre système contient des agrégats 32 bits, vous devez les étendre au format 64 bits de votre système 7-mode avant de passer à Data ONTAP 8.3 ou versions ultérieures, car ces versions de Data ONTAP ne prennent pas en charge le format 32 bits. 
+---
+= Extension d'un agrégat au format 64 bits
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si votre système contient des agrégats 32 bits, vous devez les étendre au format 64 bits de votre système 7-mode _avant_ la transition vers Data ONTAP 8.3 ou version ultérieure, car ces versions de Data ONTAP ne prennent pas en charge le format 32 bits.
+
+* Si l'agrégat contient des volumes de destination d'une relation SnapMirror avec un volume source de 32 bits, l'agrégat contenant le volume source doit être développé avant d'étendre l'agrégat contenant le volume de destination.
+
+
+Pour les volumes d'une relation SnapMirror, le volume de destination hérite du format du volume source pendant que le miroir est intact. Si l'agrégat que vous développez contient un volume de destination dont la source est un volume de 32 bits et que vous brisez le miroir avant d'étendre l'agrégat, le volume de destination est étendu au format 64 bits. Cependant, si vous rétablissez le miroir et que le volume source est toujours de 32 bits, le volume de destination revient au format 32 bits. C'est pour cette raison que vous devez développer l'agrégat contenant le volume source avant de rétablir la relation SnapMirror si vous souhaitez étendre l'ensemble des volumes 32 bits de l'agrégat au format 64 bits.
+
+.Étapes
+. Entrer en mode de privilège avancé :
++
+`*priv set advanced*`
+
+. Lancez l'extension :
++
+`*aggr 64bit-upgrade start _aggr_name_*`
+
+. Effectuez l'action appropriée :
++
+|===
+| Si la commande... | Alors... 
+
+
+ a| 
+Initialisation réussie
+ a| 
+Passez à l'étape suivante.
+
+
+
+ a| 
+Indique qu'un ou plusieurs volumes n'ont pas pu être étendus parce qu'ils n'avaient pas assez d'espace
+ a| 
+Relancez la commande en ajoutant le `grow-all` option.
+
+
+
+ a| 
+Indique que l'extension n'a pas pu être terminée pour une autre raison
+ a| 
+Effectuez l'action appropriée en fonction du problème décrit dans le message d'erreur.
+
+|===
+. Afficher l'état de l'extension :
++
+`*aggr 64bit-upgrade status _aggr_name_*`
+
++
+L'état actuel de l'extension s'affiche. Lorsque le message indique qu'aucune mise à niveau n'est en cours, l'extension est terminée.
+
+. Vérifier que tous les volumes de l'agrégat sont au format 64 bits :
++
+`*aggr 64bit-upgrade status _aggr_name_ -all*`
+
+. Revenir en mode de privilège administratif :
++
+`*priv set admin*`
+
+
+
+L'agrégat est étendu au format 64 bits. Cependant, même si tous les volumes sont étendus, il peut conserver certaines copies Snapshot 32 bits. La présence de copies Snapshot 32 bits dans les volumes source empêche la mise à niveau ou la transition vers Data ONTAP 8.3 ou version ultérieure.

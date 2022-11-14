@@ -1,0 +1,36 @@
+---
+permalink: copy-free/task_verifying_readiness_for_cutover.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, verify, cutover, ready, systems 
+summary: 'Avant de déconnecter l"accès client, vous pouvez vérifier l"état de préparation du système 7-mode pour la mise en service du stockage. Vous pouvez par exemple vérifier si le processeur de service ou la carte RLM est configuré sur le système 7-mode et si les tiroirs disques, les agrégats et les volumes sont prêts pour la transition. Vous pouvez corriger manuellement tout problème avant l"opération d"exportation, ce qui réduit le temps d"arrêt.' 
+---
+= Vérifier que les systèmes 7-mode sont prêts pour la mise en service
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de déconnecter l'accès client, vous pouvez vérifier l'état de préparation du système 7-mode pour la mise en service du stockage. Vous pouvez par exemple vérifier si le processeur de service ou la carte RLM est configuré sur le système 7-mode et si les tiroirs disques, les agrégats et les volumes sont prêts pour la transition. Vous pouvez corriger manuellement tout problème avant l'opération d'exportation, ce qui réduit le temps d'arrêt.
+
+Vous pouvez exécuter cette opération plusieurs fois avant le lancement de l'opération d'exportation et d'arrêt.
+
+.Étapes
+. Cliquez sur *Check Readiness* pour vérifier que les systèmes 7-mode sont prêts pour la mise en service.
++
+Bien que cette opération soit facultative, il est préférable de vérifier le niveau de préparation des systèmes et de corriger les problèmes avant l'exportation afin de réduire la fenêtre de mise en service du stockage.
+
+. Attendez que l'opération soit terminée et procédez comme suit :
++
+.. Cliquez sur *Enregistrer au format CSV* pour enregistrer les résultats de l'opération dans un fichier.
+.. Cliquez sur *Collect Tool Logs* pour effectuer une sauvegarde de tous les fichiers journaux de transition.
++
+Il est recommandé d'enregistrer les fichiers journaux après chaque opération de transition.
+
+.. Cliquez sur *Fermer* pour fermer la fenêtre des résultats de l'opération.
+
+
++
+Si l'opération prend beaucoup de temps, vous pouvez cliquer sur *Exécuter en arrière-plan* pour quitter la fenêtre des résultats de l'opération. Vous ne devez pas modifier le projet ni effectuer d'autres tâches lorsque l'opération est en cours d'exécution en arrière-plan. Vous pouvez ensuite afficher les résultats des opérations à partir de l'onglet Historique des opérations.
+
+

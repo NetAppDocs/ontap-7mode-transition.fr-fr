@@ -1,0 +1,29 @@
+---
+permalink: san-host/concept_rolling_back_luns_to_7_mode_after_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, rolling, lun, 7, mode 
+summary: 'Si vous n"êtes pas satisfait des performances de vos LUN clustered Data ONTAP, vous pouvez restaurer de clustered Data ONTAP vers Data ONTAP sous 7-mode, pour les transitions sans copie \(CFT\). La restauration n"est pas prise en charge pour les transitions basées sur la copie \(CBT\). La restauration n"est prise en charge que sur certains hôtes.' 
+---
+= Retour des LUN à 7-mode après la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous n'êtes pas satisfait des performances de vos LUN clustered Data ONTAP, vous pouvez restaurer de clustered Data ONTAP vers Data ONTAP sous 7-mode, pour des transitions sans copie. La restauration n'est pas prise en charge pour les transitions basées sur la copie. La restauration n'est prise en charge que sur certains hôtes.
+
+Vous pouvez à tout moment restaurer vos données de clustered Data ONTAP vers Data ONTAP sous 7-mode avant de cliquer *commit* dans l'outil 7-mode transition Tool (7MTT). Après avoir cliqué sur *commit*, vous ne pouvez pas restaurer.
+
+Les hôtes suivants prennent en charge la restauration :
+
+* Répertoires de base
+* Red Hat Enterprise Linux (RHEL)
+* VMware ESXi
+
+
+Les hôtes suivants ne prennent pas en charge la restauration :
+
+* HP-UX
+* AIX
+

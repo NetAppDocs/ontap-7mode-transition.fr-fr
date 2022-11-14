@@ -1,0 +1,35 @@
+---
+permalink: copy-based/task_completing_chain_of_custody_verification.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, complete, chain, custody, verification 
+summary: 'Si un ou plusieurs volumes SnapLock sont sélectionnés pour la vérification de la chaîne de contrôle, vous devez exécuter l"opération de chaîne de garde pour générer un rapport de chaîne de garde.' 
+---
+= Effectuer la vérification de la chaîne de garde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si un ou plusieurs volumes SnapLock sont sélectionnés pour la vérification de la chaîne de contrôle, vous devez exécuter l'opération de chaîne de garde pour générer un rapport de chaîne de garde.
+
+Vous devez avoir terminé la transition du projet.
+
+L'opération de chaîne de garde SnapLock est prise en charge pour les volumes dont les fichiers ont des noms de fichier avec uniquement des caractères ASCII.
+
+. Dans le tableau de bord de migration, cliquez sur *Start Chain of garde*.
++
+Pour conserver les volumes SnapLock 7-mode en ligne après la vérification de la chaîne de contrôle, décochez la case *prendre les volumes SnapLock 7-mode sélectionnés pour la vérification de la chaîne de garde hors ligne une fois l'opération de vérification de la chaîne de garde terminée*.
+
+. Cliquez sur *Continuer*.
++
+L'opération de vérification de la chaîne de garde est lancée. Cette opération peut prendre un certain temps sur la base du nombre de fichiers sur les volumes SnapLock. Vous pouvez cliquer sur *Exécuter en arrière-plan* pour effectuer l'opération en arrière-plan.
+
++
+Vous pouvez suivre la progression de l'opération de vérification de la chaîne de garde en cliquant sur l'onglet chaîne de garde SnapLock dans la fenêtre Tableau de bord de migration. Cet onglet affiche la progression par volume de l'opération de chaîne de garde.
+
+. Une fois l'opération de la chaîne de garde terminée, cliquez sur *Télécharger le rapport* dans l'onglet chaîne de garde de SnapLock pour télécharger le rapport de vérification de la chaîne de garde.
++
+Le rapport de vérification de la chaîne de garde contient des détails sur la réussite de la vérification de la chaîne de garde d'SnapLock. Le rapport présente le nombre total de fichiers et le nombre de fichiers non WORM pour chacun des volumes SnapLock 7-mode sélectionnés pour l'opération de chaîne de garde. Vous pouvez également vérifier le nombre de fichiers pour lesquels les empreintes ont été comparées. Le rapport indique également le nombre de fichiers WORM pour lesquels la vérification de la chaîne de garde a échoué et la raison de l'échec.
+
+

@@ -1,0 +1,104 @@
+---
+permalink: copy-free/task_running_manual_steps_for_rolling_back_transition.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, manual, roll, back 
+summary: 'Vous devez effectuer quelques étapes manuelles sur le cluster et les systèmes 7-mode si vous décidez de restaurer la transition. La liste des étapes de restauration manuelle est générée par l"outil de transition 7-mode.' 
+---
+= Annulation manuelle de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez effectuer quelques étapes manuelles sur le cluster et les systèmes 7-mode si vous décidez de restaurer la transition. La liste des étapes de restauration manuelle est générée par l'outil de transition 7-mode.
+
+Les étapes de restauration varient en fonction de l'étape à laquelle vous décidez de revenir en arrière. Vous devez effectuer toutes les étapes de cette tâche si vous décidez de revenir en arrière après une opération d'importation réussie. Si vous décidez de revenir en arrière à une étape précédente, vous devez effectuer un sous-ensemble de ces étapes.
+
+.Étapes
+. Connectez-vous au cluster.
+. Si un volume transféré fait partie d'une relation SnapMirror, choisissez l'une des actions suivantes :
++
+** Si un volume migré correspond à la destination d'une relation SnapMirror, supprimez la relation SnapMirror : +
+`*snapmirror delete -destination-path _destination-path_ -source-path _source-path_*`
+** Si un volume transféré est la source d'une relation SnapMirror, relâcher la relation SnapMirror :
+`*snapmirror release -destination-path destination-path -source-path source-path*`
+
+
+. Depuis le cluster, vérifiez que les opérations suivantes ne sont pas exécutées sur les volumes transférés :
++
+.. Opération de déplacement de volume : +
+`*volume move show*`
+.. Opération de déplacement de LUN : +
+`*lun move show*`
+.. Opération de copie LUN : +
+`*lun copy show*`
+
+
+. Effectuer la restauration de tous les agrégats 7-mode :
++
+.. Connectez-vous au niveau de privilège de diagnostic : +
+`*set -privilege diagnostic*`
+.. Restaurez l'état des agrégats 7-mode à l'aide de `storage transition revert start` commande.
++
+Cette commande nécessite des paramètres supplémentaires, tels que l'ID de projet de transition et les attributs d'agrégat. Vous devez utiliser la commande Complete avec les paramètres et leurs valeurs générés par l'outil de transition 7-mode.
+
+.. Vérifier que la restauration a réussi pour tous les agrégats transférés : +
+`*storage transition revert show-status*`
++
+Le `status-code` les champs d'un agrégat sont affichés en tant que `revert_complete` une fois le retour arrière réussi.
+
+
+
+. Réaffectez les propriétaires de disques des nœuds de cluster cibles aux contrôleurs 7-mode :
++
+.. Attribuez la propriété du disque aux contrôleurs 7-mode : +
+`*disk assign –disk _disk_id_ –s _system_id_ -force true*`
+.. Vérifiez que la propriété du disque est attribuée aux contrôleurs 7-mode :
++
+`*storage disk show -fields owner-id*`
+
+
+
+. Supprimez les LIFs 7-mode des SVM :
++
+`*network interface delete -vserver _svm_name_ -lif _lif_name_*`
+
+. Supprimez les restrictions de transition sans copie sur les nœuds du cluster cible du niveau de privilège de diagnostic :
++
+`*storage transition pre-commit end -session-id _transition_project_id_*`
+
++
+Vous pouvez également effectuer cette étape une fois l'opération de restauration terminée et que les contrôleurs 7-mode sont opérationnels.
+
+. Supprimez les informations de projet de transition sur les nœuds du cluster cible à l'aide de la commande de niveau de privilège de diagnostic suivant :
++
+`*storage transition purge-info -session-id _transition_project_id_*`
+
++
+Vous pouvez également effectuer cette étape une fois l'opération de restauration terminée et que les contrôleurs 7-mode sont opérationnels.
+
+. Si l'autopropriété des disques était désactivée sur les nœuds du cluster lors de l'opération d'exportation et d'arrêt, activez-la :
++
+`*storage disk assign -auto true*`
+
+. Supprimer manuellement toutes les configurations dont l'outil a été mis à niveau vers les SVM cibles.
++
+Vous pouvez consulter les résultats des opérations de provisionnement et d'importation des SVM pour plus d'informations sur les configurations migrées par l'outil.
+
+. Retirez les tiroirs disques des nœuds de cluster cibles, puis reconnectez-les aux contrôleurs 7-mode.
++
+
+TIP: Vous devez utiliser l'outil Config Advisor pour vérifier le câblage.
+
+. Si des ID de tiroir disque 7-mode ont été modifiés pour résoudre les conflits avec les ID de tiroir disque des nœuds du cluster cible, remplacez manuellement les anciens ID et mettez les tiroirs disques sous tension afin que les nouveaux ID prennent effet.
+. Démarrer les contrôleurs 7-mode source en mode normal.
+. Depuis l'un des contrôleurs 7-mode source, activez la fonctionnalité de basculement :
++
+`*cf enable*`
+
+. Si la suppression automatique des copies Snapshot de l'agrégat a été désactivée lors de l'exportation et de l'arrêt, activez-la :
++
+`*options snap autodelete _aggr_name_ on*`
+
+

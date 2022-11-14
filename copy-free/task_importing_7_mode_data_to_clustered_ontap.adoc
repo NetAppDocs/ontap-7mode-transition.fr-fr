@@ -1,0 +1,66 @@
+---
+permalink: copy-free/task_importing_7_mode_data_to_clustered_ontap.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, import, data 
+summary: 'Après avoir vérifié le câblage et résolu les problèmes, vous pouvez exécuter l"opération d"importation. Lors de cette phase, la propriété des disques est attribuée aux nœuds de cluster mappés, et les agrégats 7-mode, les volumes et les LUN sont convertis au format ONTAP. Toutes les configurations au niveau des volumes et des LUN sont également appliquées.' 
+---
+= Importation des données 7-mode vers ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir vérifié le câblage et résolu les problèmes, vous pouvez exécuter l'opération d'importation. Lors de cette phase, la propriété des disques est attribuée aux nœuds de cluster mappés, et les agrégats 7-mode, les volumes et les LUN sont convertis au format ONTAP. Toutes les configurations au niveau des volumes et des LUN sont également appliquées.
+
+Les opérations suivantes sont effectuées par l'outil au cours de cette phase :
+
+* Les disques 7-mode sont affectés aux nœuds de cluster cibles mappés.
+* Tous les agrégats, volumes et LUN 7-mode sont convertis au format ONTAP.
+* Les adresses IP 7-mode sélectionnées pour la transition sont configurées sur les SVM en état administratif.
+* Les configurations suivantes sont appliquées :
++
+** Règles d'exportation NFS
+** Partages CIFS
+** Configuration des listes de contrôle d'accès CIFS
+** Configuration des home directories CIFS
+** Liens symboliques CIFS
+** Configuration de quota
+** Planifications de copies Snapshot
+** Mappages de LUN et igroups
+
+
+
+
+.Étapes
+. Cliquez sur *Importer*.
++
+*Dépannage:* si un agrégat contient des disques manquants, l'agrégat devient dégradé et l'opération d'importation échoue. Si le nombre de disques manquants se situe dans une limite autorisée, vous pouvez poursuivre la transition avec les agrégats dégradés en exécutant la commande suivante à partir de l'interface de ligne de commandes de l'outil 7-mode transition :
+
++
+`*transition cft aggregate degraded-transition -p _project-name_ -n _7-mode-host-name_ -a _7-mode-aggregate-name_ -i acknowledge*`
+
++
+Vous pouvez ensuite réexécuter l'opération de vérification du câblage et poursuivre la transition. Veillez à ce que le nœud de cluster cible dispose de suffisamment de disques de spare pour reconstruire ces groupes RAID après la transition des agrégats.
+
++
+Un message d'avertissement s'affiche, répertoriant les éléments importants à prendre en compte pour cette opération.
+
+. Cliquez sur *Oui* pour continuer.
++
+Les résultats de l'opération s'affichent.
+
+. Attendez que l'opération soit terminée et procédez comme suit :
++
+.. Cliquez sur *Enregistrer au format CSV* pour enregistrer les résultats de l'opération dans un fichier.
+.. Cliquez sur *Collect Tool Logs* pour effectuer une sauvegarde de tous les fichiers journaux de transition.
++
+Il est recommandé d'enregistrer les fichiers journaux après chaque opération de transition.
+
+.. Cliquez sur *Fermer* pour fermer la fenêtre des résultats de l'opération.
+
+
++
+Si l'opération prend beaucoup de temps, vous pouvez cliquer sur *Exécuter en arrière-plan* pour quitter la fenêtre des résultats de l'opération. Vous ne devez pas modifier le projet ni effectuer d'autres tâches lorsque l'opération est en cours d'exécution en arrière-plan. Vous pouvez ensuite afficher les résultats des opérations à partir de l'onglet Historique des opérations.
+
+

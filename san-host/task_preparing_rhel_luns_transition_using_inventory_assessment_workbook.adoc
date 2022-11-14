@@ -1,0 +1,59 @@
+---
+permalink: san-host/task_preparing_rhel_luns_transition_using_inventory_assessment_workbook.html 
+sidebar: sidebar 
+keywords: rhel, lun, mount, points, dmmp, device, names, inventory, assessment, workbook 
+summary: 'Avant la transition d"un LUN avec un point de montage utilisant un nom de périphérique DMMP, vous devez remplacer le nom du périphérique DMMP par son numéro d"UUID de système de fichiers respectif. Cela s"applique à Red Hat Enterprise Linux \(RHEL\) 5 et RHEL 6.' 
+---
+= Préparation des LUN RHEL avec des points de montage à l'aide des noms de périphériques DMMP pour la transition à l'aide du manuel d'évaluation des stocks
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant la transition d'un LUN avec un point de montage utilisant un nom de périphérique DMMP, vous devez remplacer le nom du périphérique DMMP par son numéro d'UUID de système de fichiers respectif. Cela s'applique à Red Hat Enterprise Linux (RHEL) 5 et RHEL 6.
+
+Cette procédure s'applique aux transitions basées sur la copie et aux transitions sans copie.
+
+.Étapes
+. Recueillir les informations de pré-transition à partir du _Cahier d'évaluation des stocks_.
++
+Vous avez particulièrement besoin des informations suivantes :
+
++
+** Système de fichiers configuré sur le périphérique DMMP
+** Répertoire sur lequel le périphérique DMMP est monté
+** UUID du système de fichiers pour le périphérique DMMP
+
+
+
+
+.Étapes
+. Vérifiez que les points de montage du périphérique DMMP sont définis dans le fichier `/etc/fstab `.
+. Créez une sauvegarde du fichier :
++
+`*cp /etc/fstab /etc/fstab_pre_transition*`
+
+. Modifiez le `/etc/fstab` Fichier pour remplacer le nom du périphérique DMMP par son numéro d'UUID de système de fichiers respectif.
++
+Dans l'exemple suivant, le périphérique DMMP /dev/mapper/360a9800037534562572b453855496b41 est remplacé par l'UUID a073547e-00b6-4bf9-8e08-5eef08499a9c :
+
++
+[listing]
+----
+[root@IBMx3550M3-229-169 ~]# cat /etc/fstab
+/dev/VolGroup00/LogVol00 /  ext3  defaults   1 1
+LABEL=/boot /boot  ext3     defaults         1 2
+tmpfs  /dev/shm    tmpfs    defaults         0 0
+devpts /dev/pts    devpts   gid=5, mode=620  0 0
+sysfs  /sys	       sysfs           defaults  0 0
+proc   /proc       proc           defaults   0 0
+/dev/VolGroup00/LogVol01 swap	swap  defaults 0 0
+/dev/mapper/test_vg-test_lv /mnt/lvm_ext3 ext3 defaults,_netdev 0 0
+UUID=a073547e-00b6-4bf9-8e08-5eef08499a9c /mnt/dmmp_ext3 ext3 defaults,_netdev 0 0
+----
+
+
+*Informations connexes*
+
+xref:task_gathering_pretransition_information_from_inventory_assessment_workbook.adoc[Collecte des informations de pré-transition à partir du manuel d'évaluation de l'inventaire]

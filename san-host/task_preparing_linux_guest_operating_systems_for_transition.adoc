@@ -1,0 +1,132 @@
+---
+permalink: san-host/task_preparing_linux_guest_operating_systems_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, linux, operating, system 
+summary: 'Si des LUN 7-mode sont mappées en tant que RDM \(PTRDM\) compatible physique sur des machines virtuelles Linux \(VM\) pour le périphérique d"amorçage, vous devez effectuer certaines étapes pour préparer vos machines virtuelles Linux à la transition.' 
+---
+= Préparation des systèmes d'exploitation clients Linux en vue de leur transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si des LUN 7-mode sont mappées en tant que RDM (PTRDM) compatible physique sur des machines virtuelles Linux pour le périphérique de démarrage, vous devez effectuer les étapes nécessaires pour préparer vos machines virtuelles Linux à la transition.
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+
+
+.Étapes
+. Obtenir les numéros de série du périphérique SCSI :
++
+`*cat /boot/grub/menu.lst*`
+
++
+Dans l'exemple suivant, 360a9800032466879362b45777447462d-part2 et 360a9800032466879362b45777447462d-part1 sont des numéros de périphérique SCSI :
+
++
+[listing]
+----
+# cat /boot/grub/menu.lst
+...
+kernel /boot/vmlinuz-3.0.13-0.27-default root=/dev/disk/by-id/scsi-
+360a9800032466879362b45777447462d-part2 resume=/dev/disk/by-id/scsi-
+360a9800032466879362b45777447462d-part1
+----
+. Déterminez le mappage entre les numéros de série du périphérique SCSI et les périphériques/partitions SCSI :
++
+`*# ls -l /dev/disk/by-id*`
+
++
+L'exemple suivant montre comment le mappage de relations est affiché. Le `SCSI devices/partitions` sont affichés après le `SCSI device/partition serial numbers`. Dans cet exemple, `../../sda, ../../sda1, and ../../sda2` Les périphériques/partitions SCSI sont-ils.
+
++
+[listing]
+----
+lrwxrwxrwx 1 root root 9 Oct 27 06:54 scsi-360a9800032466879362b45777447462d -> ../../sda
+   lrwxrwxrwx 1 root root 10 Oct 27 05:09 scsi-360a9800032466879362b45777447462d-part1 -> ../../sda1
+   lrwxrwxrwx 1 root root 10 Oct 27 02:21 scsi-360a9800032466879362b45777447462d-part2 -> ../../sda2
+----
+. Déterminez le mappage entre les chemins de périphérique SCSI et les UUID :
++
+`*ls -l /dev/disk/by-uuid*`
+
++
+L'exemple suivant montre comment le mappage de relations est affiché. Dans cet exemple, `33d43a8b-cfae-4ac4-9355-36b479cfa524` Est l'UUID du périphérique/partition SCSI sda2`, `603e01f8-7873-440a-9182-878abff17143` Est l'UUID du périphérique/partition SCSI sdb, et `c50b757b-0817-4c19-8291-0d14938f7f0f` Est l'UUID du périphérique/partition SCSI sda1.
+
++
+[listing]
+----
+ lrwxrwxrwx 1 root root 10 Oct 27 02:21 33d43a8b-cfae-4ac4-9355-36b479cfa524 -> ../../sda2
+   lrwxrwxrwx 1 root root 9 Oct 27 06:54 603e01f8-7873-440a-9182-878abff17143 -> ../../sdb
+   lrwxrwxrwx 1 root root 10 Oct 27 05:09 c50b757b-0817-4c19-8291-0d14938f7f0f -> ../../sda1
+----
+. Utilisez l'UUID pour mettre à jour la référence de périphérique dans le démarrage grub `menu.lst` Fichier en le faisant correspondre au chemin d'accès du périphérique SCSI et au numéro de série SCSI.
++
+[listing]
+----
+#blkid
+/dev/sda1: UUID="c50b757b-0817-4c19-8291-0d14938f7f0f" TYPE="swap"
+/dev/sda2: UUID="33d43a8b-cfae-4ac4-9355-36b479cfa524" TYPE="ext3"
+/dev/sdb: UUID="603e01f8-7873-440a-9182-878abff17143" SEC_TYPE="ext2" TYPE="ext3"
+----
+. Utilisez l'UUID que vous venez de récupérer pour mettre à jour la référence de périphérique dans l'amorçage grub `menu.lst` fichier.
++
+L'exemple suivant montre le `menu.lst` fichier après sa mise à jour :
+
++
+[listing]
+----
+# Modified by YaST2. Last modification on Fri Oct 17 02:08:40 EDT 2014
+default 0
+timeout 8
+##YaST - generic_mbr
+gfxmenu (hd0,1)/boot/message
+##YaST - activate
+###Don't change this comment - YaST2 identifier: Original name: linux###
+title SUSE Linux Enterprise Server 11 SP2 - 3.0.13-0.27
+root (hd0,1)
+kernel /boot/vmlinuz-3.0.13-0.27-default root=/dev/disk/by-uuid/e5127cdf-8b30-
+418e-b0b2-35727161ef41 resume=/dev/disk/by-uuid/d9133964-d2d1-4e29-b064-7316c5ca5566
+splash=silent crashkernel=128M-:64M showopts vga=0x314
+initrd /boot/initrd-3.0.13-0.27-default
+----
+. Mettez à jour le `/etc/fstab` fichier :
++
+.. Utilisez l'UUID que vous venez de récupérer pour mettre à jour la référence de périphérique dans `/etc/fstab` fichier.
++
+L'exemple suivant montre un `/etc/fstab` Fichier avec un numéro de série SCSI :
+
++
+[listing]
+----
+/dev/disk/by-id/scsi-360a9800032466879362b45777447462d-part1 swap swap
+defaults 0 0
+/dev/disk/by-id/scsi-360a9800032466879362b45777447462d-part2 / ext3
+acl,user_xattr 1 1
+proc /proc proc defaults 0 0
+sysfs /sys sysfs noauto 0 0
+debugfs /sys/kernel/debug debugfs noauto 0 0
+devpts /dev/pts devpts mode=0620,gid=5 0 0
+----
+.. Remplacez la référence au numéro de série SCSI par l'UUID.
++
+L'exemple suivant montre un `/etc/fstab` Fichier mis à jour pour remplacer le numéro de série SCSI par l'UUID :
+
++
+[listing]
+----
+cat /etc/fstab
+UUID="c50b757b-0817-4c19-8291-0d14938f7f0f swap swap defaults
+0 0
+UUID="33d43a8b-cfae-4ac4-9355-36b479cfa524 / ext3 acl,user_xattr
+1 1
+proc /proc proc defaults 0 0
+sysfs /sys sysfs noauto 0 0
+debugfs /sys/kernel/debug debugfs noauto 0 0
+devpts /dev/pts devpts mode=0620,gid=5 0 0
+----
+
+
+

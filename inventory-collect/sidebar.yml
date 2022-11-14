@@ -1,0 +1,29 @@
+---
+section: inventory-collect
+title: Guide de collecte des informations sur les hôtes et le stockage
+url: "/inventory-collect/index.html"
+entries:
+- title: Collecte des informations d'inventaire du stockage et des hôtes
+  url: "/inventory-collect/concept_collecting_host_and_storage_inventory_information_for_transition_assessment.html"
+  entries:
+  - title: Versions cibles de ONTAP prises en charge par 7-mode transition Tool
+    url: "/inventory-collect/concept_ontap_target_releases_supported_by_7mtt.html"
+  - title: Configuration système requise pour l'exécution de l'outil de collecte d'inventaire
+    url: "/inventory-collect/concept_system_requirements_for_running_ict.html"
+  - title: Exigences de version des commutateurs FC, d'hôte et de stockage pour la
+      collecte de l'inventaire
+    url: "/inventory-collect/concept_storage_and_host_version_requirements.html"
+  - title: Préparation des systèmes 7-mode et des hôtes pour la collecte des inventaires
+    url: "/inventory-collect/task_preparing_7_mode_systems_for_inventory_collection.html"
+  - title: Configurations prises en charge pour générer un plan de zone FC
+    url: "/inventory-collect/concept_supported_configurations_for_generating_an_fc_zone_plan.html"
+  - title: Syntaxe et options
+    url: "/inventory-collect/reference_syntax_and_options.html"
+  - title: Collecte du stock et génération du rapport d'inventaire
+    url: "/inventory-collect/task_collecting_inventory_and_generating_inventory_report.html"
+  - title: Génération du plan de zone FC
+    url: "/inventory-collect/task_generating_fc_zone_plan.html"
+  - title: Commandes de collecte et d'évaluation
+    url: "/inventory-collect/reference_collection_and_assessment_commands.html"
+  - title: Où trouver des informations sur l'évaluation de la transition
+    url: "/inventory-collect/concept_where_to_find_information_about_transition_assessment.html"

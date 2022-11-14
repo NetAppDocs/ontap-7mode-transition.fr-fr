@@ -1,0 +1,59 @@
+---
+permalink: copy-based/concept_considerations_for_using_snapmirror_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, snapmirror 
+summary: Vous pouvez créer des planifications de copies de données et personnaliser les transferts de données SnapMirror pour les opérations de transition sans affecter les opérations SnapMirror ou SnapVault 7-mode existantes à 7-mode. 
+---
+= Considérations relatives à l'utilisation de SnapMirror pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez créer des planifications de copies de données et personnaliser les transferts de données SnapMirror pour les opérations de transition sans affecter les opérations SnapMirror ou SnapVault 7-mode existantes à 7-mode.
+
+
+
+== Nombre maximal de transferts SnapMirror simultanés
+
+Au cours de la transition, le nombre maximum de transferts SnapMirror simultanés pris en charge sur les systèmes 7-mode et ONTAP dépend du nombre d'opérations de réplication SnapMirror volume autorisées pour un modèle de système de stockage spécifique.
+
+Pour plus d'informations sur le nombre maximal de transferts SnapMirror de volumes simultanés pour votre modèle de système, consultez le link:https://library.netapp.com/ecm/ecm_get_file/ECMP1635994["Guide Data ONTAP de protection, de sauvegarde en ligne et de restauration pour la version 7-mode"].
+
+
+
+== Planifications de copies de données
+
+* Le nombre de transferts SnapMirror simultanés utilisés par l'outil pour exécuter les opérations SnapMirror (de base, mise à jour ou resynchronisation) est basé sur les plannings que vous configurez lors de la création du projet.
+* Si différents projets effectuent la transition de volumes depuis le même contrôleur 7-mode, vous devez vous assurer que la planification des copies de données ne se superpose pas aux différents projets.
+* Vous pouvez vous assurer que les opérations de sauvegarde et de reprise après incident existantes ne sont pas affectées par la transition Tool 7-mode de l'une des manières suivantes :
++
+** Vous devez créer des planifications de copies de données SnapMirror pour un projet de sorte qu'elles ne se chevauchent pas avec les planifications SnapMirror ou SnapVault 7-mode existantes.
+** Vous devez configurer le nombre de transferts SnapMirror simultanés pour qu'ils s'exécutent de façon à ce que les planifications SnapMirror ou SnapVault 7-mode existantes ne échouent pas.
++
+Vous pouvez également libérer des transferts en modifiant la planification active et en modifiant le nombre maximal de transferts SnapMirror de volume simultanés à zéro.
+
+
+
+* Il faut s'assurer que le nombre de transferts SnapMirror simultanés et le papillon configuré pour les opérations (mise en service, mise à jour à la demande) sont disponibles sur le système de stockage 7-mode pendant toute la durée de l'opération.
++
+L'opération de mise en service échoue si la mise à jour incrémentielle finale échoue, même pour l'un des volumes du projet.
+
+* Pour les projets secondaires, après la mise en service, les mises à jour incrémentielles de SnapMirror pour la relation SnapMirror entre les volumes primaires 7-mode et le volume secondaire ONTAP sont basées sur la planification des relations SnapMirror entre 7-mode et 7-mode.
++
+Pour que ces mises à jour puissent s'effectuer, vous devez vous assurer que suffisamment de transferts SnapMirror simultanés sont disponibles sur le contrôleur principal 7-mode.
+
+
+
+
+
+== Utilisation de plusieurs chemins pour la transition
+
+Vous pouvez spécifier deux chemins de transition à l'aide d'une adresse IP de copie de données et d'une adresse IP multivoie. Cependant, les deux chemins ne peuvent être utilisés que pour l'équilibrage de charge, et non pour le basculement.
+
+*Informations connexes*
+
+xref:concept_guidelines_for_creating_a_data_copy_schedule.adoc[Considérations relatives à la création d'un programme de copie de données]
+
+xref:task_creating_schedule_for_snapmirror_transfers.adoc[Création d'un planning de copies pour les transferts SnapMirror]

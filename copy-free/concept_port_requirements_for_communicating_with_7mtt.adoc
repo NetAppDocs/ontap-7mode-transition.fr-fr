@@ -1,0 +1,54 @@
+---
+permalink: copy-free/concept_port_requirements_for_communicating_with_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, port, requirements, 7, mode, tool 
+summary: 'L"outil 7-mode transition Tool communique avec le système 7-mode et le cluster sur certains ports. Vous devez vous assurer que ces ports du système 7-mode et du cluster sont ouverts pour permettre la communication avec l"outil de transition 7-mode.' 
+---
+= Configuration requise pour la communication avec 7-mode transition Tool
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'outil 7-mode transition Tool communique avec le système 7-mode et le cluster sur certains ports. Vous devez vous assurer que ces ports du système 7-mode et du cluster sont ouverts pour permettre la communication avec l'outil de transition 7-mode.
+
+
+
+== Ports qui doivent être ouverts sur les systèmes 7-mode
+
+L'outil 7-mode transition Tool communique avec les systèmes 7-mode via HTTPS sur le port 443.
+
+
+
+== Les ports qui doivent être ouverts sur le cluster
+
+L'outil 7-mode transition Tool communique avec le cluster en utilisant HTTPS sur le port 443.
+
+
+
+== De ports qui doivent être ouverts sur 7-mode transition Tool
+
+Le port 8444 de 7-mode transition Tool doit être ouvert pour l'interface Web.
+
+Pour effectuer la transition des netgroups et des utilisateurs et groupes locaux CIFS, les conditions suivantes doivent être remplies :
+
+* Le port 8088 de l'outil 7-mode transition Tool doit être disponible.
++
+Pour une alternative au port 8088, vous devez modifier le port spécifié par le `tool.http.port` paramètre dans le `transition-tool.conf` Fichier du répertoire d'installation de 7-mode transition Tool.
+
++
+
+NOTE: Vous devez redémarrer le service 7-mode transition Tool après avoir modifié le port dans le fichier de configuration.
+
+* Chaque nœud du cluster doit disposer d'au moins une LIF de données configurée pour le SVM cible.
+* Toutes les LIFs de données du SVM doivent pouvoir communiquer avec le port 8088 de 7-mode transition Tool ou le port spécifié par le `tool.http.port` paramètre dans le `transition-tool.conf` fichier.
++
+
+NOTE: Vous devez vérifier que les pare-feu ne bloquent pas ce trafic.
+
+
+
+*Informations connexes*
+
+http://docs.netapp.com/us-en/ontap-7mode-transition/install-admin/index.html["Installation et administration de l'outil 7-mode transition Tool"]

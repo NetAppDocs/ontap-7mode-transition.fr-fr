@@ -1,0 +1,46 @@
+---
+permalink: san-host/task_preparing_for_cutover_when_transitioning_aix_data_luns_with_file_systems.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, cutover, phase, aix, data, lun 
+summary: 'Si vous faites passer un LUN hôte AIX avec un système de fichiers de Data ONTAP fonctionnant sous 7-mode à clustered Data ONTAP, vous devez effectuer certaines étapes avant d"entrer dans la phase de mise en service.' 
+---
+= Préparation de la phase de mise en service lors du transfert des LUN de données hôte AIX avec des systèmes de fichiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous faites passer un LUN hôte AIX avec un système de fichiers de Data ONTAP fonctionnant sous 7-mode à clustered Data ONTAP, vous devez effectuer certaines étapes avant d'entrer dans la phase de mise en service.
+
+La connectivité et la segmentation de la structure aux nœuds clustered Data ONTAP doivent être établies.
+
+Pour les transitions basées sur les copies, effectuez ces étapes après la mise en service du stockage dans l'outil de transition 7-mode. Les transitions sans copie ne sont pas prises en charge sur les hôtes AIX.
+
+.Étapes
+. Arrêtez les E/S sur tous les points de montage.
+. Arrêtez chaque application qui accède aux LUN conformément aux recommandations du fournisseur de l'application.
+. Démontez tous les points de montage :
++
+`*umount _mount_point_*`
+
+. Désactiver le groupe de volumes :
++
+`*varyoffvq _vg_name_*`
+
+. Exporter le groupe de volumes :
++
+`*exportvg _vg_name_*`
+
+. Vérifiez l'état du groupe de volumes :
++
+`*lsvg*`
+
++
+Le groupe de volumes exportés ne doit pas être répertorié dans la sortie.
+
+. Si des entrées obsolètes sont présentes, supprimez-les :
++
+`*rmdev -Rdl hdisk#*`
+
+

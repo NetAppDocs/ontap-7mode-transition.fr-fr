@@ -1,0 +1,26 @@
+---
+permalink: install-admin/concept_installing_and_uninstalling_7mtt.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, install, uninstall, transition, windows 
+summary: 'Vous pouvez télécharger et installer l"outil de transition 7-mode sur un système Windows à l"aide du programme d"installation standard basé sur l"assistant. Cependant, si vous disposez déjà d"une version installée de 7-mode transition Tool, vous devez avoir connaissance de certaines conditions préalables avant de le faire.' 
+---
+= Installation ou désinstallation de l'outil 7-mode transition Tool sur un système Windows
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez télécharger et installer l'outil de transition 7-mode sur un système Windows à l'aide du programme d'installation standard basé sur l'assistant. Cependant, si vous disposez déjà d'une version installée de 7-mode transition Tool, vous devez avoir connaissance de certaines conditions préalables avant de le faire.
+
+* Si votre système est équipé d'une version 7-mode transition Tool antérieure à la version 3.0, vous devez la désinstaller avant d'installer la dernière version.
++
+Vous devez créer une sauvegarde des fichiers journaux si vous choisissez de conserver les fichiers journaux pendant la désinstallation. Le programme d'installation de 7-mode transition Tool installe l'outil dans le même dossier et écrase les fichiers journaux lors de la prochaine exécution.
+
+* Si 7-mode transition Tool 3.0 ou une version ultérieure est installé sur votre système, vous devez respecter les conditions suivantes avant d'installer la dernière version de 7-mode transition Tool :
++
+** Tous les projets de transition basés sur la copie existants doivent être terminés ou abandonnés.
+** Tous les projets de transition sans copie existants doivent être terminés ou la restauration est terminée.
+
+
+

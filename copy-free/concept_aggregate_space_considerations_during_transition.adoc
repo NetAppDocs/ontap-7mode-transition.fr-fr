@@ -1,0 +1,107 @@
+---
+permalink: copy-free/concept_aggregate_space_considerations_during_transition.html 
+sidebar: sidebar 
+keywords: transition, copy, free, aggregate, space, requirements 
+summary: 'Avant de procéder à la transition, vous devez vous assurer que les agrégats 7-mode disposent d"un espace libre suffisant. 7-mode transition Tool effectue diverses vérifications de l"espace sur les agrégats en fonction de l"espace physique, de l"espace logique, de l"espace occupé par les copies Snapshot et des paramètres de garantie d"espace. Vous devez également connaître les considérations d"espace à prendre en compte avec les agrégats Flash Pool.' 
+---
+= Besoins en espace de l'agrégat pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de procéder à la transition, vous devez vous assurer que les agrégats 7-mode disposent d'un espace libre suffisant. 7-mode transition Tool effectue diverses vérifications de l'espace sur les agrégats en fonction de l'espace physique, de l'espace logique, de l'espace occupé par les copies Snapshot et des paramètres de garantie d'espace. Vous devez également connaître les considérations d'espace à prendre en compte avec les agrégats Flash Pool.
+
+
+
+== Espace physique dans les agrégats
+
+La transition est bloquée si l'espace libre est inférieur à 5 % de l'espace physique des agrégats 7-mode. Il est recommandé d'utiliser au moins 20 % d'espace libre dans les agrégats 7-mode avant la transition.
+
+L'espace supplémentaire est requis dans l'agrégat pour les raisons suivantes :
+
+* Création de la copie Snapshot au niveau de l'agrégat pour chaque agrégat 7-mode au cours de la phase d'exportation
+* Test de la charge de travail sur les agrégats transférés avec de nouvelles données lors de la phase de test de préproduction
+
+
+Si vous ne disposez pas d'espace supplémentaire, vous pouvez ajouter des disques aux systèmes 7-mode avant la transition. Si l'ajout de disques n'est pas possible ou si vous avez la garantie que seule une quantité limitée de données est écrite sur les volumes transférés lors de la phase de préproduction, l'outil de transition 7-mode vous permet de reconnaître cette erreur et de poursuivre la transition. Vous devez toutefois continuer à surveiller l'espace total pendant la transition et vous assurer que les agrégats ne sont pas toujours de l'augmentation lors de la phase de test préproduction.
+
+
+
+== Espace logique dans les agrégats
+
+Si l'espace logique des agrégats 7-mode est plein à plus de 97 %, l'outil 7-mode transition Tool déclenche une erreur de blocage au cours du contrôle préalable. Vous pouvez ignorer cette erreur pendant la phase de planification et poursuivre la transition ; cependant, vous devez vous assurer que l'espace logique utilisé est inférieur à 97 % avant l'opération d'exportation et d'arrêt en réduisant la taille des volumes de ces agrégats ou en ajoutant des disques supplémentaires à ces agrégats. Vous ne pouvez pas ignorer cette erreur lors de la phase d'exportation et d'arrêt.
+
+
+
+== Déversement d'instantanés
+
+Si les copies Snapshot des agrégats 7-mode occupent davantage d'espace que l'espace alloué à la réserve de copies Snapshot, la création de copies Snapshot de niveau de l'agrégat risque d'échouer pour l'exportation et l'arrêt de l'opération. 7-mode transition Tool déclenche une erreur de blocage lors de la vérification préalable de cette condition. Dans ce cas, vous devez supprimer toutes les copies Snapshot existantes au niveau de l'agrégat lors de la phase de planification.
+
+Si vous ne souhaitez pas supprimer les copies Snapshot existantes, vous pouvez ignorer cette erreur lors de la phase de planification et continuer avec la transition. Toutefois, vous devez vous assurer que le pourcentage de capacité de la copie Snapshot utilisée est inférieur à 100 % avant l'opération d'exportation et d'arrêt.
+
+
+
+== Les paramètres de garantie d'espace
+
+7-mode transition Tool déclenche une erreur de blocage lors du précontrôle si les contrôleurs 7-mode possèdent des volumes possédant les paramètres de garantie d'espace suivants :
+
+* Des volumes garantis par volume avec l'option de garantie désactivée
+* Volumes garantis par fichiers
+* *Volumes garantis par volume avec garantie désactivée*
++
+Dans certains cas, la garantie d'espace est désactivée pour les volumes garantis par volume en raison du manque d'espace dans les agrégats.
+
++
+Vous devez créer un espace libre suffisant sur les agrégats 7-mode, puis activer la garantie d'espace pour ces volumes 7-mode en utilisant la commande 7-mode suivante :
+
++
+`*vol options _volume_name_ guarantee volume*`
+
++
+Si vous ne souhaitez pas effectuer d'actions correctives sur 7-mode, vous pouvez ignorer cette erreur. Après la transition, examinez les volumes pour lesquels la garantie est désactivée et activez manuellement la garantie à l'aide de la commande suivante :
+
++
+`*volume modify -vserver -volume -space-guarantee volume*`
+
+* *Volumes garantis par fichiers*
++
+La garantie de fichier n'est pas prise en charge dans ONTAP.
+
++
+Si vous disposez de volumes garantis par fichiers, vous devez effectuer l'une des opérations suivantes :
+
++
+** Si les volumes 7-mode contiennent des LUN ou des fichiers réservés en espace, modifiez le type de garantie d'espace des volumes sur le volume à l'aide de la commande 7-mode : +
+`*vol options _volume_name_ guarantee volume*`
++
+Vous devez assurer que l'espace disponible est suffisant pour les agrégats 7-mode avant d'exécuter cette commande.
+
+** Si les volumes 7-mode ne contiennent aucun fichier ou LUN réservés en espace, modifiez la garantie d'espace des volumes sur aucun en utilisant la commande 7-mode suivante : +
+`*vol options _volume_name_ guarantee none*`Si vous ne souhaitez pas effectuer d'actions correctives sur 7-mode, vous pouvez ignorer cette erreur et poursuivre la transition.
+
+
++
+Lors de la transition, si ces volumes contiennent des LUN ou des fichiers réservés sur l'espace, leur garantie d'espace sera automatiquement convertie en LUN `volume`, mais la garantie de l'espace sera désactivée initialement. Vous devez créer un espace libre suffisant sur les agrégats, puis activer manuellement la garantie via la commande suivante :
+
++
++
+`*volume modify -vserver -volume -space-guarantee volume*`
+
++
++ si les volumes ne contiennent pas de LUN ou de fichiers réservés à l'espace, leur garantie d'espace sera automatiquement convertie en aucun pendant la transition.
+
+
+
+
+
+== Considération supplémentaire pour les agrégats Flash Pool
+
+La transition n'est pas prise en charge si l'espace libre sur les disques SSD des agrégats Flash Pool est inférieur à 5 % de l'espace disque total des disques SSD. Vous devez désactiver la mise en cache SSD ou ajouter d'autres disques SSD pour poursuivre la transition.
+
+*Informations connexes*
+
+xref:reference_ignorable_errors_during_transition.adoc[Erreurs Ignorables pendant la transition]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]

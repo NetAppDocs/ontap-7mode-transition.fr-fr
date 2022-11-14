@@ -1,0 +1,46 @@
+---
+permalink: copy-based/concept_prerequisites_to_transition_nfs_configurations.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, prerequisites, nfs, configurations 
+summary: 'Les configurations NFS ne sont migrées par l"outil 7-mode transition Tool que lorsque certaines conditions préalables sont remplies sur le système 7-mode et le cluster. Si l"une des conditions n"est pas remplie, l"outil n"effectue pas la transition de la configuration.' 
+---
+= Conditions préalables à la transition des configurations NFS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les configurations NFS ne sont migrées par l'outil 7-mode transition Tool que lorsque certaines conditions préalables sont remplies sur le système 7-mode et le cluster. Si l'une des conditions n'est pas remplie, l'outil n'effectue pas la transition de la configuration.
+
+
+
+== Configuration requise pour 7-mode
+
+* NFS doit être sous licence.
+* Lorsque MultiStore est sous licence, NFS doit être activé sur l'unité vFiler à laquelle sont titulaires les volumes de transition.
+* Pour la transition d'un serveur Kerberos basé sur Microsoft Active Directory (AD) vers un nouveau SVM, une entrée DNS doit exister pour le domaine AD.
++
+
+NOTE: Pour la transition de la configuration Kerberos, au moins une LIF doit être transférée dans le cadre du projet et la LIF doit être résolue avec un nom d'hôte.
+
+* Si vous souhaitez effectuer la transition des règles d'exportation en mémoire, vous devez les ajouter à la `/etc/exports` fichier avant la transition.
++
+L'outil de transition 7-mode ne transfère que les règles d'exportation persistantes définies dans le `/etc/exports` fichier.
+
+
+
+
+
+== Conditions préalables au cluster
+
+* NFS doit être sous licence.
+* Pour la transition d'un serveur Kerberos basé sur Microsoft AD vers un SVM existant avec DNS configuré, une entrée DNS doit exister pour le domaine AD.
+* L'inclinaison de l'horloge entre le centre de distribution de clés Kerberos (KDC) et le système ONTAP doit être inférieure ou égale à 5 minutes.
+
+
+*Informations connexes*
+
+xref:concept_how_nfs_exports_are_transitioned.adoc[Mode de transition des exportations NFS]
+
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]

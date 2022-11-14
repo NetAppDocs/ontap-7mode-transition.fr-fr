@@ -1,0 +1,44 @@
+---
+permalink: copy-free/task_running_prechecks.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, runn, prechecks 
+summary: Vous pouvez exécuter des contrôles préalables pour identifier tout problème avant de démarrer une transition. Assurez-vous que les sources 7-mode, les cibles ONTAP et les configurations sont valides pour votre transition. Vous pouvez exécuter des contrôles préalables à tout moment. 
+---
+= Exécution de contrôles préalables
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter des contrôles préalables pour identifier tout problème avant de démarrer une transition. Assurez-vous que les sources 7-mode, les cibles ONTAP et les configurations sont valides pour votre transition. Vous pouvez exécuter des contrôles préalables à tout moment.
+
+Les contrôles préalables exécutent plus de 200 vérifications différentes. Par exemple, l'outil vérifie les éléments tels que si les volumes sont en ligne et si l'accès réseau existe entre les systèmes.
+
+. Dans le tableau de bord, sélectionnez le projet pour lequel vous souhaitez exécuter les contrôles préalables.
+. Cliquez sur *Exécuter les contrôles préalables*.
++
+Une fois les contrôles préalables terminés, le résumé des résultats s'affiche dans la boîte de dialogue.
+
++
+
+NOTE: L'exécution des contrôles préalables ne prend généralement que quelques minutes, mais la durée de la phase de contrôle préalable dépend du nombre et du type d'erreurs ou d'avertissements que vous résolvez.
+
+
+
+.Étapes
+. Choisissez une option sous *appliquer le filtre de type* pour filtrer les résultats :
++
+** Pour afficher tous les messages relatifs à la sécurité, sélectionnez *erreur*, *Avertissement*, *information* et *sécurité uniquement*.
+** Pour afficher tous les messages d'erreur liés à la sécurité, sélectionnez *erreur* et *sécurité uniquement*.
+** Pour afficher tous les messages d'avertissement relatifs à la sécurité, sélectionnez **Avertissement** et *sécurité uniquement*.
+** Pour afficher tous les messages d'information relatifs à la sécurité, sélectionnez *information* et *sécurité uniquement*.
+
+
+. Pour enregistrer les résultats bruts au format CSV (valeurs séparées par des virgules) et exporter les résultats, cliquez sur *Enregistrer au format CSV*.
++
+Vous pouvez afficher les opérations de transition effectuées pendant la transition, ainsi que le type d'opération, l'état, l'heure de début, l'heure de fin et les résultats dans l'onglet Historique des opérations du volet Tableau de bord.
+
+
+
+Vous devez résoudre toutes les erreurs détectées par les contrôles préalables avant de lancer la copie des données. Il est également recommandé de résoudre tous les avertissements avant de poursuivre le processus de migration. La résolution peut être la résolution du problème source du message d'avertissement, la mise en œuvre d'une solution de contournement ou l'acceptation du résultat du problème.

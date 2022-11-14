@@ -1,0 +1,24 @@
+---
+permalink: san-host/concept_transitioning_luns_with_mount_points_using_dmmp_devices_names.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, lun, mount, points, dmmp, device, name 
+summary: 'Avant de faire passer une LUN avec un point de montage à l"aide d"un nom de périphérique DMMP, vous devez remplacer le nom de périphérique DMMP par le numéro d"UUID correspondant du système de fichiers. Vous devez effectuer des étapes spécifiques pour préparer la phase de mise en service et remonter les périphériques DMMP sur l"hôte après la transition. Vous effectuez les mêmes procédures pour Red Hat Enterprise Linux \(RHEL\) 5 et RHEL 6.' 
+---
+= Transition de LUN avec des points de montage à l'aide des noms de périphériques DMMP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de faire passer une LUN avec un point de montage à l'aide d'un nom de périphérique DMMP, vous devez remplacer le nom de périphérique DMMP par le numéro d'UUID correspondant du système de fichiers. Vous devez effectuer des étapes spécifiques pour préparer la phase de mise en service et remonter les périphériques DMMP sur l'hôte après la transition. Vous effectuez les mêmes procédures pour Red Hat Enterprise Linux (RHEL) 5 et RHEL 6.
+
+*Informations connexes*
+
+xref:task_preparing_rhel_luns_transition_using_inventory_assessment_workbook.adoc[Préparation des LUN RHEL avec des points de montage à l'aide des noms de périphériques DMMP pour la transition à l'aide du manuel d'évaluation des stocks]
+
+xref:task_preparing_rhel_luns_for_transition_using_the_cli.adoc[Préparation des LUN RHEL avec des points de montage à l'aide de noms d'alias DMMP pour la transition à l'aide de l'interface de ligne de commande]
+
+xref:task_preparing_for_cutover_when_transitioning_luns_with_mounts_using_dmmp_aliases_on_linux_hosts.adoc[Préparation de la phase de mise en service lors de la transition de LUN avec des points de montage à l'aide de noms de périphériques DMMP sur des hôtes Linux]
+
+xref:task_remounting_dmmp_devices_on_linux_hosts_after_transition.adoc[Remontage des périphériques DMMP sur les hôtes Linux après la transition]

@@ -1,0 +1,53 @@
+---
+permalink: copy-based/task_starting_baseline_data_copy.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, start, baseline, copy 
+summary: 'Une fois le projet créé et l"opération de vérification préalable terminée, vous devez lancer la copie des données des volumes 7-mode vers ONTAP. Vous pouvez démarrer l"opération de copie des données de base pour des projets individuels. Vous devez arrêter les processus système et l"activité réseau inutiles pendant la copie de données.' 
+---
+= Début de la copie des données de base
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois le projet créé et l'opération de vérification préalable terminée, vous devez lancer la copie des données des volumes 7-mode vers ONTAP. Vous pouvez démarrer l'opération de copie des données de base pour des projets individuels. Vous devez arrêter les processus système et l'activité réseau inutiles pendant la copie de données.
+
+Vous devez avoir créé au moins un programme de copie de données.
+
+Estimez le temps nécessaire pour effectuer ces transferts et évaluer les performances obtenues par les transferts de SnapMirror volume dans votre environnement en effectuant une migration de tests. Voici quelques facteurs pouvant affecter les performances :
+
+* Options de planification de la copie des données de transition sélectionnées
++
+Cette planification contrôle le nombre maximal de transferts SnapMirror simultanés et la bande passante maximale à utiliser pour les transferts.
+
+* Nombre maximum de transferts SnapMirror de volume simultanés pris en charge par les contrôleurs source 7-mode
+* Bande passante réseau entre les contrôleurs source 7-mode et de destination ONTAP
++
+Le trafic réseau qui n'est pas lié à l'activité de migration doit être réduit afin que le débit soit optimisé et que le temps de réponse soit réduit entre les systèmes source et de destination.
+
+* Capacités de performances des contrôleurs source et de destination
++
+Les systèmes source et de destination doivent disposer d'une utilisation optimale du processeur et de la mémoire disponible.
+
+* Nombre de transferts SnapMirror volume 7-mode lors de la copie de données
+
+
+.Étapes
+. Dans le tableau de bord, sélectionnez le projet pour lequel vous souhaitez démarrer la copie des données de base.
+. Cliquez sur *Démarrer la ligne de base*.
++
+La vérification préalable est exécutée une fois de plus en arrière-plan et si aucune erreur n'est détectée, le transfert de base est lancé en fonction du planning de copie des données. La boîte de dialogue progression de l'opération affiche les informations sur l'état des opérations de contrôle préalable exécutées pendant la copie des données de base.
+
+. Cliquez sur l'onglet *volumes* pour afficher l'état et la progression du transfert de base.
++
+Pour afficher les détails de SnapMirror de chaque volume, cliquez sur *View transition Details*. Le nombre de transferts SnapMirror simultanés est basé sur l'entrée fournie dans la planification actuellement active. Vous pouvez suivre la planification active à partir de l'onglet planification de la copie de données du tableau de bord.
+
++
+Une fois l'opération de copie des données de base terminée, les mises à jour incrémentielles de SnapMirror démarrent selon le calendrier fourni lors de la création du projet.
+
+
+
+*Informations connexes*
+
+xref:task_creating_schedule_for_snapmirror_transfers.adoc[Création d'un planning de copies pour les transferts SnapMirror]

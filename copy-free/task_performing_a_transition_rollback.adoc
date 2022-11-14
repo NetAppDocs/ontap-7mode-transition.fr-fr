@@ -1,0 +1,88 @@
+---
+permalink: copy-free/task_performing_a_transition_rollback.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, roll, back, project 
+summary: 'Vous pouvez restaurer une transition en arrière si vous souhaitez revenir à 7-mode à n"importe quel stade de la transition sans copie avant la fin de la transition des agrégats en transition. Le retour arrière est une opération manuelle. Vous pouvez utiliser l"outil 7-mode transition Tool pour générer les étapes manuelles que vous devez effectuer pour une restauration.' 
+---
+= Annulation d'un projet de transition sans copie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez restaurer une transition en arrière si vous souhaitez revenir à 7-mode à n'importe quel stade de la transition sans copie avant la fin de la transition des agrégats en transition. Le retour arrière est une opération manuelle. Vous pouvez utiliser l'outil 7-mode transition Tool pour générer les étapes manuelles que vous devez effectuer pour une restauration.
+
+* Vous devez vous assurer qu'aucune opération de transition de volumes ou d'agrégats n'est exécutée sur le cluster.
++
+Vous pouvez utiliser le `job show -jobtype transition` commande.
+
+* Aucun des agrégats 7-mode ne doit être engagé.
++
+
+NOTE: Vous ne pouvez pas effectuer la restauration si même un agrégat 7-mode est engagé.
+
+* Les nœuds de cluster cibles ne doivent pas être en mode basculement.
+
+
+.Étapes
+. Cliquez sur *revenir à une liste de contrôle préalables* pour vérifier que le projet est éligible pour une restauration.
++
+Si le contrôle préalable signale des problèmes, vous devez les corriger manuellement et relancer l'opération de vérification préalable. Par exemple, si vous avez créé de nouveaux volumes ou des LUN pendant les tests de préproduction, vous devez les supprimer manuellement.
+
+. Cliquez sur *générer les étapes de restauration* pour générer la liste des étapes manuelles que vous devez effectuer pour une reprise réussie.
+. Cliquez sur *Enregistrer au format CSV* pour enregistrer les étapes manuelles dans un fichier.
++
+Vous pouvez copier les commandes de restauration à partir du fichier et les exécuter.
+
+. En fonction de la phase de transition à partir de laquelle vous décidez d'effectuer une restauration, effectuez les opérations manuelles requises :
++
+** *Phase d'essai d'importation ou de préproduction*
++
+... Exécutez les commandes de restauration sur le cluster et cliquez sur *confirmer*.
+... Connectez les tiroirs disques 7-mode aux contrôleurs 7-mode, vérifiez le câblage manuellement, puis cliquez sur *Confirm*.
+... Exécutez les commandes de retour arrière sur les contrôleurs 7-mode et cliquez sur *confirmer*.
+... Afficher les configurations appliquées sur les SVM depuis l'onglet Operations History.
+... Supprimez manuellement toutes les configurations appliquées par l'outil des SVM.
+
+
+** * Phase de câblage*
++
+... Connectez les tiroirs disques 7-mode aux contrôleurs 7-mode, vérifiez le câblage manuellement, puis cliquez sur *Confirm*.
++
+Vous devez vous assurer que le câblage 7-mode correspond à la configuration en début de projet.
+
++
+
+NOTE: Pour vérifier le câblage, nous vous recommandons d'utiliser le protocole Config Advisor.
+
+... Exécutez les commandes de retour arrière sur les contrôleurs 7-mode et cliquez sur *confirmer*.
+... Supprimez manuellement toutes les configurations appliquées par l'outil des SVM.
++
+Vous pouvez afficher les configurations appliquées sur les SVM à partir de l'onglet Historique des opérations.
+
+
+
+** *Phase d'exportation*
++
+... Exécutez les commandes de retour arrière sur les contrôleurs 7-mode et cliquez sur *confirmer*.
+... Supprimez manuellement toutes les configurations appliquées par l'outil des SVM.
++
+Vous pouvez afficher les configurations appliquées sur les SVM à partir de l'onglet Historique des opérations.
+
+
+
+** *Phase de provisionnement SVM*
++
+Supprimez manuellement toutes les configurations appliquées par l'outil des SVM.
+
++
+Vous pouvez afficher les configurations appliquées sur les SVM à partir de l'onglet Historique des opérations.
+
+
+
++
+xref:task_running_manual_steps_for_rolling_back_transition.adoc[Étapes manuelles pour la reprise de la transition]
+
+. Après avoir terminé toutes les étapes manuelles, cliquez sur *Verify 7-mode* depuis l'outil 7-mode transition Tool pour vérifier que les contrôleurs 7-mode sont prêts à assurer le service des données.
+

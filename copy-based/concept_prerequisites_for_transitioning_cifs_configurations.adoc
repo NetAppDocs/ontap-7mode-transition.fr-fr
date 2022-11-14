@@ -1,0 +1,129 @@
+---
+permalink: copy-based/concept_prerequisites_for_transitioning_cifs_configurations.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, prerequisites, cifs, configurations 
+summary: 'Les configurations CIFS ne sont migrées par l"outil 7-mode transition Tool que lorsque certaines conditions préalables sont remplies sur le système et le cluster 7-mode. Si l"une des conditions n"est pas remplie, l"outil n"effectue pas la transition de la configuration.' 
+---
+= Conditions préalables à la transition des configurations CIFS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les configurations CIFS ne sont migrées par l'outil 7-mode transition Tool que lorsque certaines conditions préalables sont remplies sur le système et le cluster 7-mode. Si l'une des conditions n'est pas remplie, l'outil n'effectue pas la transition de la configuration.
+
+
+
+== Configuration requise pour 7-mode
+
+* La licence CIFS doit être ajoutée.
+* Si la licence MultiStore est activée, CIFS doit être ajouté à la liste des protocoles autorisés pour l'unité vFiler propriétaire des volumes de transition.
+* Le protocole CIFS doit être configuré et en cours d'exécution pendant la transition.
+* Le type d'authentification pour CIFS doit être Active Directory (AD) ou Workgroup.
+
+
+
+
+== Conditions préalables au cluster
+
+* La licence CIFS doit être ajoutée.
+* CIFS doit être ajouté à la liste des protocoles autorisés pour la SVM.
+* DNS doit être configuré pour le SVM.
+* Les méthodes d'authentification CIFS suivantes sont prises en charge dans différentes versions de ONTAP :
++
+** Clustered Data ONTAP 8.2.x et 8.3.x prennent en charge l'authentification AD.
+** ONTAP 9.0 ou version ultérieure prend en charge l'authentification AD et l'authentification Workgroup.
+
+
+* Utiliser le tableau suivant pour décider quelle authentification doit être utilisée sur le SVM cible :
++
+|===
+| Méthode d'authentification 7-mode | Méthode d'authentification clustered Data ONTAP 8.2.x et 8.3.x. | Méthode d'authentification ONTAP 9.5 ou version antérieure 
+
+
+ a| 
+AD
+ a| 
+AD
+ a| 
+AD
+
+
+
+ a| 
+Groupe de travail
+ a| 
+AD
+ a| 
+Groupe de travail ou AD
+
+|===
+* Vous pouvez effectuer la transition CIFS de 7-mode vers ONTAP si les domaines AD ne correspondent pas entre le serveur CIFS 7-mode et le serveur CIFS SVM cible. L'outil déclenche une erreur de blocage ignorable lorsqu'une discordance de nom de domaine AD est détectée. Pour poursuivre la transition, acquitter l'erreur de blocage.
+* Le serveur CIFS doit être configuré manuellement avant la phase de configuration Apply (prétover).
++
+Vous pouvez créer le serveur CIFS sur le SVM de deux manières suivantes :
+
++
+|===
+| Les fonctions que vous recherchez... | Procédez comme suit... 
+
+
+ a| 
+Transférer ou conserver l'identité du serveur CIFS vers le SVM cible
+ a| 
+** Vous devez prévoir de transférer tous les volumes du système 7-mode source ou d'une unité vFiler au sein d'un même projet.
++
+Ce plan est requis, car le système 7-mode perd l'identité du serveur CIFS d'origine après la transition et ne peut pas servir les clients. Le nombre maximal de volumes qui peuvent être transférés dans un projet est de 160. Ainsi, pour préserver l'identité du serveur CIFS, le système 7-mode peut avoir un maximum de 160 volumes et tous ces volumes doivent être transférés dans un projet unique.
+
++
+Vous disposez des deux options suivantes pour créer le serveur CIFS :
+
++
+... Applicable à toutes les versions de ONTAP :
++
+**** Avant la phase « Apply configuration » (mise en service), vous devez reconfigurer le serveur CIFS sur le système 7-mode à l'aide d'une identité CIFS temporaire.
++
+Cette reconfiguration permet de configurer l'identité du serveur CIFS d'origine sur le SVM. Vous devez vérifier que le serveur CIFS s'exécute sur le système 7-mode lors de l'opération de mise en place d'une configuration (mise en service) avec la nouvelle identité temporaire. Cette action est nécessaire pour lire les configurations CIFS en 7-mode au cours de la mise en service au préalable.
+
+**** Vous devez configurer le serveur CIFS sur le SVM cible avec l'identité CIFS 7-mode d'origine.
+**** Une fois ces conditions remplies, vous pouvez effectuer l'opération de précontrôle.
++
+Vous devez ensuite prévoir d'effectuer la mise en service du stockage immédiatement après la mise en service afin que le client puisse accéder aux volumes ONTAP.
+
+
+
+... Applicable aux versions ONTAP 9.0 à 9.5 :
++
+**** Utilisez le `vserver cifs modify` Pour modifier le nom du serveur CIFS (nom NetBIOS du serveur CIFS).
++
+À l'aide de cette fonctionnalité, il est conseillé de créer un serveur CIFS sur le SVM cible avec une identité temporaire, puis d'effectuer l'opération Apply configuration (prétover).
+
+**** Après la phase « appliquer la configuration », vous pouvez exécuter le `vserver cifs modify` Commande sur le cluster cible pour remplacer l'identité CIFS du SVM cible par une identité CIFS 7-mode.
+
+
+
+
+
+
+
+
+ a| 
+Utiliser une nouvelle identité
+ a| 
+** Avant la phase « Apply configuration » (prémise en service), vous devez configurer le serveur CIFS sur la SVM cible avec une nouvelle identité CIFS.
+** Vous devez vérifier que le serveur CIFS est actif et exécuté sur le système 7-mode au cours de l'opération de mise en œuvre de la phase « Apply configuration » (mise en service).
++
+Cette action est nécessaire pour lire les configurations CIFS des systèmes 7-mode au cours de la phase « appliquer la configuration » (mise en service).
+
++
+Une fois ces conditions remplies, vous pouvez effectuer l'opération de précontrôle. Vous pouvez ensuite tester les configurations de SVM et prévoir d'effectuer la mise en service du stockage.
+
+
+
+|===
+
+
+*Informations connexes*
+
+xref:concept_considerations_for_local_users_and_groups_transition.adoc[Considérations relatives à la transition des utilisateurs et groupes locaux CIFS]

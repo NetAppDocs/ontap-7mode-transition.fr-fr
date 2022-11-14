@@ -1,0 +1,50 @@
+---
+permalink: copy-based/task_generating_an_assessment_report_by_importing_inventory_report_xml.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, generate, assessment, report, inventory, xml 
+summary: 'Vous pouvez importer le rapport XML d"inventaire généré par l"outil de collecte d"inventaire pour évaluer les fonctionnalités des hôtes et des contrôleurs. Vous pouvez ensuite identifier le fonctionnement de ces hôtes et contrôleurs dans la version ONTAP sélectionnée pour la transition en créant un rapport d"évaluation.' 
+---
+= Générer un rapport d'évaluation en important le XML du rapport d'inventaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez importer le rapport XML d'inventaire généré par l'outil de collecte d'inventaire pour évaluer les fonctionnalités des hôtes et des contrôleurs. Vous pouvez ensuite identifier le fonctionnement de ces hôtes et contrôleurs dans la version ONTAP sélectionnée pour la transition en créant un rapport d'évaluation.
+
+* Vous devez avoir exécuté l'outil de collecte d'inventaire et généré le fichier XML du rapport d'inventaire.
++
+
+NOTE: Pour évaluer les hôtes et les contrôleurs pour la transition basée sur la copie, vous devez utiliser l'outil de collecte d'inventaire 3.3 pour collecter les stocks.
+
+* Vous devez avoir préparé les systèmes 7-mode et les hôtes pour l'évaluation de la transition.
+
+
+Les systèmes que vous souhaitez évaluer ne doivent pas être accessibles lors de l'importation du rapport d'inventaire et de l'évaluation de la transition.
+
+.Étapes
+. Connectez-vous à 7-mode transition Tool, puis cliquez sur *Collect and Assess* (collecter et évaluer) dans la page d'accueil.
+. Cliquez sur *Importer le rapport d'inventaire XML*.
+. Cliquez sur *Parcourir*, puis sélectionnez le rapport XML généré par l'outil de collecte d'inventaire.
+. Cliquez sur *Importer*.
++
+L'état d'évaluation du système s'affiche `Imported;Ready`.
+
+. Sélectionnez le système pour lequel vous souhaitez effectuer l'évaluation de la transition.
+. Cliquez sur *Créer un rapport d'évaluation de transition*.
+. Dans la boîte de dialogue Créer un rapport d'évaluation de transition, sélectionnez la version Data ONTAP du cluster cible.
+. Spécifiez un préfixe pour le nom de fichier des rapports.
+. Cliquez sur *générer rapport*.
++
+Les rapports Sommaire du Manuel d'évaluateurs et du Résumé de l'exécutionSommaire sont générés au format XML.
+
+. Consultez le rapport du Manuel d'évaluateur dans Microsoft Excel et le rapport Résumé de l'évaluateur dans Microsoft Word avec Microsoft Office 2007 ou une version ultérieure.
++
+Pour afficher le rapport du Manuel d'évaluateur dans Microsoft Excel, vous devrez peut-être activer les macros dans Excel.
+
+
+
+*Informations connexes*
+
+xref:task_collecting_tool_logs.adoc[Téléchargement des fichiers journaux de transition]

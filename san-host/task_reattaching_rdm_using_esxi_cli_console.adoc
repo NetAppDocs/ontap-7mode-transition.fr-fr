@@ -1,0 +1,89 @@
+---
+permalink: san-host/task_reattaching_rdm_using_esxi_cli_console.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, rdm, esxi, cli, console 
+summary: 'Après la transition de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez reconnecter votre mappage de périphériques brut \(RDM\).' 
+---
+= Rattachement de RDM à l'aide de VMware ESXi de la CLI/console
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la transition de Data ONTAP 7-mode vers clustered Data ONTAP, vous devez rattacher votre RDM (Raw Device Mapping).
+
+* Vous devez récupérer le fichier de disque RDM répertorié dans la colonne disque du classeur _Inventory Assessment Workbook_.
+* Le nouvel ID naa de LUN clustered Data ONTAP doit être récupéré dans le fichier de mappage 7MTT.
+
+
+.Étapes
+. Connectez-vous à la console ESXi à l'aide de SSH.
+. Utilisez la commande mv pour effectuer une sauvegarde du fichier de disque RDM et du fichier de périphérique associé.
++
+Le fichier de disque RDM est répertorié dans la colonne disque du classeur _Inventory Assessment Workbook_.
+
++
+Si le fichier de disque RDM est `/vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-winbus-A.vmdk`, vous exécutez la commande suivante :
+
++
+`*mv /vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-winbus-A.vmdk /vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-win-bus-A.vmdk _bak*`
+
++
+** Pour la compatibilité physique RDM (PTRDM) : +
+`*mv __RDM_disk_file_name__-rdmp.vdmk __RDM_disk_file_name__-rdmp.vdmk_bak*`
++
+Par exemple :
+
++
+`*mv/vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-winbus-A-rdmp.vmdk/vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-winbus-A/VM2-win-bus-A-rdmp.vmdk _bak*`
+
+** Pour la compatibilité virtuelle RDM (NPTRDM) : +
+`*mv __RDM_disk_file_name__-rdmp.vdmk __RDM_disk_file_name__-rdmp.vdmk_bak*`
++
+Par exemple :
+
++
+`*mv/vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-winbus-A-rdmp.vmdk/vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-winbus-A/VM2-win-bus-A-rdmp.vmdk _bak*`
+
+
+
+. Utilisez le nouvel ID naa de LUN clustered Data ONTAP et le fichier de disque RDM pour recréer la configuration RDM et les fichiers de périphériques.
++
+** Pour PTRDM : +
+`*# vmkfstools –z /vmfs/devices/disks/__new_clustered_Data_ONTAP_naa_ID__.vmdk*`
++
+Par exemple :
+
++
+`*vmkfstools –z /vmfs/devices/disks/naa.600a098054314c6c442b446f79712313 /vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-win-bus-A.vmdk*`
+
+** Pour NPTRDM : +
+`*# vmkfstools –r /vmfs/devices/disks/__new_clustered_Data_ONTAP_naa_ID__.vmdk*`
++
+Par exemple :
+
++
+`*vmkfstools –r /vmfs/devices/disks/naa.600a098054314c6c442b446f79712313 /vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A/VM2-win-bus-A.vmdk*`
+
+
+
+. Vérifiez que les fichiers de configuration et de pointeur sont créés :
++
+`*# ls /vmfs/volumes/__datastore/VM_directory__*`
+
++
+`*#ls /vmfs/volumes/53a3ac3d-df5aca03-3a94-001ec9d631cb/VM2-win-bus-A*`
+
++
+Les nouveaux fichiers de configuration et de pointeur sont affichés sous le chemin d'accès au répertoire de la machine virtuelle.
+
+. Répétez les étapes pour tous les ordinateurs virtuels avec RDM attaché.
+. Redémarrez les agents hostd et vpxa dans l'hôte ESXi :
++
+`*/etc/init.d/hostd/restart*`
+
++
+`*/etc/init.d/vpxa/restart*`
+
+

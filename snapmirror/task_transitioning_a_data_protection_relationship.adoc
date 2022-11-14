@@ -1,0 +1,31 @@
+---
+permalink: snapmirror/task_transitioning_a_data_protection_relationship.html 
+sidebar: sidebar 
+keywords: ontap, 7, mode, transition, snapmirror, staggered, configuration, volumes 
+summary: 'Vous pouvez effectuer la transition d"une relation SnapMirror volume 7-mode et conserver la relation de protection des données en migrant le volume secondaire avant le volume primaire. Cette méthode permet de mettre en place une relation de reprise après incident SnapMirror échelonnée entre les volumes primaires 7-mode et les volumes secondaires clustered Data ONTAP.' 
+---
+= Faire l'adoption d'une relation SnapMirror volume dans une configuration échelonnée
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer la transition d'une relation SnapMirror volume 7-mode et conserver la relation de protection des données en migrant le volume secondaire avant le volume primaire. Cette méthode permet de mettre en place une relation de reprise après incident SnapMirror échelonnée entre les volumes primaires 7-mode et les volumes secondaires clustered Data ONTAP.
+
+* Les clusters principaux et secondaires et les SVM doivent déjà être configurés.
+* Pour établir une relation de pairs SVM lors de la transition d'une relation SnapMirror volume, les conditions suivantes doivent être remplies :
++
+** Le cluster secondaire ne doit pas avoir d'SVM portant le même nom que celui du SVM principal.
+** Le cluster principal ne doit pas avoir d'SVM portant le même nom que celui du SVM secondaire.
+** Vous devez avoir passé en revue les informations relatives à la préparation à la transition.
++
+xref:task_preparing_for_transition.adoc[Préparation à la transition]
+
+
+
+
+
+*Informations connexes*
+
+xref:task_resuming_a_failed_snapmirror_transfer_transition.adoc[Reprise d'un transfert de base SnapMirror défectueux]

@@ -1,0 +1,165 @@
+---
+permalink: copy-free/task_rehosting_volumes_from_different_svms_to_a_single_svm.html 
+sidebar: sidebar 
+keywords: ontap, transition, copy, free, rehost, volumes, svm 
+summary: 'Le réhébergement de volumes permet de migrer un volume transféré d"un SVM vers un autre SVM sans la copie des données. L"opération de réhébergement vous permet de consolider tous les volumes qui possèdent des LUN FC dans un seul SVM, tout en préservant la sémantique de l"image de système unique 7-mode \(SSI\). Vous pouvez également réhébergement de volumes NAS ayant fait l"objet de transition.' 
+---
+= Réhébergement de volumes transférés vers une autre SVM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le réhébergement de volumes permet de migrer un volume transféré d'un SVM vers un autre SVM sans la copie des données. L'opération de réhébergement vous permet de consolider tous les volumes qui possèdent des LUN FC dans un seul SVM, tout en préservant la sémantique de l'image de système unique (SSI) 7-mode. Vous pouvez également réhébergement de volumes NAS ayant fait l'objet de transition.
+
+* Le volume que vous souhaitez ré-héberger doit être en ligne.
+* Les opérations de gestion de volumes, telles que le déplacement de volumes ou de LUN, ne doivent pas être en cours d'exécution.
+* L'accès aux données au volume qui est réhébergé doit être arrêté.
++
+Le réhébergement représente aussi une opération disruptive.
+
+
+
+Les règles de volume, les règles de stratégie et les configurations suivantes ne sont pas conservées depuis le volume source. Elles doivent être reconfigurées manuellement sur le volume réhébergé après le réhébergement :
+
+* Règles d'exportation de volumes et de qtrees
+* Politiques antivirus
+* Règle d'efficacité du volume
+* Règles de qualité de services
+* Règles relatives aux snapshots
+* Règles de quotas
+* Partages CIFS
+* groupes initiateurs associés à un ensemble de ports
+
+
+.Étapes
+* *Réhébergement de volumes FC et iSCSI*
++
+.. Passer au niveau de privilège avancé : +
+`*set -privilege advanced*`
+.. Réhébergement « volume » sur le SVM de destination :
++
+|===
+| Les fonctions que vous recherchez... | Exécutez la commande suivante... 
+
+
+ a| 
+Annulez le mappage des LUN après le réhébergement
+ a| 
+`*volume rehost -vserver _source_svm_ -volume _vol_name_ -destination-vserver _destination_svm_ -force–unmap-luns true*`
+
+
+
+ a| 
+Remappage des LUN sur les mêmes groupes initiateurs après le réhébergement
+ a| 
+`*volume rehost -vserver _source_svm_ -volume _vol_name_ -destination-vserver _destination_svm_ -auto-remap-luns true*`
+
+|===
+
+
+* *Réhébergement de volumes NFS*
++
+.. Enregistrer des informations sur les règles d'exportation NFS.
+.. Démontez le volume du volume parent : +
+`*volume unmount*`
+.. Basculer vers le niveau de privilège avancé :
+`*set -privilege advanced*`
+.. Réhébergement outre-mesure le volume aussi bien sur le SVM de destination : +
+`*volume rehost -vserver _source_svm_ -volume _vol_name_ -destination-vserver _destination_svm_*`
++
+La export policy par défaut du SVM de destination est appliquée au volume réhébergé.
+
+.. Créer la export policy : +
+`*vserver export-policy create*`
+.. Mettre à jour les export policy du volume réhébergé vers une export policy définie par l'utilisateur : +
+`*volume modify*`
+.. Monter le volume sous la Junction path appropriée dans le SVM de destination : +
+`*volume mount*`
+.. Vérifier que le service NFS s'exécute sur le SVM de destination : +
+`*vserver nfs status*`
+.. Reprenez l'accès NFS au volume hébergé.
++
+Étant donné que le chemin d'accès aux volumes (LIF et Junction path) a subi des modifications, vous devez mettre à jour les identifiants du client NFS et les configurations LIF pour refléter les LIF du SVM de destination.
+
+
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+
+* *Réhébergement de volumes CIFS*
++
+.. Enregistrez des informations sur les partages CIFS.
+.. Démontez le volume du volume parent : +
+`*volume unmount*`
+.. Passer au niveau de privilège avancé : +
+`*set -privilege advanced*`
+.. Réhébergement outre-mesure le volume aussi bien sur le SVM de destination : +
+`*volume rehost -vserver _source_svm_ -volume _vol_name_ -destination-vserver _destination_svm_*`
+.. Monter le volume sous la Junction path appropriée dans le SVM de destination : +
+`*volume mount*`
+.. Créer des partages CIFS pour le volume réhébergé : +
+`*vserver cifs share create*`
+.. Si les domaines DNS diffèrent entre les SVM source et destination, créez de nouveaux utilisateurs et groupes.
+.. Mettre à jour le client CIFS avec les nouvelles LIFs du SVM de destination et Junction path vers le volume rehébergé.
+
+
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-cifs/home.html["Gestion SMB/CIFS"]
+
+* *Réhébergement de volumes dans les relations SnapMirror*
++
+.. Enregistrer le type de relation SnapMirror : +
+`*snapmirror show*`
+.. Depuis le cluster de destination, supprimer la relation SnapMirror : +
+`*snapmirror delete*`
++
+
+IMPORTANT: Vous ne devez pas interrompre la relation SnapMirror ; sinon, la capacité de protection des données du volume de destination est perdue et la relation ne peut pas être rétablie après l'opération de réhébergement.
+
+.. Depuis le cluster source, libérer les informations relatives à la relation SnapMirror : +
+`*snapmirror release*`
++
+Lorsque vous définissez le paramètre -relationinfo-seulement sur true, ainsi, les copies Snapshot ne sont pas supprimées et seules les informations concernant les relations source sont supprimées.
+
+.. Passer au niveau de privilège avancé : +
+`*set -privilege advanced*`
+.. Réhébergement outre-mesure le volume aussi bien sur le SVM de destination : +
+`*volume rehost -vserver _source_svm_ -volume _vol_name_ -destination-vserver _destination_svm_*`
+.. Créer la relation SVM peer-to-peer entre les SVM source et destination : +
+`*vserver peer create*`
+.. Créer la relation SnapMirror entre les volumes source et de destination : +
+`*snapmirror create*`
++
+Le volume réhébergé peut être la source ou la destination de la relation SnapMirror.
+
+.. Resynchroniser la relation de protection des données : +
+`*snapmirror resync*`
+
+
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-dap/home.html["Protection des données"]
+
+
+
+Vous devez créer manuellement les charges de travail d'autovolume pour les volumes réhébergés en procédant comme suit :
+
+. Créer un « policy group » défini par l'utilisateur pour la SVM :
++
+`*qos policy-group create -vserver _destination-vserver_ -policy-group _policy-group-name_*`
+
+. Attribuez la « policy group » QoS au volume réhébergé :
++
+`*volume modify -vserver _destination-vserver_ -volume _rehosted-volume_ -qos-policy-_group policy-group-name_*`
+
+
+
+Vous devez reconfigurer manuellement les stratégies et les règles associées sur le volume réhébergé.
+
+
+NOTE: En cas d'échec de l'opération de réhébergement, vous devrez peut-être reconfigurer les stratégies de volume et les règles associées sur le volume source.
+
+*Informations connexes*
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr/GUID-5CB10C70-AC11-41C0-8C16-B4D0DF916E9B.html["Commandes ONTAP 9"]

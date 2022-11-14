@@ -1,0 +1,39 @@
+---
+permalink: san-host/task_preparing_windows_hosts_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, windows, host 
+summary: 'Certaines étapes doivent être réalisées avant de passer d"hôtes Windows de Data ONTAP 7-mode à clustered Data ONTAP.' 
+---
+= Préparation des hôtes Windows pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certaines étapes doivent être réalisées avant de passer d'hôtes Windows de Data ONTAP 7-mode à clustered Data ONTAP.
+
+Cette procédure s'applique aux transitions basées sur la copie et aux transitions sans copie.
+
+
+NOTE: Si vous utilisez Windows 2003, vous devez effectuer une mise à niveau vers Windows 2008. L'outil de correction d'hôte (HRT) n'est pas pris en charge sous Windows 2003 et nécessite Windows 2008 ou version ultérieure pour fonctionner correctement.
+
+.Étapes
+. Identifiez les numéros de série de LUN, les ID de LUN et les numéros de disque physique Windows correspondants des LUN en cours de transition.
++
+** Si votre système exécute Data ONTAP DSM, utilisez le composant logiciel enfichable Data ONTAP DSM Management extension (accessible via Server Manager ou le `get-sandisk` Cmdlet Windows PowerShell).
+** Si votre système exécute MSDSM, utilisez l'outil de collecte d'inventaire (TIC).
+
+
+. Préparez-vous à rendre les LUN visibles pour l'hôte une fois la transition terminée.
++
+** Si les LUN migrées sont des LUN FC ou FCoE, créez ou modifiez la segmentation de la structure.
+** Si les LUN migrées sont des LUN iSCSI, créez des sessions iSCSI qui vous connectent au contrôleur clustered Data ONTAP.
+
+
+. Utilisez les TIC pour générer le manuel d'évaluation d'inventaire.
+
+
+*Informations connexes*
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html["Configuration SAN"]

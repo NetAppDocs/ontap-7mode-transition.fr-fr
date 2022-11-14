@@ -1,0 +1,18 @@
+---
+permalink: san-host/concept_preparing_windows_guest_operating_systems_for_transition.html 
+sidebar: sidebar 
+keywords: ontap, san, host, transition, windows, guest, operating, systems 
+summary: 'Si vos machines virtuelles Windows utilisent des périphériques RDM \(PTRDM\) compatibles physiques, vous devez mettre les disques hors ligne sur la machine virtuelle Windows avant la transition. Vous pouvez utiliser le Gestionnaire de disques pour mettre les disques hors ligne.' 
+---
+= Préparation des systèmes d'exploitation invités Windows pour la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vos machines virtuelles Windows utilisent des périphériques RDM (PTRDM) compatibles physiques, vous devez mettre les disques hors ligne sur la machine virtuelle Windows avant la transition. Vous pouvez utiliser le Gestionnaire de disques pour mettre les disques hors ligne.
+
+* Pour les transitions basées sur les copies, effectuez ces étapes avant de lancer l'opération de mise en service du stockage dans l'outil de transition 7-mode (7MTT).
+* Pour les transitions sans copie, effectuez ces étapes avant de lancer l'opération Exporter et arrêter les systèmes 7-mode dans 7MTT.
+

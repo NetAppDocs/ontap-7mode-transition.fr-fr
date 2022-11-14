@@ -1,0 +1,44 @@
+---
+permalink: copy-based/task_completing_transition_process.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, complete 
+summary: 'Comme l"opération complète est perturbatrice, vous devez évaluer quand l"exécuter. Lors de la transition de volumes dans une relation SnapMirror, le projet secondaire doit être terminé avant la fin de la transition du projet principal.' 
+---
+= Fin de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Comme l'opération complète est perturbatrice, vous devez évaluer quand l'exécuter. Lors de la transition de volumes dans une relation SnapMirror, le projet secondaire doit être terminé avant la fin de la transition du projet principal.
+
+.Étapes
+. Réaliser une copie des données des volumes 7-mode vers les volumes ONTAP :
++
+`*transition cbt update -p _project_name_ -t _available-transfers-percentage_ -c _snapmirror-throttlemax-cap-concurrent-transfers_ -x -r interactive*`
+
++
+Cela permet de réduire les temps d'indisponibilité lors de la mise en service du stockage.
+
+. Manuel : déconnecter l'accès client.
+. Terminez le processus de transition :
++
+`*transition cbt cutover -p _project_name_ -t _available-transfers-percentage_ -c _max-cap-concurrent-transfers_ -x _snapmirror-throttle_ -r interactive -o [true|false]*`
+
++
+Par défaut, les volumes 7-mode sont mis hors ligne. Pour conserver les volumes 7-mode en ligne, configurez le `-o` option à `false`.
+
++
+
+NOTE: Si la mise en service n'a pas réussi pour une raison quelconque, par exemple, le système 7-mode ou le cluster n'est pas accessible, vous devez résoudre les problèmes et exécuter le `transition cutover` commande de nouveau.
+
++
+Pour plus d'informations sur les commandes, consultez les pages de manuels.
+
++
+La session de transition passe à l'état de mise en service. Si la mise en service est réussie, la session passe à l'état terminé.
+
+
+
+Vous devez effectuer toutes les tâches post-transition, puis reconnecter les clients aux volumes ONTAP.

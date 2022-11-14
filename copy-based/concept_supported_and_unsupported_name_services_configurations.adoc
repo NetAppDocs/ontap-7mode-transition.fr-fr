@@ -1,0 +1,69 @@
+---
+permalink: copy-based/concept_supported_and_unsupported_name_services_configurations.html 
+sidebar: sidebar 
+keywords: ontap, copy, based, transition, name, services, required, manual, steps, supported, unsupported 
+summary: 'Vous devez connaître les configurations de services de noms migrées par l"outil 7-mode transition Tool. Certaines configurations de services de noms ne sont pas migrées vers ONTAP car elles ne sont pas prises en charge dans ONTAP ou qui doivent être migrées manuellement.' 
+---
+= Transition des services de noms : configurations prises en charge et non prises en charge et étapes manuelles requises
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les configurations de services de noms migrées par l'outil 7-mode transition Tool. Certaines configurations de services de noms ne sont pas migrées vers ONTAP car elles ne sont pas prises en charge dans ONTAP ou qui doivent être migrées manuellement.
+
+Vous devez vérifier tous les messages d'erreur et d'avertissement de pré-contrôle pour évaluer l'impact de ces configurations sur la transition.
+
+
+
+== Configurations qui sont migrées
+
+À un niveau élevé, les configurations de services de noms suivantes sont migrées par l'outil de transition 7-mode :
+
+* Configuration DNS (`/etc/resolv.conf`)
+* Configuration LDAP
+* Configuration NIS
+* Nommer la configuration du commutateur de service (`/etc/nsswitch.conf` et `/etc/resolv.conf`)
+* Configuration d'hôtes (`/etc/hosts`)
+* Utilisateurs et groupes UNIX (`/etc/passwd` et `/etc/group`)
+* Configuration netGroups (`/etc/netgroup`)
+
+
+Pour plus d'informations sur ces configurations de services de noms, reportez-vous aux résultats de contrôle préalable.
+
+
+
+== Configurations non prises en charge dans ONTAP
+
+* Esclave NIS
+* Diffusion NIS
+* Mise en cache des groupes NIS
+* DNS dynamique
+* Cache DNS
+* Base de données des clichés instantanés
+* Sources de base de données hôte autres que fichier ou DNS
++
+ONTAP ne prend en charge que les fichiers et DNS pour la recherche d'hôtes, mais pas les autres sources de bases de données. Ordre de recherche de l'hôte dans `/etc/nsswitch.conf` est ignorée pendant la transition.
+
+
+
+
+
+== Configurations qui doivent être configurées manuellement
+
+Vous devez configurer manuellement les options LDAP suivantes sur les SVM :
+
+* `ldap.usermap.attribute.unixaccount`
+* `ldap.password`
+* `ldap.usermap.base`
+* `ldap.ssl.enable`
+
+
+*Informations connexes*
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestion du réseau et de la LIF/ONTAP 9.7 et versions antérieures"]
+
+https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion de Network et LIF/ONTAP 9.8 et versions ultérieures"]
