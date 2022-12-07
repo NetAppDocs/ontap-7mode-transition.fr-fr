@@ -11,14 +11,28 @@ summary: 'Vous pouvez effectuer la transition de volumes 7-mode dans un environn
 
 
 [role="lead"]
-Vous pouvez effectuer la transition de volumes 7-mode dans un environnement NAS et SAN vers des volumes clustered Data ONTAP à l'aide des commandes clustered Data ONTAP SnapMirror. Vous devez ensuite configurer les protocoles, les services et l'autre configuration sur le cluster une fois la transition terminée.
+Depuis ONTAP 9.12.1, vous ne pouvez plus transférer les volumes 7-mode à l'aide de la technologie SnapMirror.
 
-*Recommandation :* il est conseillé d'utiliser l'outil 7-mode transition Tool pour la transition des volumes 7-mode en fonction des copies, car l'outil fournit des contrôles préalables pour vérifier à la fois les volumes 7-mode et le cluster à chaque étape du processus de migration, ce qui vous aide à éviter de nombreux problèmes potentiels. Cet outil simplifie considérablement la migration de tous les protocoles, réseaux et configurations de services, ainsi que la migration des données.
+Toutefois, pour ONTAP 9.11.1 et les versions antérieures, vous pouvez effectuer la transition des volumes 7-mode dans un environnement NAS et SAN vers des volumes clustered Data ONTAP à l'aide des commandes SnapMirror de clustered Data ONTAP. Vous devez ensuite configurer les protocoles, les services et les autres configurations sur le cluster une fois la transition terminée.
+
+*Recommandation :* vous devez utiliser l'outil de transition 7-mode pour effectuer la transition des volumes 7-mode à partir des versions ONTAP 9.11.1 et précédentes car l'outil fournit des pré-contrôles afin de vérifier à chaque étape du processus de migration les volumes 7-mode et le cluster, ce qui vous permet d'éviter de nombreux problèmes potentiels. Cet outil simplifie considérablement la migration de tous les protocoles, réseaux et configurations de service, ainsi que la migration de données.
 
 http://docs.netapp.com/us-en/ontap-7mode-transition/releasenotes.html["Notes de version de l'outil 7-mode transition Tool"]
 
 Cette procédure fournit les tâches générales dont vous devez effectuer la transition à l'aide de SnapMirror.
 
+[NOTE]
+====
+Avant de passer à ONTAP 9.12.1, vous devez effectuer les opérations suivantes :
+
+.Étapes
+. Lancer la commande suivante pour rendre le volume de destination SnapMirror inscriptible :
+`snapmirror break`
+. Lancer la commande suivante pour supprimer toutes les relations TDP SnapMirror :
+`snapmirror delete`
+
+
+====
 . xref:concept_planning_for_transition.adoc[Vérifiez que les volumes que vous prévoyez de passer sont pris en charge pour la transition].
 . xref:task_preparing_7_mode_system_for_transition.adoc[Préparez le système 7-mode à la transition].
 . xref:task_preparing_cluster_for_transition.adoc[Préparer le cluster pour la transition].

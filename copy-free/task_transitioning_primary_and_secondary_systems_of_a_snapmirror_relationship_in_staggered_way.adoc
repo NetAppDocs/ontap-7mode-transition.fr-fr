@@ -51,8 +51,8 @@ xref:task_performing_copy_free_transition_of_7_mode_aggregates.adoc[Transition d
 +
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
 
-.. Utilisez le `snapmirror delete` Commande permettant de supprimer la relation SnapMirror DP entre le volume primaire 7-mode et le volume secondaire ONTAP créé à l'étape ,#SUBSTEP_D528769DF8EC49058D1958565914CF47.
-.. Supprimez la planification de tâche cron créée à l'étape ,SOUS-ÉTAPE_EB470706425C45759EAAE8F0A87BA547: +
+.. Utilisez le `snapmirror delete` Commande permettant de supprimer la relation SnapMirror DP entre le volume primaire 7-mode et le volume secondaire ONTAP créé à l'étape <<SUBSTEP_D528769DF8EC49058D1958565914CF47,#SUBSTEP_D528769DF8EC49058D1958565914CF47>>.
+.. Supprimez la planification de tâche cron créée à l'étape <<SUBSTEP_EB470706425C45759EAAE8F0A87BA547,SOUS-ÉTAPE_EB470706425C45759EAAE8F0A87BA547>>: +
 `*job schedule cron delete*`
 .. Créez une relation SnapMirror volume entre les volumes primaires et secondaires ayant fait l'objet d'une transition.
 +

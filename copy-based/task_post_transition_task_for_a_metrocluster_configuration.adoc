@@ -20,5 +20,5 @@ La mise en service du stockage pour le site actif 7-mode doit avoir été réali
 +
 image::../media/mcc_cron_jobs.gif[tâches mcc cron]
 
-. Sur l'interface de ligne de commandes du cluster du site distant, exécutez la `job schedule cron create` commandes enregistrées dans ,Étape 1.
+. Sur l'interface de ligne de commandes du cluster du site distant, exécutez la `job schedule cron create` commandes enregistrées dans <<STEP_F72D5FA759564336A365328A3414D57A,Étape 1>>.
 

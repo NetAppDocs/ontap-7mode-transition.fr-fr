@@ -73,6 +73,7 @@ Pour les chemins d'accès multiples, vous devez avoir deux LIF intercluster sur 
 
 https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion du réseau et des LIF"]
 
+.Informations associées
 xref:task_creating_a_transition_peering_relationship.adoc[Création d'une relation de transition peer-to-peer]
 
 https://mysupport.netapp.com/site/docs-and-kb["Documentation NetApp : bibliothèque de produits De A à Z"]

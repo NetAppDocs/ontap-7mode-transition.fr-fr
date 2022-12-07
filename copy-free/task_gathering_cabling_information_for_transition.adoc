@@ -80,7 +80,7 @@ La sélection des ports de destination dépend de certains des facteurs suivants
 +
 .. Enregistrez les ports utilisés sur les contrôleurs 7-mode dans la fiche de câblage.
 .. Enregistrez les ports utilisés sur les nœuds de cluster cible dans la fiche de câblage.
-.. Enregistrez les ports de destination à utiliser pour la connexion des tiroirs disques 7-mode, comme prévu à l'étape ,#STEP_D0CFE719A0384F7FA5D9E73C8EA6C2E7.
+.. Enregistrez les ports de destination à utiliser pour la connexion des tiroirs disques 7-mode, comme prévu à l'étape <<STEP_D0CFE719A0384F7FA5D9E73C8EA6C2E7,#STEP_D0CFE719A0384F7FA5D9E73C8EA6C2E7>>.
 .. Vérifiez que vous disposez des câbles appropriés pour connecter les tiroirs disques.
 +
 Vous devez identifier les éventuels problèmes de câblage en fonction du nouvel emplacement de la pile de tiroirs disques.
