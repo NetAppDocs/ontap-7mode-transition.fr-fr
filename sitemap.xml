@@ -125,14 +125,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/concept_considerations_for_space_when_transitioning_san_volumes.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/concept_considerations_for_space_when_transitioning_san_volumes.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/concept_considerations_for_space_when_transitioning_san_volumes.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/concept_considerations_for_space_when_transitioning_san_volumes.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -216,14 +216,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/concept_considerations_for_using_snapmirror_for_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/concept_considerations_for_using_snapmirror_for_transition.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/concept_considerations_for_using_snapmirror_for_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/concept_considerations_for_using_snapmirror_for_transition.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -741,14 +741,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/concept_storage_and_host_version_requirements.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/concept_storage_and_host_version_requirements.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/concept_storage_and_host_version_requirements.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/concept_storage_and_host_version_requirements.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -804,14 +804,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/concept_supported_configurations_for_generating_an_fc_zone_plan.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/concept_supported_configurations_for_generating_an_fc_zone_plan.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/concept_supported_configurations_for_generating_an_fc_zone_plan.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/concept_supported_configurations_for_generating_an_fc_zone_plan.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1028,6 +1028,13 @@
     </url>
   
     <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/generic_machine_translation_disclaimer.html</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/install-admin/generic_machine_translation_disclaimer.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
@@ -1049,7 +1056,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/generic_machine_translation_disclaimer.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1070,7 +1084,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1084,21 +1098,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/san-host/</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1182,6 +1182,20 @@
     </url>
   
     <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/reference_copyright.html</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/reference_copyright.html</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/install-admin/reference_copyright.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
@@ -1196,7 +1210,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/reference_copyright.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/reference_copyright.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1210,13 +1224,6 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/reference_copyright.html</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/san-host/reference_copyright.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
@@ -1224,7 +1231,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/reference_copyright.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/reference_copyright_and_trademark.html</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/reference_copyright_and_trademark.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1245,7 +1259,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/reference_copyright_and_trademark.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/reference_copyright_and_trademark.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1259,21 +1273,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/reference_copyright_and_trademark.html</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/san-host/reference_copyright_and_trademark.html</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/reference_copyright_and_trademark.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1392,6 +1392,20 @@
     </url>
   
     <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/reference_trademark.html</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/reference_trademark.html</loc>
+      
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      
+    </url>
+  
+    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/install-admin/reference_trademark.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
@@ -1406,7 +1420,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/command-map/reference_trademark.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/reference_trademark.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1420,21 +1434,7 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/reference_trademark.html</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/san-host/reference_trademark.html</loc>
-      
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
-      
-    </url>
-  
-    <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/reference_trademark.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -1471,7 +1471,7 @@
     <url>
       <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition//search.html</loc>
       
-      <lastmod>2022-12-07T18:27:56+00:00</lastmod>
+      <lastmod>2022-12-15T12:14:03+00:00</lastmod>
       
     </url>
   
@@ -1861,14 +1861,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/task_generating_fc_zone_plan.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/task_generating_fc_zone_plan.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/task_generating_fc_zone_plan.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/task_generating_fc_zone_plan.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -2022,14 +2022,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/task_preparing_7_mode_system_for_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/task_preparing_7_mode_system_for_transition.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/task_preparing_7_mode_system_for_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/task_preparing_7_mode_system_for_transition.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -2050,14 +2050,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/task_preparing_7_mode_systems_for_inventory_collection.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/task_preparing_7_mode_systems_for_inventory_collection.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-free/task_preparing_7_mode_systems_for_inventory_collection.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/inventory-collect/task_preparing_7_mode_systems_for_inventory_collection.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
@@ -2078,16 +2078,16 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/task_preparing_cluster_for_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/task_preparing_cluster_for_transition.html</loc>
       
-      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
+      <lastmod>2022-12-07T18:27:40+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/task_preparing_cluster_for_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/task_preparing_cluster_for_transition.html</loc>
       
-      <lastmod>2022-12-07T18:27:40+00:00</lastmod>
+      <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
@@ -2344,14 +2344,14 @@
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/task_recovering_from_a_failed_lun_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/task_recovering_from_a_failed_lun_transition.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
     </url>
   
     <url>
-      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/snapmirror/task_recovering_from_a_failed_lun_transition.html</loc>
+      <loc>https://docs.netapp.com/fr-fr/ontap-7mode-transition/copy-based/task_recovering_from_a_failed_lun_transition.html</loc>
       
       <lastmod>2022-11-15T00:04:37+00:00</lastmod>
       
