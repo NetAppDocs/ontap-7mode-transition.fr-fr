@@ -11,24 +11,31 @@ summary: Vous pouvez effectuer la transition des volumes SnapLock 7-mode vers le
 
 
 [role="lead"]
-Vous pouvez effectuer la transition des volumes SnapLock 7-mode vers les volumes SnapLock créés dans ONTAP 9.5 ou version antérieure. Vous devez connaître les exigences et les consignes relatives à la transition des volumes SnapLock.
+Pour migrer des volumes SnapLock 7-mode vers ONTAP 9, vous devez connaître ces exigences et ces instructions.
 
 * La transition des volumes SnapLock 7-mode n'est pas prise en charge si les volumes SnapLock contiennent des LUN.
-* Vous pouvez effectuer la transition des volumes SnapLock Enterprise 7-mode uniquement vers les volumes SnapLock Enterprise dans ONTAP 9.5 ou version antérieure.
-* Vous pouvez effectuer la transition de volumes de conformité SnapLock 7-mode vers des volumes SnapLock Compliance dans ONTAP 9.5 ou version antérieure.
+* Vous pouvez migrer des volumes SnapLock Enterprise 7-mode vers des volumes SnapLock Enterprise dans n'importe quelle version de ONTAP 9, à l'exception de ONTAP 9.6.
+* Vous pouvez transférer des volumes SnapLock Compliance 7-mode vers des volumes SnapLock Compliance dans n'importe quelle version de ONTAP 9, à l'exception de ONTAP 9.6.
 * Lors de la transition d'une relation SnapMirror volume 7-mode, la transition échelonnée (secondaire d'abord puis primaire) ne s'applique qu'aux volumes SnapLock Enterprise.
 +
 La relation de reprise après incident SnapMirror entre les volumes primaires 7-mode et les volumes secondaires ONTAP est prise en charge uniquement pour les volumes SnapLock Enterprise, mais pas pour les volumes SnapLock Compliance.
 
 +
-xref:task_transitioning_a_data_protection_relationship.adoc[Faire l'adoption d'une relation SnapMirror volume dans une configuration échelonnée]
+xref:task_transitioning_a_data_protection_relationship.adoc[Transition d'une relation SnapMirror volume dans une configuration échelonnée^]
 
 * Vous devez effectuer la transition d'une relation SnapMirror volume 7-mode entre des volumes SnapLock Compliance en migrant les volumes primaire et secondaire en parallèle.
 +
-xref:task_transitioning_a_volume_snapmirror_relationship_in_parallel.adoc[Transition d'une relation SnapMirror volume en parallèle]
+xref:task_transitioning_a_volume_snapmirror_relationship_in_parallel.adoc[Transition d'une relation SnapMirror volume en parallèle^]
+
+* À partir de ONTAP 9.10.1, des volumes SnapLock et non SnapLock peuvent être créés dans le même agrégat.
++
+Pour effectuer la transition de volumes SnapLock 7-mode vers ONTAP 9.10.1 ou version ultérieure, vous devez créer manuellement les volumes ONTAP avec `-snaplock-type {non-snaplock|compliance|enterprise}` drapeau. Une fois les volumes créés manuellement, gérez la transition avec l'outil 7-mode transition Tool.
+
++
+Si vous créez un volume dans ONTAP 9.10.1 ou une version ultérieure à l'aide de l'outil 7-mode transition Tool, le volume n'est pas créé en tant que volume SnapLock et la base SnapMirror est défaillante.
 
 
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-arch-con/home.html["Archivage et conformité grâce à la technologie SnapLock"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-arch-con/home.html["Archivage et conformité grâce à la technologie SnapLock"^]

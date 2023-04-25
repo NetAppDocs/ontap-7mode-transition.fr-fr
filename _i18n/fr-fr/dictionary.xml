@@ -3832,15 +3832,10 @@
   <block id="d7b115c16739a449f3e88597cc6259c8" category="paragraph"><block ref="d7b115c16739a449f3e88597cc6259c8" category="inline-xref-macro-rx"></block></block>
   <block id="9ab93b9801d24dd493ae9317fa868d24" category="summary">Vous pouvez effectuer la transition des volumes SnapLock 7-mode vers les volumes SnapLock créés dans ONTAP 9.5 ou version antérieure. Vous devez connaître les exigences et les consignes relatives à la transition des volumes SnapLock.</block>
   <block id="9775f07e175b548ab2bd419f19070f93" category="list-text">La transition des volumes SnapLock 7-mode n'est pas prise en charge si les volumes SnapLock contiennent des LUN.</block>
-  <block id="cf4fd90637510c596991d81db7107f4e" category="list-text">Vous pouvez effectuer la transition des volumes SnapLock Enterprise 7-mode uniquement vers les volumes SnapLock Enterprise dans ONTAP 9.5 ou version antérieure.</block>
-  <block id="0c8ef814c009d3861680ce164fba0dec" category="list-text">Vous pouvez effectuer la transition de volumes de conformité SnapLock 7-mode vers des volumes SnapLock Compliance dans ONTAP 9.5 ou version antérieure.</block>
   <block id="8a7eb801e6d32d53d8569ffc29d3b3b4" category="list-text">Lors de la transition d'une relation SnapMirror volume 7-mode, la transition échelonnée (secondaire d'abord puis primaire) ne s'applique qu'aux volumes SnapLock Enterprise.</block>
   <block id="f49c7c11d30827c5826315411d6e270b" category="paragraph">La relation de reprise après incident SnapMirror entre les volumes primaires 7-mode et les volumes secondaires ONTAP est prise en charge uniquement pour les volumes SnapLock Enterprise, mais pas pour les volumes SnapLock Compliance.</block>
-  <block id="1cde198e883c2df917f6d51bae4a77b1" category="paragraph"><block ref="1cde198e883c2df917f6d51bae4a77b1" category="inline-xref-macro-rx"></block></block>
   <block id="49b288fe4fe7fdfa9bacf0edfbf42dd0" category="list-text">Vous devez effectuer la transition d'une relation SnapMirror volume 7-mode entre des volumes SnapLock Compliance en migrant les volumes primaire et secondaire en parallèle.</block>
-  <block id="bbdb7841fc38b8d7be1d2a2b7d6c3514" category="paragraph"><block ref="bbdb7841fc38b8d7be1d2a2b7d6c3514" category="inline-xref-macro-rx"></block></block>
   <block id="0fa5978d853b9b8f9a804a9ddf7dacd7" category="inline-link">Archivage et conformité grâce à la technologie SnapLock</block>
-  <block id="acd084e701650a06feecd55f2315ff07" category="paragraph"><block ref="acd084e701650a06feecd55f2315ff07" category="inline-link-rx"></block></block>
   <block id="78390fb015afc9c38c53377d17fcab49" category="summary">Vous devez configurer le cluster avant de transférer un système 7-mode et vérifier que le cluster répond aux exigences telles que la configuration de LIF et la vérification de la connectivité réseau pour la transition.</block>
   <block id="9218a522ea0675ebb288cbdfd9eb1fe6" category="list-text">Le cluster doit être accessible via le LIF de gestion du cluster.</block>
   <block id="a148b5b951595ea993a998bf8c4e3557" category="paragraph">Vous pouvez configurer des LIF locales qui se trouvent dans l'IPspace par défaut ou les LIF intercluster sur chaque nœud du cluster pour communiquer entre le cluster et les systèmes 7-mode. Si vous avez configuré des LIF locales, il n'est pas nécessaire de configurer les LIF intercluster. Si vous avez configuré à la fois les LIFs intercluster et locales, alors les LIFs locales sont préférables.</block>
@@ -7402,4 +7397,15 @@
   <block id="30f60d67f457bb040dffde52197a54da" category="paragraph-title">Informations associées</block>
   <block id="bcb3bf3e1c3ba469a7b1637a41c81602" category="list-text">ONTAP 9.9.1 et versions ultérieures</block>
   <block id="3b6e2da5c7b4f7bde13de4a566801528" category="list-text">ONTAP 9.10.1 et versions ultérieures</block>
+  <block id="02c0afc6dc57e30e77048bd78577f569" category="paragraph">Pour migrer des volumes SnapLock 7-mode vers ONTAP 9, vous devez connaître ces exigences et ces instructions.</block>
+  <block id="3c6e2b20b81b258a6d07d897dcbc8837" category="list-text">Vous pouvez migrer des volumes SnapLock Enterprise 7-mode vers des volumes SnapLock Enterprise dans n'importe quelle version de ONTAP 9, à l'exception de ONTAP 9.6.</block>
+  <block id="608d66a1ffc83b62ff9b96b7a6066895" category="list-text">Vous pouvez transférer des volumes SnapLock Compliance 7-mode vers des volumes SnapLock Compliance dans n'importe quelle version de ONTAP 9, à l'exception de ONTAP 9.6.</block>
+  <block id="d36c067563923a380ef9881a94cc42b6" category="inline-xref-macro">Transition d'une relation SnapMirror volume dans une configuration échelonnée^</block>
+  <block id="0cd6f41df3c2d79cbd91a1447c9355fe" category="paragraph"><block ref="0cd6f41df3c2d79cbd91a1447c9355fe" category="inline-xref-macro-rx"></block></block>
+  <block id="17fe715938ef8ba6b00ab8211c5adc65" category="inline-xref-macro">Transition d'une relation SnapMirror volume en parallèle^</block>
+  <block id="99697f507574bc1c8485cdace03a71af" category="paragraph"><block ref="99697f507574bc1c8485cdace03a71af" category="inline-xref-macro-rx"></block></block>
+  <block id="c905bec502c0652d10ba29c85c9c376b" category="list-text">À partir de ONTAP 9.10.1, des volumes SnapLock et non SnapLock peuvent être créés dans le même agrégat.</block>
+  <block id="856bd2e5c36198b1a4a96c3c36174ff1" category="paragraph">Pour effectuer la transition de volumes SnapLock 7-mode vers ONTAP 9.10.1 ou version ultérieure, vous devez créer manuellement les volumes ONTAP avec<block ref="9febb3295321c7fd9a2154b2dd4fe68c" prefix=" " category="inline-code"></block> drapeau. Une fois les volumes créés manuellement, gérez la transition avec l'outil 7-mode transition Tool.</block>
+  <block id="a0067b25c6979c2f6c86fb81b30b1b94" category="paragraph">Si vous créez un volume dans ONTAP 9.10.1 ou une version ultérieure à l'aide de l'outil 7-mode transition Tool, le volume n'est pas créé en tant que volume SnapLock et la base SnapMirror est défaillante.</block>
+  <block id="b5d693096cb7f86384fa4012d1d2a0cb" category="paragraph"><block ref="b5d693096cb7f86384fa4012d1d2a0cb" category="inline-link-rx"></block></block>
 </blocks>
