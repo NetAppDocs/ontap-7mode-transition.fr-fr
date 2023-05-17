@@ -37,11 +37,11 @@ xref:task_transitioning_a_stand_alone_volume.adoc[Faire la transition d'un volum
 
 . Créer une relation SVM intercluster entre les SVM contenant les volumes primaires et secondaires ayant fait l'objet d'une transition
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
+https://["Administration du système"]
 
 . Créez une relation SnapMirror volume entre les volumes primaires et secondaires ayant fait l'objet d'une transition.
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-sm-ic-cg/home.html["Préparation rapide de la reprise après sinistre en volume"]
+https://["Préparation rapide de la reprise après sinistre en volume"]
 
 . Sur le volume de destination, faire une resynchronisation du volume source et du volume de destination de la relation SnapMirror.
 +

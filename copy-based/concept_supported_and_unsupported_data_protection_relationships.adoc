@@ -28,7 +28,7 @@ Vous pouvez effectuer la transition de relations SnapMirror volume à l'aide de 
 Il est possible de migrer des volumes qui sont à l'origine d'une relation SnapVault ; toutefois, la relation SnapVault n'est pas transférée. Un volume faisant l'objet d'une relation SnapVault ne peut être migré qu'après l'arrêt des sauvegardes SnapVault.
 
 +
-http://www.netapp.com/us/media/tr-4052.pdf["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"]
+http://["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"]
 
 * Relations SnapMirror qtree
 +
@@ -43,7 +43,7 @@ Il est possible de migrer les volumes à la source d'une unité vFiler de repris
 Une fois la transition terminée, vous devez définir manuellement les règles de sauvegarde pour les volumes transférés dans ONTAP.
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ptbrg/home.html["Protection des données par sauvegarde sur bandes"]
+https://["Protection des données par sauvegarde sur bandes"]
 
 * Relations SnapMirror synchrones
 +

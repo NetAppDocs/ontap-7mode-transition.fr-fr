@@ -38,4 +38,4 @@ L'outil de transition 7-mode ne transfère que les règles d'exportation persist
 
 *Informations connexes*
 
-http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]
+http://["Documentation NetApp : ONTAP 9"]

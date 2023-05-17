@@ -35,4 +35,4 @@ Si le nombre total d'utilisateurs et de groupes qui effectuent la transition UNI
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+https://["Gestion NFS"]

@@ -107,4 +107,4 @@ Les configurations NFS suivantes sont fonctionnelles différentes dans ONTAP :
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+https://["Gestion NFS"]

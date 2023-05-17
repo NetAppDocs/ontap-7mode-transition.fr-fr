@@ -36,21 +36,21 @@ Une fois cette erreur ignorable ajoutée au projet, l'outil de transition 7-mode
  a| 
 `nfs-qtrees-exported`
  a| 
-En accusant cette erreur, vous avez compris les différences d'application des règles d'exportation qtree entre Data ONTAP 7-mode et ONTAP. Par ailleurs, vous avez compris les étapes manuelles nécessaires après l'application des règles d'export NFS par l'outil de transition 7-mode. https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/7MTT_Precheck_10111_-_How_to_transition_7-Mode_volumes_that_have_qtree_level_exports["7MTT Precheck 10111 : Comment effectuer la transition des volumes 7-mode avec des exportations de niveau qtree"]
+En accusant cette erreur, vous avez compris les différences d'application des règles d'exportation qtree entre Data ONTAP 7-mode et ONTAP. Par ailleurs, vous avez compris les étapes manuelles nécessaires après l'application des règles d'export NFS par l'outil de transition 7-mode. https://["7MTT Precheck 10111 : Comment effectuer la transition des volumes 7-mode avec des exportations de niveau qtree"]
 
 
 
  a| 
 `ignore-cifs-ad-domain-mismatch`
  a| 
-Si vous reconnaissez cette erreur, 7-mode transition Tool continue à opérer la transition des configurations CIFS, même si le domaine CIFS Active Directory (AD) du système 7-mode est différent du domaine CIFS AD de la SVM cible. Il faut s'assurer que les domaines CIFS AD du système 7-mode et le SVM cible sont des domaines de confiance. Dans le cas contraire, la transition des configurations CIFS vers la SVM cible échoue. https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_transition_CIFS_configurations_when_Active_Directory_Domain_of_CIFS_server_on_7-Mode_and_target_SVM_are_different["Comment effectuer la transition des configurations CIFS lorsque le domaine Active Directory du serveur CIFS sur les SVM 7-mode et cible sont différents"]
+Si vous reconnaissez cette erreur, 7-mode transition Tool continue à opérer la transition des configurations CIFS, même si le domaine CIFS Active Directory (AD) du système 7-mode est différent du domaine CIFS AD de la SVM cible. Il faut s'assurer que les domaines CIFS AD du système 7-mode et le SVM cible sont des domaines de confiance. Dans le cas contraire, la transition des configurations CIFS vers la SVM cible échoue. https://["Comment effectuer la transition des configurations CIFS lorsque le domaine Active Directory du serveur CIFS sur les SVM 7-mode et cible sont différents"]
 
 
 
  a| 
 `ignore-ping-check-from-ic-lifs-to-7mode`
  a| 
-Une fois cette erreur ignorable ajoutée au projet, l'outil 7-mode transition Tool n'exécute pas la vérification pour ping au système de stockage 7-mode depuis les LIFs intercluster du cluster cible.https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/7MTT_cbt_-_How_to_handle_the_scenario_where_7-Mode_data-copy_IP_address["Transition basée sur les copies 7MTT : Comment gérer le scénario dans lequel l'adresse IP de copie des données 7-mode n'est pas accessible depuis les LIF intercluster du cluster cible"]
+Une fois cette erreur ignorable ajoutée au projet, l'outil 7-mode transition Tool n'exécute pas la vérification pour ping au système de stockage 7-mode depuis les LIFs intercluster du cluster cible.https://["Transition basée sur les copies 7MTT : Comment gérer le scénario dans lequel l'adresse IP de copie des données 7-mode n'est pas accessible depuis les LIF intercluster du cluster cible"]
 
 
 
@@ -64,7 +64,7 @@ Une fois cette erreur ignorable ajoutée au projet, l'outil 7-mode transition To
  a| 
 `ignore-configuration-limits-check`
  a| 
-Vous pouvez utiliser cette option pour valider les limites de configuration (erreur de vérification préalable) et poursuivre la transition. En accusant cette erreur, vous comprenez que le temps de mise en service du stockage doit prendre plus de 3 à 8 heures, notamment le temps nécessaire aux opérations d'exportation, d'arrêt et d'importation (les opérations automatisées), et le câblage des tiroirs disques aux nouveaux contrôleurs. https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/Storage_cutover_time_considerations_for_Copy-Free_Transition["Considérations relatives au délai de mise en service du stockage pour la transition sans copie"]
+Vous pouvez utiliser cette option pour valider les limites de configuration (erreur de vérification préalable) et poursuivre la transition. En accusant cette erreur, vous comprenez que le temps de mise en service du stockage doit prendre plus de 3 à 8 heures, notamment le temps nécessaire aux opérations d'exportation, d'arrêt et d'importation (les opérations automatisées), et le câblage des tiroirs disques aux nouveaux contrôleurs. https://["Considérations relatives au délai de mise en service du stockage pour la transition sans copie"]
 
 
 

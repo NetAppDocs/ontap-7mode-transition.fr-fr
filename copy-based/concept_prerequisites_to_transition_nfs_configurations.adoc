@@ -43,4 +43,4 @@ L'outil de transition 7-mode ne transfère que les règles d'exportation persist
 
 xref:concept_how_nfs_exports_are_transitioned.adoc[Mode de transition des exportations NFS]
 
-http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]
+http://["Documentation NetApp : ONTAP 9"]

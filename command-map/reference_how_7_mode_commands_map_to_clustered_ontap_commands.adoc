@@ -859,7 +859,7 @@ vidage
  a| 
 Ne prend pas en charge Vous devez lancer la sauvegarde en utilisant NDMP comme décrit dans la documentation de sauvegarde sur bande. Pour la fonctionnalité dump-to-null, vous devez définir la variable d'environnement NDMP DUMP_TO_NULL.
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ptbrg/home.html["Protection des données par sauvegarde sur bandes"]
+https://["Protection des données par sauvegarde sur bandes"]
 
 |===
 [role="lead"]
@@ -2500,7 +2500,7 @@ Non pris en charge
 
 Vous devez lancer la restauration à l'aide de NDMP, comme décrit dans la documentation relative à la sauvegarde sur bande.
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ptbrg/home.html["Protection des données par sauvegarde sur bandes"]
+https://["Protection des données par sauvegarde sur bandes"]
 
 
 
@@ -4053,7 +4053,7 @@ Ne prend pas en charge Vous devez utiliser l'une des méthodes suivantes, comme 
 * Répliquez le volume d'origine à l'aide de SnapMirror, puis rompez la relation SnapMirror pour effectuer une copie de volume en lecture-écriture.
 
 
-http://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-vsmg%2FGUID-5578BA46-5522-4BA6-B354-5C924B8207B1.html["Guide de gestion du stockage logique"]
+http://["Guide de gestion du stockage logique"]
 
 
 

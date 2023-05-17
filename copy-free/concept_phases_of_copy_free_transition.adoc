@@ -134,4 +134,4 @@ Une fois les agrégats 7-mode validation et la transition terminée, vous ne pou
 
 *Informations connexes*
 
-https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
+https://["Téléchargement NetApp : Config Advisor"]

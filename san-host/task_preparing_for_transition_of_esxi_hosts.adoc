@@ -47,6 +47,6 @@ VMware HA et DRS ne sont pas pris en charge pendant la transition.
 
 *Informations connexes*
 
-http://kb.vmware.com/kb/2032893["Conservation des pools de ressources lors de la désactivation des clusters VMware DRS dans le client Web vSphere"]
+http://["Conservation des pools de ressources lors de la désactivation des clusters VMware DRS dans le client Web vSphere"]
 
-http://kb.vmware.com/kb/1008025["Désactivation de VMware High Availability (HA)"]
+http://["Désactivation de VMware High Availability (HA)"]

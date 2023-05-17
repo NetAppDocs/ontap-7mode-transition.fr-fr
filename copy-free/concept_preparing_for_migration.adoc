@@ -17,4 +17,4 @@ image::../media/delete_me_cft_preparation_workflow.gif[supprimez-moi le flux de 
 
 *Informations connexes*
 
-https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+https://["Matrice d'interopérabilité NetApp"]

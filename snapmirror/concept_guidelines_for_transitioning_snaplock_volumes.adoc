@@ -38,4 +38,4 @@ Si vous créez un volume dans ONTAP 9.10.1 ou une version ultérieure à l'aide 
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-arch-con/home.html["Archivage et conformité grâce à la technologie SnapLock"^]
+https://["Archivage et conformité grâce à la technologie SnapLock"^]

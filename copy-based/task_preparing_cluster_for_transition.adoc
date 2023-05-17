@@ -15,7 +15,7 @@ Avant la transition, vous devez vous assurer que le cluster répond aux exigence
 
 * Le cluster et le SVM doivent déjà être configurés.
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Configuration logicielle"]
+https://["Configuration logicielle"]
 
 +
 Le SVM cible ne doit pas se trouver dans une relation de reprise d'activité de SVM.
@@ -28,7 +28,7 @@ Le SVM cible ne doit pas se trouver dans une relation de reprise d'activité de 
 L'espace supplémentaire est requis pour la mise à niveau du volume transféré vers le format 64 bits.
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+https://["Gestion des disques et des agrégats"]
 
 * Pour établir une relation de SVM peer lors de la transition d'une relation SnapMirror volume, les conditions suivantes doivent être remplies :
 +
@@ -114,7 +114,7 @@ mgmt
 
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
+https://["Administration du système"]
 
 . Créer un LIF intercluster sur chaque node du cluster pour assurer la communication entre le cluster et le système 7-mode :
 +
@@ -165,7 +165,7 @@ system7mode is alive
 Pour les chemins d'accès multiples, vous devez avoir deux LIF intercluster sur chaque nœud.
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestion du réseau et des LIF"]
+https://["Gestion du réseau et des LIF"]
 
 
 

@@ -30,4 +30,4 @@ xref:task_finding_and_removing_32_bit_data_from_source_volumes_and_snapshot_copi
 
 *Informations connexes*
 
-http://www.netapp.com/us/media/tr-3978.pdf["Rapport technique NetApp 3978 : mise à niveau d'agrégats 32 bits en agrégats 64 bits sans déplacement des données : présentation et meilleures pratiques"]
+http://["Rapport technique NetApp 3978 : mise à niveau d'agrégats 32 bits en agrégats 64 bits sans déplacement des données : présentation et meilleures pratiques"]

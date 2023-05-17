@@ -15,4 +15,4 @@ Vous devez connaître les versions de Data ONTAP 7-mode, des hôtes et des commu
 
 Pour obtenir la liste des versions 7-mode, des hôtes et des commutateurs FC pris en charge pour l'évaluation par l'outil Inventory Collect Tool, consultez la matrice d'interopérabilité.
 
-https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+https://["Matrice d'interopérabilité NetApp"]

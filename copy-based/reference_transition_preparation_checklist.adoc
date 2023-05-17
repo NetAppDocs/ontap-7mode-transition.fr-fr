@@ -22,7 +22,7 @@ Avant de commencer la transition, vous devez vérifier que vous avez rempli tout
 
 
  a| 
-Version 7-mode prise en charge https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+Version 7-mode prise en charge https://["Matrice d'interopérabilité NetApp"]
  a| 
 
 

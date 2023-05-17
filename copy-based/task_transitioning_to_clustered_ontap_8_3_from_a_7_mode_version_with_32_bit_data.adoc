@@ -22,4 +22,4 @@ image::../media/32bit_upgrade_path_updated.gif[mise à jour du chemin de mise à
 
 *Informations connexes*
 
-http://www.netapp.com/us/media/tr-3978.pdf["Rapport technique NetApp 3978 : mise à niveau d'agrégats 32 bits en agrégats 64 bits sans déplacement des données : présentation et meilleures pratiques"]
+http://["Rapport technique NetApp 3978 : mise à niveau d'agrégats 32 bits en agrégats 64 bits sans déplacement des données : présentation et meilleures pratiques"]

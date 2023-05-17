@@ -15,7 +15,7 @@ La prise en charge des clusters cibles de transition ONTAP dépend de la méthod
 
 N'oubliez pas de consulter la version actuelle de 7-mode transition Tool _Release Notes_ pour obtenir les dernières informations sur les versions cibles prises en charge et les problèmes connus.
 
-https://docs.netapp.com/us-en/ontap-7mode-transition/releasenotes.html["Notes de version de l'outil 7-mode transition Tool"]
+https://["Notes de version de l'outil 7-mode transition Tool"]
 
 Ces versions ONTAP prennent en charge les transitions basées sur des copies.
 

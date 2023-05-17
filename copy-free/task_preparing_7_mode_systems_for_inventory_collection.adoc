@@ -102,4 +102,4 @@ Pour plus d'informations sur le téléchargement et l'installation du logiciel N
 
 *Informations connexes*
 
-http://mysupport.netapp.com/["Documentation sur le site de support NetApp : mysupport.netapp.com"]
+http://["Documentation sur le site de support NetApp : mysupport.netapp.com"]

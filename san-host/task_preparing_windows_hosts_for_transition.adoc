@@ -36,4 +36,4 @@ NOTE: Si vous utilisez Windows 2003, vous devez effectuer une mise à niveau ver
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html["Configuration SAN"]
+https://["Configuration SAN"]

@@ -87,8 +87,6 @@ Vous devez configurer manuellement les groupes initiateurs liés à un ensemble 
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+https://["Gestion NFS"]
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestion du réseau et de la LIF/ONTAP 9.7 et versions antérieures"]
-
-https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion de Network et LIF/ONTAP 9.8 et versions ultérieures"]
+https://["Gestion du réseau et des LIF"]

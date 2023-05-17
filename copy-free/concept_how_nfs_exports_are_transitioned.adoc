@@ -34,7 +34,7 @@ Pour que les clients NFS puissent monter des qtrees, les qtrees doivent apparten
 * Si le même hôte est spécifié dans la combinaison de listes d'autorisations d'accès en lecture seule, en lecture/écriture et racine, vous devez évaluer les règles d'exportation migrées après la transition afin de déterminer le privilège d'accès approprié pour les hôtes.
 
 
-http://www.netapp.com/us/media/tr-4067.pdf["Rapport technique NetApp 4067 : Guide des meilleures pratiques et de mise en œuvre de NFS"]
+http://["Rapport technique NetApp 4067 : Guide des meilleures pratiques et de mise en œuvre de NFS"]
 
 
 
@@ -165,4 +165,4 @@ Une fois la transition terminée, vous devez évaluer l'impact de l'application 
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]
+https://["Gestion NFS"]

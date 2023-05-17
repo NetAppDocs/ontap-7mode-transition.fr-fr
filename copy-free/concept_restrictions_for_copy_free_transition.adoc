@@ -24,7 +24,7 @@ Les types de volumes suivants ne sont pas pris en charge pour la transition :
 Vous pouvez utiliser des méthodes de transition basées sur hôte pour effectuer la transition de volumes traditionnels.
 
 +
-http://www.netapp.com/us/media/tr-4052.pdf["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"]
+http://["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"]
 
 * Volumes SnapLock
 +

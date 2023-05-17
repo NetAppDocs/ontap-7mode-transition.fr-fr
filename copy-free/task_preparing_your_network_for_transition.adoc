@@ -44,4 +44,4 @@ NOTE: Les adresses IPv6 ne peuvent pas être migrées et doivent être configur�
 
 *Informations connexes*
 
-https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion du réseau et des LIF"]
+https://["Gestion du réseau et des LIF"]

@@ -21,4 +21,4 @@ Après avoir effectué la transition des paires haute disponibilité primaires e
 
 *Informations connexes*
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.onc-sm-help/GUID-DF04A607-30B0-4B98-99C8-CB065C64E670.html["Gestion du cluster via System Manager"]
+https://["Gestion du cluster avec System Manager"]

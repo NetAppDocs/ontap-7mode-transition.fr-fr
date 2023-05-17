@@ -15,4 +15,4 @@ L'outil de transition 7-mode vous permet de collecter l'inventaire des contrôle
 
 N'oubliez pas de consulter la version actuelle de 7-mode transition Tool _Release Notes_ pour obtenir les dernières informations sur les versions cibles prises en charge et les problèmes connus.
 
-http://docs.netapp.com/us-en/ontap-7mode-transition/releasenotes.html["Notes de version de l'outil 7-mode transition Tool"]
+http://["Notes de version de l'outil 7-mode transition Tool"]

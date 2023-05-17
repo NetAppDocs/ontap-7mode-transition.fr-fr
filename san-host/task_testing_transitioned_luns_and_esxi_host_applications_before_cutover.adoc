@@ -78,4 +78,4 @@ Une fois le test terminé, planifiez l'heure d'arrêt de l'hôte source connect�
 
 *Informations connexes*
 
-http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-dctg/home.html["Transition basée sur la copie"]
+http://["Transition basée sur la copie"]

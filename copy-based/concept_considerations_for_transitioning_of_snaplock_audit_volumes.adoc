@@ -19,4 +19,4 @@ En ONTAP, les volumes d'audit sont configurés au niveau du SVM. Dans Data ONTAP
 
 Les volumes d'audit SnapLock sont un type de volume SnapLock Compliance. La transition des volumes d'audit SnapLock n'est pas prise en charge si le cluster cible se trouve dans une configuration MetroCluster.
 
-Voir https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_configure_audit_volume_in_clustered_Data_ONTAP_for_the_transitioned_SnapLock_volumes["Comment configurer un volume d'audit dans clustered Data ONTAP pour les volumes SnapLock transférés"]
+Voir https://["Comment configurer un volume d'audit dans clustered Data ONTAP pour les volumes SnapLock transférés"]

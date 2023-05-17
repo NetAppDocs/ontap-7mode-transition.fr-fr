@@ -104,4 +104,4 @@ La transition n'est pas prise en charge si l'espace libre sur les disques SSD de
 
 xref:reference_ignorable_errors_during_transition.adoc[Erreurs Ignorables pendant la transition]
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+https://["Gestion des disques et des agrégats"]
