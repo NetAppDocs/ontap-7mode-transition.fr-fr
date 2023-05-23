@@ -38,7 +38,7 @@ Nouveaux tiroirs disques et nouveaux disques pour héberger les volumes transfé
  a| 
 Besoins de la plateforme
  a| 
-Pris en charge uniquement sur les plateformes de milieu et de haut niveau https://["Matrice d'interopérabilité NetApp"]
+Pris en charge uniquement sur les plateformes de milieu et de haut niveau https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
  a| 
 Prise en charge sur toutes les plateformes
 

@@ -27,7 +27,7 @@ Vous devez effacer le cache chaque fois que vous installez une nouvelle version 
 .Étapes
 . Téléchargez le logiciel depuis le site de support NetApp.
 +
-http://["Téléchargements NetApp : logiciels"]
+http://mysupport.netapp.com/NOW/cgi-bin/software["Téléchargements NetApp : logiciels"]
 
 . Exécutez le `NetApp_7ModeTransitionTool_Setup.exe` fichier.
 . Dans l'écran d'accueil 7-mode transition Tool Setup, cliquez sur *Next* (Suivant).

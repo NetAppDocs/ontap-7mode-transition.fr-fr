@@ -15,7 +15,7 @@ La première étape de la planification d'un projet de transition consiste à s�
 
 * Les contrôleurs 7-mode de la paire haute disponibilité doivent exécuter une version ONTAP prise en charge sur une plateforme prise en charge pour une transition sans copie.
 +
-https://["Matrice d'interopérabilité NetApp"]
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
 
 * Les deux contrôleurs de la configuration haute disponibilité doivent être sains.
 +

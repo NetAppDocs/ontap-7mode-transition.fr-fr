@@ -15,7 +15,7 @@ Vous devez configurer le cluster avant de transférer un système 7-mode et vér
 
 * Le cluster et le SVM doivent déjà être configurés.
 +
-https://["Configuration logicielle"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Configuration logicielle"]
 
 +
 Le SVM cible ne doit pas se trouver dans une relation de reprise d'activité de SVM.
@@ -71,9 +71,9 @@ system7mode is alive
 
 Pour les chemins d'accès multiples, vous devez avoir deux LIF intercluster sur chaque nœud.
 
-https://["Gestion du réseau et des LIF"]
+https://docs.netapp.com/us-en/ontap/networking/index.html["Gestion du réseau et des LIF"]
 
 .Informations associées
 xref:task_creating_a_transition_peering_relationship.adoc[Création d'une relation de transition peer-to-peer]
 
-https://["Documentation NetApp : bibliothèque de produits De A à Z"]
+https://mysupport.netapp.com/site/docs-and-kb["Documentation NetApp : bibliothèque de produits De A à Z"]

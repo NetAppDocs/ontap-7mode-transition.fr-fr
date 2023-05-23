@@ -15,9 +15,9 @@ Vous devez mapper chaque contrôleur 7-mode de la paire HA sur un SVM cible. Si 
 
 On doit avoir créé les SVM sur le cluster cible.
 
-https://["Gestion du cluster avec System Manager"]
+https://docs.netapp.com/us-en/ontap/concept_administration_overview.html["Gestion du cluster avec System Manager"]
 
-https://["Administration du système"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
 
 Une unité vFiler peut être mappée uniquement à une seule SVM. Les volumes des autres contrôleurs 7-mode ou unités vFiler ne peuvent pas être transférés vers une SVM mappée.
 

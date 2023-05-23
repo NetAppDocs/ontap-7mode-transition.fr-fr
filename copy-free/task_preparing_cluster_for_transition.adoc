@@ -15,7 +15,7 @@ Avant la transition, vous devez préparer le cluster à communiquer avec 7-mode 
 
 * Le cluster doit déjà être configuré et les nœuds de cluster cibles doivent être reliés au cluster.
 +
-https://["Configuration logicielle"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Configuration logicielle"]
 
 * Les SVM doivent être créés et attribués à un IPspace.
 * Vous pouvez passer des tiroirs disques 7-mode à une paire haute disponibilité cible contenant des agrégats et des volumes de données préexistants.
@@ -94,6 +94,6 @@ mgmt
 
 
 +
-https://["Administration du système"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
 
 

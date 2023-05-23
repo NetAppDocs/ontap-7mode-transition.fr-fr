@@ -41,4 +41,4 @@ xref:task_customizing_configurations_for_transition.adoc[Personnalisation de la 
 
 *Informations connexes*
 
-https://["Gestion NFS"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-nfs/home.html["Gestion NFS"]

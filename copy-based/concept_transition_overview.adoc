@@ -25,4 +25,4 @@ L'implémentation inclut le déploiement et la configuration du cluster, la migr
 
 *Informations connexes*
 
-http://["Documentation NetApp : ONTAP 9"]
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]

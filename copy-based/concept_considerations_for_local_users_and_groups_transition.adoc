@@ -45,10 +45,10 @@ Commande pour s'assurer que l'adresse IP de l'outil 7-mode transition Tool est a
 Si cette erreur s'affiche pendant la phase de contrôle préalable, vous devez supprimer manuellement les SID supplémentaires qui sont mappés à un seul utilisateur ou groupe de domaine sur le système 7-mode. Vous devez ensuite relancer l'opération de vérification préalable avec un seul SID mappé à l'utilisateur ou au groupe du domaine.
 
 +
-https://["Workflow de dépannage : CIFS : le périphérique connecté au système ne fonctionne pas"]
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/Troubleshooting_Workflow%3A_CIFS%3A_Device_attached_to_the_system_is_not_functioning["Workflow de dépannage : CIFS : le périphérique connecté au système ne fonctionne pas"]
 
 
 
 *Informations connexes*
 
-http://["Gestion SMB/CIFS"]
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.cdot-famg-cifs/home.html["Gestion SMB/CIFS"]

@@ -19,11 +19,11 @@ link:https://docs.netapp.com/us-en/ontap-7mode-transition/releasenotes.html["Not
 
 * *Modèles de plate-forme*
 +
-La transition sans copie est prise en charge uniquement sur les systèmes FAS de milieu et de haut de gamme et sur les systèmes IBM N series. Le https://["Matrice d'interopérabilité NetApp"] Dispose des dernières informations sur les plateformes prises en charge pour les systèmes 7-mode et les nœuds de cluster cibles.
+La transition sans copie est prise en charge uniquement sur les systèmes FAS de milieu et de haut de gamme et sur les systèmes IBM N series. Le https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"] Dispose des dernières informations sur les plateformes prises en charge pour les systèmes 7-mode et les nœuds de cluster cibles.
 
 * *Data ONTAP dans les systèmes source 7-mode*
 +
-Pour obtenir la liste des versions de 7-mode prises en charge pour la migration par l'outil 7-mode transition Tool, consultez la https://["Matrice d'interopérabilité NetApp"]
+Pour obtenir la liste des versions de 7-mode prises en charge pour la migration par l'outil 7-mode transition Tool, consultez la https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
 
 * *Systèmes cibles ONTAP*
 +
@@ -65,19 +65,19 @@ NOTE: Le modèle de tiroir disque DS14mk2 FC n'est pas pris en charge.
 Vous devez télécharger et installer le dernier pack de qualification de disques, firmware de disque, tiroir disque et firmware ACP sur les systèmes 7-mode et les nœuds de cluster cibles.
 
 +
-https://["Téléchargements NetApp : pack de qualification des disques"]
+https://mysupport.netapp.com/NOW/download/tools/diskqual/["Téléchargements NetApp : pack de qualification des disques"]
 
 +
-https://["Téléchargements NetApp : firmware de disque"]
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Téléchargements NetApp : firmware de disque"]
 
 +
-https://["Téléchargements NetApp : firmware des tiroirs disques"]
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Téléchargements NetApp : firmware des tiroirs disques"]
 
 * *Outil de vérification du câblage*
 +
 Après avoir connecté les tiroirs disques 7-mode aux nœuds de cluster cible pendant la transition, vous devez utiliser Config Advisor pour vérifier le câblage.
 
 +
-https://["Téléchargement NetApp : Config Advisor"]
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
 
 

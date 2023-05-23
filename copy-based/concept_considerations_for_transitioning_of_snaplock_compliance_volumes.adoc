@@ -23,4 +23,4 @@ Le mode de lecture/écriture de pré-commande n'est pas pris en charge pour les 
 
 Pendant la mise en service, si le volume sélectionné est un volume SnapLock Compliance et qu'il représente la destination d'une relation SnapMirror, la relation SnapMirror entre le volume 7-mode et le volume ONTAP est supprimée sans interruption de SnapMirror. Cette action permet aux volumes ONTAP SnapLock Compliance secondaires de rester en mode lecture seule. Les volumes de conformité ONTAP SnapLock secondaires doivent être en mode lecture seule pour que l'opération de resynchronisation puisse réussir entre les volumes de conformité SnapLock primaire et secondaire.
 
-Voir https://["Comment effectuer la transition des volumes de conformité SnapLock 7-mode avec la relation SnapMirror vers clustered Data ONTAP"]
+Voir https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_transition_the_7-Mode_SnapLock_Compliance_volumes_with_SnapMirror_relationship_to_clustered_Data_ONTAP["Comment effectuer la transition des volumes de conformité SnapLock 7-mode avec la relation SnapMirror vers clustered Data ONTAP"]

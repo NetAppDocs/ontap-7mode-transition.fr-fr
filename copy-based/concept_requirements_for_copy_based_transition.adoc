@@ -15,7 +15,7 @@ Vous devez connaître les exigences relatives à la version de ONTAP, les exigen
 
 * *Systèmes source Data ONTAP 7-mode*
 +
-Pour obtenir la liste des versions de 7-mode prises en charge pour la migration par l'outil 7-mode transition Tool, consultez la https://["Matrice d'interopérabilité NetApp"].
+Pour obtenir la liste des versions de 7-mode prises en charge pour la migration par l'outil 7-mode transition Tool, consultez la https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"].
 
 * *Systèmes cibles ONTAP*
 +
@@ -93,6 +93,6 @@ Pour que les planifications de copies de données soient appliquées, le service
 
 * *Exigences de version du stockage, de l'hôte et du commutateur FC pour l'évaluation de la transition*
 +
-Pour obtenir la liste des versions 7-mode, des hôtes et des commutateurs FC pris en charge pour l'évaluation par l'outil de transition 7-mode, consultez le https://["Matrice d'interopérabilité NetApp"].
+Pour obtenir la liste des versions 7-mode, des hôtes et des commutateurs FC pris en charge pour l'évaluation par l'outil de transition 7-mode, consultez le https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"].
 
 

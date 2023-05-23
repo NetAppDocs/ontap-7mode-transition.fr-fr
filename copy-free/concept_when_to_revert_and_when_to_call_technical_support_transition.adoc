@@ -24,7 +24,7 @@ Si vous rencontrez l'une des situations suivantes, contactez immédiatement le s
 * Le processus de transition se termine pour une partie des données et de la configuration, et vous décidez de restaurer la transition.
 * Vous avez un problème avec le processus de transition et ne pouvez pas résoudre le problème lié aux messages de réponse d'erreur de l'outil 7-mode transition Tool, dans les messages d'événement EMS Data ONTAP et dans la base de connaissances NetApp.
 +
-https://["Base de connaissances NetApp"]
+https://kb.netapp.com/["Base de connaissances NetApp"]
 
 
 

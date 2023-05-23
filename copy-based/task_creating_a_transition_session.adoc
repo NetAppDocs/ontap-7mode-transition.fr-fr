@@ -151,7 +151,7 @@ Système 7-mode principal du projet secondaire
  a| 
 `*transition cbt add-primary-seven-mode-system -p _project_name_ -h _source-host_ -f _management-ipaddress_ -d _data-copy-ipaddress_ [-m _multipathing-ipaddress_]*`
 
-Pour plus d'informations, voir https://["CBT : Comment fournir tous les détails 7-mode principaux requis pour un projet secondaire donné"].
+Pour plus d'informations, voir https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/CBT_%3A_How_to_provide_all_the_required_primary_7-Mode_details_for_a_given_secondary_project["CBT : Comment fournir tous les détails 7-mode principaux requis pour un projet secondaire donné"].
 
 
 
@@ -160,7 +160,7 @@ Cluster secondaire ou SVM vers le projet principal
  a| 
 `*transition cbt add-secondary-cluster-mode-system -p _project_name_ -h _c-mode-host-name_ -v _vserver-name_*`
 
-Pour plus d'informations, reportez-vous à la section https://["CBT : comment ajouter les détails du cluster secondaire requis au projet principal"]
+Pour plus d'informations, reportez-vous à la section https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/CBT%3A_How_to_add_the_required_secondary_cluster_details_to_the_primary_project["CBT : comment ajouter les détails du cluster secondaire requis au projet principal"]
 
 |===
 +

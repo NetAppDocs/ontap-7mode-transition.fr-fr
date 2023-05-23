@@ -107,7 +107,7 @@ Des règles d'exportation qtree sont présentes dans le système 7-mode.
 
 La reconnaissance de cette erreur signifie que vous avez compris les différences dans les règles d'exportation qtree entre Data ONTAP 7-mode et ONTAP. Il peut être nécessaire d'effectuer manuellement des étapes après l'application des règles d'export NFS par l'outil de transition 7-mode.
 
-https://["7MTT Precheck 10111 : transition des volumes 7-mode dont les exportations sont au niveau qtree"]
+https://kb.netapp.com/onprem/ontap/da/NAS/7MTT_Precheck_10111_-_How_to_transition_7-Mode_volumes_that_have_qtree_level_exports["7MTT Precheck 10111 : transition des volumes 7-mode dont les exportations sont au niveau qtree"]
 
 
 
@@ -116,7 +116,7 @@ https://["7MTT Precheck 10111 : transition des volumes 7-mode dont les exportati
  a| 
 La transition des objets et des configurations va au-delà d'une certaine limite. La mise en service du stockage peut être longue et vous devez vous préparer au temps d'indisponibilité.
 
-https://["Facteurs à prendre en compte pour la réduction du délai de mise en service du stockage pendant la transition sans copie"]
+https://kb.netapp.com/onprem/ontap/os/Storage_cutover_time_considerations_for_Copy-Free_Transition["Facteurs à prendre en compte pour la réduction du délai de mise en service du stockage pendant la transition sans copie"]
 
 
 
@@ -127,7 +127,7 @@ L'outil de transition 7-mode poursuit la transition de la configuration CIFS, m�
 
 Il faut s'assurer que les domaines CIFS Active Directory du système 7-mode et le SVM cible sont des domaines de confiance. Dans le cas contraire, la transition des configurations CIFS vers la SVM cible échoue.
 
-https://["Comment effectuer la transition des configurations CIFS lorsque le domaine Active Directory du serveur CIFS sur les SVM 7-mode et cible sont différents"]
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_transition_CIFS_configurations_when_Active_Directory_Domain_of_CIFS_server_on_7-Mode_and_target_SVM_are_different["Comment effectuer la transition des configurations CIFS lorsque le domaine Active Directory du serveur CIFS sur les SVM 7-mode et cible sont différents"]
 
 |===
 

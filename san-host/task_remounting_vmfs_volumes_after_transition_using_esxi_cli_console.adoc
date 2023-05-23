@@ -48,4 +48,4 @@ Extent name: naa.600a098054314c6c445d446f79716475:1 range: 0 - 409599
 
 *Informations connexes*
 
-http://["VMware KB : traitement vSphere des LUN détectées comme LUN de snapshot"]
+http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1011387["VMware KB : traitement vSphere des LUN détectées comme LUN de snapshot"]

@@ -23,4 +23,4 @@ Si des volumes contiennent des LUN réservées à l'espace, la croissance du vol
 
 xref:task_recovering_from_a_failed_lun_transition.adoc[Restauration suite à une transition de LUN ayant échoué]
 
-http://["Documentation NetApp : ONTAP 9"]
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]

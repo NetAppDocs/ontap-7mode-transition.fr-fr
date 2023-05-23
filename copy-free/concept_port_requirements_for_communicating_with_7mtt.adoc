@@ -51,4 +51,4 @@ NOTE: Vous devez vérifier que les pare-feu ne bloquent pas ce trafic.
 
 *Informations connexes*
 
-http://["Installation et administration de l'outil 7-mode transition Tool"]
+http://docs.netapp.com/us-en/ontap-7mode-transition/install-admin/index.html["Installation et administration de l'outil 7-mode transition Tool"]

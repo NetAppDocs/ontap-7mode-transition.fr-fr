@@ -21,4 +21,4 @@ Pour apporter les modifications requises à l'initiateur iSCSI logiciel sur l'h�
 
 *Informations connexes*
 
-https://["Administration du système"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]

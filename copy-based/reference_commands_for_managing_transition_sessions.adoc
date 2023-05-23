@@ -144,7 +144,7 @@ Ajoutez des informations sur un système principal 7-mode à un projet secondair
  a| 
 `transition cbt add-primary-seven-mode-system ``
 
-https://["CBT : Comment fournir tous les détails 7-mode principaux requis pour un projet secondaire donné"]
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/CBT_%3A_How_to_provide_all_the_required_primary_7-Mode_details_for_a_given_secondary_project["CBT : Comment fournir tous les détails 7-mode principaux requis pour un projet secondaire donné"]
 
 
 
@@ -153,7 +153,7 @@ Ajoutez des informations sur un système secondaire ONTAP à un projet principal
  a| 
 `transition cbt add-secondary-cluster-mode-system`
 
-https://["CBT : comment ajouter les détails du cluster secondaire requis au projet principal"]
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/CBT%3A_How_to_add_the_required_secondary_cluster_details_to_the_primary_project["CBT : comment ajouter les détails du cluster secondaire requis au projet principal"]
 
 
 

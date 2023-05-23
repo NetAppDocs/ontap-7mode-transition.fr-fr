@@ -19,6 +19,6 @@ Pour plus d'informations sur la migration dynamique du stockage Hyper-V, consult
 
 * Si vous utilisez le même nom de groupe initiateur sur les deux nœuds du contrôleur 7-mode, l'outil de transition risque de ne pas pouvoir résoudre le conflit entre ce groupe initiateur.
 +
-ID de bug https://["769715"].
+ID de bug https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=769715["769715"].
 
 

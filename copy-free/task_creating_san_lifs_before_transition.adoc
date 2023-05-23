@@ -34,4 +34,4 @@ Si vous souhaitez réutiliser l'adresse IP 7-mode pour les LIF iSCSI, vous devez
 
 *Informations connexes*
 
-https://["Administration SAN"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["Administration SAN"]

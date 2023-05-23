@@ -49,4 +49,4 @@ LUN#2,/vol/vol_SANdataset_sm_0/lun-payroll,dtY5B4tFAaAC,LnxGrp2,2,/vol/vol_SANda
 
 Vous devez effectuer les tâches de post-transition requises sur l'hôte avant de restaurer l'accès aux volumes ONTAP transférés.
 
-http://["Transition et résolution des problèmes liés aux hôtes SAN"]
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-sanspl/home.html["Transition et résolution des problèmes liés aux hôtes SAN"]

@@ -23,4 +23,4 @@ Si des volumes contiennent des LUN réservées à l'espace, la croissance du vol
 
 *Informations connexes*
 
-http://["Documentation NetApp : ONTAP 9"]
+http://docs.netapp.com/ontap-9/index.jsp["Documentation NetApp : ONTAP 9"]
