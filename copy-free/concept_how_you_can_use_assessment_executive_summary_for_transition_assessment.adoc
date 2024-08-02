@@ -39,7 +39,7 @@ En fonction de la configuration du volume et du contrôleur et du résumé de co
 
 Pour la plupart des configurations, 7-mode transition Tool est l'outil recommandé pour la transition. Cependant, certaines charges de travail ne peuvent pas être migrées à l'aide de l'outil 7-mode transition Tool. Vous devez en outre adopter une méthode de migration basée sur l'application ou l'hôte,
 
-http://www.netapp.com/us/media/tr-4052.pdf["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"]
+https://www.netapp.com/pdf.html?item=/media/19510-tr-4052.pdf["Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)"^]
 
 
 

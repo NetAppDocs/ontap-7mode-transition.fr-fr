@@ -794,7 +794,6 @@
   <block id="ee938c4ccb225fb1eaa8be3c480458c0" category="paragraph">Utilisez le workflow suivant pour décider si une mise à niveau est requise avant la transition.</block>
   <block id="92cd2f5e96983a715cf5b509f4aa5a2b" category="image-alt">mise à jour du chemin de mise à niveau 32 bits</block>
   <block id="13434f43b15c9640896f4fc73fa54221" category="inline-link">Rapport technique NetApp 3978 : mise à niveau d'agrégats 32 bits en agrégats 64 bits sans déplacement des données : présentation et meilleures pratiques</block>
-  <block id="0a2da8e756e37983a5c9c20d332cfa66" category="paragraph"><block ref="0a2da8e756e37983a5c9c20d332cfa66" category="inline-link-rx"></block></block>
   <block id="c04bc7c8a0ecb1dff1242a85b590e188" category="summary">Lors de la transition de volumes FlexClone vers la SVM, les clones sont séparés des volumes parent et sont transférés comme volumes FlexVol vers le cluster de destination. Par conséquent, la hiérarchie de clones et l'efficacité du stockage ne sont plus conservées au cours du processus de transition.</block>
   <block id="80bedf9b4df8b4fbfe84a49b0f9a8c11" category="doc">Considérations relatives aux volumes FlexClone</block>
   <block id="021f8e6944f134caa4dde3b220684668" category="paragraph">Si le cluster cible exécute Data ONTAP 8.3 ou une version antérieure, des volumes FlexClone ne peuvent pas être créés à partir de copies Snapshot migrées depuis 7-mode. Vous ne pouvez créer des volumes FlexClone qu'à partir de nouvelles copies Snapshot créées une fois le volume migré vers ONTAP. Depuis la version clustered Data ONTAP 8.3.1, vous pouvez créer des volumes FlexClone à partir de copies Snapshot qui ont été migrées depuis 7-mode.</block>
@@ -1281,7 +1280,6 @@
   <block id="67e55df2230df7a56836309fe173b259" category="paragraph">En fonction de la configuration du volume et du contrôleur et du résumé de contrôle préalable, la synthèse fournit des recommandations sur la meilleure méthodologie de transition pour chaque volume évalué. Par exemple, vous ne pouvez pas effectuer la transition des volumes traditionnels 7-mode ou des volumes FlexCache, car ces fonctionnalités ne sont pas prises en charge par ONTAP.</block>
   <block id="a4188dde39855b0f8b00898bc8a50fc5" category="paragraph">Pour la plupart des configurations, 7-mode transition Tool est l'outil recommandé pour la transition. Cependant, certaines charges de travail ne peuvent pas être migrées à l'aide de l'outil 7-mode transition Tool. Vous devez en outre adopter une méthode de migration basée sur l'application ou l'hôte,</block>
   <block id="664f739c9dfce166b4c021cac0d8633e" category="inline-link">Rapport technique de NetApp 4052 : une transition réussie vers clustered Data ONTAP (Data ONTAP 8.2.x et 8.3)</block>
-  <block id="755b3c98012d25558d664e3aae2c2528" category="paragraph"><block ref="755b3c98012d25558d664e3aae2c2528" category="inline-link-rx"></block></block>
   <block id="ca2ca47a2d122a4c2b69f770ebdcaf17" category="section-title">Inventaire du stockage</block>
   <block id="e666d79eed8ef816936f0c67b7ccc988" category="paragraph">Cette section fournit les informations suivantes :</block>
   <block id="a378d84c51afa40ad9cc4d4db2fbbb40" category="list-text">Objets de stockage : fournit des informations sur le nombre d'objets de stockage, tels que les volumes, les qtrees, les LUN, les unités vFiler, Relations SnapMirror, partages et exportations, dans chaque contrôleur.</block>
@@ -1469,7 +1467,6 @@
   <block id="b94690f1d58e7f298c4e94a655b35110" category="paragraph">Pour que les clients NFS puissent monter des qtrees, les qtrees doivent appartenir à un volume disposant d'une autorisation en lecture seule. Sans les autorisations de lecture seule au niveau du volume, les clients NFS ne peuvent pas monter le qtree.</block>
   <block id="1b4bd805f1c43c7d5c9719dce981c2f4" category="list-text">Si le même hôte est spécifié dans la combinaison de listes d'autorisations d'accès en lecture seule, en lecture/écriture et racine, vous devez évaluer les règles d'exportation migrées après la transition afin de déterminer le privilège d'accès approprié pour les hôtes.</block>
   <block id="8fad4be94e9aa7ce4db57aef3f0d7941" category="inline-link">Rapport technique NetApp 4067 : Guide des meilleures pratiques et de mise en œuvre de NFS</block>
-  <block id="2e5e5fdaff65cd094319505704237d70" category="paragraph"><block ref="2e5e5fdaff65cd094319505704237d70" category="inline-link-rx"></block></block>
   <block id="b014fe06ce5f68b47e31838c02f8644b" category="section-title">Exemple : modification de l'export policy d'un volume pour permettre l'accès à un qtree</block>
   <block id="c4d849bb273335cc15c5a5e062d19ca2" category="paragraph">Envisagez la règle d'exportation suivante configurée dans le système de stockage 7-mode (192.168.26.18) qui permet l'accès en lecture/écriture au volume volstd10 et qtree qtre1 pour le client NFS 192.168.10.10 :</block>
   <block id="1907717ab9a8223ee3ce06ec78e360cc" category="paragraph">Après la transition, la export policy du volume volsdt10 dans ONTAP est comme indiqué ci-dessous :</block>
@@ -7391,4 +7388,7 @@
   <block id="53b500e941f815e0da37832bbbb3f265" category="inline-link">Gestion du cluster avec System Manager</block>
   <block id="54875b6362e405aeb3f3e1f1b65a3cc7" category="paragraph"><block ref="54875b6362e405aeb3f3e1f1b65a3cc7" category="inline-link-rx"></block></block>
   <block id="e8fb469abd5e30926d4d1c7fc20519c2" category="sidebar">La documentation relative à 7-mode transition contient des informations utiles pour l'installation et la configuration de 7-mode transition Tool, les données de transition à l'aide des commandes SnapMirror, la réalisation d'une transition sans copie ou sans copie, la collecte d'informations pour la transition et l'exécution des procédures préalables et postérieures à la transition pour les hôtes SAN.</block>
+  <block id="6819367dcff0e5919ebb17505dc3e140" category="paragraph"><block ref="6819367dcff0e5919ebb17505dc3e140" category="inline-link-rx"></block></block>
+  <block id="07c5daecfe0dafef7e4667a307affc19" category="paragraph"><block ref="07c5daecfe0dafef7e4667a307affc19" category="inline-link-rx"></block></block>
+  <block id="f7042196519d0be4fd9ec6a8bd4a4b28" category="paragraph"><block ref="f7042196519d0be4fd9ec6a8bd4a4b28" category="inline-link-rx"></block></block>
 </blocks>
